@@ -1,0 +1,108 @@
+### RAW COLLECT host=192.168.56.10 source=dc1-forwarded window=2026-10-14T23:06:30Z..2026-10-14T23:07:30Z ###
+### END RAW COLLECT ###
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+--- A) Security 4688 - process creation (CommandLine audit) ---
+records = 5
+[4688-001] Utc=2026-10-14T23:06:41.601Z RecId=15754 Computer=SOC002-WS001.soc002.local Provider=Microsoft-Windows-Security-Auditing
+        NewProcessId=2992  NewProcessName=C:\Windows\System32\winrshost.exe
+        CreatorPID=716  ParentProcessName=C:\Windows\System32\svchost.exe
+        Subject=SOC002\SOC002-WS001$  LogonId=0x3e7  Elevation=%%1936  Integrity=S-1-16-12288
+        CommandLine=C:\Windows\system32\WinrsHost.exe -Embedding
+[4688-002] Utc=2026-10-14T23:06:41.617Z RecId=15755 Computer=SOC002-WS001.soc002.local Provider=Microsoft-Windows-Security-Auditing
+        NewProcessId=3404  NewProcessName=C:\Windows\System32\conhost.exe
+        CreatorPID=2992  ParentProcessName=C:\Windows\System32\winrshost.exe
+        Subject=SOC002\Administrator  LogonId=0x644e0e  Elevation=%%1936  Integrity=S-1-16-12288
+        CommandLine=\??\C:\Windows\system32\conhost.exe 0xffffffff -ForceV1
+[4688-003] Utc=2026-10-14T23:06:41.685Z RecId=15756 Computer=SOC002-WS001.soc002.local Provider=Microsoft-Windows-Security-Auditing
+        NewProcessId=1808  NewProcessName=C:\Windows\System32\cmd.exe
+        CreatorPID=2992  ParentProcessName=C:\Windows\System32\winrshost.exe
+        Subject=SOC002\Administrator  LogonId=0x644e0e  Elevation=%%1936  Integrity=S-1-16-12288
+        CommandLine=C:\Windows\system32\cmd.exe /C powershell -encodedcommand JABjAD0AWwBJAE8ALgBGAGkAbABlAF0AOgA6AFIAZQBhAGQAQQBsAGwAVABlAHgAdAAoACcAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABzAG8AYwAwADAAMgAtAHAAaABhAHMAZQA3AFwAcABoAGEAcwBlADcAXwBjAGgAaQBsAGQAXwBjAG8AbQBtAGEAbgBkAC4AdAB4AHQAJwApADsAIABwAG8AdwBlAHIAcwBoAGUAbABsAC4AZQB4AGUAIAAtAE4AbwBQAHIAbwBmAGkAbABlACAALQBOAG8AbgBJAG4AdABlAHIAYQBjAHQAaQB2AGUAIAAtAEMAbwBtAG0AYQBuAGQAIAAkAGMA
+[4688-004] Utc=2026-10-14T23:06:41.704Z RecId=15757 Computer=SOC002-WS001.soc002.local Provider=Microsoft-Windows-Security-Auditing
+        NewProcessId=2936  NewProcessName=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+        CreatorPID=1808  ParentProcessName=C:\Windows\System32\cmd.exe
+        Subject=SOC002\Administrator  LogonId=0x644e0e  Elevation=%%1936  Integrity=S-1-16-12288
+        CommandLine=powershell  -encodedcommand JABjAD0AWwBJAE8ALgBGAGkAbABlAF0AOgA6AFIAZQBhAGQAQQBsAGwAVABlAHgAdAAoACcAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABzAG8AYwAwADAAMgAtAHAAaABhAHMAZQA3AFwAcABoAGEAcwBlADcAXwBjAGgAaQBsAGQAXwBjAG8AbQBtAGEAbgBkAC4AdAB4AHQAJwApADsAIABwAG8AdwBlAHIAcwBoAGUAbABsAC4AZQB4AGUAIAAtAE4AbwBQAHIAbwBmAGkAbABlACAALQBOAG8AbgBJAG4AdABlAHIAYQBjAHQAaQB2AGUAIAAtAEMAbwBtAG0AYQBuAGQAIAAkAGMA
+[4688-005] Utc=2026-10-14T23:06:42.031Z RecId=15758 Computer=SOC002-WS001.soc002.local Provider=Microsoft-Windows-Security-Auditing
+        NewProcessId=1428  NewProcessName=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+        CreatorPID=2936  ParentProcessName=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+        Subject=SOC002\Administrator  LogonId=0x644e0e  Elevation=%%1936  Integrity=S-1-16-12288
+        CommandLine="C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -Command "$b='U09DMDAyLVBIQVNFNy1CTElORFNQT1QtVEVTVApTT0MwMDIgUEhBU0UgNyBDT05UUk9MTEVEIEJMSU5ELVNQT1QgVkFMSURBVElPTgpNYXJrZXI6IFNPQzAwMi1QSEFTRTctQkxJTkRTUE9ULVRFU1QKUHVycG9zZTogaGFybWxlc3MgbWFya2VyIHJlY29uc3RydWN0aW9uIG9ubHkuIE5vIHBlcnNpc3RlbmNlLCBubyBuZXR3b3JrLApubyBjb25maWd1cmF0aW9uIGNoYW5nZSwgbm8gYXJiaXRyYXJ5IGNvZGUgZXhlY3V0aW9uLgo=';$t=[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($b));Write-Output $t;Write-Output ('HOST='+$env:COMPUTERNAME);Write-Output ('USER='+[System.Security.Principal.WindowsIdentity]::GetCurrent().Name);Write-Output ('CHILD_PID='+$PID);Write-Output ('START_UTC='+(Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ'))"
+
+--- B) Sysmon Event ID 1 - ProcessCreate ---
+records = 5
+[1-001] Utc=2026-10-14T23:06:41.614Z RecId=4138 Computer=SOC002-WS001.soc002.local Provider=Microsoft-Windows-Sysmon
+        ProcessGuid={edcef402-0b01-6ad0-af05-000000000700}  PID=2992
+        Image=C:\Windows\System32\winrshost.exe
+        ParentProcessGuid={edcef402-d859-6acf-0d00-000000000700}  PPID=716  ParentImage=C:\Windows\System32\svchost.exe
+        User=SOC002\Administrator  LogonId=0x644e0e  Integrity=High
+        Hashes=SHA256=047427E1ECC1D5758A9553F0E819A9536D9D56D279BA81F707FE377FA1433318
+        CommandLine=C:\Windows\system32\WinrsHost.exe -Embedding
+        ParentCommandLine=C:\Windows\system32\svchost.exe -k DcomLaunch -p
+[1-002] Utc=2026-10-14T23:06:41.622Z RecId=4139 Computer=SOC002-WS001.soc002.local Provider=Microsoft-Windows-Sysmon
+        ProcessGuid={edcef402-0b01-6ad0-b005-000000000700}  PID=3404
+        Image=C:\Windows\System32\conhost.exe
+        ParentProcessGuid={edcef402-0b01-6ad0-af05-000000000700}  PPID=2992  ParentImage=C:\Windows\System32\winrshost.exe
+        User=SOC002\Administrator  LogonId=0x644e0e  Integrity=High
+        Hashes=SHA256=A26A1FFB81A61281FFA55CB7778CC3FB0FF981704DE49F75F51F18B283FBA7A2
+        CommandLine=\??\C:\Windows\system32\conhost.exe 0xffffffff -ForceV1
+        ParentCommandLine=C:\Windows\system32\WinrsHost.exe -Embedding
+[1-003] Utc=2026-10-14T23:06:41.693Z RecId=4140 Computer=SOC002-WS001.soc002.local Provider=Microsoft-Windows-Sysmon
+        ProcessGuid={edcef402-0b01-6ad0-b105-000000000700}  PID=1808
+        Image=C:\Windows\System32\cmd.exe
+        ParentProcessGuid={edcef402-0b01-6ad0-af05-000000000700}  PPID=2992  ParentImage=C:\Windows\System32\winrshost.exe
+        User=SOC002\Administrator  LogonId=0x644e0e  Integrity=High
+        Hashes=SHA256=B99D61D874728EDC0918CA0EB10EAB93D381E7367E377406E65963366C874450
+        CommandLine=C:\Windows\system32\cmd.exe /C powershell -encodedcommand JABjAD0AWwBJAE8ALgBGAGkAbABlAF0AOgA6AFIAZQBhAGQAQQBsAGwAVABlAHgAdAAoACcAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABzAG8AYwAwADAAMgAtAHAAaABhAHMAZQA3AFwAcABoAGEAcwBlADcAXwBjAGgAaQBsAGQAXwBjAG8AbQBtAGEAbgBkAC4AdAB4AHQAJwApADsAIABwAG8AdwBlAHIAcwBoAGUAbABsAC4AZQB4AGUAIAAtAE4AbwBQAHIAbwBmAGkAbABlACAALQBOAG8AbgBJAG4AdABlAHIAYQBjAHQAaQB2AGUAIAAtAEMAbwBtAG0AYQBuAGQAIAAkAGMA
+        ParentCommandLine=C:\Windows\system32\WinrsHost.exe -Embedding
+[1-004] Utc=2026-10-14T23:06:41.712Z RecId=4141 Computer=SOC002-WS001.soc002.local Provider=Microsoft-Windows-Sysmon
+        ProcessGuid={edcef402-0b01-6ad0-b205-000000000700}  PID=2936
+        Image=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+        ParentProcessGuid={edcef402-0b01-6ad0-b105-000000000700}  PPID=1808  ParentImage=C:\Windows\System32\cmd.exe
+        User=SOC002\Administrator  LogonId=0x644e0e  Integrity=High
+        Hashes=SHA256=B4E7BC24BF3F5C3DA2EB6E9EC5EC10F90099DEFA91B820F2F3FC70DD9E4785C4
+        CommandLine=powershell  -encodedcommand JABjAD0AWwBJAE8ALgBGAGkAbABlAF0AOgA6AFIAZQBhAGQAQQBsAGwAVABlAHgAdAAoACcAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABzAG8AYwAwADAAMgAtAHAAaABhAHMAZQA3AFwAcABoAGEAcwBlADcAXwBjAGgAaQBsAGQAXwBjAG8AbQBtAGEAbgBkAC4AdAB4AHQAJwApADsAIABwAG8AdwBlAHIAcwBoAGUAbABsAC4AZQB4AGUAIAAtAE4AbwBQAHIAbwBmAGkAbABlACAALQBOAG8AbgBJAG4AdABlAHIAYQBjAHQAaQB2AGUAIAAtAEMAbwBtAG0AYQBuAGQAIAAkAGMA
+        ParentCommandLine=C:\Windows\system32\cmd.exe /C powershell -encodedcommand JABjAD0AWwBJAE8ALgBGAGkAbABlAF0AOgA6AFIAZQBhAGQAQQBsAGwAVABlAHgAdAAoACcAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABzAG8AYwAwADAAMgAtAHAAaABhAHMAZQA3AFwAcABoAGEAcwBlADcAXwBjAGgAaQBsAGQAXwBjAG8AbQBtAGEAbgBkAC4AdAB4AHQAJwApADsAIABwAG8AdwBlAHIAcwBoAGUAbABsAC4AZQB4AGUAIAAtAE4AbwBQAHIAbwBmAGkAbABlACAALQBOAG8AbgBJAG4AdABlAHIAYQBjAHQAaQB2AGUAIAAtAEMAbwBtAG0AYQBuAGQAIAAkAGMA
+[1-005] Utc=2026-10-14T23:06:42.046Z RecId=4142 Computer=SOC002-WS001.soc002.local Provider=Microsoft-Windows-Sysmon
+        ProcessGuid={edcef402-0b02-6ad0-b305-000000000700}  PID=1428
+        Image=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+        ParentProcessGuid={edcef402-0b01-6ad0-b205-000000000700}  PPID=2936  ParentImage=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+        User=SOC002\Administrator  LogonId=0x644e0e  Integrity=High
+        Hashes=SHA256=B4E7BC24BF3F5C3DA2EB6E9EC5EC10F90099DEFA91B820F2F3FC70DD9E4785C4
+        CommandLine="C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -Command "$b='U09DMDAyLVBIQVNFNy1CTElORFNQT1QtVEVTVApTT0MwMDIgUEhBU0UgNyBDT05UUk9MTEVEIEJMSU5ELVNQT1QgVkFMSURBVElPTgpNYXJrZXI6IFNPQzAwMi1QSEFTRTctQkxJTkRTUE9ULVRFU1QKUHVycG9zZTogaGFybWxlc3MgbWFya2VyIHJlY29uc3RydWN0aW9uIG9ubHkuIE5vIHBlcnNpc3RlbmNlLCBubyBuZXR3b3JrLApubyBjb25maWd1cmF0aW9uIGNoYW5nZSwgbm8gYXJiaXRyYXJ5IGNvZGUgZXhlY3V0aW9uLgo=';$t=[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($b));Write-Output $t;Write-Output ('HOST='+$env:COMPUTERNAME);Write-Output ('USER='+[System.Security.Principal.WindowsIdentity]::GetCurrent().Name);Write-Output ('CHILD_PID='+$PID);Write-Output ('START_UTC='+(Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ'))"
+        ParentCommandLine=powershell  -encodedcommand JABjAD0AWwBJAE8ALgBGAGkAbABlAF0AOgA6AFIAZQBhAGQAQQBsAGwAVABlAHgAdAAoACcAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABzAG8AYwAwADAAMgAtAHAAaABhAHMAZQA3AFwAcABoAGEAcwBlADcAXwBjAGgAaQBsAGQAXwBjAG8AbQBtAGEAbgBkAC4AdAB4AHQAJwApADsAIABwAG8AdwBlAHIAcwBoAGUAbABsAC4AZQB4AGUAIAAtAE4AbwBQAHIAbwBmAGkAbABlACAALQBOAG8AbgBJAG4AdABlAHIAYQBjAHQAaQB2AGUAIAAtAEMAbwBtAG0AYQBuAGQAIAAkAGMA
+
+--- C) PowerShell Event ID 4104 - ScriptBlockLogging ---
+records = 4
+[4104-001] Utc=2026-10-14T23:06:42.015Z RecId=74338 Computer=SOC002-WS001.soc002.local Provider=Microsoft-Windows-PowerShell
+        ExecutingPID=2936  ScriptBlockId=b1395568-33ca-4789-af41-2b7bf2667522  Msg=1/1  Path=
+        Len=138
+        Text=$c=[IO.File]::ReadAllText('C:\Windows\Temp\soc002-phase7\phase7_child_command.txt'); powershell.exe -NoProfile -NonInteractive -Command $c
+[4104-002] Utc=2026-10-14T23:06:42.336Z RecId=74343 Computer=SOC002-WS001.soc002.local Provider=Microsoft-Windows-PowerShell
+        ExecutingPID=1428  ScriptBlockId=96c73586-2334-4bbd-a1c7-e2e5163f19c0  Msg=1/1  Path=
+        Len=667   <== contains [Convert]::FromBase64String
+        Text=$b='U09DMDAyLVBIQVNFNy1CTElORFNQT1QtVEVTVApTT0MwMDIgUEhBU0UgNyBDT05UUk9MTEVEIEJMSU5ELVNQT1QgVkFMSURBVElPTgpNYXJrZXI6IFNPQzAwMi1QSEFTRTctQkxJTkRTUE9ULVRFU1QKUHVycG9zZTogaGFybWxlc3MgbWFya2VyIHJlY29uc3RydWN0aW9uIG9ubHkuIE5vIHBlcnNpc3RlbmNlLCBubyBuZXR3b3JrLApubyBjb25maWd1cmF0aW9uIGNoYW5nZSwgbm8gYXJiaXRyYXJ5IGNvZGUgZXhlY3V0aW9uLgo=';$t=[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($b));Write-Output $t;Write-Output ('HOST='+$env:COMPUTERNAME);Write-Output ('USER='+[System.Security.Principal.WindowsIdentity]::GetCurrent().Name);Write-Output ('CHILD_PID='+$PID);Write-Output ('START_UTC='+(Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ'))
+[4104-003] Utc=2026-10-14T23:06:42.505Z RecId=74350 Computer=SOC002-WS001.soc002.local Provider=Microsoft-Windows-PowerShell
+        ExecutingPID=1428  ScriptBlockId=3f8c567d-8f9f-453f-bca3-e7c1c97be68d  Msg=1/1  Path=
+        Len=9
+        Text=$global:?
+[4104-004] Utc=2026-10-14T23:06:42.693Z RecId=74354 Computer=SOC002-WS001.soc002.local Provider=Microsoft-Windows-PowerShell
+        ExecutingPID=2936  ScriptBlockId=fc98b8ac-8662-44af-b4d0-8cafd30c158c  Msg=1/1  Path=
+        Len=9
+        Text=$global:?
+
+--- D) Sysmon Event ID 3 - NetworkConnect (proves/disproves network contact) ---
+records = 3
+[3-001] Utc=2026-10-14T23:06:42.769Z RecId=4144 Computer=SOC002-WS001.soc002.local Provider=Microsoft-Windows-Sysmon
+        PID=4  Image=System  User=NT AUTHORITY\SYSTEM
+        Proto=tcp  Initiated=false  Source=192.168.56.1:56138  Destination=192.168.56.102:5985  DestHost=SOC002-WS001.soc002.local
+[3-002] Utc=2026-10-14T23:06:42.769Z RecId=4145 Computer=SOC002-WS001.soc002.local Provider=Microsoft-Windows-Sysmon
+        PID=4  Image=System  User=NT AUTHORITY\SYSTEM
+        Proto=tcp  Initiated=false  Source=192.168.56.1:56150  Destination=192.168.56.102:5985  DestHost=SOC002-WS001.soc002.local
+[3-003] Utc=2026-10-14T23:06:42.769Z RecId=4146 Computer=SOC002-WS001.soc002.local Provider=Microsoft-Windows-Sysmon
+        PID=628  Image=C:\Windows\System32\lsass.exe  User=NT AUTHORITY\SYSTEM
+        Proto=tcp  Initiated=true  Source=192.168.56.102:49974  Destination=192.168.56.10:49668  DestHost=SOC002-DC1
+

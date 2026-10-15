@@ -1,0 +1,35 @@
+MARKER=SOC002-PHASE4-T3-WEFPROOF
+GEN_TIME_LOCAL=2026-10-15 00:44:30
+SOURCE_PORT=49925
+=== SOURCE (WS001) Event 1 ===
+SourceEventRecordID=3423
+SystemTimeUTC=2026-10-14T21:44:30.641Z
+Computer=SOC002-WS001.soc002.local
+ProcessGuid={edcef402-f7be-6acf-d304-000000000700}
+ProcessId=2824
+Image=C:\Windows\System32\cmd.exe
+CommandLine="C:\Windows\system32\cmd.exe" /c "echo SOC002-PHASE4-T3-WEFPROOF"
+User=SOC002\Administrator
+Hashes=SHA256=B99D61D874728EDC0918CA0EB10EAB93D381E7367E377406E65963366C874450
+ParentImage=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+=== SOURCE (WS001) Event 3 ===
+SourceEventRecordID=3428
+SystemTimeUTC=2026-10-14T21:44:32.493Z
+Computer=SOC002-WS001.soc002.local
+ProcessGuid={edcef402-f7be-6acf-d204-000000000700}
+ProcessId=6096
+Image=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+User=SOC002\Administrator
+Protocol=tcp
+Initiated=true
+SourceIp=192.168.56.102
+SourcePort=49925
+DestinationIp=192.168.56.10
+DestinationPort=5985
+DestinationHostname=SOC002-DC1
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.102:5985/wsman

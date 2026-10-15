@@ -1,0 +1,259 @@
+=== wecutil ss /? ===
+Sets subscription configuration by changing subscription parameters from the command
+line or by using an XML configuration file.
+
+Usage:
+
+wecutil { ss | set-subscription } SUBSCRIPTION_ID [/OPTION:VALUE [/OPTION:VALUE] ...]
+
+wecutil { ss | set-subscription } /c:CONFIG_FILE [/cus:USERNAME [/cup:PASSWORD] ...]
+
+SUBSCRIPTION_ID
+String that uniquely identifies a subscription, specified by the <SubscriptionId> tag of
+the XML configuration file used to create the subscription
+
+Options:
+
+You can use either the short (i.e. /q) or long (i.e. /Query) version of the
+option names. Options and their values are case-insensitive.
+
+
+
+
+
+COMMON OPTIONS (for all type of subscriptions):
+
+/c:CONFIG_FILE    (Config)
+String that specifies the path to the XML file that contains subscription configuration.
+The path can be absolute or relative to the current directory. This option may only be
+used with the optional /cus (CommonUserName) and /cup (CommonUserPassword) options and
+is mutually exclusive with all other options.
+
+/e[:VALUE] (enabled)
+Enable or disable a subscription. VALUE can be true or false. The default value of this
+option is true.
+
+/d:DESCRIPTION    (Description)
+String that describes the subscription.
+
+/ex:DATE_TIME    (Expires)
+String that specifies the subscription expiration time. DATE_TIME value is specified in
+standard XML or ISO8601 date-time format: yyyy-MM-ddThh:mm:ss[.sss][Z], where T is the
+time separator and Z indicates UTC time.
+
+/uri:URI
+String that specifies the type of the events consumed by the subscription. The address
+of the event source machine along with the URI uniquely identifies the source of the
+events.
+
+/cm:CONFIGURATION_MODE  (ConfigurationMode)
+String that specifies the configuration mode. CONFIGURATION_MODE can be one of the
+following strings: Normal, Custom, MinLatency or MinBandwidth. The Normal, MinLatency,
+and MinBandwidth modes set delivery mode, delivery max items, heartbeat interval, and
+delivery max latency time. The /dm (DeliveryMode), /dmi (DeliveryMaxItems),
+/hi (HeartbeatInterval) or /dmlt (DeliveryMaxLatencyTime) option may only be specified
+if the configuration mode is set to Custom.
+
+/q:QUERY    (Query)
+String that specifies that query string for the subscription. The format of this string
+may be different for different URI values and applies to all sources in the subscription.
+
+/dia:DIALECT  (Dialect)
+String that specifies the dialect the query string uses.
+
+/cf:FORMAT   (ContentFormat)
+String that specifies the format of the returned events. FORMAT can be Events or
+RenderedText. When the value is RenderedText, the events are returned with the localized
+strings (such as event description) attached to the event. The default value of FORMAT
+is RenderedText.
+
+/l:LOCALE    (Locale)
+String that specifies the locale for delivery of the localized strings in RenderedText
+format. LOCALE is a language/country culture identifier, for example, "en-US". This
+option is valid only if /cf (ContentFormat) option is set to "RenderedText".
+
+/ree[:VALUE]   (ReadExistingEvents)
+Specifies which events are to be delivered for the subscription. VALUE can true or false.
+When the VALUE is true, all existing events are read from the subscription event sources.
+When the VALUE is false, only future (arriving) events are delivered. The default value
+is true for an /ree option without a value. If no /ree option is specified, the default
+value is false.
+
+/lf:FILENAME   (LogFile)
+String that specifies the local event log used to store events received from the event
+sources.
+
+/pn:PUBLISHER  (PublisherName)
+String that specifies the publisher name. It must be a publisher which owns or imports
+log specified by /lf (LogFile) option.
+
+/dm:MODE (DeliveryMode)
+String that specifies the delivery mode. MODE can be either pull or push for collector
+initiated subscriptions and only push for source initiated subscriptions. This option is
+valid only if /cm (ConfigurationMode) option is set to Custom.
+
+/dmi:NUMBER  (DeliveryMaxItems)
+A number that specifies the maximum number of items for batched delivery. This option is
+valid only if /cm (ConfigurationMode) is set to Custom.
+
+/dmlt:MS (DeliveryMaxLatencyTime)
+A number that specified the maximum latency in delivering a batch of events. MS is the
+number of milliseconds. This option is valid only if /cm (ConfigurationMode) is set to
+Custom.
+
+/hi:MS   (HeartbeatInterval)
+A number that specifies the heartbeat interval for push subscriptionsm, or the polling
+interval for pull subscriptions. MS is the number of milliseconds. This option is valid 
+only if /cm (ConfigurationMode) is set to Custom.
+
+/tn:TRANSPORTNAME   (TransportName)
+String that specifies the name of the transport used to connect to remote event source.
+It can be http or https.
+/esa:EVENT_SOURCE   (EventSourceAddress)
+Specifies the address of an event source. EVENT_SOURCE is a string that identifies a
+machine serving as a source of events using fully-qualified domain name, NetBIOS name,
+or an IP address. This option should be used with /ese (EventSourceEnabled),
+/aes (AddEventSource), /res (RemoveEventSource), or /un (UserName) and /up (UserPassword)
+options.
+
+/ese[:VALUE]  (EventSourceEnabled)
+Enable or disable an event source. VALUE can be true or false. This option is allowed
+only if /esa (EventSourceAddress) option is specified. The default value of this option
+is true.
+
+OPTIONS SPECIFIC TO COLLECTOR INITIATED SUBSCRIPTIONS:
+
+/aes  (AddEventSource)
+Adds event source specified by the /esa (EventSourceAddress) option, if it is not already
+a part of the subscription. If the address specified by the /esa (EventSourceAddress) is
+already a part of the subscription, an error is raised. This option is allowed only if
+/esa (EventSourceAddress) option is specified.
+
+/res  (RemoveEventSource)
+Removes event source specified by the /esa (EventSourceAddress) option, if it is already
+a part of the subscription. If the address specified by the /esa (EventSourceAddress)
+is not a part of the subscription, an error is raised. This option is allowed only if
+/esa (EventSourceAddress) option is specified.
+
+/un:USERNAME   (UserName)
+Specifies user credential to be used with the source specified by the
+/esa (EventSourceAddress) option. This option is allowed only if /esa (EventSourceAddress)
+option is specified.
+
+/up:PASSWORD   (UserPassword)
+Sets the user password for the user credential for the source specified by the
+/esa (EventSourceAddress) option. This option is allowed only if /un (UserName) option
+is specified.
+
+/tp:TRANSPORTPORT   (TransportPort)
+Port number used by transport when connecting to remote event source. If not specified the 
+port defaults to the standard one used for the given transport name: 80 for http, 443 for 
+https
+
+/hn:NAME   (HostName)
+String that specifies the FQDNS name of the local machine. This name is used by remote
+event source to push back events and must be used for push subscription only. It is used
+in scenarios involving multi-homed servers that may have multiple FQDNS names.
+
+/ct:TYPE   (CredentialsType)
+String that specifies the credential type to be used for remote source access. TYPE may
+be one of the following values: "default", "negotiate", "digest", "basic" or
+"localmachine". The default value is "default".
+
+/cun:USERNAME   (CommonUserName)
+Sets shared user credential to be used for event sources that do not have their own user
+credentials.
+Note: if this option is specified with the /c (Config) option, UserName/UserPassword
+settings for individual event sources from the configuration file are ignored. If you
+want to use different credential for a specific event source, you may override this
+value by specifying the /un (UserName) and /up (UserPassword) for a specific event
+source on the command line of another ss (set-subscription) command.
+
+/cup:PASSWORD   (CommonUserPassword)
+Sets the user password for the shared user credential. When PASSWORD is set to
+* (asterisk), the password is read from the console. This option is only valid when
+/cun (CommonUserName) option is specified.
+
+
+
+
+
+OPTIONS SPECIFIC TO SOURCE INITIATED SUBSCRIPTIONS:
+
+/ica:THUMBPRINTS   (AllowedIssuerCA)
+Sets the list of issuer certificate thumbprints, in a comma separated list.
+
+/as:SUBJECTS   (AllowedSubjects)
+Comma separated list of strings that specifies the DNS names of non-domain computers
+allowed to initiate subscriptions. The names may be specified using wildcards, like
+"*.mydomain.com". By default this list is empty.
+
+/ds:SUBJECTS   (DeniedSubjects)
+Comma separated list of strings that specifies the DNS names of non-domain computers
+not allowed to initiate subscriptions. The names may be specified using wildcards, like
+"*.mydomain.com". By default this list is empty.
+
+/adc:SDDL   (AllowedSourceDomainComputers)
+A string which specifies which domain computers are allowed or not to initiate
+subscriptions, in SDDL format. Default is to allow all domain computers.
+
+
+
+
+
+EXAMPLES:
+
+Update subscription configuration named sub1 from a new XML file, WsSelRg2.xml.
+wecutil ss sub1 /c:%Windir%\system32\WsSelRg2.xml
+
+Update subscription configuration named sub2 with multiple parameters:
+wecutil ss sub2 /esa:myComputer /ese /un:uname /up:* /cm:Normal
+
+Update the allowed and denied subject lists for a source initiated subscription:
+wecutil ss sub3 /as:"*.private.mydomain.com" /ds:"*.public.mydomain.net,*.mydomain.tv"
+
+=== Backup subscription config to file ===
+Written: 2900 bytes
+<?xml version="1.0" encoding="UTF-8"?>
+<Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
+	<SubscriptionId>SOC002-WS001-Security</SubscriptionId>
+	<SubscriptionType>CollectorInitiated</SubscriptionType>
+	<Description>Known-good Security 4624 4625 4688 plus PowerShell 4104</Description>
+	<Enabled>true</Enabled>
+	<Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
+	<ConfigurationMode>Custom</ConfigurationMode>
+	<Delivery Mode="Pull">
+		<Batching>
+			<MaxItems>1</MaxItems>
+			<MaxLatencyTime>5000</MaxLatencyTime>
+		</Batching>
+		<PushSettings>
+			<Heartbeat Interval="5000"/>
+		</PushSettings>
+	</Delivery>
+	<Query>
+		<![CDATA[
+<QueryList><Query Id="0"><Select Path="Security">*[System[(EventID=4624 or EventID=4625 or EventID=4688)]]</Select><Select Path="Microsoft-Windows-PowerShell/Operational">*[System[(EventID=4104)]]</Select></Query></QueryList>
+		]]>
+	</Query>
+	<ReadExistingEvents>false</ReadExistingEvents>
+	<TransportName>HTTP</TransportName>
+	<TransportPort>5985</TransportPort>
+	<ContentFormat>RenderedText</ContentFormat>
+	<Locale Language="en-US"/>
+	<LogFile>ForwardedEvents</LogFile>
+	<PublisherName>Microsoft-Windows-EventCollector</PublisherName>
+	<CredentialsType>Default</CredentialsType>
+	<EventSources>
+		<EventSource Enabled="true">
+			<Address>SOC002-WS001.soc002.local</Address>
+		</EventSource>
+	</EventSources>
+</Subscription>
+
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.10:5985/wsman

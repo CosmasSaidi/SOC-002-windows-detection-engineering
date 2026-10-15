@@ -1,0 +1,70 @@
+SOC-002 PHASE 7 - LIMITATIONS
+=============================
+Every statement below is bounded by what was actually measured in Phase 7.
+
+1. SINGLE CONTROLLED RUN, ONE HOST, ONE REPRESENTATION
+   Exactly one execution on one workstation, using one alternative
+   representation (-Command with [Convert]::FromBase64String inside the script
+   text). This validates that specific limitation. It does NOT measure a
+   detection rate and cannot generalise to other representations.
+
+2. ONLY THE CLI-SWITCH DIMENSION WAS VARIED
+   The behaviour under test is a command-line shape. Other ways to reach the
+   same "decode then use" outcome were deliberately NOT tested, e.g. the call
+   operator (&) with a decoded string, Invoke-Expression, a compressed or
+   hex-encoded blob, a second decode layer, or a payload built entirely from
+   variables. Whether those are covered is NOT VERIFIED. Phase 7 does not claim
+   the blind spot is limited to the one form tested.
+
+3. THE DECODED CONTENT IS PLAIN TEXT - NO DECODE-AND-EXECUTE CLAIM
+   The blob reconstructs text that is only printed. Phase 7 therefore says
+   nothing about whether the stack could detect a command that reconstructs and
+   then executes content. The escape screen (ESC-02) would likely matter there,
+   but only for events DET-001 already considers candidates.
+
+4. DELIVERY CONSTRAINTS SHAPED THE MECHANISM (NO CONTROL WAS WEAKENED)
+   WS001's effective execution policy is Restricted, so a staged .ps1 could not
+   be executed and the payload was handed to powershell.exe via -Command from a
+   staged text file. Phase 7 did NOT change any policy and did NOT use
+   -ExecutionPolicy Bypass. The consequence is that the payload process sits one
+   level below the baselined WinRS transport, which is where the Phase 5
+   controlled test also sat - so this is comparable to the baseline, not a
+   deviation from it.
+
+5. THE OPERATOR'S OWN STAGING IS INDISTINGUISHABLE FROM "SOMETHING DECODING BASE64"
+   The file-transfer steps used to stage Phase 7 artefacts contain
+   [Convert]::FromBase64String and therefore trip ESC-03, which overrides the
+   baseline and produces an INVESTIGATION record. Phase 6 already measured and
+   accepted this exact precision cost. In Phase 7 it produced 3 of the session
+   window's records. None of them is the payload process. This means DET-001 v2's
+   alert volume in an operator session is partly the operator's own tooling.
+
+6. CORR-001 INHERITS DET-001's BLIND SPOT BY CONSTRUCTION
+   CORR-001 iterates DET-001 candidates, so anything the trigger never produced
+   can never be correlated - even when DET-002 has a record for it. Phase 7
+   observed this directly: DET-002 had a lineage record for PID 1428 and
+   CORR-001 produced nothing for it.
+
+7. DET-002 IS CONTEXT, AND ITS VOLUME IS HIGH
+   DET-002 fires on any PowerShell process whose ancestry contains
+   winrshost.exe/wsmprovhost.exe - which in this lab is essentially every
+   administrative action. It flagged the payload process, but it would equally
+   have flagged any neighbouring operator call. A DET-002 record is a prompt, not
+   a detection of the Phase 7 technique.
+
+8. TELEMETRY DEPENDENCIES
+   The whole chain depends on the Phase 4 enablers staying in place (4688
+   CommandLine policy, ScriptBlockLogging, the Sysmon configuration, the WEF
+   subscription). Phase 7 verified they were in place and left them untouched.
+   If any is removed, the corresponding evidence disappears; that is a
+   collection problem, not a detection result.
+
+9. 4104 DOES NOT CARRY THE RECONSTRUCTED TEXT
+   The payload's 4104 script block contains the base64 blob and the
+   FromBase64String call, not the reconstructed marker. The marker only exists in
+   the process stdout. An analyst reading only 4104 must decode the blob manually.
+
+10. NO ADVERSARY, NOT PRODUCTION
+   This is a controlled, authorised detection-validation exercise in a two-VM
+   lab. No adversary telemetry exists and no production claim is made. Absence of
+   other activity is NOT OBSERVED, not DISPROVED.

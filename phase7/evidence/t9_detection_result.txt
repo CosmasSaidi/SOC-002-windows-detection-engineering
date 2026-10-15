@@ -1,0 +1,20 @@
+=== SOC-002 PHASE 7 :: DETECTION RESULT ===
+Derived from: evidence/t6_detection_stack_controlled.txt and _session.txt
+
+CONTROLLED WINDOW (the activity under test)
+  DET-001 v2 candidates (encoded-switch trigger)  = 1
+  DET-001 v2 INVESTIGATION records                = 0
+  DET-001 v2 baselined by BASE-01 (INFO)          = 1
+  DET-001 v2 escalations by the payload screen    = 0
+  DET-001 v2 detected the PAYLOAD process (1428)? = NO
+  DET-002 records for the payload process (1428)  = YES (INFERRED lineage, 'Encoded switch = absent')
+  CORR-001 record for the payload process (1428)  = NO
+
+SESSION WINDOW (staging + execution, for completeness)
+  DET-001 v2 candidates                           = 25
+  DET-001 v2 INVESTIGATION records                = 3
+     of which the payload process                 = 0
+     of which the operator's own file transfers   = 3 (ESC-03 on the upload decode step)
+
+RESULT: OUTCOME B - the known Phase 6 blind spot is CONFIRMED.
+        DET-001 v2 never produced a candidate for the payload process.

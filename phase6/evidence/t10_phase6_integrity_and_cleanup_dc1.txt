@@ -1,0 +1,31 @@
+=== SOC-002 PHASE 6 | TASK 10 - POST-RUN INTEGRITY & CLEANUP (READ-ONLY, SOC002-DC1) ===
+Purpose : confirm that Phase 6 left no artefacts on the lab hosts and that no lab
+          configuration was modified. Every command below is a read-only query
+          (Get-Service / Get-WinEvent / Test-Path / wecutil es / Get-ChildItem).
+          Credentials are supplied by environment variables and are never printed.
+== host / clock ==
+hostname      = SOC002-DC1
+local time    = 2026-10-15T01:47:53+03:00
+utc time      = 2026-10-14T22:47:53Z
+
+== Phase 6 artefacts on the collector ==
+C:\Windows\Temp\soc002-phase6 present = False
+C:\Windows\Temp\soc002-phase5 present = False
+(no leftover lines above = clean)
+
+== collector log state (read-only) ==
+ForwardedEvents records   = 2638
+ForwardedEvents max size  = 20 MB
+ForwardedEvents file size = 20 MB
+last write time           = 2026-10-15T01:46:11
+
+== WEF subscription (NOT modified by Phase 6) ==
+  subscription: SOC002-WS001-Security
+
+== management services still healthy ==
+WinRM service  = Running
+
+== local detection copy on the collector (pushed, then removed) ==
+C:\Windows\Temp\soc002-phase6 deleted = True
+
+[RC]=0

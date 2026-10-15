@@ -1,0 +1,57 @@
+SOC-002 PHASE 5 - DETECTION 001 LIMITATIONS
+===========================================
+Detection : SOC002-DET-001  "Encoded PowerShell execution observed - investigation required"
+            Primary   : Sysmon Ev1, Image ~ powershell.exe/pwsh.exe + encoded-command switch.
+            Corrobor. : PowerShell 4104 from the same executing PID within the window.
+
+WHAT THE DETECTION DOES *NOT* PROVE
+  - It does NOT prove compromise. An encoded command line is an indicator, not a verdict.
+  - It does NOT prove malicious intent. It only says "a human should look at this".
+  - It does NOT know what the script did until the 4104 (or a decode) is reviewed.
+
+FALSE POSITIVES (observed, not theoretical)
+  - This detection fired 39 times in a 60-minute window on a single workstation.
+    Exactly 1 was the controlled test; 38 were the lab's own administration, because
+    the operator drives the host over WinRM and the WinRM client invokes remote
+    PowerShell with "powershell -encodedcommand <b64>".
+    Evidence: evidence/t6_detection_broad60_dc1.txt  (38 alerts parent=cmd.exe, 1 parent=powershell.exe)
+  - Legitimate encoded PowerShell is common: some management tools, RMM agents,
+    orchestration/configuration management, and the WinRM channel itself.
+  - A single admin using WinRM can therefore drown this rule in noise; in a real
+    estate it needs scoping/tuning (see tuning ideas below) before it is usable.
+
+FALSE NEGATIVES / EVASION AND VISIBILITY GAPS
+  - Switch coverage: only the CLI switch is matched. Encoded/blinded commands that are
+    built inside PowerShell (e.g. -Command with [Convert]::FromBase64String(...)) or
+    passed via -Command/Invoke-Expression are NOT matched.
+  - Alternate hosts: only powershell.exe/pwsh.exe images are matched.
+  - If Sysmon is absent: the primary signal disappears entirely, and the detection
+    falls back to nothing (Security 4688 is not currently parsed by this rule).
+  - If 4104 is absent (ScriptBlockLogging off, or the log not forwarded): the
+    corroboration step returns "NONE FOUND" but the Sysmon alert still stands, so the
+    analyst loses the "what did it actually do" view and must decode manually.
+  - 4104 fragmentation: long scripts are split across MessageNumber/MessageTotal > 1.
+    Here it was 1/1 (no fragmentation); a fragmented script would need reassembly.
+  - 4104 noise: high-volume, and it also carries the runner's own block plus any
+    tooling that mentions the same text, so marker-based matching is weaker than PID matching.
+  - Command-line visibility depends entirely on the two enablers verified in Phase 4
+    (4688 CommandLine policy = 1, ScriptBlockLogging = 1). Without them fields are empty.
+  - Short retention: the Sysmon, Security and PowerShell logs on WS001 are bounded, so
+    the evidence is only available for as long as retention allows; on DC1 ForwardedEvents
+    has the same constraint. Long windows may silently miss events.
+  - Collector quirk (observed this phase): forwarded events in DC1 ForwardedEvents carry
+    NO rendered Message text, so any rule that filters on $_.Message silently matches
+    nothing centrally. Rules must parse the EventData XML. This detection was reworked
+    for that reason.
+
+TUNING IDEAS (not implemented here; deliberately out of scope for a first detection)
+  - Baseline and allow-list the administrative source hosts / parent chain.
+  - Require the encoded block to be corroborated by a 4104 (raise confidence).
+  - Add "decode and show the analyst" (already done) so triage is fast.
+  - Extend matching to -Command with FromBase64String and to pwsh.exe.
+  - Add a second rule for "powershell spawned by cmd.exe/wsmprovhost/winrshost" as context.
+
+HONEST SUMMARY
+  This is a good *triage* detection: cheap, transparent, and it puts the analyst in front
+  of the decoded command with corroboration. It is NOT a compromise detector and must be
+  read together with the surrounding context before any conclusion is drawn.

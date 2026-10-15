@@ -1,0 +1,21 @@
+{
+  "phase": "SOC-002 Phase 8",
+  "detection": "SOC002-DET-003",
+  "marker": "SOC002-PHASE8-DET003-TEST",
+  "delivery": "WinRM/WinRS as SOC002\\Administrator (existing authorised lab admin context)",
+  "loader_line": "$c=[IO.File]::ReadAllText('C:\\Windows\\Temp\\soc002-phase8\\phase8_child_command.txt'); powershell.exe -NoProfile -NonInteractive -Command $c",
+  "payload_process_command": "powershell.exe -NoProfile -NonInteractive -Command \"$b='U09DMDAyLVBIQVNFOC1ERVQwMDMtVEVTVApTT0MwMDIgUEhBU0UgOCBDT05UUk9MTEVEIERFVC0wMDMgVkFMSURBVElPTgpNYXJrZXI6IFNPQzAwMi1QSEFTRTgtREVUMDAzLVRFU1QKUHVycG9zZTogaGFybWxlc3MgbWFya2VyIHJlY29uc3RydWN0aW9uIG9ubHkuCg==';$t=[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($b));Write-Output $t\"",
+  "uses_encoded_command_switch": false,
+  "reconstructs_with": "[Convert]::FromBase64String",
+  "decodes_to": "plain text only (marker + purpose line); never executed",
+  "decoded_bytes": 151,
+  "decoded_sha256": "C1DA5E3974AD104D9C1BBA5632EE41E302078077B402348E4847B6BFF5034496",
+  "body_sha256": "C1735EFCFEEF584F529B922BC64A5A815FF0521C934E6B9E55A1AE65DBF58FD2",
+  "base64_len": 204,
+  "executions": 1,
+  "persistence": false,
+  "config_change": false,
+  "network_contact_by_payload": false,
+  "file_writes_by_payload": false,
+  "permanent_files": false
+}

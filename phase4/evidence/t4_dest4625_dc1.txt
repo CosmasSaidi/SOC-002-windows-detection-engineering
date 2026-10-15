@@ -1,0 +1,28 @@
+NOW=2026-10-15 00:47:43
+centralized4625Count=1
+--- CENTRALIZED 4625 ---
+Provider      = Microsoft-Windows-Security-Auditing
+FwdRecordId   = 15056
+SysEventRecordID_xml = 15056
+SystemTimeUTC = 2026-10-14T21:46:54.264Z
+Computer      = SOC002-WS001.soc002.local
+Channel_in_xml= Security
+TargetUserName          = soc002-ph4-failauth
+TargetDomainName        = SOC002
+TargetUserSid           = S-1-0-0
+LogonType               = 3
+Status                  = 0xc000006d
+SubStatus               = 0xc0000064
+FailureReason           = %%2313
+LogonProcessName        = NtLmSsp 
+AuthenticationPackageName= NTLM
+WorkstationName         = SOC002-WS001
+IpAddress               = 192.168.56.102
+IpPort                  = 49930
+SubjectUserName         = -
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.10:5985/wsman

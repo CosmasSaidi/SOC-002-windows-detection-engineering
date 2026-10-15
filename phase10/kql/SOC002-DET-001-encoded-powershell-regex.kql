@@ -1,0 +1,65 @@
+// =============================================================================
+// SOC-002 | PHASE 10 (closure) | SOC002-DET-001  --  KQL translation (REGEX form)
+// -----------------------------------------------------------------------------
+// TRANSLATION ARTEFACT - NOT A NEW DETECTION.
+//
+// THIS IS THE CLOSER TRANSLATION OF THE ORIGINAL DETECTOR.
+//   It reproduces the token-exact encoded-switch regex used by the original,
+//   already validated PowerShell detector
+//   (phase5/detections/detect_encoded_powershell.ps1):
+//
+//       $encRx = '(?i)\s-(e|en|enc|encodedcommand)(\s|$)'
+//
+//   The portable Sigma rule - and therefore the companion portable KQL file
+//   SOC002-DET-001-encoded-powershell.kql - could only express the LONG switch
+//   ("CommandLine contains -EncodedCommand") and deliberately dropped the short
+//   forms -e / -en / -enc, because portable "contains" cannot distinguish them
+//   from unrelated strings. This file closes that gap using a KQL regex.
+//
+// WHY THE SHORT FORMS ARE SAFE HERE (token-exactness):
+//   The regex requires whitespace BEFORE the switch and whitespace-or-end AFTER
+//   the whole switch token. Unrelated switches therefore do NOT match:
+//       -ErrorAction      -> 'e' then 'r'   : no whitespace/end after the token
+//       -ExecutionPolicy  -> 'e' then 'x'   : no whitespace/end after the token
+//       -Enabled          -> 'en' then 'a'  : no whitespace/end after the token
+//       -Encoding         -> 'enc' then 'o' : no whitespace/end after the token
+//   while the intended switches do match:
+//       -e  / -en  / -enc  / -EncodedCommand   (case-insensitive)
+//   KQL's "matches regex" is case-sensitive, so the (?i) inline flag is retained
+//   explicitly to mirror the original detector's (?i) behaviour.
+//
+// ASSUMED SOURCE MODEL: identical to the portable file - Microsoft Sentinel
+//   "Event" table carrying Sysmon Event ID 1, EventData treated as dynamic.
+//   This is an assumed schema, not a claim about a live workspace.
+//
+// SCOPE: the primary DET-001 trigger ONLY - no enrichment, no other detection's
+//   logic, no environment-specific baseline suppression. Static, offline
+//   translation; not executed against any live backend.
+// =============================================================================
+
+Event
+| where EventID == 1
+| where Source == "Microsoft-Windows-Sysmon"
+     or EventLog == "Microsoft-Windows-Sysmon/Operational"
+| extend
+    Image       = tostring(EventData.Image),
+    CommandLine = tostring(EventData.CommandLine)
+| where Image endswith @"\powershell.exe"
+     or Image endswith @"\pwsh.exe"
+// Token-exact encoded-command switch: -e | -en | -enc | -encodedcommand
+| where CommandLine matches regex @"(?i)\s-(e|en|enc|encodedcommand)(\s|$)"
+| project
+    TimeGenerated,
+    Computer,
+    DetectionName      = "SOC002-DET-001",
+    Severity           = "Medium",
+    SwitchForm         = "regex(-e|-en|-enc|-encodedcommand)",
+    SysmonEventId      = EventID,
+    ProcessImage       = Image,
+    ProcessCommandLine = CommandLine,
+    ProcessId          = tostring(EventData.ProcessId),
+    ParentImage        = tostring(EventData.ParentImage),
+    ParentCommandLine  = tostring(EventData.ParentCommandLine),
+    User               = tostring(EventData.User),
+    Hashes             = tostring(EventData.Hashes)
+| order by TimeGenerated desc

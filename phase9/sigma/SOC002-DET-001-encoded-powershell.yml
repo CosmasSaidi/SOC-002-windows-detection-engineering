@@ -1,0 +1,89 @@
+# =============================================================================
+# SOC-002 | PHASE 9 (closure) | Sigma representation of SOC002-DET-001
+# -----------------------------------------------------------------------------
+# This file is a PORTABLE REPRESENTATION of an already-existing, lab-validated
+# detection. It does NOT introduce new detection logic.
+#   derived from : phase5/detections/detect_encoded_powershell.ps1
+#                 phase6/detections/detect_encoded_powershell_v2.ps1 (trigger
+#                 unchanged from Phase 5; Phase 6 only added classification)
+#   excludes     : SOC002-DET-003 (Base64 reconstruction via PowerShell APIs)
+#   excludes     : the Phase 6 BASE-01 WinRS baseline (lab-contextual tuning,
+#                  deliberately NOT encoded here as a global exclusion)
+#   excludes     : the Base64 extraction/decoding step, which is enrichment only
+# This rule has not been run against any production SIEM. See SIGMA_NOTES.md.
+# =============================================================================
+title: SOC002-DET-001 - Encoded PowerShell Execution Observed (Investigation Required)
+id: 9e77668f-116f-459b-80bf-4b6c4ba02ae7
+status: experimental
+description: |
+  Detects creation of a PowerShell process (powershell.exe or pwsh.exe) whose command
+  line carries an encoded-command switch, i.e. the primary Sysmon Event ID 1 condition
+  of the existing SOC-002 lab detection SOC002-DET-001. This is the Sigma
+  representation of that trigger only: the same condition that was validated against
+  controlled lab activity in Phase 5 and replayed unchanged in Phase 6.
+
+  This is a triage signal. It says "an analyst should look at this", it does NOT say
+  "malicious" and it does NOT prove compromise. The underlying PowerShell detection
+  additionally decodes the Base64 payload for the analyst and correlates PowerShell
+  Event ID 4104 from the same process; both of those are enrichment and are NOT part
+  of this rule's logic.
+
+  Portability caveat: the PowerShell implementation matches the switch family
+  -EncodedCommand | -enc | -en | -e using the token-exact regex
+  "(?i)\s-(e|en|enc|encodedcommand)(\s|$)". Portable Sigma string matching cannot
+  express the short forms -e / -en / -enc without matching unrelated strings (for
+  example "-ErrorAction", "-ExecutionPolicy", "-Encoding", "-Enabled"), so those
+  forms are deliberately NOT written as wildcard/broad contains values and are
+  documented as a representation gap in SIGMA_NOTES.md instead.
+references:
+  - phase5/detections/detect_encoded_powershell.ps1
+  - phase6/detections/detect_encoded_powershell_v2.ps1
+  - phase6/detections/lib_soc002_v2.ps1
+  - phase5/evidence/raw/sysmon1-recid3535-ws001.xml
+  - phase5/evidence/DETECTION_LIMITATIONS.txt
+  - phase6/evidence/TUNING_RATIONALE.txt
+  - phase8/PHASE8_REPORT.md
+  - https://attack.mitre.org/techniques/T1059/001/
+author: SOC-002 Windows Detection Engineering & Investigation lab
+date: 2026-10-15
+tags:
+  - attack.execution
+  - attack.t1059.001
+  - attack.defense_evasion
+  - attack.t1027
+logsource:
+  category: process_creation
+  product: windows
+  service: sysmon
+  definition: >-
+    Sysmon Event ID 1 (Process Create), channel Microsoft-Windows-Sysmon/Operational.
+    The Image field carries the created process path and the CommandLine field carries
+    the full command line - the two fields the existing DET-001 reads. Security Event
+    ID 4688 is only an optional, non-primary fallback in the PowerShell implementation
+    and is deliberately not declared here.
+detection:
+  selection_image:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+  selection_encoded_switch:
+    # Sigma string matching is case-insensitive by default, so the canonical
+    # -EncodedCommand covers -encodedcommand / -ENCODEDCOMMAND. Both common spellings
+    # are listed for backends that are case-sensitive in practice.
+    CommandLine|contains:
+      - '-EncodedCommand'
+      - '-encodedcommand'
+  condition: selection_image and selection_encoded_switch
+falsepositives:
+  - "WinRM / WinRS remote administration - the WinRS client delivers every remote
+    command as 'cmd.exe /C powershell -encodedcommand <base64>'. This was the dominant
+    source of hits in the SOC-002 lab (38 of 39 hits in a 60-minute window were the
+    lab operator's own administration; evidence file phase5/evidence/t6_detection_broad60_dc1.txt)."
+  - Legitimate management, RMM, orchestration and configuration-management tooling that
+    wraps PowerShell in an encoded command.
+  - Deployment, patching or scheduled-task wrappers that pass -EncodedCommand to avoid
+    quoting problems.
+  - Any single administrator working over WinRM can generate alert-per-command volume.
+    Scope this rule to the environment and pair it with process-lineage context before
+    treating a hit as suspicious.
+level: medium

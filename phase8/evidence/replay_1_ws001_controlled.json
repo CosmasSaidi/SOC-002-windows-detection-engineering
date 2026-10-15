@@ -1,0 +1,43 @@
+{
+  "label": "phase7 WS001 local controlled window",
+  "raw": "phase7/evidence/raw/t4_raw_local_ws001_controlled.txt",
+  "events": 17,
+  "records_examined": 8,
+  "det003_candidates": 3,
+  "det003_low": 3,
+  "det003_medium": 0,
+  "word_only_non_triggers": 0,
+  "comment_suppressed": 0,
+  "candidates": [
+    {
+      "source": "Security-4688",
+      "recordid": "15758",
+      "pid": "1428",
+      "scriptblockid": "",
+      "indicator": "[Convert]::FromBase64String",
+      "severity": "LOW",
+      "class": "RECONSTRUCTION-OBSERVED",
+      "host": "SOC002-WS001.soc002.local"
+    },
+    {
+      "source": "Sysmon-Event1",
+      "recordid": "4142",
+      "pid": "1428",
+      "scriptblockid": "",
+      "indicator": "[Convert]::FromBase64String",
+      "severity": "LOW",
+      "class": "RECONSTRUCTION-OBSERVED",
+      "host": "SOC002-WS001.soc002.local"
+    },
+    {
+      "source": "PowerShell-4104",
+      "recordid": "74343",
+      "pid": "1428",
+      "scriptblockid": "96c73586-2334-4bbd-a1c7-e2e5163f19c0",
+      "indicator": "[Convert]::FromBase64String",
+      "severity": "LOW",
+      "class": "RECONSTRUCTION-OBSERVED",
+      "host": "SOC002-WS001.soc002.local"
+    }
+  ]
+}

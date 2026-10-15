@@ -1,0 +1,56 @@
+SOC-002 PHASE 4 - EVIDENCE MANIFEST
+===================================
+All times: VM local = Africa/Nairobi (UTC+3). UTC = local - 03:00.
+Collection host: Kali (./phase4). Transport: WinRM (NTLM) over HTTP/5985.
+
+FILES
+-----
+evidence/t1_prestate_ws001.txt     Task1 before-state: 4688 CommandLine registry + auditpol Process Creation
+evidence/t1_regcheck_ws001.txt     Task1 exact reg value/type + key LastWriteTime = 2026-10-14 23:54:10
+evidence/t1_analyze_ws001.txt      Task1 analysis: earliest non-empty CommandLine = 2026-10-14 23:54:10
+evidence/t1_probe_4688_ws001.txt   Task1 recent 4688 samples + retention
+evidence/t1_new4688_ws001.txt      Task1 fresh 4688 with populated CommandLine (RecordID 14686)
+evidence/t2_recon_ws001.txt        Task2 Sysmon service/registry/log discovery (pre-change)
+evidence/t2_config_ws001.txt       Task2 running config dump BEFORE change ("Network connection: disabled")
+evidence/t2_configfile_ws001.txt   Task2 pre-change config file content + hash 80814C50...
+evidence/t2_backup_ws001.txt       Task2 backup actions + backup dir listing
+evidence/t2_hist_ws001.txt         Task2 history: prior config apply 2026-10-15 00:07:47; Event1 stopped there
+evidence/t2_diag_ws001.txt         Task2 diagnosis: ProcessCreate stopped 00:07:47; only Event5 continued
+evidence/t2_apply_ws001.txt        Task2 attempt v2 (NetworkConnect enabled)
+evidence/t2_apply_v3_ws001.txt     Task2 attempt v3 (flat empty includes - proved empty include = no events)
+evidence/t2_apply_v4_ws001.txt     Task2 attempt v4 ("*" literal match failed)
+evidence/t2_apply_v5_ws001.txt     Task2 WORKING config: Event1 + Event3 generating
+evidence/t2_finalize_ws001.txt     Task2 canonical config applied; hash D3A8A1F8...; cleanup
+evidence/t2_events_ws001.txt       Task2 Event1 + Event3 representative evidence
+evidence/t2_event3_ws001.txt       Task2 clean Event3 from held connection (Image resolved)
+evidence/t3_wec_recon_dc1.txt      Task3 WEF subscription config + runtime BEFORE change
+evidence/t3_backup_sub_dc1.txt     Task3 subscription XML backup + wecutil ss syntax
+evidence/t3_update_sub_dc1.txt     Task3 first (failed) wecutil ss attempt - exit 87, sub unchanged
+evidence/t3_update_sub2_dc1.txt    Task3 successful subscription update + verification
+evidence/t3_fwd_inspect_dc1.txt    Task3 how centralized events are stored (EventData preserved)
+evidence/t3_check_flow_dc1.txt     Task3 first proof Sysmon flowing to ForwardedEvents
+evidence/t3_source_pair_ws001.txt  Task3 paired test - SOURCE side (WS001)
+evidence/t3_dest_pair_dc1.txt      Task3 paired lookup (failed: Message not rendered on DC1)
+evidence/t3_dest_debug_dc1.txt     Task3 paired lookup via raw XML (found)
+evidence/t3_dest_detail_dc1.txt    Task3 paired test - CENTRALIZED side (DC1) full field comparison
+evidence/t3_preserve_check_dc1.txt Task3 preservation of 4624/4688/4104 + Sysmon + RecordId semantics
+evidence/t4_fail_auth_ws001.txt    Task4 ONE failed auth -> fresh local 4625 (RecordID 15056)
+evidence/t4_dest4625_dc1.txt       Task4 centralized 4625 (RecordID 15056) field comparison
+evidence/final_snapshot_ws001.txt  Final health snapshot WS001
+evidence/final_snapshot_dc1.txt    Final health snapshot DC1
+
+configs/soc002_sysmon_phase4.xml      ACTIVE Sysmon config (SHA256 D3A8A1F8...)
+configs/wef_subscription.phase4.xml   ACTIVE WEF subscription config
+backup/BACKUP-pre-phase4-soc002_sysmon_minimal.xml   Previous (broken) Sysmon config
+backup/wef_subscription.pre-phase4.xml               WEF subscription BEFORE change
+backup/SysmonDrv.pre-phase4.reg                      Registry export of SysmonDrv key (pre-change)
+backup/Sysmon64.pre-phase4.reg                       Registry export of Sysmon64 key (pre-change)
+backup/sysmon_running_config.pre-phase4.txt          Running config dump (pre-change)
+
+CLASSIFICATION
+--------------
+OBSERVED = read directly from a host / event / command output and reproduced in the files above.
+INFERRED = conclusion drawn from multiple observations.
+NOT VERIFIED = not tested in this phase.
+
+No credentials, passwords or tokens are stored in this evidence tree.

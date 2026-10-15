@@ -1,0 +1,77 @@
+SOC-002 PHASE 5 - ANALYST INVESTIGATION NOTES
+=============================================
+Alert            : SOC002-DET-001  "Encoded PowerShell execution observed - investigation required"
+Analyst question  : was this execution malicious, or an authorised/benign action?
+Classification    : CONTROLLED TEST ACTIVITY (authorised, benign).  NOT malicious.
+Evidence labels   : OBSERVED = read directly from an event / host output.
+                    INFERRED = conclusion drawn from several observations.
+                    NOT VERIFIED = was not tested or is not auditable in this lab.
+
+Q1. WHICH HOST?     OBSERVED: SOC002-WS001.soc002.local (192.168.56.102).
+Q2. WHICH USER?     OBSERVED: SOC002\Administrator, LogonId 0x5c764d (Sysmon User + 4688 SubjectUser*).
+Q3. WHICH PROCESS?  OBSERVED: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+                    PID 1500 (0x5dc), ProcessGuid {edcef402-fb54-6acf-ef04-000000000700},
+                    IntegrityLevel High, CurrentDirectory C:\Users\Administrator\.
+                    Binary hash (Sysmon): SHA256 B4E7BC24BF3F5C3DA2EB6E9EC5EC10F9
+                    0099DEFA91B820F2F3FC70DD9E4785C4  -- the unmodified Microsoft binary.
+Q4. WHAT WAS THE PARENT?
+                    OBSERVED process chain (Sysmon Ev1 + 4688 agree on every PID):
+                      svchost.exe (716) -> winrshost.exe (5800) -> cmd.exe (3596)
+                      -> powershell.exe (4576)  [the operator/runner]
+                      -> powershell.exe (1500)  [the encoded command]
+                    INFERRED: the parent chain is the classic signature of a remote
+                    WinRM session; the execution was initiated remotely over WinRM
+                    (port 5985) as SOC002\Administrator, from the lab operator host
+                    192.168.56.1 (Kali). This matches how the lab is operated and is
+                    authorised in this exercise.
+Q5. WHAT COMMAND LINE? OBSERVED: "C:\...\powershell.exe" -NoProfile -EncodedCommand
+                    IwAgAFMATwBDAC0AMAAwADIAIABQAEgAQQBTAEUAIAA1AC4ALgAu...
+                    (single argument, base64, no other switches, no download/exec).
+Q6. WAS IT ENCODED? OBSERVED: YES - "-EncodedCommand" with a UTF-16LE base64 payload.
+Q7. WHAT DID THE DECODED SCRIPT DO?
+                    OBSERVED (decoded read-only by the detection, never executed by it;
+                    identical text confirmed in 4104 ScriptBlockText):
+                      - sets $marker = 'SOC002-PHASE5-ENCODED-POWERSHELL'
+                      - Write-Output of the marker, host, user, START_UTC
+                      - Start-Sleep -Seconds 3
+                      - Write-Output END_UTC and 'BENIGN_CONTROLLED_TEST_COMPLETE'
+                    It performs NO file write, NO registry change, NO service/task
+                    creation, NO credential access, NO download, NO decoding of external
+                    data. It only prints text and sleeps.  (see DECODED_TEST_COMMAND.txt)
+Q8. DID 4104 CORROBORATE? OBSERVED: YES. 4104 RecId 72974, ExecPID 1500 (exactly the
+                    Sysmon PID), ScriptBlockId 039b9c99-15fb-488d-8046-46e868aa9a39,
+                    MessageNumber 1/1 (not fragmented). ScriptBlockText == decoded script.
+                    The runner's own 4104 (RecId 72965, ExecPID 4576) is a separate block.
+Q9. WAS THERE NETWORK ACTIVITY? OBSERVED: NO network connection from the encoded process.
+                    Sysmon Event 3 filtered on its ProcessGuid over 2 hours = 0 events.
+                    The three Event 3 records in the minute are unrelated transport
+                    (local WinRM listener on :5985 and an lsass->DC1 LDAP/kerberos socket).
+Q10. WAS THERE PERSISTENCE? OBSERVED: none. Decoded script has no persistence logic.
+                    TaskScheduler Operational 106 (task registered) = 0 in the window
+                    (log enabled, RecordCount 3197, newest event 00:48:58 - before the test).
+                    System log 7045 (service installed) = 0 in the window.
+                    NOT VERIFIED: Security 4697/4698 could NOT be used - the audit
+                    subcategories "Security System Extension" and "Other Object Access
+                    Events" are set to "No Auditing" on WS001, so their absence proves
+                    nothing. The 106/7045 evidence is what carries the conclusion.
+Q11. WAS THERE PRIVILEGE ESCALATION? OBSERVED: no escalation. The process ran with a FULL
+                    token (TokenElevationType %%1936) at High integrity (S-1-16-12288),
+                    inherited from the already-elevated Administrator logon. No new
+                    privilege was obtained; 4672 at logon time is expected for Administrator.
+Q12. WAS THERE LATERAL MOVEMENT? OBSERVED: none from WS001 (no network from the payload).
+                    INFERRED: the *origin* of this execution was remote (WinRM). In a real
+                    incident that remote-origin pattern (T1021.006) would be the main
+                    thing to chase; here it is the authorised lab management channel.
+
+WHY THE BENIGN/TEST CONCLUSION IS SUPPORTED (not assumed):
+  - The decoded content is a self-labelled harmless test script and 4104 independently
+    echoes the exact same text (two sources, same content).
+  - The process tree is a WinRM administration chain by the domain Administrator.
+  - Output captured from the execution is only text (marker + timestamps), RC=0.
+  - No network, no persistence, no escalation, no lateral movement were observed.
+  - The single strongest artefact - the base64 command line - is an indicator, not proof;
+    it is the decoded meaning plus context that decides benign vs malicious.
+
+WHAT IS *NOT* PROVEN:
+  - That "encoded PowerShell" is inherently malicious (it is not; see DETECTION_LIMITATIONS.txt).
+  - That the absence of persistence is exhaustive (4697/4698 are not audited on this host).

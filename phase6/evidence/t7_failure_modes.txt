@@ -1,0 +1,188 @@
+
+==========================================================================
+ SOC-002 PHASE 6 / TASK 7 - FAILURE MODES
+==========================================================================
+Library=phase6-v2.0 sha256=3C332445BFB69045E2AD3B135C8184086D91979D8FC03C1BBEAD79D17B69D09F
+Phase 5 evidence root=./phase5/evidence
+Baseline for every statement below: the Phase 5 broad 60-minute window, 39 DET-001 candidates,
+of which 38 were authorised WinRM administration and 1 was the controlled test.
+No logging subsystem was disabled, reconfigured or restarted to produce these findings.
+
+==========================================================================
+ FM-1  MISSING SYSMON EVENT 1 (the primary DET-001 source)
+==========================================================================
+Status: OBSERVED - this failure is not hypothetical. It already happened inside the
+        Phase 5 window and is visible in the preserved Phase 5 evidence itself.
+
+OBSERVED in phase5/evidence/t6_detection_broad60_dc1.txt:
+  The 39 preserved DET-001 alerts run 00:05:18 .. 01:02:56 local with NO alert at all
+  between 00:07:38 and 00:41:10 - a 33m32s hole in the Sysmon Event 1 stream at the
+  collector, while the Phase 5 window was still open and the operator was still active.
+
+OBSERVED in the read-only live probe (see the appended FM probe section):
+  - Sysmon Ev1 encoded-PowerShell candidates in the Phase 5 window = 39
+  - Security 4688 encoded-PowerShell records in the SAME window    = 52
+  - 10-minute buckets with ZERO Sysmon Ev1 candidates (00:10 / 00:20 / 00:30) while
+    4688 carried 4 and 13 candidates in the 00:20 and 00:30 buckets.
+
+EFFECT ON THE DETECTIONS:
+  - DET-001 (Sysmon-primary) is BLIND for the duration of the hole: encoded PowerShell
+    executed by authorised administration and by an adversary would look identical -
+    both would simply produce no alert.
+  - DET-002 (lineage) also loses its input: the chain is built from process-create events.
+  - The -Include4688Fallback switch keeps coverage: Security 4688 carried the encoded
+    command line for 52 processes in the same window and the trigger condition evaluates
+    identically on NewProcessName + CommandLine. 21 of those had no Sysmon twin.
+  - COST of the fallback: 4688 has no ProcessGuid and no ParentProcessGuid, so lineage
+    must be resolved by PID (PID reuse is a real risk over a long window) and the WinRS
+    wrapper command line has to be recovered from the creator process own 4688 record.
+    DET-001 therefore trusts a 4688-rooted lineage LESS: it is baselined at the weaker
+    tier and reported as such, never silently upgraded to CONFIRMED.
+
+CONTRIBUTING FACTOR (OBSERVED): the collector ForwardedEvents log is sitting at its
+20 MB maximum and actively evicting its oldest records, so retention is a live
+constraint on this lab rather than a theoretical one. That explains WHY evidence can
+disappear, but it does NOT explain a hole in the MIDDLE of the retained range.
+
+CAUSE OF THE HOLE: NOT VERIFIED. The candidates are (a) the bounded Sysmon log on the
+source rolling over before the forwarder read it, or (b) collector-side drop/backlog on
+the higher-volume Sysmon channel (note the Sysmon EventRecordIDs jump 3053 -> 3252
+across the hole, so roughly 199 Sysmon records are unaccounted for, while Security 4688
+kept recording through the same minutes). Verifying the mechanism requires touching
+WEF/Sysmon logging configuration, which Phase 6 was explicitly told not to do.
+
+==========================================================================
+ FM-2  MISSING POWERSHELL 4104 (the corroboration / "what did it do" source)
+==========================================================================
+Status: OBSERVED in both Phase 5 and Phase 6.
+
+  - Of the 39 replayed candidates, the Phase 5 run itself recorded NO 4104 for 8
+    of them (its own Corroboration line reads "NONE FOUND (4104 missing / not forwarded)").
+  - The Phase 6 replay binds a 4104 by executing PID where the preserved raw XML holds one,
+    and produced 0 payload escalations.
+
+EFFECT:
+  - DET-001 still FIRES. Sysmon Event 1 is the trigger; 4104 is enrichment only. This is
+    the correct fail-open direction - a missing 4104 must not hide the execution.
+  - What is LOST is the decoded ScriptBlockText and ScriptBlockId: the analyst loses the
+    "what did it actually run" view and must decode the base64 command line by hand.
+  - DET-002/CORR-001 are unaffected in principle (they use process events), but the
+    correlation reading degrades from "what + how" to "how only".
+  - A vanished 4104 is itself weakly suspicious only if it is gone for ONE process and not
+    its neighbours; that pattern is NOT observable here (no adversary telemetry).
+
+==========================================================================
+ FM-3  MISSING PROCESS LINEAGE (no parent process-create record)
+==========================================================================
+Status: MEASURED in both directions - and the two directions disagree, which matters.
+
+  LIVE (read-only probe, all parent events present):  39 of 39 Sysmon
+                                    candidates found their immediate-parent record; 0 were
+                                    unresolved.  Live lineage resolution is therefore normal.
+  REPLAY over preserved Phase 5 evidence:  only 6 candidates resolved as far as a
+                                    WinRM host, and 33 were baselined on the
+                                    transport PATTERN alone.
+
+READING: the 33 unresolved lineages in the replay are an EVIDENCE-PRESERVATION artefact
+(Phase 5 kept only excerpts), not a live telemetry gap. The live probe shows lineage is
+normally available. This is exactly why the replay never upgrades a PATTERN-tier event.
+
+EFFECT WHEN LINEAGE IS GENUINELY MISSING AT RUNTIME (e.g. during the FM-1 hole):
+  - DET-001 drops the event from BASELINE-TRANSPORT-CONFIRMED (INFO) to
+    BASELINE-TRANSPORT-PATTERN (LOW). It is NOT suppressed outright and it is NOT
+    silently treated as benign - the analyst sees the tier drop and the reason it dropped.
+  - DET-002 emits no lineage record, so CORR-001 reports the gap as an investigative gap
+    ("LESS context than with lineage") instead of fabricating a chain.
+  - The safety property that matters: a MISSING parent can never make an event look MORE
+    benign than the evidence supports. Fail direction = keep looking, not suppress.
+NOT VERIFIED: whether a genuinely malicious parent would be hidden. No adversary
+  telemetry exists in this lab, so that direction cannot be measured here.
+
+==========================================================================
+ FM-4  MISSING / DEGRADED COMMAND LINE
+==========================================================================
+Status: PARTIALLY OBSERVED.
+
+  OBSERVED (live): 0 of the 52 powershell.exe 4688 records in the window had an
+    empty CommandLine, and 0 of the 39 Sysmon candidates had an empty CommandLine. In this lab
+    command-line auditing was ON for the whole window, so the trigger always evaluated.
+  OBSERVED (Phase 5 preserved output): 39 of the 39 preserved alerts carry a
+    truncated CommandLine ("...[cut]"). The truncation is a Phase 5 OUTPUT-REPORTING
+    choice, not a telemetry loss, but it has a measurable consequence below.
+
+EFFECT:
+  - If CommandLine is genuinely absent, DET-001 cannot evaluate its trigger at all: the
+    event is invisible to the rule and the encoding is never noticed. This is the worst
+    of the four failure modes because the failure is SILENT - no alert, no gap marker.
+    Whether the audit policy can ever be off in this lab is NOT VERIFIED; only the
+    "everything present" case is measured.
+  - The base64 decode also depends on the command line, so a missing command line removes
+    both the trigger and the decode step at once.
+  - MEASURED cost of degraded (truncated) payload text: with the full text available the
+    payload screen escalates 2 of the 38 baselined events (ESC-03, a second decode layer
+    on RecId 2975 and 3045); with only the preserved prefix the same replay escalates
+    0 of 38. A shortened command line therefore costs real escalations - the screen can
+    only judge the bytes it can see.
+
+==========================================================================
+ SUMMARY - FAILURE MODES
+==========================================================================
+Failure mode                                               Status        
+FM-1 missing Sysmon Event 1 (primary source)               OBSERVED      
+FM-2 missing PowerShell 4104 (corroboration)               OBSERVED      
+FM-3 missing process lineage (context)                     OBSERVED (replay: largely an artefact)
+FM-4 missing command line (trigger + decode)               PARTIAL       
+FM-1 root cause of the Sysmon hole                         NOT VERIFIED  
+FM-4 whether auditing is ever off in this lab              NOT VERIFIED  
+any failure mode against real adversary telemetry          NOT VERIFIED  
+
+The invariants that survive all four failure modes:
+  1. DET-001 never becomes silent-by-suppression: a degraded event is retained at a weaker,
+     labelled tier, and the lost context is printed next to it.
+  2. No failure mode turns an unverifiable event into a benign verdict.
+  3. Every degraded reading is visible to the analyst in the alert block itself.
+
+==========================================================================
+ APPENDIX - READ-ONLY LIVE FAILURE-MODE PROBE (SOC002-DC1)
+==========================================================================
+Source file: ./phase6/evidence/t7_fm_live_probe_dc1.txt
+This probe measured one telemetry source at a time. Nothing was disabled: a source that
+was not read simply was not read.
+
+=== SOC-002 PHASE 6 | TASK 7 - FAILURE-MODE PROBE (READ-ONLY, SOC002-DC1) ===
+Log=ForwardedEvents  Window=2026-10-15 00:04:46 .. 2026-10-15 01:04:46 (collector local)
+No logging subsystem was disabled, reconfigured or restarted for this measurement:
+each figure is computed by NOT reading one source and observing what remains.
+-------------------------------------------------------------------
+FM-1 / baseline: Sysmon Event 1 encoded-PowerShell candidates in window = 39
+FM-1 / Security 4688 encoded-PowerShell records in window               = 52
+FM-1 / 4688 encoded-PowerShell with NO Sysmon Ev1 twin (same host+pid+second) = 21
+FM-1 / Sysmon Ev1 encoded-PowerShell with NO 4688 twin (same host+pid+second) = 8
+FM-1 / distinct host+pid+SECOND keys (Sysmon->4688 join, +/- within same second): Sysmon=39 4688=52 union=60
+
+FM-2 / candidates WITH a binding 4104 block (executing PID match)       = 33
+FM-2 / candidates WITHOUT any 4104 block                                = 6
+FM-2 / 4104 blocks in window that bind to no candidate executing PID    = 142
+
+FM-3 / candidates whose immediate-parent process-create record was found = 39
+FM-3 / candidates whose immediate-parent record was NOT found            = 0
+
+FM-4 / powershell.exe 4688 records in window (any command line)          = 52
+FM-4 / ... of which command line is EMPTY (trigger could not evaluate)   = 0
+FM-4 / Sysmon Ev1 candidates whose command line is empty                 = 0
+
+FM-1b / encoded-PowerShell candidates per 10-minute bucket (local):
+bucket      SysmonEv1       4688
+00:00               8          3
+00:20               0          4
+00:30               0         13
+00:40              18         19
+00:50               4          4
+01:00               9          9
+
+FM-1c / largest gap between consecutive Sysmon Ev1 candidates = 2012 s  (00:07:38 -> 00:41:10)
+      (a period with zero Sysmon Ev1 candidates is NOT the same as a period with zero activity:
+       compare the 4688 column above before reading any gap as "nothing happened")
+
+
+[RC]=0

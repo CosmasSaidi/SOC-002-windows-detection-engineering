@@ -1,0 +1,85 @@
+=====================================================================
+ SOC-002 PHASE 6 / TASK 6 - PHASE 5 vs PHASE 6 (same events, joined)
+=====================================================================
+Phase 5 source : ./phase5/evidence/t6_detection_broad60_dc1.txt (39 alerts, window 2026-10-15 00:04:46..01:05:46 local)
+Phase 6 live   : ./phase6/evidence/t6_phase6_det001_v2_live_dc1.txt
+Phase 6 replay : ./phase6/evidence/t6_phase6_det001_v2_replay.txt
+Join key       : Sysmon RecordId (preserved end-to-end by WEF)
+
+Per-event result for the 39 Phase 5 alerts:
+  RecId    Utc           PID    Parent    PHASE 6 LIVE                     PHASE 6 REPLAY
+  2975     21:05:18.830  2276   cmd.exe   INVESTIGATION (BASE-01 OVERRIDDEN by payload escalation: ESC-03) BASELINE-TRANSPORT-PATTERN
+  2983     21:05:20.404  5848   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3011     21:05:36.696  196    cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3020     21:07:20.227  4488   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3029     21:07:21.263  1004   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3037     21:07:22.238  5344   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3045     21:07:23.160  1212   cmd.exe   INVESTIGATION (BASE-01 OVERRIDDEN by payload escalation: ESC-03) BASELINE-TRANSPORT-PATTERN
+  3053     21:07:38.959  5684   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3252     21:41:10.485  1832   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3268     21:41:22.230  6072   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3283     21:41:51.898  4696   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3295     21:42:15.054  4044   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3306     21:42:16.392  2436   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3316     21:42:17.729  5496   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3326     21:42:19.058  4324   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3336     21:42:20.396  2460   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3346     21:42:28.258  5812   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3356     21:42:29.742  3156   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3366     21:42:37.705  5360   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3376     21:42:39.172  3352   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3386     21:42:40.652  4548   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3396     21:42:42.153  2040   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3406     21:42:43.634  5340   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3422     21:44:30.124  6096   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3444     21:46:53.466  996    cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3465     21:48:01.288  3156   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3508     21:58:52.617  5452   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-CONFIRMED
+  3523     21:59:09.175  4372   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-CONFIRMED
+  3534     21:59:47.583  4576   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-CONFIRMED
+  3535     21:59:48.080  1500   powershell.exe INVESTIGATION (not baselined: parent leaf 'powershell.exe' is not cmd.exe) INVESTIGATION (not baselined: parent leaf 'powershell.exe' is not cmd.exe)
+  3560     22:00:47.365  4348   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-CONFIRMED
+  3572     22:00:49.872  4012   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-CONFIRMED
+  3582     22:00:52.463  5920   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3592     22:00:54.447  5944   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3603     22:01:53.341  1444   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3615     22:01:55.201  3412   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3625     22:01:57.028  2832   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3635     22:01:58.952  852    cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+  3645     22:02:56.236  3660   cmd.exe   BASELINE-TRANSPORT-CONFIRMED     BASELINE-TRANSPORT-PATTERN
+
+--- Measured comparison ---------------------------------------------------
+Metric                                                            Phase 5    Phase 6
+Detection trigger                                              encoded PS  unchanged
+Candidate alerts produced                                              39         39
+Alerts requiring human triage (retained)                               39          3
+Baselined by BASE-01 (no triage)                                        0         36
+   - BASELINE-TRANSPORT-CONFIRMED (INFO)                              n/a         36
+   - BASELINE-TRANSPORT-PATTERN (LOW)                                 n/a          0
+Re-opened by the payload screen (ESC-03)                              n/a          2
+Of the 38 Phase-5 benign-classified events: suppressed                  0         36
+Of the 38 Phase-5 benign-classified events: re-opened                   0          2
+Controlled-test event (RecId 3535): retained                            1          1
+
+Events present in the Phase 6 LIVE run but NOT in the Phase 5 alert list:
+  count = 3
+    RecId 3688  2026-10-14T22:05:32.172Z  tier=BASELINE-TRANSPORT-CONFIRMED  (Sysmon Event 1 created after Phase 5 ran its query - see note)
+    RecId 3677  2026-10-14T22:05:17.770Z  tier=BASELINE-TRANSPORT-CONFIRMED  (Sysmon Event 1 created after Phase 5 ran its query - see note)
+    RecId 3661  2026-10-14T22:05:05.767Z  tier=BASELINE-TRANSPORT-CONFIRMED  (Sysmon Event 1 created after Phase 5 ran its query - see note)
+  NOTE (OBSERVED): these extra events are WS001 process creates that Phase 5's own detection run
+  and post-run steps produced at 01:05:05-01:05:50 local, i.e. at/after the moment the Phase 5
+  query executed. They were not visible to that query (forwarding/query timing) but they are
+  visible now, and every one of them is classified as baseline WinRS transport.
+
+HONEST READING OF THE FALSE-POSITIVE QUESTION
+ - Detection hits did NOT fall: 39/39 Phase 5 events are still detected, plus 3 more that the
+   window now contains.
+ - TRIAGE VOLUME fell from 39 (every alert reviewed by hand in Phase 5) to 3 retained candidate(s).
+ - 36 of 39 events are auto-classified as baseline WinRS transport with the reason recorded per event;
+   0 of those needed the weaker 'pattern-only' tier because their parent process-create event is gone.
+ - 2 events that Phase 5 had manually called benign (the Sysmon-config application over WinRM,
+   whose decoded payload contains a base64 blob decode) are RE-OPENED by the payload screen. That is a
+   deliberate precision/recall trade, not an accident: the same shape is used by real stagers.
+ - This is a re-decision over known-benign data. It does NOT prove the baseline reduces false
+   positives against unseen or adversarial activity - no such activity exists in this lab (NOT VERIFIED).
+

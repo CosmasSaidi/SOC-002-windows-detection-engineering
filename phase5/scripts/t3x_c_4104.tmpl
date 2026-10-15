@@ -1,0 +1,20 @@
+$ErrorActionPreference='Continue'
+$L='__L__'
+$S=Get-Date '2026-10-15 00:59:40';$E=Get-Date '2026-10-15 00:59:58'
+$M='SOC002-PHASE5-ENCODED-POWERSHELL'
+function P($e){$x=[xml]$e.ToXml();$d=[ordered]@{};foreach($n in $x.Event.EventData.Data){$d[$n.Name]=$n.'#text'};@{X=$x;D=$d}}
+"=== C. POWERSHELL 4104 targeted (marker) ==="
+$a=@(Get-WinEvent -FilterHashtable @{LogName=$L;Id=4104;StartTime=$S;EndTime=$E} -EA SilentlyContinue|?{$_.Message -match [regex]::Escape($M)})
+"COUNT=$($a.Count)"
+foreach($e in $a){$p=P $e
+"--- RecId=$($e.RecordId) ---"
+"TimeLocal=$($e.TimeCreated.ToString('yyyy-MM-dd HH:mm:ss.fff'))"
+"TimeUtc=$($e.TimeCreated.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ'))"
+"Computer=$($p.X.Event.System.Computer)"
+"ExecProcessId=$($p.X.Event.System.ExecutionProcessID)"
+"ExecThreadId=$($p.X.Event.System.ExecutionThreadID)"
+foreach($k in @('MessageNumber','MessageTotal','ScriptBlockId','Path','ScriptBlockText')){"$k=<<<$($p.D[$k])>>>"}
+"===RAWXML-BEGIN PowerShell4104-Rec$($e.RecordId)==="
+$e.ToXml()
+"===RAWXML-END==="
+}

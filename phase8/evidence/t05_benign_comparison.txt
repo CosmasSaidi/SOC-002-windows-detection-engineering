@@ -1,0 +1,86 @@
+=== SOC-002 PHASE 8 :: DET-003 BENIGN COMPARISON SUITE ===
+Library         = phase8-v1.0 sha256=EC519AE9C313C3360D39F97404E828D19189A701D4570FDAC6641E3703238181
+Trigger         = Base64 RECONSTRUCTION CALL (REC-01..05); the literal word 'Base64' never triggers.
+Naive keyword   = a simple `text -match "Base64"` rule, shown only for comparison.
+Nothing below is executed, decoded-and-run, or sent anywhere. Every case is a literal string.
+These are BENIGN TEST CASES, not a measured false-positive rate.
+-------------------------------------------------------------------
+
+  case  keyword-rule  det003  severity  class/comment
+  ----  ------------  ------  --------  -------------
+  B01   clear         clear   -         no base64 content
+  B02   FIRE          clear   -         word 'Base64' present, no decode call -> NOT triggered
+  B03   FIRE          FIRE    LOW       REC-01  ctx=CTX-STRING-ROUNDTRIP
+  B04   FIRE          FIRE    LOW       REC-01  ctx=CTX-STRING-ROUNDTRIP
+  B05   FIRE          clear   -         comment-only mention -> SUPPRESSED (recorded, not alerted)
+  B06   FIRE          FIRE    MEDIUM    REC-01  ctx=CTX-EXEC-ADJACENT
+  B07   FIRE          FIRE    LOW       REC-01  ctx=CTX-PLUMBING
+
+--- per-case detail -------------------------------------------------
+
+  [B01] plain PowerShell, no base64 at all
+       triggered   = False
+       indicators  = (none)
+       contexts    = (none)
+       severity    = -   class = -
+       word-only   = False   comment-suppressed = False
+       keyword-rule would fire = False   DET-003 fires = False
+
+  [B02] word "Base64" in harmless commentary / help text
+       triggered   = False
+       indicators  = (none)
+       contexts    = (none)
+       severity    = -   class = -
+       word-only   = True   comment-suppressed = False
+       keyword-rule would fire = True   DET-003 fires = False
+
+  [B03] explicit FromBase64String reconstruction (decode only)
+       triggered   = True
+       indicators  = REC-01
+       contexts    = CTX-STRING-ROUNDTRIP
+       severity    = LOW   class = RECONSTRUCTION-OBSERVED
+       word-only   = False   comment-suppressed = False
+       keyword-rule would fire = True   DET-003 fires = True
+
+  [B04] the real Phase 7 blind-spot payload command line (preserved evidence)
+       triggered   = True
+       indicators  = REC-01
+       contexts    = CTX-STRING-ROUNDTRIP
+       severity    = LOW   class = RECONSTRUCTION-OBSERVED
+       word-only   = False   comment-suppressed = False
+       keyword-rule would fire = True   DET-003 fires = True
+
+  [B05] reconstruction call that appears ONLY inside a comment
+       triggered   = False
+       indicators  = (none)
+       contexts    = (none)
+       severity    = -   class = -
+       word-only   = True   comment-suppressed = True
+       keyword-rule would fire = True   DET-003 fires = False
+
+  [B06] decode followed by an execution primitive (context contrast)
+       triggered   = True
+       indicators  = REC-01
+       contexts    = CTX-EXEC-ADJACENT
+       severity    = MEDIUM   class = RECONSTRUCTION-WITH-EXECUTION-ADJACENT
+       word-only   = False   comment-suppressed = False
+       keyword-rule would fire = True   DET-003 fires = True
+
+  [B07] the lab operator's own WinRM file-transfer plumbing
+       triggered   = True
+       indicators  = REC-01
+       contexts    = CTX-PLUMBING
+       severity    = LOW   class = RECONSTRUCTION-OBSERVED
+       word-only   = False   comment-suppressed = False
+       keyword-rule would fire = True   DET-003 fires = True
+
+--- reading ---------------------------------------------------------
+  * B02/B05 contain the word "Base64" but are NOT triggered by DET-003, while a
+    naive keyword rule WOULD fire on them. That is the precision gain.
+  * B04 is the exact Phase 7 blind spot: DET-003 triggers on it (REC-01).
+  * B06 shows the context model: an execution primitive alongside the decode
+    raises severity to MEDIUM. It is STILL not a verdict - the text is only read.
+  * B07 shows the DOCUMENTED false-positive source: the operator's own file
+    transfer uses FromBase64String, so DET-003 flags it (LOW, CTX-PLUMBING).
+  * Sample size is a handful of synthetic cases: this demonstrates behaviour,
+    it does NOT establish a false-positive rate.

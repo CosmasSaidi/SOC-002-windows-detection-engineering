@@ -1,0 +1,15 @@
+=== TaskScheduler 106 events in window ===
+=== same, wider 00:55-01:05 count ===
+count=0
+=== cmd to powershell 4688 chain (creator) in window ===
+00:59:48.071 New=powershell.exe NewPID=0x5dc Creator=powershell.exe CreatorPID=0x11e0
+00:59:47.574 New=powershell.exe NewPID=0x11e0 Creator=cmd.exe CreatorPID=0xe0c
+00:59:47.547 New=cmd.exe NewPID=0xe0c Creator=winrshost.exe CreatorPID=0x16a8
+00:59:47.476 New=conhost.exe NewPID=0x8a4 Creator=winrshost.exe CreatorPID=0x16a8
+00:59:47.459 New=winrshost.exe NewPID=0x16a8 Creator=svchost.exe CreatorPID=0x2cc
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.102:5985/wsman

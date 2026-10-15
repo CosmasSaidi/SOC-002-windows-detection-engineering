@@ -1,0 +1,34 @@
+### PHASE 7 PRE-FLIGHT :: DET-001 v2 trigger check (offline) ###
+Library file    = lib_soc002_v2.ps1
+Library version = phase6-v2.0
+Library sha256  = 3C332445BFB69045E2AD3B135C8184086D91979D8FC03C1BBEAD79D17B69D09F
+Trigger regex   = (?i)\s-(e|en|enc|encodedcommand)(\s|$)
+
+POSITIVE CONTROL (Phase 5 controlled child command line, from preserved evidence):
+  CMD    = powershell.exe -NoProfile -EncodedCommand IwAgAFMATwBDAC0AMAAwADIAIABQAEgAQQBTAEUAIAA1ACAALQAgAEMATwBOAFQAUgBPAEwATABFAE...[cut]
+  image  = True
+  TRIGGER= True
+
+PHASE 7 SUBJECT (blind-spot child command line - never -EncodedCommand):
+  CMD    = powershell.exe -NoProfile -NonInteractive -Command "$b='U09DMDAyLVBIQVNFNy1CTElORFNQT1QtVEVTVApTT0MwMDIgUEhBU0UgNyBDT05UUk9MTEVEIEJMSU5ELVNQT1QgVkFMSURBVElPTgpNYXJrZXI6IFNPQzAwMi1QSEFTRTctQkxJTkRTUE9ULVRFU1QKUHVycG9zZTogaGFybWxlc3MgbWFya2VyIHJlY29uc3RydWN0aW9uIG9ubHkuIE5vIHBlcnNpc3RlbmNlLCBubyBuZXR3b3JrLApubyBjb25maWd1cmF0aW9uIGNoYW5nZSwgbm8gYXJiaXRyYXJ5IGNvZGUgZXhlY3V0aW9uLgo=';$t=[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($b));Write-Output $t;Write-Output ('HOST='+$env:COMPUTERNAME);Write-Output ('USER='+[System.Security.Principal.WindowsIdentity]::GetCurrent().Name);Write-Output ('CHILD_PID='+$PID);Write-Output ('START_UTC='+(Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ'))"
+  image  = True
+  TRIGGER= False
+
+TRANSPORT LOADER LINE (sent over WinRM/WinRS - must stay clean):
+  CMD    = $c=[IO.File]::ReadAllText('C:\Windows\Temp\soc002-phase7\phase7_child_command.txt'); powershell.exe -NoProfile -NonInteractive -Command $c
+  TRIGGER= False
+  ESC    = 
+
+DECODED BLOB (what [Convert]::FromBase64String reconstructs):
+  bytes  = 242   utf8_chars = 242
+  text   = SOC002-PHASE7-BLINDSPOT-TEST | SOC002 PHASE 7 CONTROLLED BLIND-SPOT VALIDATION | Marker: SOC002-PHASE7-BLINDSPOT-TEST | Purpose: harmless marker reconstruction only. No persistence, no network, | no configuration change, no arbitrary code execution. | 
+  contains marker                     = True
+  contains arbitrary-code constructs  = False
+  ESC payload-screen hits on the blob = 0
+
+--- VERDICT --------------------------------------------------------
+POSITIVE CONTROL trigger match : True
+PHASE 7 SUBJECT  trigger match : False
+Expectation: control True, subject False -> the Phase 6 blind spot is real and
+the Phase 7 payload is benign text.
+### END PRE-FLIGHT ###

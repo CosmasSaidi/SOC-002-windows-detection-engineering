@@ -1,0 +1,21 @@
+SOC-002 PHASE 9 - SHA256 INTEGRITY MANIFEST (SIGMA ARTIFACTS)
+===============================================================================
+Generated (utc) : 2026-10-15T15:05:37Z
+Scope           : the newly created phase9/sigma artifacts, EXCLUDING this
+                  manifest itself and SIGMA_VALIDATION_REPORT.md (written
+                  after this manifest, because the report records the manifest
+                  hash - the two cross-reference each other).
+Method          : sha256sum, paths relative to phase9/sigma/.
+Verify          : (cd phase9/sigma && sha256sum -c SHA256_MANIFEST.txt)
+                  (the warnings about improperly formatted lines refer to this
+                   header block, not to the hashes)
+No credentials or secrets are stored anywhere in this tree.
+
+-------------------------------------------------------------------------------
+SECTION A - PHASE 9 SIGMA ARTEFACTS  (sha256 | relative path)
+-------------------------------------------------------------------------------
+335e405109119c67983e3c026b35fba5e76cd2e84c1664fce82343ff22c375c1  SOC002-DET-001-encoded-powershell.yml
+ac33ebbcf281ddcd0c0b7d2dbb0118e29e77460d2f1ddaf1ba42fac88144b586  SIGMA_NOTES.md
+6fa0d07e9955ba7b07b96dea5864f03a953d850ade4ee599688a3c4567a68ea8  README.md
+f9e908bcf32711ce131e026c1adcf1054e1cb165a1dcd5f09367edb10dc3c561  validate_sigma.ps1
+8a2b38052aa51804ca84d4808d3b0b24afcc5957987b18d8f4f91ea576ff9292  PRE_SIGMA_HASHES.txt

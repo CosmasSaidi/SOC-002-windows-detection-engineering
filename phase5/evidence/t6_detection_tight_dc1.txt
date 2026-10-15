@@ -1,0 +1,40 @@
+=== SOC002-DET-001 :: Encoded PowerShell Execution ===
+Log=ForwardedEvents  Window=2026-10-15 00:59:48 .. 2026-10-15 00:59:49 (local)
+-------------------------------------------------------------------
+
+[ALERT 001] Encoded PowerShell execution observed - INVESTIGATION REQUIRED
+  Detection        = SOC002-DET-001  (severity MEDIUM: triage, not proof of compromise)
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator   LogonId=0x5c764d
+  EventUtc         = 2026-10-14T21:59:48.080Z
+  SysmonRecordId   = 3535   ProcessGuid={edcef402-fb54-6acf-ef04-000000000700}
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1500)
+  Parent           = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe  (PPID 4576)
+  ParentCommandLine= powershell  -encodedcommand JABFAHIAcgBvAHIAQQBjAHQAaQBvAG4AUAByAGUAZgBlAHIAZQBuAGMAZQA9ACcAQwBvAG4AdABpAG4AdQBlACcACgAkAG0AYQByAGsAZQByACAAPQAgACcAUwBPAEMAMAAwADIALQBQAEgAQQBTAEUANQAtAEUATgBDAE8ARABF...[cut]
+  Hashes           = SHA256=B4E7BC24BF3F5C3DA2EB6E9EC5EC10F90099DEFA91B820F2F3FC70DD9E4785C4
+  EncodedSwitch    = -EncodedCommand (indicator matched)
+  CommandLine      = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -EncodedCommand IwAgAFMATwBDAC0AMAAwADIAIABQAEgAQQBTAEUAIAA1ACAALQAgAEMATwBOAFQAUgBPAEwATABFAEQAIABCAEUATgBJAEcATgAgAFQARQBTAFQAC...[cut]
+  DecodedScript    = <<<# SOC-002 PHASE 5 - CONTROLLED BENIGN TEST
+# Marker: SOC002-PHASE5-ENCODED-POWERSHELL
+# Purpose: harmless observable output only. No persistence, no network, no modification.
+$marker = 'SOC002-PHASE5-ENCODED-POWERSHELL'
+Write-Output $marker
+Write-Output ('HOST=' + $env:COMPUTERNAME)
+Write-Output ('USER=' + [System.Security.Principal.WindowsIdentity]::GetCurrent().Name)
+Write-Output ('START_UTC=' +...[cut]>>>  [decoded by detection - NOT executed]
+  MarkerMatch      = SOC002-PHASE5-ENCODED-POWERSHELL  (controlled-test marker present in decoded script)
+  Corroboration    = PowerShell 4104 RecId=72981 ExecPID=1500 ScriptBlockId=9ecf7ac9-25a3-4224-ae2c-f8ca48518860 Msg=1/1
+                     4104Text=$global:?
+  Corroboration    = PowerShell 4104 RecId=72974 ExecPID=1500 ScriptBlockId=039b9c99-15fb-488d-8046-46e868aa9a39 Msg=1/1
+                     4104Text=# SOC-002 PHASE 5 - CONTROLLED BENIGN TEST # Marker: SOC002-PHASE5-ENCODED-POWERSHELL # Purpose: harmless observable output only. No persistence, no network, no modification. $marker = 'SOC002-PHASE5-...[cut]
+  Corroboration    = PowerShell 4104 RecId=72965 ExecPID=4576 ScriptBlockId=e02842dc-7c5f-4bde-b18d-6ad4d161aa11 Msg=1/1
+                     4104Text=$ErrorActionPreference='Continue' $marker = 'SOC002-PHASE5-ENCODED-POWERSHELL' $b64 = 'IwAgAFMATwBDAC0AMAAwADIAIABQAEgAQQBTAEUAIAA1ACAALQAgAEMATwBOAFQAUgBPAEwATABFAEQAIABCAEUATgBJAEcATgAgAFQARQBTAFQAC...[cut]
+
+-------------------------------------------------------------------
+Total alerts = 1
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.10:5985/wsman

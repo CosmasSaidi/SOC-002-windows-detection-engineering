@@ -1,0 +1,292 @@
+{
+  "case_id": "SOC002-CASE-0001",
+  "case_version": "phase6-v2.0",
+  "status": "CLOSED",
+  "title": "Encoded PowerShell execution on SOC002-WS001 (Phase 5 controlled test, re-triaged in Phase 6)",
+  "labeling_convention": {
+    "OBSERVED": "read directly from a preserved event or host output",
+    "INFERRED": "conclusion drawn from several observations",
+    "NOT VERIFIED": "not tested, or not auditable in this lab"
+  },
+  "alerts": [
+    {
+      "alert_id": "SOC002-DET-001/ALERT-010",
+      "phase": "5",
+      "file": "phase5/evidence/t6_detection_broad60_dc1.txt",
+      "label": "OBSERVED"
+    },
+    {
+      "alert_id": "SOC002-DET-001/ALERT-001-tight",
+      "phase": "5",
+      "file": "phase5/evidence/t6_detection_tight_dc1.txt",
+      "label": "OBSERVED"
+    },
+    {
+      "alert_id": "SOC002-DET-001-v2/ALERT-001-replay",
+      "phase": "6",
+      "file": "phase6/evidence/t6_phase6_det001_v2_replay.txt",
+      "label": "OBSERVED"
+    },
+    {
+      "alert_id": "SOC002-DET-001-v2/ALERT-001-live",
+      "phase": "6",
+      "file": "phase6/evidence/t6_phase6_det001_v2_live_dc1.txt",
+      "label": "OBSERVED"
+    },
+    {
+      "alert_id": "SOC002-DET-002/LINEAGE-013",
+      "phase": "6",
+      "file": "phase6/evidence/t6_phase6_det002_lineage_live_dc1.txt",
+      "label": "OBSERVED"
+    },
+    {
+      "alert_id": "CORR-SOC002-WS001-1500-20261014T215948Z",
+      "phase": "6",
+      "file": "phase6/evidence/t6_phase6_correlation_live_dc1.txt",
+      "label": "OBSERVED"
+    }
+  ],
+  "source_records": [
+    {
+      "kind": "Sysmon-Event1",
+      "record_id": "3535",
+      "process_guid": "{edcef402-fb54-6acf-ef04-000000000700}",
+      "label": "OBSERVED"
+    },
+    {
+      "kind": "Security-4688",
+      "record_id": "15141",
+      "new_process_id": "0x5dc (1500)",
+      "label": "OBSERVED"
+    },
+    {
+      "kind": "PowerShell-4104",
+      "record_id": "72974",
+      "exec_pid": 1500,
+      "script_block_id": "039b9c99-15fb-488d-8046-46e868aa9a39",
+      "message": "1/1",
+      "label": "OBSERVED"
+    },
+    {
+      "kind": "PowerShell-4104",
+      "record_id": "72965",
+      "exec_pid": 4576,
+      "note": "operator runner block, separate ScriptBlockId",
+      "label": "OBSERVED"
+    },
+    {
+      "kind": "PowerShell-4104",
+      "record_id": "72981",
+      "exec_pid": 1500,
+      "note": "$global:? noise block, no marker text",
+      "label": "OBSERVED"
+    }
+  ],
+  "affected": {
+    "host": {
+      "value": "SOC002-WS001.soc002.local",
+      "ip": "192.168.56.102",
+      "label": "OBSERVED"
+    },
+    "collector": {
+      "value": "SOC002-DC1",
+      "ip": "192.168.56.10",
+      "log": "ForwardedEvents",
+      "label": "OBSERVED"
+    },
+    "user": {
+      "value": "SOC002\\Administrator",
+      "label": "OBSERVED"
+    },
+    "logon_id": {
+      "value": "0x5c764d",
+      "label": "OBSERVED"
+    },
+    "process": {
+      "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "pid": 1500,
+      "process_guid": "{edcef402-fb54-6acf-ef04-000000000700}",
+      "integrity": "High (S-1-16-12288)",
+      "token_elevation": "%%1936 (Full)",
+      "label": "OBSERVED"
+    },
+    "binary_sha256": {
+      "value": "B4E7BC24BF3F5C3DA2EB6E9EC5EC10F90099DEFA91B820F2F3FC70DD9E4785C4",
+      "label": "OBSERVED"
+    }
+  },
+  "timestamps": [
+    {
+      "local": "2026-10-15 00:59:47.459",
+      "utc": "2026-10-14T21:59:47.459Z",
+      "event": "winrshost.exe (5800) created by svchost.exe (716)",
+      "label": "OBSERVED"
+    },
+    {
+      "local": "2026-10-15 00:59:47.547",
+      "utc": "2026-10-14T21:59:47.547Z",
+      "event": "cmd.exe (3596) created by winrshost.exe (5800)",
+      "label": "OBSERVED"
+    },
+    {
+      "local": "2026-10-15 00:59:47.574",
+      "utc": "2026-10-14T21:59:47.574Z",
+      "event": "powershell.exe (4576) created by cmd.exe (3596) - operator runner",
+      "label": "OBSERVED"
+    },
+    {
+      "local": "2026-10-15 00:59:48.071",
+      "utc": "2026-10-14T21:59:48.071Z",
+      "event": "CONTROLLED EVENT: 4688 RecId 15141, powershell.exe (1500) created by powershell.exe (4576)",
+      "label": "OBSERVED"
+    },
+    {
+      "local": "2026-10-15 00:59:48.080",
+      "utc": "2026-10-14T21:59:48.080Z",
+      "event": "CONTROLLED EVENT: Sysmon Ev1 RecId 3535, -EncodedCommand present (primary signal)",
+      "label": "OBSERVED"
+    },
+    {
+      "local": "2026-10-15 00:59:48.392",
+      "utc": "2026-10-14T21:59:48.392Z",
+      "event": "PowerShell 4104 RecId 72974, decoded ScriptBlockText",
+      "label": "OBSERVED"
+    },
+    {
+      "local": "2026-10-15 00:59:51.567",
+      "utc": "2026-10-14T21:59:51.567Z",
+      "event": "payload stdout: marker + START_UTC + END_UTC; exit code 0; elapsed 3706 ms",
+      "label": "OBSERVED"
+    }
+  ],
+  "phase5_broad_window": {
+    "local": "2026-10-15 00:04:46 .. 01:05:46",
+    "total_det001_candidates": 39,
+    "authorised_winrm_baseline": 38,
+    "controlled_event": 1,
+    "label": "OBSERVED"
+  },
+  "evidence_references": {
+    "phase5_originals_preserved": [
+      "phase5/evidence/INVESTIGATION_NOTES.txt",
+      "phase5/evidence/CORRELATION_TIMELINE.txt",
+      "phase5/evidence/t6_detection_broad60_dc1.txt",
+      "phase5/evidence/t6_detection_tight_dc1.txt",
+      "phase5/evidence/t6_detection_output_dc1.txt",
+      "phase5/evidence/DETECTION_LIMITATIONS.txt",
+      "phase5/evidence/ATTACK_MAPPING.txt",
+      "phase5/evidence/DECODED_TEST_COMMAND.txt",
+      "phase5/evidence/raw/sysmon1-recid3535-ws001.xml",
+      "phase5/evidence/raw/sysmon1-recid3535-dc1.xml",
+      "phase5/evidence/raw/security4688-recid15141-ws001.xml",
+      "phase5/evidence/raw/security4688-recid15141-dc1.xml",
+      "phase5/evidence/raw/powershell4104-recid72974-ws001.xml",
+      "phase5/evidence/raw/powershell4104-recid72974-dc1.xml",
+      "phase5/evidence/t3z_ancestry_ws001.txt",
+      "phase5/evidence/MANIFEST.txt"
+    ],
+    "phase6_derived": [
+      "phase6/evidence/t6_phase6_det001_v2_live_dc1.txt",
+      "phase6/evidence/t6_phase6_det001_v2_replay.txt",
+      "phase6/evidence/t6_phase6_det002_lineage_live_dc1.txt",
+      "phase6/evidence/t6_phase6_correlation_live_dc1.txt",
+      "phase6/evidence/t6_comparison_phase5_vs_phase6.txt",
+      "phase6/evidence/t2_false_positive_baseline.txt",
+      "phase6/evidence/t7_failure_modes.txt",
+      "phase6/evidence/TUNING_RATIONALE.txt",
+      "phase6/evidence/SHA256_MANIFEST.txt"
+    ]
+  },
+  "detection_references": [
+    {
+      "id": "SOC002-DET-001",
+      "file": "phase5/detections/detect_encoded_powershell.ps1",
+      "role": "original detector, no classification (preserved)"
+    },
+    {
+      "id": "SOC002-DET-001-v2",
+      "file": "phase6/detections/detect_encoded_powershell_v2.ps1",
+      "version": "phase6-v2.0",
+      "role": "same trigger, adds baseline classification + payload screen"
+    },
+    {
+      "id": "SOC002-DET-002",
+      "file": "phase6/detections/detect_powershell_lineage.ps1",
+      "version": "phase6-v2.0",
+      "role": "process lineage as context (CONTEXT ONLY)"
+    },
+    {
+      "id": "SOC002-CORR-001",
+      "file": "phase6/detections/correlate_det001_det002.ps1",
+      "version": "phase6-v2.0",
+      "role": "joins DET-001 and DET-002"
+    },
+    {
+      "id": "lib",
+      "file": "phase6/detections/lib_soc002_v2.ps1",
+      "version": "phase6-v2.0",
+      "role": "shared decision library (also used by the offline replay)"
+    }
+  ],
+  "investigation_summary": "A single encoded PowerShell execution ran on SOC002-WS001 at 2026-10-15 00:59:48 local. Sysmon Event 1 (RecId 3535), Security 4688 (RecId 15141) and PowerShell 4104 (RecId 72974) captured the same process creation and agree on every identifier, and the same records were available centrally on SOC002-DC1 ForwardedEvents. The command line was powershell.exe -NoProfile -EncodedCommand <base64>; the payload decodes to a self-labelled harmless test script whose text PowerShell 4104 independently echoes. No network connection came from the process; no task was registered and no service was installed in the window. The lineage is powershell.exe(1500) <- powershell.exe(4576) <- cmd.exe(3596) <- winrshost.exe(5800) <- svchost.exe(716) <- services.exe(604); winrshost.exe is the WinRM shell host, which in this lab is the sanctioned management channel. Phase 6 keeps this event as an INVESTIGATION candidate rather than baselining it, because its parent is powershell.exe and not the WinRS wrapper shape (BASE-01) the baseline recognises.",
+  "observed_facts": [
+    "OBSERVED - Sysmon Ev1 3535, Security 4688 15141 and PowerShell 4104 72974 describe the same process creation (powershell.exe PID 1500, 2026-10-14T21:59:48.071-.080Z).",
+    "OBSERVED - executing account SOC002\\Administrator, LogonId 0x5c764d, High integrity, full token.",
+    "OBSERVED - command line contained -EncodedCommand with a UTF-16LE base64 payload and no other switches.",
+    "OBSERVED - the payload decodes to a script that only writes output and sleeps; 4104 carries the identical text.",
+    "OBSERVED - 4104 System/Execution ProcessID 1500 equals the Sysmon PID, tying the decoded text to the execution.",
+    "OBSERVED - parent is powershell.exe (4576); grandparent cmd.exe (3596) was created by winrshost.exe (5800).",
+    "OBSERVED - binary is the unmodified Microsoft powershell.exe (SHA256 B4E7BC24...4785C4).",
+    "OBSERVED - Sysmon Event 3 filtered on the process ProcessGuid over 2 hours = 0 network events.",
+    "OBSERVED - TaskScheduler 106 = 0 and System 7045 = 0 in the window.",
+    "OBSERVED - process exit code 0 after 3706 ms, after printing the marker and timestamps.",
+    "OBSERVED - the same records were present centrally on DC1 ForwardedEvents.",
+    "OBSERVED (Phase 6) - in the same 62-minute collector window the Sysmon Event 1 encoded-PowerShell stream stops entirely between 00:07:38 and 00:41:10 (2012 s) while Security 4688 continues (4 and 13 candidates in the 00:20 and 00:30 buckets)."
+  ],
+  "inferred_facts": [
+    "INFERRED - the execution was delivered remotely over WinRM by the lab operator (lineage root winrshost.exe + lab administrative account + lab-authored payload).",
+    "INFERRED - the encoded argument was produced by the WinRS transport used by the operator tooling (cmd.exe /C powershell -encodedcommand <b64>); that wrapper shape produces the 38 sibling alerts.",
+    "INFERRED - the Sysmon Event 1 outage is a collection or retention effect rather than genuine inactivity, because 4688 shows continued activity in exactly those minutes.",
+    "INFERRED - the near-identical timestamps and the shared ProcessGuid mean the three sources describe one process creation, not three coincidences."
+  ],
+  "not_verified": [
+    "NOT VERIFIED - who was physically present; the single-operator design is an assumption, not telemetry.",
+    "NOT VERIFIED - that the absence of persistence is exhaustive: Security 4697/4698 are set to No Auditing on WS001.",
+    "NOT VERIFIED - the root cause of the Sysmon Event 1 gap (local log rollover vs collector-side drop); establishing it requires changing WEF/Sysmon configuration, which Phase 6 must not do.",
+    "NOT VERIFIED - that the payload had no effect that produces no event at all (e.g. in-memory only).",
+    "NOT VERIFIED - how the detection behaves against real adversary telemetry; none exists in this lab and none was generated.",
+    "NOT VERIFIED - the payload text beyond the truncation point in the Phase 5 preserved broad-run report (the full text exists in Phase 5 raw XML and DECODED_TEST_COMMAND.txt)."
+  ],
+  "final_classification": "CONTROLLED TEST ACTIVITY / AUTHORISED BENIGN",
+  "classification_authority": "Decoded payload is a self-labelled harmless test script independently echoed by PowerShell 4104; execution was delivered through the lab's sanctioned WinRM management channel by the lab's administrative account; no network, persistence, escalation or lateral-movement behaviour was observed. Scoped to this event only - it does not assert that encoded PowerShell is benign in general, and it does not baseline the powershell.exe -> powershell.exe lineage.",
+  "analyst_conclusion": "The alert was correct to fire: a nested PowerShell interpreter running a base64 -EncodedCommand is exactly what a SOC should look at, and looking at it is what established that it was the lab testing its own detection. The detection's value is not that it decides, but that it delivers the decoded payload and the process lineage together so the decision is fast. Phase 6 makes that hand-off explicit: this event is retained as an INVESTIGATION candidate (severity MEDIUM), correlation SOC002-CORR-001 attaches the WinRM-rooted lineage, and nothing in the chain asserts malice.",
+  "recommended_follow_up": [
+    "Extend the trigger to encoded payloads that never use the CLI switch (-Command with [Convert]::FromBase64String).",
+    "Add pwsh.exe to the encoded-payload surface and verify with a controlled test in the next phase.",
+    "Investigate and if possible close the Sysmon Event 1 continuity gap; it is a real coverage hole, currently mitigated only by -Include4688Fallback.",
+    "Decide whether 4688-rooted lineage may reach the BASELINE-TRANSPORT-CONFIRMED tier or must stay capped at the weaker pattern tier.",
+    "Carry this case forward as the regression fixture: future tuning must keep this event as a retained investigation candidate."
+  ],
+  "triage_outcome": {
+    "retained_investigation_candidates": 1,
+    "baseline_alerts_in_same_window": {
+      "value": 38,
+      "tier_confirmed": 36,
+      "tier_pattern": 0,
+      "note": "live Phase 6 run over the same window; the 38 are recorded here as one bulk baseline observation, not as 38 cases"
+    },
+    "bulk_baseline_observation": {
+      "lineage": "winrshost.exe -> cmd.exe -> powershell.exe",
+      "reason": "pywinrm/WinRS delivers each administrative call as cmd.exe /C powershell -encodedcommand <b64>, which satisfies the DET-001 trigger by design",
+      "label": "OBSERVED",
+      "per_event_reason_location": "phase6/evidence/t6_phase6_det001_v2_live_dc1.txt"
+    }
+  },
+  "provenance": {
+    "created_in": "SOC-002 Phase 6",
+    "derived_from": "Phase 5 controlled detection (SOC002-DET-001)",
+    "new_activity_generated": false,
+    "phase5_evidence_modified": false,
+    "credentials_or_secrets_included": false
+  }
+}

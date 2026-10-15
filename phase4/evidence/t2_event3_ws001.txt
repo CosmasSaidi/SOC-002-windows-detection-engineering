@@ -1,0 +1,42 @@
+=== Held TCP connection WS001 -> DC1:5985 (harmless) ===
+Connected=True  LocalEndpoint=192.168.56.102:49922  RemoteEndpoint=192.168.56.10:5985
+--- Sysmon Event 3 ---
+EventRecordID       = 3287
+SystemTimeUTC       = 2026-10-14T21:41:54.194Z
+RuleName            = SOC002-Phase4-NetworkConnect
+UtcTime             = 2026-10-14 21:41:51.046
+ProcessGuid         = {edcef402-f71f-6acf-9c04-000000000700}
+ProcessId           = 4696
+Image               = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+User                = SOC002\Administrator
+Protocol            = tcp
+Initiated           = true
+SourceIp            = 192.168.56.102
+SourcePort          = 49922
+DestinationIp       = 192.168.56.10
+DestinationPort     = 5985
+DestinationHostname = SOC002-DC1
+
+--- Sysmon Event 3 ---
+EventRecordID       = 3285
+SystemTimeUTC       = 2026-10-14T21:41:52.894Z
+RuleName            = SOC002-Phase4-NetworkConnect
+UtcTime             = 2026-10-14 21:41:50.436
+ProcessGuid         = {edcef402-d855-6acf-eb03-000000000000}
+ProcessId           = 4
+Image               = System
+User                = NT AUTHORITY\SYSTEM
+Protocol            = tcp
+Initiated           = false
+SourceIp            = 192.168.56.1
+SourcePort          = 39048
+DestinationIp       = 192.168.56.102
+DestinationPort     = 5985
+DestinationHostname = SOC002-WS001.soc002.local
+
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.102:5985/wsman

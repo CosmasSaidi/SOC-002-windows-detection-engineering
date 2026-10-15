@@ -1,0 +1,95 @@
+[
+  {
+    "Case": "B01",
+    "Desc": "plain PowerShell, no base64 at all",
+    "KeywordFires": false,
+    "Det003Fires": false,
+    "Severity": "",
+    "Indicators": [],
+    "Contexts": [],
+    "CommentSuppressed": false,
+    "WordOnly": false
+  },
+  {
+    "Case": "B02",
+    "Desc": "word \"Base64\" in harmless commentary / help text",
+    "KeywordFires": true,
+    "Det003Fires": false,
+    "Severity": "",
+    "Indicators": [],
+    "Contexts": [],
+    "CommentSuppressed": false,
+    "WordOnly": true
+  },
+  {
+    "Case": "B03",
+    "Desc": "explicit FromBase64String reconstruction (decode only)",
+    "KeywordFires": true,
+    "Det003Fires": true,
+    "Severity": "LOW",
+    "Indicators": [
+      "REC-01"
+    ],
+    "Contexts": [
+      "CTX-STRING-ROUNDTRIP"
+    ],
+    "CommentSuppressed": false,
+    "WordOnly": false
+  },
+  {
+    "Case": "B04",
+    "Desc": "the real Phase 7 blind-spot payload command line (preserved evidence)",
+    "KeywordFires": true,
+    "Det003Fires": true,
+    "Severity": "LOW",
+    "Indicators": [
+      "REC-01"
+    ],
+    "Contexts": [
+      "CTX-STRING-ROUNDTRIP"
+    ],
+    "CommentSuppressed": false,
+    "WordOnly": false
+  },
+  {
+    "Case": "B05",
+    "Desc": "reconstruction call that appears ONLY inside a comment",
+    "KeywordFires": true,
+    "Det003Fires": false,
+    "Severity": "",
+    "Indicators": [],
+    "Contexts": [],
+    "CommentSuppressed": true,
+    "WordOnly": true
+  },
+  {
+    "Case": "B06",
+    "Desc": "decode followed by an execution primitive (context contrast)",
+    "KeywordFires": true,
+    "Det003Fires": true,
+    "Severity": "MEDIUM",
+    "Indicators": [
+      "REC-01"
+    ],
+    "Contexts": [
+      "CTX-EXEC-ADJACENT"
+    ],
+    "CommentSuppressed": false,
+    "WordOnly": false
+  },
+  {
+    "Case": "B07",
+    "Desc": "the lab operator's own WinRM file-transfer plumbing",
+    "KeywordFires": true,
+    "Det003Fires": true,
+    "Severity": "LOW",
+    "Indicators": [
+      "REC-01"
+    ],
+    "Contexts": [
+      "CTX-PLUMBING"
+    ],
+    "CommentSuppressed": false,
+    "WordOnly": false
+  }
+]

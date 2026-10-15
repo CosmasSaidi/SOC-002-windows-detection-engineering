@@ -1,0 +1,35 @@
+=== D. SYSMON EVENT 3 in tight window (network) ===
+COUNT=3
+--- RecId=3538 ---
+TimeUtc=2026-10-14T21:59:48.664Z
+ProcessGuid={edcef402-d859-6acf-0c00-000000000700}
+ProcessId=628
+Image=C:\Windows\System32\lsass.exe
+DestinationIp=192.168.56.10
+DestinationPort=49668
+DestinationHostname=SOC002-DC1
+User=NT AUTHORITY\SYSTEM
+--- RecId=3537 ---
+TimeUtc=2026-10-14T21:59:48.663Z
+ProcessGuid={edcef402-d855-6acf-eb03-000000000000}
+ProcessId=4
+Image=System
+DestinationIp=192.168.56.102
+DestinationPort=5985
+DestinationHostname=SOC002-WS001.soc002.local
+User=NT AUTHORITY\SYSTEM
+--- RecId=3536 ---
+TimeUtc=2026-10-14T21:59:48.663Z
+ProcessGuid={edcef402-d855-6acf-eb03-000000000000}
+ProcessId=4
+Image=System
+DestinationIp=192.168.56.102
+DestinationPort=5985
+DestinationHostname=SOC002-WS001.soc002.local
+User=NT AUTHORITY\SYSTEM
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.10:5985/wsman

@@ -1,0 +1,79 @@
+=== SOC-002 PHASE 8 :: INVESTIGATION NOTES ===
+Case SOC002-CASE-0003 · Detection SOC002-DET-003 · Host SOC002-WS001 · Collector SOC002-DC1
+
+Evidence labels: OBSERVED (read from a telemetry field), INFERRED (conclusion from
+several observations), NOT VERIFIED (not tested / not auditable in this lab).
+
+-------------------------------------------------------------------------------
+A. WHAT DET-003 WAS TESTED AGAINST
+-------------------------------------------------------------------------------
+OBSERVED  The primary target was the exact Phase 7 blind-spot event, replayed from
+          the preserved, unmodified phase7/evidence/raw/ files. DET-003 flagged it
+          in all four preserved views (WS001 local + DC1 ForwardedEvents, controlled
+          + session windows): DET-003 candidates carry REC-01
+          ([Convert]::FromBase64String) against PID 1428.
+OBSERVED  In every view the contrast held: the Phase 7 payload (PID 1428) was
+          DET-001-miss / DET-003-hit, and the WinRS transport powershell (PID 2936)
+          was DET-001-hit / DET-003-miss. The two detections are disjoint here.
+INFERRED  DET-003 closes the specific Phase 7 gap: DET-001's trigger keys on the
+          encoded-command CLI switch; the payload carried no such switch but did
+          carry an explicit decode call.
+
+-------------------------------------------------------------------------------
+B. LIVE VALIDATION
+-------------------------------------------------------------------------------
+OBSERVED  One controlled, benign execution on SOC002-WS001 (23:35:06-08Z):
+          a plainly-started powershell.exe reconstructed the marker
+          SOC002-PHASE8-DET003-TEST with [Convert]::FromBase64String(...).
+          The payload child command line contains NO encoded-command switch.
+          Marker printed, RC=0, no network connection, no persistence, no
+          configuration change, temp body removed (TMP_REMOVED=True).
+OBSERVED  DET-003 flagged the live payload in Security 4688 (RecId 16123),
+          Sysmon Event 1 (RecId 4600) and PowerShell 4104 (RecId 77450,
+          ScriptBlockId 50aa4a2f-00ff-4f0f-b0d4-2f5f2543ccae), PID 1268,
+          LogonId 0x695d72. The same RecordIDs arrived at DC1 via WEF.
+OBSERVED  A separate DET-003 hit (4104 RecId 77434, ExecPID 1996) is the OPERATOR'S
+          OWN staging script, which carries the payload text as a literal. It is
+          labelled CTX-PLUMBING and is not the activity under test.
+INFERRED  The live path (detector reading ForwardedEvents on DC1) behaves the same
+          as the offline replay: same trigger, same result.
+
+-------------------------------------------------------------------------------
+C. INVESTIGATION REASONING FOR A DET-003 RECORD
+-------------------------------------------------------------------------------
+The investigation question a DET-003 record raises is NOT "is this malicious?"
+It is: "who ran a base64 reconstruction, where did it come from, and did the
+reconstructed data get used to execute or retrieve anything?"
+  1. Account/LogonId -> is the operator authorised for this host?
+  2. Parent chain (DET-002) -> was this delivered through the sanctioned WinRM
+     path, an interactive logon, a scheduled task, or a service?
+  3. Surrounding text -> is the decode part of a legitimate decode of config,
+     a certificate, a blob, or a staged file (plumbing), or does it feed an
+     execution/retrieval primitive (CTX-EXEC-ADJACENT / CTX-REMOTE-RETRIEVAL)?
+  4. Payload intent -> the decoded content is read by a human. DET-003 NEVER
+     executes or decodes-and-runs it.
+
+-------------------------------------------------------------------------------
+D. CLASSIFICATION OF THE CONTROLLED EVENTS
+-------------------------------------------------------------------------------
+OBSERVED  Phase 7 (SOC002-CASE-0002): CONTROLLED TEST ACTIVITY / AUTHORISED BENIGN.
+OBSERVED  Phase 8 (SOC002-CASE-0003): CONTROLLED TEST ACTIVITY / AUTHORISED BENIGN.
+          The Phase 8 live activity decoded a fixed blob to plain text and printed
+          it. No persistence, configuration change, credential access, privilege
+          escalation, lateral movement or payload network contact.
+INFERRED  The finding of value in both phases is the detection behaviour, not the
+          activity: the activity is a deliberately harmless technique-shape test.
+
+-------------------------------------------------------------------------------
+E. NOT VERIFIED
+-------------------------------------------------------------------------------
+NOT VERIFIED  Generalisation to other reconstruction styles: custom decoders,
+              fragment-assembled method names, compressed/hex blobs, certutil
+              -decode, multi-stage decoding, or non-PowerShell hosts.
+NOT VERIFIED  Whether DET-003 catches reconstruct-AND-EXECUTE in practice - it
+              raises severity when an execution primitive co-occurs, but it does
+              not observe the execution itself.
+NOT VERIFIED  Any behaviour outside this lab, at scale, or where WinRM is not the
+              sanctioned management channel. This is not production validation.
+NOT VERIFIED  A false-positive RATE. The benign suite is a small set of synthetic
+              cases; it demonstrates behaviour, not a rate.

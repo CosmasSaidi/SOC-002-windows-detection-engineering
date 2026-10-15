@@ -1,0 +1,40 @@
+# POST-STATE PHASE 6
+# tree: ./phase6
+# snapshot utc: 2026-10-14T23:17:53Z
+# files: 34
+# format: <sha256>  <relative path>
+--------------------------------------------------------------------------------
+4cc229769b7ab0438ed99f5e6974beb1e87dc50c4c0666ad57b98472d807ece2  ./README.md
+17ff8b5c0cc1c02e191923e6281dc42214b3c2e3429198b8afd2361fa1026e5c  ./analysis/baseline_false_positives.ps1
+d5bc8610f6ffb7d03ce42e5754f720b93e8037d070889f9d26eb8860ecd16153  ./analysis/build_manifest.ps1
+e2bfe6d86a1818d86ac439b7a80edcae1f64f8c99311abd4f92b0f5bd12951f2  ./analysis/compare_phase5_phase6.ps1
+25de87953a6b6a750e6ea1690be951a806a4586ffd3cfb1a6475e8f303ccf4a1  ./analysis/failure_modes.ps1
+a2ea800430111db253061a69ce7ee610ef01b8b48fbb145d4ab380513fd75655  ./analysis/lib_evidence_phase5.ps1
+7a842481823d45aed1b637c5b2a9231483561ccdd4937b4db32f08ee590d0612  ./analysis/probe_failure_modes_dc1.ps1
+7b98f2eda5b5ae665798d6f05d6d41cb76d8c4e0aeb6416375c55a155de5c62d  ./analysis/replay_phase5_evidence.ps1
+42437f0e9201497be3bc43fd3d36b660ddcf12a40d4f37a7d3c912ec71f0b45c  ./cases/README.md
+87fb61f4a935960e77cc347173e140b3b850c3109351befc4accfd2bc8615727  ./cases/SOC002-CASE-0001/CASE.md
+42e7a97b15ba8e06eace48a8538f976bea92772488a964e029db1bc1340cafd1  ./cases/SOC002-CASE-0001/case.json
+d4d5d12fa62ab856816ea5b81ce4d0f2e154fa614764b05f34ac9c510930c974  ./detections/correlate_det001_det002.ps1
+c9b73426134571dfa6a26df3cb39e4d6030ce5886720cf7679de575845b0d16c  ./detections/detect_encoded_powershell_v2.ps1
+86149f2559512515ce2a97f54bbee1d54e788cc21d5346c34278326434668bae  ./detections/detect_powershell_lineage.ps1
+3c332445bfb69045e2ad3b135c8184086d91979d8fc03c1bbead79d17b69d09f  ./detections/lib_soc002_v2.ps1
+3404a8bf210fde3ac1418f1fd7dae15251bc8f3dae6ae717c453ffaa28ed4c7d  ./detections/lib_soc002_windows.ps1
+a04d661c5d0b9bdf24a08a6315762caf63940a2e5efdfcca52e85ff4ac4ae265  ./evidence/SHA256_MANIFEST.txt
+b71641f9609d1f59335f06e054ee2403af65d3dac950f9663ac73f240b198da3  ./evidence/TUNING_RATIONALE.txt
+8da8df593d39db09508afed161bb5283ad298048bdfd7c40d255ceb3896c7a85  ./evidence/t10_phase6_integrity_and_cleanup_dc1.txt
+a8ffdf3b7a9410c7bb15f7e7167b89fbe65f4d16df5e0fbc89842cfc2b9a0228  ./evidence/t2_false_positive_baseline.txt
+8a56b4406fe6abe9d664e7e83bb252fc2d6c3b980a0852c0725dccc70628302b  ./evidence/t6_comparison_phase5_vs_phase6.txt
+f75b3dc43f138bc04348809f72ecd2c1df31394556f22dbe1570976d43b5e14d  ./evidence/t6_comparison_phase5_vs_phase6_live_join.txt
+e274e50cc90ec0d33747c35dce6af4ff64c77e3ecb1b48e721de398a51ebae83  ./evidence/t6_phase6_correlation_live_dc1.txt
+a847d2f95b52c306159353c822ed62efafae42bf4c2743b65d4f6aeba7aa9900  ./evidence/t6_phase6_correlation_replay.txt
+21673798afd8dffb88087954cb32f71d6be8f636aca7c1070b57d715f0b746c6  ./evidence/t6_phase6_det001_v2_live_dc1.txt
+84a921cbb308a131aa9f0485866814adfae19963f6000fe62fb4ffe4be5364be  ./evidence/t6_phase6_det001_v2_replay.txt
+5cd6b7acb7e87067647cd3243a8fbf389cf0b102a2ad6566ed7b70649950ac48  ./evidence/t6_phase6_det002_lineage_live_dc1.txt
+f0f43749cf398c9e85be988a855c5acc5d5ddc573bfed0d5ddeaa3220adb6b3b  ./evidence/t6_phase6_det002_lineage_replay.txt
+698c470345a32ed88811792ba0b60c77b2233c35f2e5dcb6224b8a43d1c7bb42  ./evidence/t6_phase6_readonly_integrity_check_dc1.txt
+f7adb897942f30f3300341c7a3fb8aa64546c99f8b1269a210fb0a1e5f62830b  ./evidence/t6_phase6_selfobservation_window_live_dc1.txt
+b41eb10b098f4937b90387a7049bfe1811fab65508d7a8610c0180a90c95d8d1  ./evidence/t7_failure_modes.txt
+212d62bce45d07c15eb0d85532f50ec54dbbd816e46292d7d8ff6d5bde93d6d7  ./evidence/t7_fm_live_probe_dc1.txt
+ac943a9a52d20a2fc7b5d94fb08e162eef820d28d5ff1a69f1529865a3063670  ./evidence/t8_case_management.txt
+4e762e3b4dfe530e9cddf0a884c321176eb62e86d66e0824d04c327bc42856c4  ./tools/dc1_ops.py

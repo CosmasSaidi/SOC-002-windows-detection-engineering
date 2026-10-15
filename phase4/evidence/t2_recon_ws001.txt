@@ -1,0 +1,75 @@
+=== SERVICES ===
+
+
+Name        : Sysmon64
+DisplayName : Sysmon64
+State       : Running
+StartMode   : Auto
+ProcessId   : 2152
+PathName    : C:\Windows\Sysmon64.exe
+
+
+
+
+=== SERVICE REG KEYS ===
+--- HKLM:\SYSTEM\CurrentControlSet\Services\Sysmon64 ---
+
+
+ImagePath   : C:\Windows\Sysmon64.exe
+Start       : 2
+Type        : 16
+Description : System Monitor service
+DisplayName : Sysmon64
+
+
+
+
+  SubKeys: Parameters
+  Parameters values: DriverName, PSPath, PSParentPath, PSChildName, PSDrive, PSProvider
+MISSING: HKLM:\SYSTEM\CurrentControlSet\Services\Sysmon
+--- HKLM:\SYSTEM\CurrentControlSet\Services\SysmonDrv ---
+
+
+ImagePath   : SysmonDrv.sys
+Start       : 0
+Type        : 1
+Description : System Monitor driver
+DisplayName : SysmonDrv
+
+
+
+
+  SubKeys: Instances, Parameters
+  Parameters values: ConfigFile, ConfigHash, HashingAlgorithm, CheckRevocation, DnsLookup, Rules, PSPath, PSParentPath, PSChildName, PSDrive, PSProvider
+=== BINARY SEARCH ===
+C:\Windows\Sysmon64.exe EXISTS  ver=15.22
+C:\Sysmon\Sysmon64.exe EXISTS  ver=15.22
+
+FullName                 Length
+--------                 ------
+C:\Sysmon\Sysmon64.exe  3203368
+C:\Windows\Sysmon64.exe 3203368
+
+
+
+=== CONFIG FILE SEARCH ===
+
+=== SYSmon LOG ===
+IsEnabled=True  LogMode=Circular  MaxKB=65536  RecordCount=3141  FileKB=0
+=== Sysmon event ID counts (last 20000) ===
+
+Name Count
+---- -----
+1     1587
+5     1549
+4        3
+16       2
+
+
+
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">2</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="2"><TNRef RefId="0" /><MS><I64 N="SourceId">2</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="3"><TNRef RefId="0" /><MS><I64 N="SourceId">2</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.102:5985/wsman

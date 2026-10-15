@@ -1,0 +1,73 @@
+=== v3 written, hash: CF66531B782E75FF95D776F8B9D8CEA1DFE4047229A61A1DC0E0FBE7FC9B4185
+=== APPLY ===
+=== EFFECTIVE (readable) ===
+
+
+System Monitor v15.22 - System activity monitor
+
+By Mark Russinovich and Thomas Garnier
+
+Copyright (C) 2014-2026 Microsoft Corporation
+
+Using libxml2. libxml2 is Copyright (C) 1998-2012 Daniel Veillard. All Rights Reserved.
+
+Sysinternals - www.sysinternals.com
+
+
+
+Current configuration:
+
+ - Service name:                  Sysmon64
+
+ - Driver name:                   SysmonDrv
+
+ - Config file:                   C:\Temp\soc002_sysmon_phase4_v3.xml
+
+ - Config hash:                   SHA256=CF66531B782E75FF95D776F8B9D8CEA1DFE4047229A61A1DC0E0FBE7FC9B4185
+
+
+
+ - HashingAlgorithms:             SHA256
+
+ - Network connection:            disabled
+
+ - Archive Directory:             -
+
+ - Image loading:                 disabled
+
+ - CRL checking:                  enabled
+
+ - DNS lookup:                    enabled
+
+
+
+Rule configuration (version 4.90):
+
+ - ProcessCreate                      onmatch: include   combine rules using 'And'
+
+ - NetworkConnect                     onmatch: include   combine rules using 'And'
+
+
+
+=== GENERATE test process + connection ===
+SOC002-PHASE4-T2-PROCCHECK
+curl exit=0
+=== NEW Event 1 since config apply? ===
+=== NEW Event 3 since config apply? ===
+STILL NO EVENT 3
+=== counts last 5 min ===
+
+Name Count
+---- -----
+16       2
+5       51
+
+
+
+
+[STDERR]
+#< CLIXML
+
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">2</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="2"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.102:5985/wsman

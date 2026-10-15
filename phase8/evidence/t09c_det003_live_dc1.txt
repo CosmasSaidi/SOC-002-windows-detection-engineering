@@ -1,0 +1,722 @@
+### PHASE 8 :: DET-003 LIVE RUN ON SOC002-DC1 (ForwardedEvents) ###
+Collector = 192.168.56.10   Temp = C:\Windows\Temp\soc002-phase8-det003
+  PUSHED C:\Windows\Temp\soc002-phase8-det003\lib_soc002_phase8.ps1 bytes=27273 sha256=EC519AE9C313C3360D39F97404E828D19189A701D4570FDAC6641E3703238181
+  PUSHED C:\Windows\Temp\soc002-phase8-det003\detect_base64_reconstruction.ps1 bytes=6887 sha256=1F7ED2E0C4826BE1FD2E63F21BDA5C89F861FDA0835EBB376422A31E7F981352
+  PUSHED C:\Windows\Temp\soc002-phase8-det003\lib_soc002_v2.ps1 bytes=35731 sha256=3C332445BFB69045E2AD3B135C8184086D91979D8FC03C1BBEAD79D17B69D09F
+  PUSHED C:\Windows\Temp\soc002-phase8-det003\lib_soc002_windows.ps1 bytes=8982 sha256=3404A8BF210FDE3AC1418F1FD7DAE15251BC8F3DAE6AE717C453FFAA28ED4C7D
+----------------------------------------------------------------------
+=== SOC002-DET-003 :: PowerShell Base64 reconstruction / decode behaviour ===
+Library        = phase8-v1.0 sha256=EC519AE9C313C3360D39F97404E828D19189A701D4570FDAC6641E3703238181
+Legacy library = phase6-v2.0 sha256=3C332445BFB69045E2AD3B135C8184086D91979D8FC03C1BBEAD79D17B69D09F  (read-only, for lineage/DET-002 context)
+Log=ForwardedEvents  Window=2026-10-15 01:39:10 .. (2026-10-15 02:40:10) (collector local)
+IndexFrom=2026-10-14 23:39:10  process records=1120
+Trigger = Base64 RECONSTRUCTION CALL (REC-01..05), never the literal word "Base64".
+CONTEXT ONLY for the analyst: reconstruction alone is NOT a verdict.
+-------------------------------------------------------------------
+
+[DET-003 001] Base64 reconstruction observed - INVESTIGATION CONTEXT REQUIRED
+  Detection        = SOC002-DET-003  severity=LOW class=RECONSTRUCTION-OBSERVED
+  Timestamp (UTC)  = 2026-10-14T23:35:07.272Z
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator
+  PID              = 1268   (PPID 5468)
+  Parent process   = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+  LogonId          = 0x695d72
+  ProcessGuid      = {edcef402-11ab-6ad0-5706-000000000700}
+  ScriptBlockId    = 
+  Matched indicator= [Convert]::FromBase64String (REC-01)  [1 occurrence(s)]
+  Source event     = Sysmon-Event1  RecordId=4600
+  Context flags    = CTX-STRING-ROUNDTRIP
+  Match snippet    = 8.GetString([Convert]::FromBase64String($b));Wri
+  CommandLine      = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -Command "$b='U09DMDAyLVBIQVNFOC1ERVQwMDMtVEVTVApTT0MwMDIgUEhBU0UgOCBDT05UUk9MTEVEIERFVC0wMDMgVkFMSURBVElPTgpNYXJrZXI6IFNPQzAwMi1QSEFTRTgtREVUMDAzLVRFU1QKUHVycG9zZTogaGFybWxlc3MgbWFya2VyIHJlY29uc3RydWN0aW9uIG9ubHkuCg==';$t=[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($b));Write-Output $t"
+  Decoded content  = NO - this detection only reads text; nothing is executed or decoded-and-run
+  Investigation    = Base64 reconstruction indicator(s) present in Sysmon-Event1: REC-01
+  Investigation    = A decode call alone is NOT evidence of maliciousness - it is a common, legitimate operation.
+  Investigation    = context flags: CTX-STRING-ROUNDTRIP
+  Investigation    = Required next step: check authorisation of the operator and read the surrounding command/script (never execute it).
+
+[DET-003 002] Base64 reconstruction observed - INVESTIGATION CONTEXT REQUIRED
+  Detection        = SOC002-DET-003  severity=LOW class=RECONSTRUCTION-OBSERVED
+  Timestamp (UTC)  = 2026-10-14T23:06:42.046Z
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator
+  PID              = 1428   (PPID 2936)
+  Parent process   = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+  LogonId          = 0x644e0e
+  ProcessGuid      = {edcef402-0b02-6ad0-b305-000000000700}
+  ScriptBlockId    = 
+  Matched indicator= [Convert]::FromBase64String (REC-01)  [1 occurrence(s)]
+  Source event     = Sysmon-Event1  RecordId=4142
+  Context flags    = CTX-STRING-ROUNDTRIP
+  Match snippet    = 8.GetString([Convert]::FromBase64String($b));Wri
+  CommandLine      = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -Command "$b='U09DMDAyLVBIQVNFNy1CTElORFNQT1QtVEVTVApTT0MwMDIgUEhBU0UgNyBDT05UUk9MTEVEIEJMSU5ELVNQT1QgVkFMSURBVElPTgpNYXJrZXI6IFNPQzAwMi1QSEFTRTctQkxJTkRTUE9ULVRFU1QKUHVycG9zZTogaGFybWxlc3MgbWFya2VyIHJlY29uc3RydWN0aW9uIG9ubHkuIE5vIHBlcnNpc3RlbmNlLCBubyBuZXR3b3JrLApubyBjb25maWd1cmF0aW9uIGNoYW5nZSwgbm8gYXJiaXRyYXJ...[cut]
+  Decoded content  = NO - this detection only reads text; nothing is executed or decoded-and-run
+  Investigation    = Base64 reconstruction indicator(s) present in Sysmon-Event1: REC-01
+  Investigation    = A decode call alone is NOT evidence of maliciousness - it is a common, legitimate operation.
+  Investigation    = context flags: CTX-STRING-ROUNDTRIP
+  Investigation    = Required next step: check authorisation of the operator and read the surrounding command/script (never execute it).
+
+[DET-003 003] Base64 reconstruction observed - INVESTIGATION CONTEXT REQUIRED
+  Detection        = SOC002-DET-003  severity=LOW class=RECONSTRUCTION-OBSERVED
+  Timestamp (UTC)  = 2026-10-14T23:35:07.263Z
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator
+  PID              = 1268   (PPID 5468)
+  Parent process   = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+  LogonId          = 0x695d72
+  ProcessGuid      = 
+  ScriptBlockId    = 
+  Matched indicator= [Convert]::FromBase64String (REC-01)  [1 occurrence(s)]
+  Source event     = Security-4688  RecordId=16123
+  Context flags    = CTX-STRING-ROUNDTRIP
+  Match snippet    = 8.GetString([Convert]::FromBase64String($b));Wri
+  CommandLine      = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -Command "$b='U09DMDAyLVBIQVNFOC1ERVQwMDMtVEVTVApTT0MwMDIgUEhBU0UgOCBDT05UUk9MTEVEIERFVC0wMDMgVkFMSURBVElPTgpNYXJrZXI6IFNPQzAwMi1QSEFTRTgtREVUMDAzLVRFU1QKUHVycG9zZTogaGFybWxlc3MgbWFya2VyIHJlY29uc3RydWN0aW9uIG9ubHkuCg==';$t=[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($b));Write-Output $t"
+  Decoded content  = NO - this detection only reads text; nothing is executed or decoded-and-run
+  Investigation    = Base64 reconstruction indicator(s) present in Security-4688: REC-01
+  Investigation    = A decode call alone is NOT evidence of maliciousness - it is a common, legitimate operation.
+  Investigation    = context flags: CTX-STRING-ROUNDTRIP
+  Investigation    = Required next step: check authorisation of the operator and read the surrounding command/script (never execute it).
+
+[DET-003 004] Base64 reconstruction observed - INVESTIGATION CONTEXT REQUIRED
+  Detection        = SOC002-DET-003  severity=LOW class=RECONSTRUCTION-OBSERVED
+  Timestamp (UTC)  = 2026-10-14T23:06:42.031Z
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator
+  PID              = 1428   (PPID 2936)
+  Parent process   = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+  LogonId          = 0x644e0e
+  ProcessGuid      = 
+  ScriptBlockId    = 
+  Matched indicator= [Convert]::FromBase64String (REC-01)  [1 occurrence(s)]
+  Source event     = Security-4688  RecordId=15758
+  Context flags    = CTX-STRING-ROUNDTRIP
+  Match snippet    = 8.GetString([Convert]::FromBase64String($b));Wri
+  CommandLine      = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -Command "$b='U09DMDAyLVBIQVNFNy1CTElORFNQT1QtVEVTVApTT0MwMDIgUEhBU0UgNyBDT05UUk9MTEVEIEJMSU5ELVNQT1QgVkFMSURBVElPTgpNYXJrZXI6IFNPQzAwMi1QSEFTRTctQkxJTkRTUE9ULVRFU1QKUHVycG9zZTogaGFybWxlc3MgbWFya2VyIHJlY29uc3RydWN0aW9uIG9ubHkuIE5vIHBlcnNpc3RlbmNlLCBubyBuZXR3b3JrLApubyBjb25maWd1cmF0aW9uIGNoYW5nZSwgbm8gYXJiaXRyYXJ...[cut]
+  Decoded content  = NO - this detection only reads text; nothing is executed or decoded-and-run
+  Investigation    = Base64 reconstruction indicator(s) present in Security-4688: REC-01
+  Investigation    = A decode call alone is NOT evidence of maliciousness - it is a common, legitimate operation.
+  Investigation    = context flags: CTX-STRING-ROUNDTRIP
+  Investigation    = Required next step: check authorisation of the operator and read the surrounding command/script (never execute it).
+
+[DET-003 005] Base64 reconstruction observed - INVESTIGATION CONTEXT REQUIRED
+  Detection        = SOC002-DET-003  severity=LOW class=RECONSTRUCTION-OBSERVED
+  Timestamp (UTC)  = 2026-10-14T23:35:07.598Z
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator
+  PID              = 1268   (PPID 5468)
+  Parent process   = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+  LogonId          = 0x695d72
+  ProcessGuid      = {edcef402-11ab-6ad0-5706-000000000700}
+  ScriptBlockId    = 50aa4a2f-00ff-4f0f-b0d4-2f5f2543ccae
+  Matched indicator= [Convert]::FromBase64String (REC-01)  [1 occurrence(s)]
+  Source event     = PowerShell-4104  RecordId=77450
+  Context flags    = CTX-STRING-ROUNDTRIP
+  Match snippet    = 8.GetString([Convert]::FromBase64String($b));Wri
+  Decoded content  = NO - this detection only reads text; nothing is executed or decoded-and-run
+  Investigation    = Base64 reconstruction indicator(s) present in PowerShell-4104: REC-01
+  Investigation    = A decode call alone is NOT evidence of maliciousness - it is a common, legitimate operation.
+  Investigation    = context flags: CTX-STRING-ROUNDTRIP
+  Investigation    = Required next step: check authorisation of the operator and read the surrounding command/script (never execute it).
+
+[DET-003 006] Base64 reconstruction observed - INVESTIGATION CONTEXT REQUIRED
+  Detection        = SOC002-DET-003  severity=LOW class=RECONSTRUCTION-OBSERVED
+  Timestamp (UTC)  = 2026-10-14T23:35:06.453Z
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator
+  PID              = 1996   (PPID 2632)
+  Parent process   = C:\Windows\System32\cmd.exe
+  LogonId          = 0x694566
+  ProcessGuid      = {edcef402-11aa-6ad0-5206-000000000700}
+  ScriptBlockId    = a8662866-d48c-4970-98ef-e10ec1eb1c40
+  Matched indicator= [Convert]::FromBase64String (REC-01)  [1 occurrence(s)]
+  Source event     = PowerShell-4104  RecordId=77434
+  Context flags    = CTX-STRING-ROUNDTRIP, CTX-PLUMBING
+  Match snippet    = 8.GetString([Convert]::FromBase64String($b));Wri
+  Decoded content  = NO - this detection only reads text; nothing is executed or decoded-and-run
+  Investigation    = Base64 reconstruction indicator(s) present in PowerShell-4104: REC-01
+  Investigation    = A decode call alone is NOT evidence of maliciousness - it is a common, legitimate operation.
+  Investigation    = context flags: CTX-STRING-ROUNDTRIP, CTX-PLUMBING
+  Investigation    = Required next step: check authorisation of the operator and read the surrounding command/script (never execute it).
+
+[DET-003 007] Base64 reconstruction observed - INVESTIGATION CONTEXT REQUIRED
+  Detection        = SOC002-DET-003  severity=LOW class=RECONSTRUCTION-OBSERVED
+  Timestamp (UTC)  = 2026-10-14T23:10:04.317Z
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator
+  PID              = 4916   (PPID 3596)
+  Parent process   = C:\Windows\System32\cmd.exe
+  LogonId          = 0x66e02d
+  ProcessGuid      = {edcef402-0bcb-6ad0-2006-000000000700}
+  ScriptBlockId    = ee1d9ebc-5192-4c59-9069-f126daef1d7d
+  Matched indicator= [Convert]::FromBase64String (REC-01)  [1 occurrence(s)]
+  Source event     = PowerShell-4104  RecordId=74613
+  Context flags    = CTX-PLUMBING
+  Match snippet    = ns_dc1.ps1',[Convert]::FromBase64String($b));Rem
+  Decoded content  = NO - this detection only reads text; nothing is executed or decoded-and-run
+  Investigation    = Base64 reconstruction indicator(s) present in PowerShell-4104: REC-01
+  Investigation    = A decode call alone is NOT evidence of maliciousness - it is a common, legitimate operation.
+  Investigation    = context flags: CTX-PLUMBING
+  Investigation    = Required next step: check authorisation of the operator and read the surrounding command/script (never execute it).
+
+[DET-003 008] Base64 reconstruction observed - INVESTIGATION CONTEXT REQUIRED
+  Detection        = SOC002-DET-003  severity=LOW class=RECONSTRUCTION-OBSERVED
+  Timestamp (UTC)  = 2026-10-14T23:09:59.166Z
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator
+  PID              = 5288   (PPID 1040)
+  Parent process   = C:\Windows\System32\cmd.exe
+  LogonId          = 0x665181
+  ProcessGuid      = {edcef402-0bc6-6ad0-0806-000000000700}
+  ScriptBlockId    = ae861039-1a99-4985-9f54-6b7ac55ef62f
+  Matched indicator= [Convert]::FromBase64String (REC-01)  [1 occurrence(s)]
+  Source event     = PowerShell-4104  RecordId=74547
+  Context flags    = CTX-PLUMBING
+  Match snippet    = emetry.ps1',[Convert]::FromBase64String($b));Rem
+  Decoded content  = NO - this detection only reads text; nothing is executed or decoded-and-run
+  Investigation    = Base64 reconstruction indicator(s) present in PowerShell-4104: REC-01
+  Investigation    = A decode call alone is NOT evidence of maliciousness - it is a common, legitimate operation.
+  Investigation    = context flags: CTX-PLUMBING
+  Investigation    = Required next step: check authorisation of the operator and read the surrounding command/script (never execute it).
+
+[DET-003 009] Base64 reconstruction observed - INVESTIGATION CONTEXT REQUIRED
+  Detection        = SOC002-DET-003  severity=LOW class=RECONSTRUCTION-OBSERVED
+  Timestamp (UTC)  = 2026-10-14T23:09:51.469Z
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator
+  PID              = 5824   (PPID 5984)
+  Parent process   = C:\Windows\System32\cmd.exe
+  LogonId          = 0x656a56
+  ProcessGuid      = {edcef402-0bbf-6ad0-e005-000000000700}
+  ScriptBlockId    = a1cd3847-8bfe-41ac-ba94-632dd556e746
+  Matched indicator= [Convert]::FromBase64String (REC-01)  [1 occurrence(s)]
+  Source event     = PowerShell-4104  RecordId=74445
+  Context flags    = CTX-PLUMBING
+  Match snippet    = emetry.ps1',[Convert]::FromBase64String($b));Rem
+  Decoded content  = NO - this detection only reads text; nothing is executed or decoded-and-run
+  Investigation    = Base64 reconstruction indicator(s) present in PowerShell-4104: REC-01
+  Investigation    = A decode call alone is NOT evidence of maliciousness - it is a common, legitimate operation.
+  Investigation    = context flags: CTX-PLUMBING
+  Investigation    = Required next step: check authorisation of the operator and read the surrounding command/script (never execute it).
+
+[DET-003 010] Base64 reconstruction observed - INVESTIGATION CONTEXT REQUIRED
+  Detection        = SOC002-DET-003  severity=LOW class=RECONSTRUCTION-OBSERVED
+  Timestamp (UTC)  = 2026-10-14T23:06:42.336Z
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator
+  PID              = 1428   (PPID 2936)
+  Parent process   = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+  LogonId          = 0x644e0e
+  ProcessGuid      = {edcef402-0b02-6ad0-b305-000000000700}
+  ScriptBlockId    = 96c73586-2334-4bbd-a1c7-e2e5163f19c0
+  Matched indicator= [Convert]::FromBase64String (REC-01)  [1 occurrence(s)]
+  Source event     = PowerShell-4104  RecordId=74343
+  Context flags    = CTX-STRING-ROUNDTRIP
+  Match snippet    = 8.GetString([Convert]::FromBase64String($b));Wri
+  Decoded content  = NO - this detection only reads text; nothing is executed or decoded-and-run
+  Investigation    = Base64 reconstruction indicator(s) present in PowerShell-4104: REC-01
+  Investigation    = A decode call alone is NOT evidence of maliciousness - it is a common, legitimate operation.
+  Investigation    = context flags: CTX-STRING-ROUNDTRIP
+  Investigation    = Required next step: check authorisation of the operator and read the surrounding command/script (never execute it).
+
+[DET-003 011] Base64 reconstruction observed - INVESTIGATION CONTEXT REQUIRED
+  Detection        = SOC002-DET-003  severity=LOW class=RECONSTRUCTION-OBSERVED
+  Timestamp (UTC)  = 2026-10-14T23:06:26.397Z
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator
+  PID              = 3308   (PPID 1736)
+  Parent process   = C:\Windows\System32\cmd.exe
+  LogonId          = 0x640f0e
+  ProcessGuid      = {edcef402-0af2-6ad0-aa05-000000000700}
+  ScriptBlockId    = 2af19541-a9f9-4686-9652-87b7d74245a4
+  Matched indicator= [Convert]::FromBase64String (REC-01)  [1 occurrence(s)]
+  Source event     = PowerShell-4104  RecordId=74304
+  Context flags    = CTX-PLUMBING
+  Match snippet    = ommand.txt',[Convert]::FromBase64String($b));Rem
+  Decoded content  = NO - this detection only reads text; nothing is executed or decoded-and-run
+  Investigation    = Base64 reconstruction indicator(s) present in PowerShell-4104: REC-01
+  Investigation    = A decode call alone is NOT evidence of maliciousness - it is a common, legitimate operation.
+  Investigation    = context flags: CTX-PLUMBING
+  Investigation    = Required next step: check authorisation of the operator and read the surrounding command/script (never execute it).
+
+[DET-003 012] Base64 reconstruction observed - INVESTIGATION CONTEXT REQUIRED
+  Detection        = SOC002-DET-003  severity=LOW class=RECONSTRUCTION-OBSERVED
+  Timestamp (UTC)  = 2026-10-14T23:04:15.800Z
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator
+  PID              = 3948   (PPID 5900)
+  Parent process   = C:\Windows\System32\cmd.exe
+  LogonId          = 0x6329b7
+  ProcessGuid      = {edcef402-0a6f-6ad0-8c05-000000000700}
+  ScriptBlockId    = d2f57fe7-7871-4c78-b0d9-068472d7b8fe
+  Matched indicator= [Convert]::FromBase64String (REC-01)  [1 occurrence(s)]
+  Source event     = PowerShell-4104  RecordId=74174
+  Context flags    = CTX-PLUMBING
+  Match snippet    = emetry.ps1',[Convert]::FromBase64String($b));Rem
+  Decoded content  = NO - this detection only reads text; nothing is executed or decoded-and-run
+  Investigation    = Base64 reconstruction indicator(s) present in PowerShell-4104: REC-01
+  Investigation    = A decode call alone is NOT evidence of maliciousness - it is a common, legitimate operation.
+  Investigation    = context flags: CTX-PLUMBING
+  Investigation    = Required next step: check authorisation of the operator and read the surrounding command/script (never execute it).
+
+[DET-003 013] Base64 reconstruction observed - INVESTIGATION CONTEXT REQUIRED
+  Detection        = SOC002-DET-003  severity=LOW class=RECONSTRUCTION-OBSERVED
+  Timestamp (UTC)  = 2026-10-14T23:04:08.539Z
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator
+  PID              = 5700   (PPID 3988)
+  Parent process   = C:\Windows\System32\cmd.exe
+  LogonId          = 0x6257e3
+  ProcessGuid      = {edcef402-0a68-6ad0-6805-000000000700}
+  ScriptBlockId    = a48c77fe-9496-4e0b-959b-4df3cc602b9c
+  Matched indicator= [Convert]::FromBase64String (REC-01)  [1 occurrence(s)]
+  Source event     = PowerShell-4104  RecordId=74081
+  Context flags    = CTX-PLUMBING
+  Match snippet    = _ws001.ps1',[Convert]::FromBase64String($b));Rem
+  Decoded content  = NO - this detection only reads text; nothing is executed or decoded-and-run
+  Investigation    = Base64 reconstruction indicator(s) present in PowerShell-4104: REC-01
+  Investigation    = A decode call alone is NOT evidence of maliciousness - it is a common, legitimate operation.
+  Investigation    = context flags: CTX-PLUMBING
+  Investigation    = Required next step: check authorisation of the operator and read the surrounding command/script (never execute it).
+
+--- SOC002-DET-003 summary -----------------------------------------
+Telemetry records examined                    = 303
+DET-003 candidates (reconstruction call seen) = 13
+   severity LOW  (decode only)                = 13
+   severity MEDIUM (exec/retrieval adjacent)  = 0
+Non-triggers where only the WORD 'Base64' appeared = 0
+Non-triggers suppressed as comment-only mentions   = 0
+
+=== SOC002-CORR-002 :: DET-003 x process telemetry x DET-002 ===
+Purpose: tie a reconstruction observation to the process, the 4688, the 4104 block and the WinRM context.
+-------------------------------------------------------------------
+
+[CORR-002 001] CORR2-SOC002-WS001-1268-20261014T233507Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 1268
+  EventUtc         = 2026-10-14T23:35:07.272Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-11ab-6ad0-5706-000000000700}
+  ScriptBlockId    = 
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=False  DET-002=True
+  DET-002 lineage  = powershell.exe(1268) <- powershell.exe(5468) <- cmd.exe(5652) <- winrshost.exe(4008) <- svchost.exe(716)
+  Correlation gap  = no PowerShell 4104 block linked to this process
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-11ab-6ad0-5706-000000000700}, PID 1268)
+  Reading          = linked Security 4688 (RecordId 16123, PID 1268)
+  Reading          = NO linked PowerShell 4104 script block for this PID/window (correlation gap)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 002] CORR2-SOC002-WS001-1428-20261014T230642Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 1428
+  EventUtc         = 2026-10-14T23:06:42.046Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0b02-6ad0-b305-000000000700}
+  ScriptBlockId    = 
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=False  DET-002=True
+  DET-002 lineage  = powershell.exe(1428) <- powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716)
+  Correlation gap  = no PowerShell 4104 block linked to this process
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0b02-6ad0-b305-000000000700}, PID 1428)
+  Reading          = linked Security 4688 (RecordId 15758, PID 1428)
+  Reading          = NO linked PowerShell 4104 script block for this PID/window (correlation gap)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 003] CORR2-SOC002-WS001-1268-20261014T233507Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 1268
+  EventUtc         = 2026-10-14T23:35:07.263Z
+  User             = SOC002\Administrator
+  ProcessGuid      = 
+  ScriptBlockId    = 
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=False  DET-002=True
+  DET-002 lineage  = powershell.exe(1268) <- powershell.exe(5468) <- cmd.exe(5652) <- winrshost.exe(4008) <- svchost.exe(716)
+  Correlation gap  = no PowerShell 4104 block linked to this process
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-11ab-6ad0-5706-000000000700}, PID 1268)
+  Reading          = linked Security 4688 (RecordId 16123, PID 1268)
+  Reading          = NO linked PowerShell 4104 script block for this PID/window (correlation gap)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 004] CORR2-SOC002-WS001-1428-20261014T230642Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 1428
+  EventUtc         = 2026-10-14T23:06:42.031Z
+  User             = SOC002\Administrator
+  ProcessGuid      = 
+  ScriptBlockId    = 
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=False  DET-002=True
+  DET-002 lineage  = powershell.exe(1428) <- powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716)
+  Correlation gap  = no PowerShell 4104 block linked to this process
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0b02-6ad0-b305-000000000700}, PID 1428)
+  Reading          = linked Security 4688 (RecordId 15758, PID 1428)
+  Reading          = NO linked PowerShell 4104 script block for this PID/window (correlation gap)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 005] CORR2-SOC002-WS001-1268-20261014T233507Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 1268
+  EventUtc         = 2026-10-14T23:35:07.598Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-11ab-6ad0-5706-000000000700}
+  ScriptBlockId    = 50aa4a2f-00ff-4f0f-b0d4-2f5f2543ccae
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(1268) <- powershell.exe(5468) <- cmd.exe(5652) <- winrshost.exe(4008) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-11ab-6ad0-5706-000000000700}, PID 1268)
+  Reading          = linked Security 4688 (RecordId 16123, PID 1268)
+  Reading          = linked PowerShell 4104 (ScriptBlockId 50aa4a2f-00ff-4f0f-b0d4-2f5f2543ccae, ExecPID 1268)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 006] CORR2-SOC002-WS001-1996-20261014T233506Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 1996
+  EventUtc         = 2026-10-14T23:35:06.453Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-11aa-6ad0-5206-000000000700}
+  ScriptBlockId    = a8662866-d48c-4970-98ef-e10ec1eb1c40
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(1996) <- cmd.exe(2632) <- winrshost.exe(4048) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-11aa-6ad0-5206-000000000700}, PID 1996)
+  Reading          = linked Security 4688 (RecordId 16114, PID 1996)
+  Reading          = linked PowerShell 4104 (ScriptBlockId a8662866-d48c-4970-98ef-e10ec1eb1c40, ExecPID 1996)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 007] CORR2-SOC002-WS001-4916-20261014T231004Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 4916
+  EventUtc         = 2026-10-14T23:10:04.317Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0bcb-6ad0-2006-000000000700}
+  ScriptBlockId    = ee1d9ebc-5192-4c59-9069-f126daef1d7d
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(4916) <- cmd.exe(3596) <- winrshost.exe(3012) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0bcb-6ad0-2006-000000000700}, PID 4916)
+  Reading          = linked Security 4688 (RecordId 15975, PID 4916)
+  Reading          = linked PowerShell 4104 (ScriptBlockId ee1d9ebc-5192-4c59-9069-f126daef1d7d, ExecPID 4916)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 008] CORR2-SOC002-WS001-5288-20261014T230959Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 5288
+  EventUtc         = 2026-10-14T23:09:59.166Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0bc6-6ad0-0806-000000000700}
+  ScriptBlockId    = ae861039-1a99-4985-9f54-6b7ac55ef62f
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(5288) <- cmd.exe(1040) <- winrshost.exe(4048) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0bc6-6ad0-0806-000000000700}, PID 5288)
+  Reading          = linked Security 4688 (RecordId 15927, PID 5288)
+  Reading          = linked PowerShell 4104 (ScriptBlockId ae861039-1a99-4985-9f54-6b7ac55ef62f, ExecPID 5288)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 009] CORR2-SOC002-WS001-5824-20261014T230951Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 5824
+  EventUtc         = 2026-10-14T23:09:51.469Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0bbf-6ad0-e005-000000000700}
+  ScriptBlockId    = a1cd3847-8bfe-41ac-ba94-632dd556e746
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(5824) <- cmd.exe(5984) <- winrshost.exe(3352) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0bbf-6ad0-e005-000000000700}, PID 5824)
+  Reading          = linked Security 4688 (RecordId 15847, PID 5824)
+  Reading          = linked PowerShell 4104 (ScriptBlockId a1cd3847-8bfe-41ac-ba94-632dd556e746, ExecPID 5824)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 010] CORR2-SOC002-WS001-1428-20261014T230642Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 1428
+  EventUtc         = 2026-10-14T23:06:42.336Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0b02-6ad0-b305-000000000700}
+  ScriptBlockId    = 96c73586-2334-4bbd-a1c7-e2e5163f19c0
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(1428) <- powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0b02-6ad0-b305-000000000700}, PID 1428)
+  Reading          = linked Security 4688 (RecordId 15758, PID 1428)
+  Reading          = linked PowerShell 4104 (ScriptBlockId 96c73586-2334-4bbd-a1c7-e2e5163f19c0, ExecPID 1428)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 011] CORR2-SOC002-WS001-3308-20261014T230626Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 3308
+  EventUtc         = 2026-10-14T23:06:26.397Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0af2-6ad0-aa05-000000000700}
+  ScriptBlockId    = 2af19541-a9f9-4686-9652-87b7d74245a4
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(3308) <- cmd.exe(1736) <- winrshost.exe(6140) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0af2-6ad0-aa05-000000000700}, PID 3308)
+  Reading          = linked Security 4688 (RecordId 15740, PID 3308)
+  Reading          = linked PowerShell 4104 (ScriptBlockId 2af19541-a9f9-4686-9652-87b7d74245a4, ExecPID 3308)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 012] CORR2-SOC002-WS001-3948-20261014T230415Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 3948
+  EventUtc         = 2026-10-14T23:04:15.800Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0a6f-6ad0-8c05-000000000700}
+  ScriptBlockId    = d2f57fe7-7871-4c78-b0d9-068472d7b8fe
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(3948) <- cmd.exe(5900) <- winrshost.exe(5540) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0a6f-6ad0-8c05-000000000700}, PID 3948)
+  Reading          = linked Security 4688 (RecordId 15634, PID 3948)
+  Reading          = linked PowerShell 4104 (ScriptBlockId d2f57fe7-7871-4c78-b0d9-068472d7b8fe, ExecPID 3948)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 013] CORR2-SOC002-WS001-5700-20261014T230408Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 5700
+  EventUtc         = 2026-10-14T23:04:08.539Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0a68-6ad0-6805-000000000700}
+  ScriptBlockId    = a48c77fe-9496-4e0b-959b-4df3cc602b9c
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(5700) <- cmd.exe(3988) <- winrshost.exe(4572) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0a68-6ad0-6805-000000000700}, PID 5700)
+  Reading          = linked Security 4688 (RecordId 15562, PID 5700)
+  Reading          = linked PowerShell 4104 (ScriptBlockId a48c77fe-9496-4e0b-959b-4df3cc602b9c, ExecPID 5700)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+Correlation records = 13
+Correlation is CONTEXT, not a compromise verdict.
+
+=== DET-002 lineage context (from the unmodified Phase 6 detection) ===
+
+[LINEAGE 001] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:35:07.272Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1268)
+  User             = SOC002\Administrator   LogonId=0x695d72
+  Chain            = powershell.exe(1268) <- powershell.exe(5468) <- cmd.exe(5652) <- winrshost.exe(4008) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:powershell.exe[OBSERVED-PARENT-EVENT] d2:cmd.exe[OBSERVED-PARENT-EVENT] d3:winrshost.exe[OBSERVED-PARENT-EVENT] d4:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = not matched   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = absent
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 002] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:06:42.046Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1428)
+  User             = SOC002\Administrator   LogonId=0x644e0e
+  Chain            = powershell.exe(1428) <- powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:powershell.exe[OBSERVED-PARENT-EVENT] d2:cmd.exe[OBSERVED-PARENT-EVENT] d3:winrshost.exe[OBSERVED-PARENT-EVENT] d4:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = not matched   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = absent
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 003] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:35:07.263Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1268)
+  User             = SOC002\Administrator   LogonId=0x695d72
+  Chain            = powershell.exe(1268) <- powershell.exe(5468) <- cmd.exe(5652) <- winrshost.exe(4008) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:powershell.exe[OBSERVED-PARENT-EVENT] d2:cmd.exe[OBSERVED-PARENT-EVENT] d3:winrshost.exe[OBSERVED-PARENT-EVENT] d4:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = not matched   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = absent
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 004] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:06:42.031Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1428)
+  User             = SOC002\Administrator   LogonId=0x644e0e
+  Chain            = powershell.exe(1428) <- powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:powershell.exe[OBSERVED-PARENT-EVENT] d2:cmd.exe[OBSERVED-PARENT-EVENT] d3:winrshost.exe[OBSERVED-PARENT-EVENT] d4:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = not matched   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = absent
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 005] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:35:07.272Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1268)
+  User             = SOC002\Administrator   LogonId=0x695d72
+  Chain            = powershell.exe(1268) <- powershell.exe(5468) <- cmd.exe(5652) <- winrshost.exe(4008) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:powershell.exe[OBSERVED-PARENT-EVENT] d2:cmd.exe[OBSERVED-PARENT-EVENT] d3:winrshost.exe[OBSERVED-PARENT-EVENT] d4:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = not matched   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = absent
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 006] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:35:06.137Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1996)
+  User             = SOC002\Administrator   LogonId=0x694566
+  Chain            = powershell.exe(1996) <- cmd.exe(2632) <- winrshost.exe(4048) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 007] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:10:03.991Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 4916)
+  User             = SOC002\Administrator   LogonId=0x66e02d
+  Chain            = powershell.exe(4916) <- cmd.exe(3596) <- winrshost.exe(3012) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 008] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:09:58.877Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5288)
+  User             = SOC002\Administrator   LogonId=0x665181
+  Chain            = powershell.exe(5288) <- cmd.exe(1040) <- winrshost.exe(4048) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 009] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:09:51.157Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5824)
+  User             = SOC002\Administrator   LogonId=0x656a56
+  Chain            = powershell.exe(5824) <- cmd.exe(5984) <- winrshost.exe(3352) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 010] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:06:42.046Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1428)
+  User             = SOC002\Administrator   LogonId=0x644e0e
+  Chain            = powershell.exe(1428) <- powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:powershell.exe[OBSERVED-PARENT-EVENT] d2:cmd.exe[OBSERVED-PARENT-EVENT] d3:winrshost.exe[OBSERVED-PARENT-EVENT] d4:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = not matched   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = absent
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 011] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:06:26.077Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3308)
+  User             = SOC002\Administrator   LogonId=0x640f0e
+  Chain            = powershell.exe(3308) <- cmd.exe(1736) <- winrshost.exe(6140) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 012] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:15.498Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3948)
+  User             = SOC002\Administrator   LogonId=0x6329b7
+  Chain            = powershell.exe(3948) <- cmd.exe(5900) <- winrshost.exe(5540) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 013] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:08.258Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5700)
+  User             = SOC002\Administrator   LogonId=0x6257e3
+  Chain            = powershell.exe(5700) <- cmd.exe(3988) <- winrshost.exe(4572) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+DET-002 lineage records linked to DET-003 = 13
+
+detector rc = 0
+----------------------------------------------------------------------
+cleanup: TMP_REMOVED=True
+### END DET-003 LIVE RUN ###

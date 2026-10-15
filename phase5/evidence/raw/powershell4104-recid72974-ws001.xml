@@ -1,0 +1,12 @@
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-PowerShell' Guid='{a0c1853b-5c40-4b15-8766-3cf1c58f985a}'/><EventID>4104</EventID><Version>1</Version><Level>5</Level><Task>2</Task><Opcode>15</Opcode><Keywords>0x0</Keywords><TimeCreated SystemTime='2026-10-14T21:59:48.3924613Z'/><EventRecordID>72974</EventRecordID><Correlation ActivityID='{76f7e10b-5c12-0000-1d84-f876125cdd01}'/><Execution ProcessID='1500' ThreadID='3044'/><Channel>Microsoft-Windows-PowerShell/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-21-1571239376-360375575-1388094843-500'/></System><EventData><Data Name='MessageNumber'>1</Data><Data Name='MessageTotal'>1</Data><Data Name='ScriptBlockText'># SOC-002 PHASE 5 - CONTROLLED BENIGN TEST
+# Marker: SOC002-PHASE5-ENCODED-POWERSHELL
+# Purpose: harmless observable output only. No persistence, no network, no modification.
+$marker = 'SOC002-PHASE5-ENCODED-POWERSHELL'
+Write-Output $marker
+Write-Output ('HOST=' + $env:COMPUTERNAME)
+Write-Output ('USER=' + [System.Security.Principal.WindowsIdentity]::GetCurrent().Name)
+Write-Output ('START_UTC=' + (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ'))
+Start-Sleep -Seconds 3
+Write-Output ('END_UTC=' + (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ'))
+Write-Output 'BENIGN_CONTROLLED_TEST_COMPLETE'
+</Data><Data Name='ScriptBlockId'>039b9c99-15fb-488d-8046-46e868aa9a39</Data><Data Name='Path'></Data></EventData></Event>

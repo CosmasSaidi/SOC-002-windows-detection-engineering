@@ -1,0 +1,1487 @@
+### PHASE7 DETECTION STACK RUN ===
+RunOn        = SOC002-DC1
+WindowUtc    = 2026-10-14T23:03:00Z .. 2026-10-14T23:09:30Z
+WindowLocal  = 2026-10-15 02:03:00 .. 2026-10-15 02:09:30   (collector local, as passed to the Phase 6 detectors)
+Marker       = SOC002-PHASE7-BLINDSPOT-TEST
+LibDir       = C:\Windows\Temp\soc002-phase7\detections
+--- Phase 6 detection file integrity (sha256 taken NOW, on the collector) ---
+lib_soc002_v2.ps1                      3C332445BFB69045E2AD3B135C8184086D91979D8FC03C1BBEAD79D17B69D09F
+lib_soc002_windows.ps1                 3404A8BF210FDE3AC1418F1FD7DAE15251BC8F3DAE6AE717C453FFAA28ED4C7D
+detect_encoded_powershell_v2.ps1       C9B73426134571DFA6A26DF3CB39E4D6030CE5886720CF7679DE575845B0D16C
+detect_powershell_lineage.ps1          86149F2559512515CE2A97F54BBEE1D54E788CC21D5346C34278326434668BAE
+correlate_det001_det002.ps1            D4D5D12FA62AB856816EA5B81CE4D0F2E154FA614764B05F34AC9C510930C974
+
+##################### SOC002-DET-001 v2 #####################
+=== SOC002-DET-001 v2 :: Encoded PowerShell Execution - classified ===
+Library=phase6-v2.0 sha256=3C332445BFB69045E2AD3B135C8184086D91979D8FC03C1BBEAD79D17B69D09F
+Log=ForwardedEvents  Window=2026-10-15 02:03:00 .. 2026-10-15 02:09:30 (collector local)
+IndexFrom=2026-10-15 00:03:00  index records=357
+Baseline=BASE-01 (narrow WinRS transport wrapper)   Payload screen=ESC-01..08   Trigger=unchanged from Phase 5
+-------------------------------------------------------------------
+[BASE 001] rec=4141 utc=2026-10-14T23:06:41.712Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=2936 parent=cmd.exe(1808) lineage=powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716) rule=BASE-01 payload=True
+[BASE 002] rec=4131 utc=2026-10-14T23:06:27.822Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=2952 parent=cmd.exe(5384) lineage=powershell.exe(2952) <- cmd.exe(5384) <- winrshost.exe(5616) <- svchost.exe(716) rule=BASE-01 payload=True
+
+[ALERT 001] Encoded PowerShell execution observed - INVESTIGATION REQUIRED
+  Detection        = SOC002-DET-001 v2  tier=INVESTIGATION severity=MEDIUM
+  Why retained     = BASE-01 OVERRIDDEN by payload escalation: ESC-03
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator   LogonId=0x640f0e
+  EventUtc         = 2026-10-14T23:06:26.077Z
+  RecordId/Source  = 4119 / Sysmon-Event1
+  ProcessGuid      = {edcef402-0af2-6ad0-aa05-000000000700}
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3308)
+  Parent           = C:\Windows\System32\cmd.exe  (PPID 1736)
+  ParentCommandLine= C:\Windows\system32\cmd.exe /C powershell -encodedcommand JABiAD0AWwBJAE8ALgBGAGkAbABlAF0AOgA6AFIAZQBhAGQAQQBsAGwAVABlAHgAdAAoACcAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABzAG8AYwAwADAAMgAtAHAAaABhAHMAZQA3AFwAcABoAGEAcwBlADcAXwBjAGgAaQBsAGQAXwBjAG8AbQBtAGEAbgBkAC4AdAB4AHQALgBiADYANAAnACkAOwBbAEkATwAuAEYAaQBsAGUAXQA6ADoAVwByAGkAdABlAEEAbABsAEIAeQB0AGUAcwAoACcAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABzAG8AYwAwADAAMgAtAHAAaABhAHMAZQA3AFwAcABoAGEAcwBlADcAXwBjAGgAaQBsAGQAXwBjAG8AbQBtAGEAbgBkAC4AdAB4AHQAJwAsAFsAQwBvAG4AdgBlAHIAdABdADoAOgBGAHIAbwBtAEIAYQBzAGUANgA0AFMAdAByAGkAbgBnACgAJABiACkAKQA7AFIAZQBtAG8AdgBlAC0ASQB0AGUAbQAgAC0ARgBvAHIAYwBlACAAJwBDADoAXABXAGkAbgBkAG8AdwBzAFwAVABlAG0AcABcAHMAbwBjADAAMAAyAC0AcABoAGEAcwBlADcAXABwAGgAYQBzAGUANwBfAGMAaABpAGwAZABfAGMAbwBtAG0AYQBuAGQALgB0AHgAdAAuAGIANgA0ACcAOwAnAEwARQBOAD0AJwArACgARwBlAHQALQBJAHQAZQBtACAAJwBDADoAXABXAGkAbgBkAG8AdwBzAFwAVABlAG0AcABcAHMAbwBjADAAMAAyAC0AcABoAGEAcwBlADcAXABwAGgAYQBzAGUANwBfAGMAaABpAGwAZABfAGMAbwBtAG0AYQBuAGQALgB0AHgAdAAnACkALgBMAGUAbgBnAHQAaAA7ACcAUwBIAEEAMgA1ADYAPQAnACsAKABHAGUAdAAtAEYAaQBsAGUASABhAHMAaAAgAC0AQQBsAGcAbwByAGkAdABoAG0AIABTAEgAQQAyADUANgAgACcAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABzAG8AYwAwAD...[cut]
+  Hashes           = SHA256=B4E7BC24BF3F5C3DA2EB6E9EC5EC10F90099DEFA91B820F2F3FC70DD9E4785C4
+  CommandLine      = powershell  -encodedcommand JABiAD0AWwBJAE8ALgBGAGkAbABlAF0AOgA6AFIAZQBhAGQAQQBsAGwAVABlAHgAdAAoACcAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABzAG8AYwAwADAAMgAtAHAAaABhAHMAZQA3AFwAcABoAGEAcwBlADcAXwBjAGgAaQBsAGQAXwBjAG8AbQBtAGEAbgBkAC4AdAB4AHQALgBiADYANAAnACkAOwBbAEkATwAuAEYAaQBsAGUAXQA6ADoAVwByAGkAdABlAEEAbABsAEIAeQB0AGUAcwAoACcAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABzAG8AYwAwADAAMgAtAHAAaABhAHMAZQA3AFwAcABoAGEAcwBlADcAXwBjAGgAaQBsAGQAXwBjAG8AbQBtAGEAbgBkAC4AdAB4AHQAJwAsAFsAQwBvAG4AdgBlAHIAdABdADoAOgBGAHIAbwBtAEIAYQBzAGUANgA0AFMAdAByAGkAbgBnACgAJABiACkAKQA7AFIAZQBtAG8AdgBlAC0ASQB0AGUAbQAgAC0ARgBvAHIAYwBlACAAJwBDADoAXABXAGkAbgBkAG8AdwBzAFwAVABlAG0AcABcAHMAbwBjADAAMAAyAC0AcABoAGEAcwBlADcAXABwAGgAYQBzAGUANwBfAGMAaABpAGwAZABfAGMAbwBtAG0AYQBuAGQALgB0AHgAdAAuAGIANgA0ACcAOwAnAEwARQBOAD0AJwArACgARwBlAHQALQBJAHQAZQBtACAAJwBDADoAXABXAGkAbgBkAG8AdwBzAFwAVABlAG0AcABcAHMAbwBjADAAMAAyAC0AcABoAGEAcwBlADcAXABwAGgAYQBzAGUANwBfAGMAaABpAGwAZABfAGMAbwBtAG0AYQBuAGQALgB0AHgAdAAnACkALgBMAGUAbgBnAHQAaAA7ACcAUwBIAEEAMgA1ADYAPQAnACsAKABHAGUAdAAtAEYAaQBsAGUASABhAHMAaAAgAC0AQQBsAGcAbwByAGkAdABoAG0AIABTAEgAQQAyADUANgAgACcAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABzAG8AYwAwADAAMgAtAHAAaABhAHMAZQA3AFwAcABo...[cut]
+  DecodedScript    = <<<$b=[IO.File]::ReadAllText('C:\Windows\Temp\soc002-phase7\phase7_child_command.txt.b64');[IO.File]::WriteAllBytes('C:\Windows\Temp\soc002-phase7\phase7_child_command.txt',[Convert]::FromBase64String($b));Remove-Item -Force 'C:\Windows\Temp\soc002-phase7\phase7_child_command.txt.b64';'LEN='+(Get-Item 'C:\Windows\Temp\soc002-phase7\phase7_child_command.txt').Length;'SHA256='+(Get-FileHash -Algorithm SHA256 'C:\Windows\Temp\soc002-phase7\phase7_child_command.txt').Hash>>>  [decoded by detection - NOT executed]
+  Lineage          = powershell.exe(3308) <- cmd.exe(1736) <- winrshost.exe(6140) <- svchost.exe(716)
+                     depth 0: powershell.exe [OBSERVED-CHILD-EVENT]
+                     depth 1: cmd.exe [OBSERVED-PARENT-EVENT]
+                     depth 2: winrshost.exe [OBSERVED-PARENT-EVENT]
+                     depth 3: svchost.exe [OBSERVED-CHILD-EVENT]
+  Corroboration    = PowerShell 4104 RecId= ExecPID= ScriptBlockId= Msg=/
+[BASE 003] rec=4108 utc=2026-10-14T23:06:25.405Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=3548 parent=cmd.exe(2764) lineage=powershell.exe(3548) <- cmd.exe(2764) <- winrshost.exe(5216) <- svchost.exe(716) rule=BASE-01 payload=True
+[BASE 004] rec=4096 utc=2026-10-14T23:06:24.716Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5400 parent=cmd.exe(1900) lineage=powershell.exe(5400) <- cmd.exe(1900) <- winrshost.exe(5140) <- svchost.exe(716) rule=BASE-01 payload=True
+[BASE 005] rec=4088 utc=2026-10-14T23:06:24.039Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5224 parent=cmd.exe(1004) lineage=powershell.exe(5224) <- cmd.exe(1004) <- winrshost.exe(1620) <- svchost.exe(716) rule=BASE-01 payload=True
+[BASE 006] rec=4070 utc=2026-10-14T23:05:21.535Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5136 parent=cmd.exe(1272) lineage=powershell.exe(5136) <- cmd.exe(1272) <- winrshost.exe(3648) <- svchost.exe(716) rule=BASE-01 payload=True
+[BASE 007] rec=4058 utc=2026-10-14T23:04:28.671Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=4976 parent=cmd.exe(1356) lineage=powershell.exe(4976) <- cmd.exe(1356) <- winrshost.exe(2800) <- svchost.exe(716) rule=BASE-01 payload=True
+[BASE 008] rec=4048 utc=2026-10-14T23:04:17.230Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=6052 parent=cmd.exe(3628) lineage=powershell.exe(6052) <- cmd.exe(3628) <- winrshost.exe(3244) <- svchost.exe(716) rule=BASE-01 payload=True
+
+[ALERT 002] Encoded PowerShell execution observed - INVESTIGATION REQUIRED
+  Detection        = SOC002-DET-001 v2  tier=INVESTIGATION severity=MEDIUM
+  Why retained     = BASE-01 OVERRIDDEN by payload escalation: ESC-03
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator   LogonId=0x6329b7
+  EventUtc         = 2026-10-14T23:04:15.498Z
+  RecordId/Source  = 4036 / Sysmon-Event1
+  ProcessGuid      = {edcef402-0a6f-6ad0-8c05-000000000700}
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3948)
+  Parent           = C:\Windows\System32\cmd.exe  (PPID 5900)
+  ParentCommandLine= C:\Windows\system32\cmd.exe /C powershell -encodedcommand JABiAD0AWwBJAE8ALgBGAGkAbABlAF0AOgA6AFIAZQBhAGQAQQBsAGwAVABlAHgAdAAoACcAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABzAG8AYwAwADAAMgAtAHAAaABhAHMAZQA3AFwAYwBvAGwAbABlAGMAdABfAHAAaABhAHMAZQA3AF8AdABlAGwAZQBtAGUAdAByAHkALgBwAHMAMQAuAGIANgA0ACcAKQA7AFsASQBPAC4ARgBpAGwAZQBdADoAOgBXAHIAaQB0AGUAQQBsAGwAQgB5AHQAZQBzACgAJwBDADoAXABXAGkAbgBkAG8AdwBzAFwAVABlAG0AcABcAHMAbwBjADAAMAAyAC0AcABoAGEAcwBlADcAXABjAG8AbABsAGUAYwB0AF8AcABoAGEAcwBlADcAXwB0AGUAbABlAG0AZQB0AHIAeQAuAHAAcwAxACcALABbAEMAbwBuAHYAZQByAHQAXQA6ADoARgByAG8AbQBCAGEAcwBlADYANABTAHQAcgBpAG4AZwAoACQAYgApACkAOwBSAGUAbQBvAHYAZQAtAEkAdABlAG0AIAAtAEYAbwByAGMAZQAgACcAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABzAG8AYwAwADAAMgAtAHAAaABhAHMAZQA3AFwAYwBvAGwAbABlAGMAdABfAHAAaABhAHMAZQA3AF8AdABlAGwAZQBtAGUAdAByAHkALgBwAHMAMQAuAGIANgA0ACcAOwAnAEwARQBOAD0AJwArACgARwBlAHQALQBJAHQAZQBtACAAJwBDADoAXABXAGkAbgBkAG8AdwBzAFwAVABlAG0AcABcAHMAbwBjADAAMAAyAC0AcABoAGEAcwBlADcAXABjAG8AbABsAGUAYwB0AF8AcABoAGEAcwBlADcAXwB0AGUAbABlAG0AZQB0AHIAeQAuAHAAcwAxACcAKQAuAEwAZQBuAGcAdABoADsAJwBTAEgAQQAyADUANgA9ACcAKwAoAEcAZQB0AC0ARgBpAGwAZQBIAGEAcwBoACAALQBBAGwAZwBvAHIAaQB0AGgAbQAgAFMASABBADIANQA2ACAAJwBDADoAXABXAG...[cut]
+  Hashes           = SHA256=B4E7BC24BF3F5C3DA2EB6E9EC5EC10F90099DEFA91B820F2F3FC70DD9E4785C4
+  CommandLine      = powershell  -encodedcommand JABiAD0AWwBJAE8ALgBGAGkAbABlAF0AOgA6AFIAZQBhAGQAQQBsAGwAVABlAHgAdAAoACcAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABzAG8AYwAwADAAMgAtAHAAaABhAHMAZQA3AFwAYwBvAGwAbABlAGMAdABfAHAAaABhAHMAZQA3AF8AdABlAGwAZQBtAGUAdAByAHkALgBwAHMAMQAuAGIANgA0ACcAKQA7AFsASQBPAC4ARgBpAGwAZQBdADoAOgBXAHIAaQB0AGUAQQBsAGwAQgB5AHQAZQBzACgAJwBDADoAXABXAGkAbgBkAG8AdwBzAFwAVABlAG0AcABcAHMAbwBjADAAMAAyAC0AcABoAGEAcwBlADcAXABjAG8AbABsAGUAYwB0AF8AcABoAGEAcwBlADcAXwB0AGUAbABlAG0AZQB0AHIAeQAuAHAAcwAxACcALABbAEMAbwBuAHYAZQByAHQAXQA6ADoARgByAG8AbQBCAGEAcwBlADYANABTAHQAcgBpAG4AZwAoACQAYgApACkAOwBSAGUAbQBvAHYAZQAtAEkAdABlAG0AIAAtAEYAbwByAGMAZQAgACcAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABzAG8AYwAwADAAMgAtAHAAaABhAHMAZQA3AFwAYwBvAGwAbABlAGMAdABfAHAAaABhAHMAZQA3AF8AdABlAGwAZQBtAGUAdAByAHkALgBwAHMAMQAuAGIANgA0ACcAOwAnAEwARQBOAD0AJwArACgARwBlAHQALQBJAHQAZQBtACAAJwBDADoAXABXAGkAbgBkAG8AdwBzAFwAVABlAG0AcABcAHMAbwBjADAAMAAyAC0AcABoAGEAcwBlADcAXABjAG8AbABsAGUAYwB0AF8AcABoAGEAcwBlADcAXwB0AGUAbABlAG0AZQB0AHIAeQAuAHAAcwAxACcAKQAuAEwAZQBuAGcAdABoADsAJwBTAEgAQQAyADUANgA9ACcAKwAoAEcAZQB0AC0ARgBpAGwAZQBIAGEAcwBoACAALQBBAGwAZwBvAHIAaQB0AGgAbQAgAFMASABBADIANQA2ACAAJwBDADoAXABXAGkAbgBkAG8AdwBzAFwAVABlAG0AcABc...[cut]
+  DecodedScript    = <<<$b=[IO.File]::ReadAllText('C:\Windows\Temp\soc002-phase7\collect_phase7_telemetry.ps1.b64');[IO.File]::WriteAllBytes('C:\Windows\Temp\soc002-phase7\collect_phase7_telemetry.ps1',[Convert]::FromBase64String($b));Remove-Item -Force 'C:\Windows\Temp\soc002-phase7\collect_phase7_telemetry.ps1.b64';'LEN='+(Get-Item 'C:\Windows\Temp\soc002-phase7\collect_phase7_telemetry.ps1').Length;'SHA256='+(Get-FileHash -Algorithm SHA256 'C:\Windows\Temp\soc002-phase7\collect_phase7_telemetry.ps1').Hash>>>  [decoded by detection - NOT executed]
+  Lineage          = powershell.exe(3948) <- cmd.exe(5900) <- winrshost.exe(5540) <- svchost.exe(716)
+                     depth 0: powershell.exe [OBSERVED-CHILD-EVENT]
+                     depth 1: cmd.exe [OBSERVED-PARENT-EVENT]
+                     depth 2: winrshost.exe [OBSERVED-PARENT-EVENT]
+                     depth 3: svchost.exe [OBSERVED-CHILD-EVENT]
+  Corroboration    = PowerShell 4104 RecId= ExecPID= ScriptBlockId= Msg=/
+[BASE 009] rec=4026 utc=2026-10-14T23:04:14.822Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=4732 parent=cmd.exe(5052) lineage=powershell.exe(4732) <- cmd.exe(5052) <- winrshost.exe(2228) <- svchost.exe(716) rule=BASE-01 payload=True
+[BASE 010] rec=4016 utc=2026-10-14T23:04:14.141Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=3760 parent=cmd.exe(5996) lineage=powershell.exe(3760) <- cmd.exe(5996) <- winrshost.exe(2408) <- svchost.exe(716) rule=BASE-01 payload=True
+[BASE 011] rec=4006 utc=2026-10-14T23:04:13.456Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=1428 parent=cmd.exe(5784) lineage=powershell.exe(1428) <- cmd.exe(5784) <- winrshost.exe(2276) <- svchost.exe(716) rule=BASE-01 payload=True
+[BASE 012] rec=3996 utc=2026-10-14T23:04:12.782Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5672 parent=cmd.exe(2572) lineage=powershell.exe(5672) <- cmd.exe(2572) <- winrshost.exe(1808) <- svchost.exe(716) rule=BASE-01 payload=True
+[BASE 013] rec=3986 utc=2026-10-14T23:04:12.069Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5984 parent=cmd.exe(5760) lineage=powershell.exe(5984) <- cmd.exe(5760) <- winrshost.exe(6032) <- svchost.exe(716) rule=BASE-01 payload=True
+[BASE 014] rec=3976 utc=2026-10-14T23:04:11.384Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5380 parent=cmd.exe(1736) lineage=powershell.exe(5380) <- cmd.exe(1736) <- winrshost.exe(2784) <- svchost.exe(716) rule=BASE-01 payload=True
+[BASE 015] rec=3966 utc=2026-10-14T23:04:10.655Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=2964 parent=cmd.exe(3068) lineage=powershell.exe(2964) <- cmd.exe(3068) <- winrshost.exe(876) <- svchost.exe(716) rule=BASE-01 payload=True
+[BASE 016] rec=3958 utc=2026-10-14T23:04:09.953Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=4692 parent=cmd.exe(3556) lineage=powershell.exe(4692) <- cmd.exe(3556) <- winrshost.exe(5216) <- svchost.exe(716) rule=BASE-01 payload=True
+
+[ALERT 003] Encoded PowerShell execution observed - INVESTIGATION REQUIRED
+  Detection        = SOC002-DET-001 v2  tier=INVESTIGATION severity=MEDIUM
+  Why retained     = BASE-01 OVERRIDDEN by payload escalation: ESC-03
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator   LogonId=0x6257e3
+  EventUtc         = 2026-10-14T23:04:08.258Z
+  RecordId/Source  = 3946 / Sysmon-Event1
+  ProcessGuid      = {edcef402-0a68-6ad0-6805-000000000700}
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5700)
+  Parent           = C:\Windows\System32\cmd.exe  (PPID 3988)
+  ParentCommandLine= C:\Windows\system32\cmd.exe /C powershell -encodedcommand JABiAD0AWwBJAE8ALgBGAGkAbABlAF0AOgA6AFIAZQBhAGQAQQBsAGwAVABlAHgAdAAoACcAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABzAG8AYwAwADAAMgAtAHAAaABhAHMAZQA3AFwAcABoAGEAcwBlADcAXwByAHUAbgBfAHcAcwAwADAAMQAuAHAAcwAxAC4AYgA2ADQAJwApADsAWwBJAE8ALgBGAGkAbABlAF0AOgA6AFcAcgBpAHQAZQBBAGwAbABCAHkAdABlAHMAKAAnAEMAOgBcAFcAaQBuAGQAbwB3AHMAXABUAGUAbQBwAFwAcwBvAGMAMAAwADIALQBwAGgAYQBzAGUANwBcAHAAaABhAHMAZQA3AF8AcgB1AG4AXwB3AHMAMAAwADEALgBwAHMAMQAnACwAWwBDAG8AbgB2AGUAcgB0AF0AOgA6AEYAcgBvAG0AQgBhAHMAZQA2ADQAUwB0AHIAaQBuAGcAKAAkAGIAKQApADsAUgBlAG0AbwB2AGUALQBJAHQAZQBtACAALQBGAG8AcgBjAGUAIAAnAEMAOgBcAFcAaQBuAGQAbwB3AHMAXABUAGUAbQBwAFwAcwBvAGMAMAAwADIALQBwAGgAYQBzAGUANwBcAHAAaABhAHMAZQA3AF8AcgB1AG4AXwB3AHMAMAAwADEALgBwAHMAMQAuAGIANgA0ACcAOwAnAEwARQBOAD0AJwArACgARwBlAHQALQBJAHQAZQBtACAAJwBDADoAXABXAGkAbgBkAG8AdwBzAFwAVABlAG0AcABcAHMAbwBjADAAMAAyAC0AcABoAGEAcwBlADcAXABwAGgAYQBzAGUANwBfAHIAdQBuAF8AdwBzADAAMAAxAC4AcABzADEAJwApAC4ATABlAG4AZwB0AGgAOwAnAFMASABBADIANQA2AD0AJwArACgARwBlAHQALQBGAGkAbABlAEgAYQBzAGgAIAAtAEEAbABnAG8AcgBpAHQAaABtACAAUwBIAEEAMgA1ADYAIAAnAEMAOgBcAFcAaQBuAGQAbwB3AHMAXABUAGUAbQBwAFwAcwBvAGMAMAAwADIALQBwAGgAYQBzAGUANwBcAHAAaABhAHMAZQA3AF...[cut]
+  Hashes           = SHA256=B4E7BC24BF3F5C3DA2EB6E9EC5EC10F90099DEFA91B820F2F3FC70DD9E4785C4
+  CommandLine      = powershell  -encodedcommand JABiAD0AWwBJAE8ALgBGAGkAbABlAF0AOgA6AFIAZQBhAGQAQQBsAGwAVABlAHgAdAAoACcAQwA6AFwAVwBpAG4AZABvAHcAcwBcAFQAZQBtAHAAXABzAG8AYwAwADAAMgAtAHAAaABhAHMAZQA3AFwAcABoAGEAcwBlADcAXwByAHUAbgBfAHcAcwAwADAAMQAuAHAAcwAxAC4AYgA2ADQAJwApADsAWwBJAE8ALgBGAGkAbABlAF0AOgA6AFcAcgBpAHQAZQBBAGwAbABCAHkAdABlAHMAKAAnAEMAOgBcAFcAaQBuAGQAbwB3AHMAXABUAGUAbQBwAFwAcwBvAGMAMAAwADIALQBwAGgAYQBzAGUANwBcAHAAaABhAHMAZQA3AF8AcgB1AG4AXwB3AHMAMAAwADEALgBwAHMAMQAnACwAWwBDAG8AbgB2AGUAcgB0AF0AOgA6AEYAcgBvAG0AQgBhAHMAZQA2ADQAUwB0AHIAaQBuAGcAKAAkAGIAKQApADsAUgBlAG0AbwB2AGUALQBJAHQAZQBtACAALQBGAG8AcgBjAGUAIAAnAEMAOgBcAFcAaQBuAGQAbwB3AHMAXABUAGUAbQBwAFwAcwBvAGMAMAAwADIALQBwAGgAYQBzAGUANwBcAHAAaABhAHMAZQA3AF8AcgB1AG4AXwB3AHMAMAAwADEALgBwAHMAMQAuAGIANgA0ACcAOwAnAEwARQBOAD0AJwArACgARwBlAHQALQBJAHQAZQBtACAAJwBDADoAXABXAGkAbgBkAG8AdwBzAFwAVABlAG0AcABcAHMAbwBjADAAMAAyAC0AcABoAGEAcwBlADcAXABwAGgAYQBzAGUANwBfAHIAdQBuAF8AdwBzADAAMAAxAC4AcABzADEAJwApAC4ATABlAG4AZwB0AGgAOwAnAFMASABBADIANQA2AD0AJwArACgARwBlAHQALQBGAGkAbABlAEgAYQBzAGgAIAAtAEEAbABnAG8AcgBpAHQAaABtACAAUwBIAEEAMgA1ADYAIAAnAEMAOgBcAFcAaQBuAGQAbwB3AHMAXABUAGUAbQBwAFwAcwBvAGMAMAAwADIALQBwAGgAYQBzAGUANwBcAHAAaABhAHMAZQA3AF8AcgB1AG4AXwB3AHMAMAAwADEALgBw...[cut]
+  DecodedScript    = <<<$b=[IO.File]::ReadAllText('C:\Windows\Temp\soc002-phase7\phase7_run_ws001.ps1.b64');[IO.File]::WriteAllBytes('C:\Windows\Temp\soc002-phase7\phase7_run_ws001.ps1',[Convert]::FromBase64String($b));Remove-Item -Force 'C:\Windows\Temp\soc002-phase7\phase7_run_ws001.ps1.b64';'LEN='+(Get-Item 'C:\Windows\Temp\soc002-phase7\phase7_run_ws001.ps1').Length;'SHA256='+(Get-FileHash -Algorithm SHA256 'C:\Windows\Temp\soc002-phase7\phase7_run_ws001.ps1').Hash>>>  [decoded by detection - NOT executed]
+  Lineage          = powershell.exe(5700) <- cmd.exe(3988) <- winrshost.exe(4572) <- svchost.exe(716)
+                     depth 0: powershell.exe [OBSERVED-CHILD-EVENT]
+                     depth 1: cmd.exe [OBSERVED-PARENT-EVENT]
+                     depth 2: winrshost.exe [OBSERVED-PARENT-EVENT]
+                     depth 3: svchost.exe [OBSERVED-CHILD-EVENT]
+  Corroboration    = PowerShell 4104 RecId= ExecPID= ScriptBlockId= Msg=/
+[BASE 017] rec=3936 utc=2026-10-14T23:04:07.587Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=1040 parent=cmd.exe(3468) lineage=powershell.exe(1040) <- cmd.exe(3468) <- winrshost.exe(2804) <- svchost.exe(716) rule=BASE-01 payload=True
+[BASE 018] rec=3926 utc=2026-10-14T23:04:06.892Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=4364 parent=cmd.exe(1272) lineage=powershell.exe(4364) <- cmd.exe(1272) <- winrshost.exe(4576) <- svchost.exe(716) rule=BASE-01 payload=True
+[BASE 019] rec=3915 utc=2026-10-14T23:04:06.183Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=3196 parent=cmd.exe(4160) lineage=powershell.exe(3196) <- cmd.exe(4160) <- winrshost.exe(1552) <- svchost.exe(716) rule=BASE-01 payload=True
+[BASE 020] rec=3905 utc=2026-10-14T23:04:05.544Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5676 parent=cmd.exe(5856) lineage=powershell.exe(5676) <- cmd.exe(5856) <- winrshost.exe(3328) <- svchost.exe(716) rule=BASE-01 payload=True
+[BASE 021] rec=3892 utc=2026-10-14T23:04:04.867Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5720 parent=cmd.exe(948) lineage=powershell.exe(5720) <- cmd.exe(948) <- winrshost.exe(3592) <- svchost.exe(716) rule=BASE-01 payload=True
+[BASE 022] rec=3884 utc=2026-10-14T23:04:04.164Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5568 parent=cmd.exe(2468) lineage=powershell.exe(5568) <- cmd.exe(2468) <- winrshost.exe(5556) <- svchost.exe(716) rule=BASE-01 payload=True
+
+--- SOC002-DET-001 v2 summary ---------------------------------------
+Candidate alerts (encoded PowerShell matched)  = 25
+Retained investigation candidates              = 3
+Suppressed by narrow baseline (BASE-01)        = 22
+   - baseline + WinRM ancestry resolved       = 22   (INFO)
+   - baseline pattern, ancestry NOT resolved  = 0   (LOW)
+Escalated back by payload screen (ESC-*)       = 3
+Suppressed by a general 'powershell' rule      = 0 (no such rule exists)
+Suppressed by a general '-EncodedCommand' rule = 0 (no such rule exists)
+Security 4688 fallback                         = disabled
+
+=== SOC002-DET-002 :: PowerShell delivered through a WinRM host process (CONTEXT ONLY) ===
+
+[LINEAGE 001] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:06:41.712Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 2936)
+  User             = SOC002\Administrator   LogonId=0x644e0e
+  Chain            = powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 002] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:06:27.822Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 2952)
+  User             = SOC002\Administrator   LogonId=0x642f6a
+  Chain            = powershell.exe(2952) <- cmd.exe(5384) <- winrshost.exe(5616) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 003] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:06:26.077Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3308)
+  User             = SOC002\Administrator   LogonId=0x640f0e
+  Chain            = powershell.exe(3308) <- cmd.exe(1736) <- winrshost.exe(6140) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 004] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:06:25.405Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3548)
+  User             = SOC002\Administrator   LogonId=0x63f765
+  Chain            = powershell.exe(3548) <- cmd.exe(2764) <- winrshost.exe(5216) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 005] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:06:24.716Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5400)
+  User             = SOC002\Administrator   LogonId=0x63ddad
+  Chain            = powershell.exe(5400) <- cmd.exe(1900) <- winrshost.exe(5140) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 006] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:06:24.039Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5224)
+  User             = SOC002\Administrator   LogonId=0x63c524
+  Chain            = powershell.exe(5224) <- cmd.exe(1004) <- winrshost.exe(1620) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 007] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:05:21.535Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5136)
+  User             = SOC002\Administrator   LogonId=0x639b15
+  Chain            = powershell.exe(5136) <- cmd.exe(1272) <- winrshost.exe(3648) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 008] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:28.671Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 4976)
+  User             = SOC002\Administrator   LogonId=0x636564
+  Chain            = powershell.exe(4976) <- cmd.exe(1356) <- winrshost.exe(2800) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 009] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:17.230Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 6052)
+  User             = SOC002\Administrator   LogonId=0x634708
+  Chain            = powershell.exe(6052) <- cmd.exe(3628) <- winrshost.exe(3244) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 010] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:15.498Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3948)
+  User             = SOC002\Administrator   LogonId=0x6329b7
+  Chain            = powershell.exe(3948) <- cmd.exe(5900) <- winrshost.exe(5540) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 011] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:14.822Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 4732)
+  User             = SOC002\Administrator   LogonId=0x631394
+  Chain            = powershell.exe(4732) <- cmd.exe(5052) <- winrshost.exe(2228) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 012] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:14.141Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3760)
+  User             = SOC002\Administrator   LogonId=0x62fdac
+  Chain            = powershell.exe(3760) <- cmd.exe(5996) <- winrshost.exe(2408) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 013] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:13.456Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1428)
+  User             = SOC002\Administrator   LogonId=0x62e79e
+  Chain            = powershell.exe(1428) <- cmd.exe(5784) <- winrshost.exe(2276) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 014] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:12.782Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5672)
+  User             = SOC002\Administrator   LogonId=0x62d199
+  Chain            = powershell.exe(5672) <- cmd.exe(2572) <- winrshost.exe(1808) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 015] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:12.069Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5984)
+  User             = SOC002\Administrator   LogonId=0x62bb0b
+  Chain            = powershell.exe(5984) <- cmd.exe(5760) <- winrshost.exe(6032) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 016] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:11.384Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5380)
+  User             = SOC002\Administrator   LogonId=0x62a4e4
+  Chain            = powershell.exe(5380) <- cmd.exe(1736) <- winrshost.exe(2784) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 017] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:10.655Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 2964)
+  User             = SOC002\Administrator   LogonId=0x628d3c
+  Chain            = powershell.exe(2964) <- cmd.exe(3068) <- winrshost.exe(876) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 018] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:09.953Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 4692)
+  User             = SOC002\Administrator   LogonId=0x627582
+  Chain            = powershell.exe(4692) <- cmd.exe(3556) <- winrshost.exe(5216) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 019] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:08.258Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5700)
+  User             = SOC002\Administrator   LogonId=0x6257e3
+  Chain            = powershell.exe(5700) <- cmd.exe(3988) <- winrshost.exe(4572) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 020] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:07.587Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1040)
+  User             = SOC002\Administrator   LogonId=0x624178
+  Chain            = powershell.exe(1040) <- cmd.exe(3468) <- winrshost.exe(2804) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 021] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:06.892Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 4364)
+  User             = SOC002\Administrator   LogonId=0x62281c
+  Chain            = powershell.exe(4364) <- cmd.exe(1272) <- winrshost.exe(4576) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 022] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:06.183Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3196)
+  User             = SOC002\Administrator   LogonId=0x620cc8
+  Chain            = powershell.exe(3196) <- cmd.exe(4160) <- winrshost.exe(1552) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 023] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:05.544Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5676)
+  User             = SOC002\Administrator   LogonId=0x61f6f4
+  Chain            = powershell.exe(5676) <- cmd.exe(5856) <- winrshost.exe(3328) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 024] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:04.867Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5720)
+  User             = SOC002\Administrator   LogonId=0x61dcc7
+  Chain            = powershell.exe(5720) <- cmd.exe(948) <- winrshost.exe(3592) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 025] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:04.164Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5568)
+  User             = SOC002\Administrator   LogonId=0x61c324
+  Chain            = powershell.exe(5568) <- cmd.exe(2468) <- winrshost.exe(5556) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+DET-002 lineage records = 25
+
+=== SOC002-CORR-001 :: DET-001 x DET-002 correlation ===
+Purpose: one encoded-PowerShell signal + process lineage context = better investigation context.
+Correlation is CONTEXT, not a compromise verdict.
+-------------------------------------------------------------------
+
+[CORRELATION 001] CORR-SOC002-WS001-2936-20261014T230641Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 2936  {edcef402-0b01-6ad0-b205-000000000700}
+  EventUtc         = 2026-10-14T23:06:41.712Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 002] CORR-SOC002-WS001-2952-20261014T230627Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 2952  {edcef402-0af3-6ad0-ae05-000000000700}
+  EventUtc         = 2026-10-14T23:06:27.822Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(2952) <- cmd.exe(5384) <- winrshost.exe(5616) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(2952) <- cmd.exe(5384) <- winrshost.exe(5616) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 003] CORR-SOC002-WS001-3308-20261014T230626Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 3308  {edcef402-0af2-6ad0-aa05-000000000700}
+  EventUtc         = 2026-10-14T23:06:26.077Z
+  User             = SOC002\Administrator
+  DET-001          = tier=INVESTIGATION severity=MEDIUM rule=BASE-01 overridden
+  DET-002          = lineage record present (lineage powershell.exe(3308) <- cmd.exe(1736) <- winrshost.exe(6140) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution NOT explained by the narrow baseline
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(3308) <- cmd.exe(1736) <- winrshost.exe(6140) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  Reading          = payload escalation: ESC-03 second decode layer / encoded blob handling
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 004] CORR-SOC002-WS001-3548-20261014T230625Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 3548  {edcef402-0af1-6ad0-a505-000000000700}
+  EventUtc         = 2026-10-14T23:06:25.405Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(3548) <- cmd.exe(2764) <- winrshost.exe(5216) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(3548) <- cmd.exe(2764) <- winrshost.exe(5216) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 005] CORR-SOC002-WS001-5400-20261014T230624Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5400  {edcef402-0af0-6ad0-a105-000000000700}
+  EventUtc         = 2026-10-14T23:06:24.716Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(5400) <- cmd.exe(1900) <- winrshost.exe(5140) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5400) <- cmd.exe(1900) <- winrshost.exe(5140) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 006] CORR-SOC002-WS001-5224-20261014T230624Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5224  {edcef402-0af0-6ad0-9d05-000000000700}
+  EventUtc         = 2026-10-14T23:06:24.039Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(5224) <- cmd.exe(1004) <- winrshost.exe(1620) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5224) <- cmd.exe(1004) <- winrshost.exe(1620) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 007] CORR-SOC002-WS001-5136-20261014T230521Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5136  {edcef402-0ab1-6ad0-9905-000000000700}
+  EventUtc         = 2026-10-14T23:05:21.535Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(5136) <- cmd.exe(1272) <- winrshost.exe(3648) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5136) <- cmd.exe(1272) <- winrshost.exe(3648) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 008] CORR-SOC002-WS001-4976-20261014T230428Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 4976  {edcef402-0a7c-6ad0-9405-000000000700}
+  EventUtc         = 2026-10-14T23:04:28.671Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(4976) <- cmd.exe(1356) <- winrshost.exe(2800) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(4976) <- cmd.exe(1356) <- winrshost.exe(2800) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 009] CORR-SOC002-WS001-6052-20261014T230417Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 6052  {edcef402-0a71-6ad0-9005-000000000700}
+  EventUtc         = 2026-10-14T23:04:17.230Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(6052) <- cmd.exe(3628) <- winrshost.exe(3244) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(6052) <- cmd.exe(3628) <- winrshost.exe(3244) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 010] CORR-SOC002-WS001-3948-20261014T230415Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 3948  {edcef402-0a6f-6ad0-8c05-000000000700}
+  EventUtc         = 2026-10-14T23:04:15.498Z
+  User             = SOC002\Administrator
+  DET-001          = tier=INVESTIGATION severity=MEDIUM rule=BASE-01 overridden
+  DET-002          = lineage record present (lineage powershell.exe(3948) <- cmd.exe(5900) <- winrshost.exe(5540) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution NOT explained by the narrow baseline
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(3948) <- cmd.exe(5900) <- winrshost.exe(5540) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  Reading          = payload escalation: ESC-03 second decode layer / encoded blob handling
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 011] CORR-SOC002-WS001-4732-20261014T230414Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 4732  {edcef402-0a6e-6ad0-8805-000000000700}
+  EventUtc         = 2026-10-14T23:04:14.822Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(4732) <- cmd.exe(5052) <- winrshost.exe(2228) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(4732) <- cmd.exe(5052) <- winrshost.exe(2228) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 012] CORR-SOC002-WS001-3760-20261014T230414Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 3760  {edcef402-0a6e-6ad0-8405-000000000700}
+  EventUtc         = 2026-10-14T23:04:14.141Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(3760) <- cmd.exe(5996) <- winrshost.exe(2408) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(3760) <- cmd.exe(5996) <- winrshost.exe(2408) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 013] CORR-SOC002-WS001-1428-20261014T230413Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 1428  {edcef402-0a6d-6ad0-8005-000000000700}
+  EventUtc         = 2026-10-14T23:04:13.456Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(1428) <- cmd.exe(5784) <- winrshost.exe(2276) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(1428) <- cmd.exe(5784) <- winrshost.exe(2276) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 014] CORR-SOC002-WS001-5672-20261014T230412Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5672  {edcef402-0a6c-6ad0-7c05-000000000700}
+  EventUtc         = 2026-10-14T23:04:12.782Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(5672) <- cmd.exe(2572) <- winrshost.exe(1808) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5672) <- cmd.exe(2572) <- winrshost.exe(1808) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 015] CORR-SOC002-WS001-5984-20261014T230412Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5984  {edcef402-0a6c-6ad0-7805-000000000700}
+  EventUtc         = 2026-10-14T23:04:12.069Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(5984) <- cmd.exe(5760) <- winrshost.exe(6032) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5984) <- cmd.exe(5760) <- winrshost.exe(6032) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 016] CORR-SOC002-WS001-5380-20261014T230411Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5380  {edcef402-0a6b-6ad0-7405-000000000700}
+  EventUtc         = 2026-10-14T23:04:11.384Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(5380) <- cmd.exe(1736) <- winrshost.exe(2784) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5380) <- cmd.exe(1736) <- winrshost.exe(2784) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 017] CORR-SOC002-WS001-2964-20261014T230410Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 2964  {edcef402-0a6a-6ad0-7005-000000000700}
+  EventUtc         = 2026-10-14T23:04:10.655Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(2964) <- cmd.exe(3068) <- winrshost.exe(876) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(2964) <- cmd.exe(3068) <- winrshost.exe(876) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 018] CORR-SOC002-WS001-4692-20261014T230409Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 4692  {edcef402-0a69-6ad0-6c05-000000000700}
+  EventUtc         = 2026-10-14T23:04:09.953Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(4692) <- cmd.exe(3556) <- winrshost.exe(5216) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(4692) <- cmd.exe(3556) <- winrshost.exe(5216) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 019] CORR-SOC002-WS001-5700-20261014T230408Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5700  {edcef402-0a68-6ad0-6805-000000000700}
+  EventUtc         = 2026-10-14T23:04:08.258Z
+  User             = SOC002\Administrator
+  DET-001          = tier=INVESTIGATION severity=MEDIUM rule=BASE-01 overridden
+  DET-002          = lineage record present (lineage powershell.exe(5700) <- cmd.exe(3988) <- winrshost.exe(4572) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution NOT explained by the narrow baseline
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5700) <- cmd.exe(3988) <- winrshost.exe(4572) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  Reading          = payload escalation: ESC-03 second decode layer / encoded blob handling
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 020] CORR-SOC002-WS001-1040-20261014T230407Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 1040  {edcef402-0a67-6ad0-6405-000000000700}
+  EventUtc         = 2026-10-14T23:04:07.587Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(1040) <- cmd.exe(3468) <- winrshost.exe(2804) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(1040) <- cmd.exe(3468) <- winrshost.exe(2804) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 021] CORR-SOC002-WS001-4364-20261014T230406Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 4364  {edcef402-0a66-6ad0-6005-000000000700}
+  EventUtc         = 2026-10-14T23:04:06.892Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(4364) <- cmd.exe(1272) <- winrshost.exe(4576) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(4364) <- cmd.exe(1272) <- winrshost.exe(4576) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 022] CORR-SOC002-WS001-3196-20261014T230406Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 3196  {edcef402-0a66-6ad0-5b05-000000000700}
+  EventUtc         = 2026-10-14T23:04:06.183Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(3196) <- cmd.exe(4160) <- winrshost.exe(1552) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(3196) <- cmd.exe(4160) <- winrshost.exe(1552) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 023] CORR-SOC002-WS001-5676-20261014T230405Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5676  {edcef402-0a65-6ad0-5705-000000000700}
+  EventUtc         = 2026-10-14T23:04:05.544Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(5676) <- cmd.exe(5856) <- winrshost.exe(3328) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5676) <- cmd.exe(5856) <- winrshost.exe(3328) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 024] CORR-SOC002-WS001-5720-20261014T230404Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5720  {edcef402-0a64-6ad0-5205-000000000700}
+  EventUtc         = 2026-10-14T23:04:04.867Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(5720) <- cmd.exe(948) <- winrshost.exe(3592) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5720) <- cmd.exe(948) <- winrshost.exe(3592) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 025] CORR-SOC002-WS001-5568-20261014T230404Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5568  {edcef402-0a64-6ad0-4e05-000000000700}
+  EventUtc         = 2026-10-14T23:04:04.164Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(5568) <- cmd.exe(2468) <- winrshost.exe(5556) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5568) <- cmd.exe(2468) <- winrshost.exe(5556) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+Correlation records = 25
+
+
+##################### SOC002-DET-002 #####################
+=== SOC002-DET-002 :: PowerShell lineage - delivery through a WinRM host process ===
+Library=phase6-v2.0 sha256=3C332445BFB69045E2AD3B135C8184086D91979D8FC03C1BBEAD79D17B69D09F
+Log=ForwardedEvents  Window=2026-10-15 02:03:00 .. 2026-10-15 02:09:30 (collector local)
+IndexFrom=2026-10-15 00:03:00  index records=357  powershell/pwsh create records in window=26
+Pattern LIN-01 = winrshost.exe -> cmd.exe -> powershell.exe (OBSERVED in Phase 5, authorised management channel)
+CONTEXT ONLY - this detection never asserts maliciousness.
+-------------------------------------------------------------------
+
+[LINEAGE 001] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:06:42.046Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1428)
+  User             = SOC002\Administrator   LogonId=0x644e0e
+  Chain            = powershell.exe(1428) <- powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:powershell.exe[OBSERVED-PARENT-EVENT] d2:cmd.exe[OBSERVED-PARENT-EVENT] d3:winrshost.exe[OBSERVED-PARENT-EVENT] d4:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = not matched   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = absent
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 002] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:06:41.712Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 2936)
+  User             = SOC002\Administrator   LogonId=0x644e0e
+  Chain            = powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 003] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:06:27.822Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 2952)
+  User             = SOC002\Administrator   LogonId=0x642f6a
+  Chain            = powershell.exe(2952) <- cmd.exe(5384) <- winrshost.exe(5616) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 004] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:06:26.077Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3308)
+  User             = SOC002\Administrator   LogonId=0x640f0e
+  Chain            = powershell.exe(3308) <- cmd.exe(1736) <- winrshost.exe(6140) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 005] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:06:25.405Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3548)
+  User             = SOC002\Administrator   LogonId=0x63f765
+  Chain            = powershell.exe(3548) <- cmd.exe(2764) <- winrshost.exe(5216) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 006] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:06:24.716Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5400)
+  User             = SOC002\Administrator   LogonId=0x63ddad
+  Chain            = powershell.exe(5400) <- cmd.exe(1900) <- winrshost.exe(5140) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 007] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:06:24.039Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5224)
+  User             = SOC002\Administrator   LogonId=0x63c524
+  Chain            = powershell.exe(5224) <- cmd.exe(1004) <- winrshost.exe(1620) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 008] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:05:21.535Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5136)
+  User             = SOC002\Administrator   LogonId=0x639b15
+  Chain            = powershell.exe(5136) <- cmd.exe(1272) <- winrshost.exe(3648) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 009] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:28.671Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 4976)
+  User             = SOC002\Administrator   LogonId=0x636564
+  Chain            = powershell.exe(4976) <- cmd.exe(1356) <- winrshost.exe(2800) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 010] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:17.230Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 6052)
+  User             = SOC002\Administrator   LogonId=0x634708
+  Chain            = powershell.exe(6052) <- cmd.exe(3628) <- winrshost.exe(3244) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 011] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:15.498Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3948)
+  User             = SOC002\Administrator   LogonId=0x6329b7
+  Chain            = powershell.exe(3948) <- cmd.exe(5900) <- winrshost.exe(5540) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 012] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:14.822Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 4732)
+  User             = SOC002\Administrator   LogonId=0x631394
+  Chain            = powershell.exe(4732) <- cmd.exe(5052) <- winrshost.exe(2228) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 013] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:14.141Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3760)
+  User             = SOC002\Administrator   LogonId=0x62fdac
+  Chain            = powershell.exe(3760) <- cmd.exe(5996) <- winrshost.exe(2408) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 014] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:13.456Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1428)
+  User             = SOC002\Administrator   LogonId=0x62e79e
+  Chain            = powershell.exe(1428) <- cmd.exe(5784) <- winrshost.exe(2276) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 015] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:12.782Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5672)
+  User             = SOC002\Administrator   LogonId=0x62d199
+  Chain            = powershell.exe(5672) <- cmd.exe(2572) <- winrshost.exe(1808) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 016] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:12.069Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5984)
+  User             = SOC002\Administrator   LogonId=0x62bb0b
+  Chain            = powershell.exe(5984) <- cmd.exe(5760) <- winrshost.exe(6032) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 017] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:11.384Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5380)
+  User             = SOC002\Administrator   LogonId=0x62a4e4
+  Chain            = powershell.exe(5380) <- cmd.exe(1736) <- winrshost.exe(2784) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 018] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:10.655Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 2964)
+  User             = SOC002\Administrator   LogonId=0x628d3c
+  Chain            = powershell.exe(2964) <- cmd.exe(3068) <- winrshost.exe(876) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 019] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:09.953Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 4692)
+  User             = SOC002\Administrator   LogonId=0x627582
+  Chain            = powershell.exe(4692) <- cmd.exe(3556) <- winrshost.exe(5216) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 020] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:08.258Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5700)
+  User             = SOC002\Administrator   LogonId=0x6257e3
+  Chain            = powershell.exe(5700) <- cmd.exe(3988) <- winrshost.exe(4572) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 021] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:07.587Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1040)
+  User             = SOC002\Administrator   LogonId=0x624178
+  Chain            = powershell.exe(1040) <- cmd.exe(3468) <- winrshost.exe(2804) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 022] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:06.892Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 4364)
+  User             = SOC002\Administrator   LogonId=0x62281c
+  Chain            = powershell.exe(4364) <- cmd.exe(1272) <- winrshost.exe(4576) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 023] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:06.183Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3196)
+  User             = SOC002\Administrator   LogonId=0x620cc8
+  Chain            = powershell.exe(3196) <- cmd.exe(4160) <- winrshost.exe(1552) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 024] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:05.544Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5676)
+  User             = SOC002\Administrator   LogonId=0x61f6f4
+  Chain            = powershell.exe(5676) <- cmd.exe(5856) <- winrshost.exe(3328) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 025] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:04.867Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5720)
+  User             = SOC002\Administrator   LogonId=0x61dcc7
+  Chain            = powershell.exe(5720) <- cmd.exe(948) <- winrshost.exe(3592) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 026] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T23:04:04.164Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5568)
+  User             = SOC002\Administrator   LogonId=0x61c324
+  Chain            = powershell.exe(5568) <- cmd.exe(2468) <- winrshost.exe(5556) <- svchost.exe(716)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-CHILD-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+--- SOC002-DET-002 summary ------------------------------------------
+PowerShell process-create records examined    = 26
+Lineages with a WinRM host in the ancestry    = 26
+   of which LIN-01 exact shape (winrshost->cmd->powershell) = 25
+PowerShell creates whose ancestry did NOT resolve = 0  (context gap, reported not hidden)
+CONTEXT, NOT ACCUSATION: a winrshost.exe-rooted lineage is expected for every remote administration call in this lab, including the SOC team's own collection runs.
+
+
+##################### SOC002-CORR-001 #####################
+=== SOC002-CORR-001 :: DET-001 x DET-002 correlation ===
+Library=phase6-v2.0 sha256=3C332445BFB69045E2AD3B135C8184086D91979D8FC03C1BBEAD79D17B69D09F
+Log=ForwardedEvents  Window=2026-10-15 02:03:00 .. 2026-10-15 02:09:30 (collector local)
+Purpose: one encoded-PowerShell signal + process lineage context = better investigation context.
+Correlation is CONTEXT, not a compromise verdict.
+-------------------------------------------------------------------
+
+[CORRELATION 001] CORR-SOC002-WS001-2936-20261014T230641Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 2936  {edcef402-0b01-6ad0-b205-000000000700}
+  EventUtc         = 2026-10-14T23:06:41.712Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 002] CORR-SOC002-WS001-2952-20261014T230627Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 2952  {edcef402-0af3-6ad0-ae05-000000000700}
+  EventUtc         = 2026-10-14T23:06:27.822Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(2952) <- cmd.exe(5384) <- winrshost.exe(5616) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(2952) <- cmd.exe(5384) <- winrshost.exe(5616) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 003] CORR-SOC002-WS001-3308-20261014T230626Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 3308  {edcef402-0af2-6ad0-aa05-000000000700}
+  EventUtc         = 2026-10-14T23:06:26.077Z
+  User             = SOC002\Administrator
+  DET-001          = tier=INVESTIGATION severity=MEDIUM rule=BASE-01 overridden
+  DET-002          = lineage record present (lineage powershell.exe(3308) <- cmd.exe(1736) <- winrshost.exe(6140) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution NOT explained by the narrow baseline
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(3308) <- cmd.exe(1736) <- winrshost.exe(6140) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  Reading          = payload escalation: ESC-03 second decode layer / encoded blob handling
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 004] CORR-SOC002-WS001-3548-20261014T230625Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 3548  {edcef402-0af1-6ad0-a505-000000000700}
+  EventUtc         = 2026-10-14T23:06:25.405Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(3548) <- cmd.exe(2764) <- winrshost.exe(5216) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(3548) <- cmd.exe(2764) <- winrshost.exe(5216) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 005] CORR-SOC002-WS001-5400-20261014T230624Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5400  {edcef402-0af0-6ad0-a105-000000000700}
+  EventUtc         = 2026-10-14T23:06:24.716Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(5400) <- cmd.exe(1900) <- winrshost.exe(5140) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5400) <- cmd.exe(1900) <- winrshost.exe(5140) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 006] CORR-SOC002-WS001-5224-20261014T230624Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5224  {edcef402-0af0-6ad0-9d05-000000000700}
+  EventUtc         = 2026-10-14T23:06:24.039Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(5224) <- cmd.exe(1004) <- winrshost.exe(1620) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5224) <- cmd.exe(1004) <- winrshost.exe(1620) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 007] CORR-SOC002-WS001-5136-20261014T230521Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5136  {edcef402-0ab1-6ad0-9905-000000000700}
+  EventUtc         = 2026-10-14T23:05:21.535Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(5136) <- cmd.exe(1272) <- winrshost.exe(3648) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5136) <- cmd.exe(1272) <- winrshost.exe(3648) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 008] CORR-SOC002-WS001-4976-20261014T230428Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 4976  {edcef402-0a7c-6ad0-9405-000000000700}
+  EventUtc         = 2026-10-14T23:04:28.671Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(4976) <- cmd.exe(1356) <- winrshost.exe(2800) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(4976) <- cmd.exe(1356) <- winrshost.exe(2800) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 009] CORR-SOC002-WS001-6052-20261014T230417Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 6052  {edcef402-0a71-6ad0-9005-000000000700}
+  EventUtc         = 2026-10-14T23:04:17.230Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(6052) <- cmd.exe(3628) <- winrshost.exe(3244) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(6052) <- cmd.exe(3628) <- winrshost.exe(3244) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 010] CORR-SOC002-WS001-3948-20261014T230415Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 3948  {edcef402-0a6f-6ad0-8c05-000000000700}
+  EventUtc         = 2026-10-14T23:04:15.498Z
+  User             = SOC002\Administrator
+  DET-001          = tier=INVESTIGATION severity=MEDIUM rule=BASE-01 overridden
+  DET-002          = lineage record present (lineage powershell.exe(3948) <- cmd.exe(5900) <- winrshost.exe(5540) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution NOT explained by the narrow baseline
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(3948) <- cmd.exe(5900) <- winrshost.exe(5540) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  Reading          = payload escalation: ESC-03 second decode layer / encoded blob handling
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 011] CORR-SOC002-WS001-4732-20261014T230414Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 4732  {edcef402-0a6e-6ad0-8805-000000000700}
+  EventUtc         = 2026-10-14T23:04:14.822Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(4732) <- cmd.exe(5052) <- winrshost.exe(2228) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(4732) <- cmd.exe(5052) <- winrshost.exe(2228) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 012] CORR-SOC002-WS001-3760-20261014T230414Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 3760  {edcef402-0a6e-6ad0-8405-000000000700}
+  EventUtc         = 2026-10-14T23:04:14.141Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(3760) <- cmd.exe(5996) <- winrshost.exe(2408) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(3760) <- cmd.exe(5996) <- winrshost.exe(2408) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 013] CORR-SOC002-WS001-1428-20261014T230413Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 1428  {edcef402-0a6d-6ad0-8005-000000000700}
+  EventUtc         = 2026-10-14T23:04:13.456Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(1428) <- cmd.exe(5784) <- winrshost.exe(2276) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(1428) <- cmd.exe(5784) <- winrshost.exe(2276) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 014] CORR-SOC002-WS001-5672-20261014T230412Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5672  {edcef402-0a6c-6ad0-7c05-000000000700}
+  EventUtc         = 2026-10-14T23:04:12.782Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(5672) <- cmd.exe(2572) <- winrshost.exe(1808) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5672) <- cmd.exe(2572) <- winrshost.exe(1808) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 015] CORR-SOC002-WS001-5984-20261014T230412Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5984  {edcef402-0a6c-6ad0-7805-000000000700}
+  EventUtc         = 2026-10-14T23:04:12.069Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(5984) <- cmd.exe(5760) <- winrshost.exe(6032) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5984) <- cmd.exe(5760) <- winrshost.exe(6032) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 016] CORR-SOC002-WS001-5380-20261014T230411Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5380  {edcef402-0a6b-6ad0-7405-000000000700}
+  EventUtc         = 2026-10-14T23:04:11.384Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(5380) <- cmd.exe(1736) <- winrshost.exe(2784) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5380) <- cmd.exe(1736) <- winrshost.exe(2784) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 017] CORR-SOC002-WS001-2964-20261014T230410Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 2964  {edcef402-0a6a-6ad0-7005-000000000700}
+  EventUtc         = 2026-10-14T23:04:10.655Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(2964) <- cmd.exe(3068) <- winrshost.exe(876) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(2964) <- cmd.exe(3068) <- winrshost.exe(876) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 018] CORR-SOC002-WS001-4692-20261014T230409Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 4692  {edcef402-0a69-6ad0-6c05-000000000700}
+  EventUtc         = 2026-10-14T23:04:09.953Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(4692) <- cmd.exe(3556) <- winrshost.exe(5216) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(4692) <- cmd.exe(3556) <- winrshost.exe(5216) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 019] CORR-SOC002-WS001-5700-20261014T230408Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5700  {edcef402-0a68-6ad0-6805-000000000700}
+  EventUtc         = 2026-10-14T23:04:08.258Z
+  User             = SOC002\Administrator
+  DET-001          = tier=INVESTIGATION severity=MEDIUM rule=BASE-01 overridden
+  DET-002          = lineage record present (lineage powershell.exe(5700) <- cmd.exe(3988) <- winrshost.exe(4572) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution NOT explained by the narrow baseline
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5700) <- cmd.exe(3988) <- winrshost.exe(4572) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  Reading          = payload escalation: ESC-03 second decode layer / encoded blob handling
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 020] CORR-SOC002-WS001-1040-20261014T230407Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 1040  {edcef402-0a67-6ad0-6405-000000000700}
+  EventUtc         = 2026-10-14T23:04:07.587Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(1040) <- cmd.exe(3468) <- winrshost.exe(2804) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(1040) <- cmd.exe(3468) <- winrshost.exe(2804) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 021] CORR-SOC002-WS001-4364-20261014T230406Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 4364  {edcef402-0a66-6ad0-6005-000000000700}
+  EventUtc         = 2026-10-14T23:04:06.892Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(4364) <- cmd.exe(1272) <- winrshost.exe(4576) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(4364) <- cmd.exe(1272) <- winrshost.exe(4576) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 022] CORR-SOC002-WS001-3196-20261014T230406Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 3196  {edcef402-0a66-6ad0-5b05-000000000700}
+  EventUtc         = 2026-10-14T23:04:06.183Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(3196) <- cmd.exe(4160) <- winrshost.exe(1552) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(3196) <- cmd.exe(4160) <- winrshost.exe(1552) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 023] CORR-SOC002-WS001-5676-20261014T230405Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5676  {edcef402-0a65-6ad0-5705-000000000700}
+  EventUtc         = 2026-10-14T23:04:05.544Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(5676) <- cmd.exe(5856) <- winrshost.exe(3328) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5676) <- cmd.exe(5856) <- winrshost.exe(3328) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 024] CORR-SOC002-WS001-5720-20261014T230404Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5720  {edcef402-0a64-6ad0-5205-000000000700}
+  EventUtc         = 2026-10-14T23:04:04.867Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(5720) <- cmd.exe(948) <- winrshost.exe(3592) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5720) <- cmd.exe(948) <- winrshost.exe(3592) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 025] CORR-SOC002-WS001-5568-20261014T230404Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5568  {edcef402-0a64-6ad0-4e05-000000000700}
+  EventUtc         = 2026-10-14T23:04:04.164Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(5568) <- cmd.exe(2468) <- winrshost.exe(5556) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5568) <- cmd.exe(2468) <- winrshost.exe(5556) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+--- SOC002-CORR-001 summary -----------------------------------------
+DET-001 signals in window                     = 25
+DET-001 signals with a DET-002 lineage record = 25
+DET-001 signals with NO lineage (explanation gap) = 0
+DET-001 signals escalated by the payload screen   = 3
+Correlation records produced                  = 25
+No correlation record here is a verdict: the analyst still has to check authorisation and payload intent.
+
+
+### END PHASE7 DETECTION STACK RUN ###
+
+[RC]=0

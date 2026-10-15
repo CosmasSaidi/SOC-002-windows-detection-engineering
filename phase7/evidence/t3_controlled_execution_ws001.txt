@@ -1,0 +1,24 @@
+### PHASE 7 :: SINGLE CONTROLLED EXECUTION ###
+Target          = 192.168.56.102 (SOC002-WS001)
+Account         = SOC002\Administrator
+Staged body     = C:\Windows\Temp\soc002-phase7\phase7_child_command.txt
+TRANSPORT LINE  = $c=[IO.File]::ReadAllText('C:\Windows\Temp\soc002-phase7\phase7_child_command.txt'); powershell.exe -NoProfile -NonInteractive -Command $c
+CHILD STARTS    = powershell.exe -NoProfile -NonInteractive -Command <staged body>
+Encoded switch? = NO
+OperatorUtcBefore = 2026-10-14T23:06:41.652Z
+-------------------------------------------------------------------
+--- child/transport stdout ---
+SOC002-PHASE7-BLINDSPOT-TEST
+SOC002 PHASE 7 CONTROLLED BLIND-SPOT VALIDATION
+Marker: SOC002-PHASE7-BLINDSPOT-TEST
+Purpose: harmless marker reconstruction only. No persistence, no network,
+no configuration change, no arbitrary code execution.
+
+HOST=SOC002-WS001
+USER=SOC002\Administrator
+CHILD_PID=1428
+START_UTC=2026-10-14T23:06:42.488Z
+-------------------------------------------------------------------
+RC                = 0
+OperatorUtcAfter  = 2026-10-14T23:06:42.951Z
+### END SINGLE CONTROLLED EXECUTION ###

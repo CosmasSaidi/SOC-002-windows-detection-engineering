@@ -1,0 +1,170 @@
+SOC-002 PHASE 6 - TUNING RATIONALE FOR SOC002-DET-001 v2
+=========================================================
+Scope      : why the Phase 5 detection was noisy, exactly what Phase 6 changed,
+             exactly what Phase 6 refused to suppress, and the residual risk.
+Evidence   : phase5/evidence/* (read-only) + the Phase 6 replay/live outputs.
+Labels     : OBSERVED = in the telemetry.  INFERRED = drawn from observations.
+             NOT VERIFIED = not testable in this lab.
+
+---------------------------------------------------------------
+1. WHY THE ORIGINAL DETECTION WAS NOISY  (measured, not asserted)
+---------------------------------------------------------------
+The trigger is unchanged from Phase 5 and is deliberately coarse:
+
+    Sysmon Event 1  AND  Image ~ powershell.exe|pwsh.exe
+                    AND  CommandLine matches (?i)\s-(e|en|enc|encodedcommand)(\s|$)
+
+OBSERVED in the Phase 5 broad run (phase5/evidence/t6_detection_broad60_dc1.txt):
+    39 candidates in 60 minutes on ONE workstation.
+    Immediate parent of 38 of 39 = cmd.exe running the WinRS wrapper
+        'cmd.exe /C powershell -encodedcommand <base64>'
+    Immediate parent of  1 of 39 = powershell.exe (the nested operator runner).
+
+INFERRED: the noise is STRUCTURAL, not random. The lab is operated over WinRM;
+pywinrm/WinRS delivers every remote command as
+'cmd.exe /C powershell -encodedcommand <b64>'. So each administrative call
+satisfies the indicator by construction. A single administrator therefore
+produces alert-per-command volume.
+
+OBSERVED counter-example that matters: the controlled test's parent is
+powershell.exe, NOT the cmd.exe wrapper. The benign-looking shape is therefore
+not universal, and the one real investigation candidate in the window does not
+match it. Any tuning that ignored this would have hidden the only interesting
+event in the set.
+
+---------------------------------------------------------------
+2. WHAT WAS CHANGED
+---------------------------------------------------------------
+The trigger is NOT changed (coverage must not silently shrink between phases).
+What is added is CLASSIFICATION and CONTEXT, in three parts.
+
+  2.1  BASE-01 - the narrow baseline (the only suppression in DET-001)
+       Matched when BOTH of these hold:
+         (a) the parent process IMAGE LEAF is exactly 'cmd.exe', and
+         (b) that parent's COMMAND LINE matches the WinRS wrapper
+             ^\s*"?[^"]*cmd\.exe"?\s+/c\s+("?[^\s"]*powershell(?:\.exe)?"?\s+)?-(e|en|enc|encodedcommand)(\s|$)
+       Not 'a cmd.exe parent'. Not 'any parent that mentions powershell'.
+       The wrapper itself must be present. 'cmd.exe /C <anything else>' is
+       explicitly NOT baselined.
+
+       Evidence basis (OBSERVED): 38/38 benign alerts carry this exact wrapper;
+       the 1 non-benign alert does not. The condition is as narrow as that
+       observation allows and no narrower.
+
+  2.2  ESC-01..08 - the fail-safe payload screen
+       The decoded payload of every baseline-matched event is scanned for
+       high-risk constructs: reflection/AMSI, download/execute stagers, a second
+       decode layer, execution-policy or AV tampering / hidden window,
+       persistence primitives, credential-access tooling, directory/account
+       modification, and nested encoded commands.
+       ANY hit OVERRIDES the baseline and clears the event back to
+       INVESTIGATION. The baseline is therefore never a blind spot for a payload
+       it cannot see the meaning of.
+
+       Measured effect: live, ESC-03 (a second decode layer) re-opened 2 of the
+       38 baselined events (Sysmon RecId 2975 and 3045). Those are the Sysmon
+       configuration work that legitimately uses [Convert]::FromBase64String.
+       Phase 6 deliberately does NOT suppress them: base64-in-base64 is exactly
+       the shape an analyst should see.
+
+  2.3  Lineage gating of the baseline's STRENGTH
+       The baseline is only promoted to BASELINE-TRANSPORT-CONFIRMED (INFO) when
+       the ancestry is actually resolved up to a WinRM host
+       (winrshost.exe / wsmprovhost.exe) from surviving process-create events.
+       If the lineage cannot be resolved, the event falls to
+       BASELINE-TRANSPORT-PATTERN (LOW) and the gap is printed in the alert.
+       It is never silently dropped and never silently treated as benign.
+
+---------------------------------------------------------------
+3. WHAT WAS INTENTIONALLY *NOT* SUPPRESSED
+---------------------------------------------------------------
+  3.1  No general 'powershell.exe' rule exists.        (measured: 0 suppressed)
+  3.2  No general '-EncodedCommand' rule exists.       (measured: 0 suppressed)
+       Both are printed as zero in every DET-001 v2 summary so the absence of
+       such a rule is auditable, not just claimed.
+
+  3.3  The controlled event (Sysmon RecId 3535) is retained as INVESTIGATION in
+       the replay AND in the live run - it is outside the baseline shape because
+       its parent is powershell.exe. This is the regression fixture for the phase.
+  3.4  The 2 ESC-03 events (RecId 2975, 3045) are retained as INVESTIGATION.
+  3.5  The 36 remaining baseline events are still emitted as one-line baseline
+       records with the reason attached; they are hidden only if the operator
+       asks for it with -HideBaseline, and they are still fed to correlation.
+  3.6  Nothing is suppressed on the basis of host, user, account, hash,
+       integrity level, or time of day (see section 4).
+
+---------------------------------------------------------------
+4. TUNING CONDITIONS THAT WERE CONSIDERED AND REFUSED
+   (the evidence did not support them, or they suppressed the wrong thing)
+---------------------------------------------------------------
+  REFUSED  allow-list by User (SOC002\Administrator)
+           All 39 alerts share this user, including the controlled event and the
+           ESC-03 events. Tuning on it would suppress exactly what must be seen,
+           and it is the attacker's most likely account in a real intrusion.
+  REFUSED  allow-list by LogonId
+           38 distinct LogonIds in 39 alerts - it changes per remote session. It
+           is useful for GROUPING one session's calls, useless as an allow-list.
+  REFUSED  allow-list by Computer / source host
+           39 of 39 came from one host. Scoping by host is an estate-wide blind
+           spot and is not justified by a single-host lab.
+  REFUSED  allow-list on 'parent image = cmd.exe' alone
+           38 of 39 parents are cmd.exe, but so is a great deal of malicious
+           PowerShell delivery. The wrapper command line is the discriminating
+           fact; the image name alone is not.
+  REFUSED  allow-list on 'parent image = powershell.exe'
+           That is the shape of the controlled event - it would suppress the only
+           real investigation candidate in the window.
+  REFUSED  allow-list by binary hash (SHA256 B4E7BC24...4785C4)
+           Identical on all 39 events. powershell.exe is the attacker's binary
+           too; the hash separates nothing.
+  REFUSED  allow-list by IntegrityLevel / elevation
+           High integrity and a full token on all 39. Refusing to alert on
+           elevated PowerShell would remove most detections.
+  REFUSED  time-of-day or volume-based suppression ('the operator is active now')
+           OBSERVED: the Sysmon Event 1 stream at the collector has a 2012 s hole
+           (00:07:38..00:41:10) during which NOTHING was recorded, while Security
+           4688 kept recording. Any tuning that keys on 'expected activity
+           windows' would have treated that hole as quiet and this phase's own
+           measurement as the anomaly. Time is not a reliable signal here.
+  REFUSED  suppressing events whose lineage could not be resolved
+           The 33 pattern-tier events in the replay are an evidence-preservation
+           artefact, not evidence of benignity. Suppressing 'unexplainable'
+           events is how a detection goes quiet without anyone noticing.
+
+  BOTTOM LINE: the ONLY narrow condition the evidence supports is BASE-01 -
+  parent cmd.exe AND that parent's WinRS wrapper command line AND no ESC-* hit in
+  the decoded payload. No wider tuning was forced.
+
+---------------------------------------------------------------
+5. RESIDUAL RISK OF THE BASELINE (accepted, documented)
+---------------------------------------------------------------
+  5.1  EVASION BY MIMICRY (NOT VERIFIED): an adversary who can already execute
+       commands remotely could deliver a payload as
+       'cmd.exe /C powershell -encodedcommand <b64>' and meet BASE-01.
+       The ESC-01..08 screen is the compensating control, but it is a keyword
+       screen, not a proof: an obfuscated payload need not contain any ESC
+       keyword. This is stated in the detection output, not hidden. The correct
+       compensating control in a real estate is not a wider allow-list but
+       corroboration (authentication source, change ticket, BASELINE DRIFT),
+       which this lab does not have.
+  5.2  PID-REUSE: when lineage is resolved from Security 4688 (no
+       ParentProcessGuid exists there), a PID join can mis-attribute a parent.
+       Phase 6 guards this by refusing a PID candidate whose image name does not
+       match the image the child recorded for its parent - a guard shown to be
+       necessary because Phase 5 evidence contains a PID that is winrshost.exe
+       early in the window and cmd.exe later.
+  5.3  BASELINE VALIDITY IS SINGLE-OPERATOR: the 'expected' shape was learned
+       from ONE operator on ONE host over ONE hour. It is evidence-based for this
+       lab and must not be presented as a production baseline.
+
+---------------------------------------------------------------
+6. WHAT PHASE 6 DOES NOT CLAIM
+---------------------------------------------------------------
+  - Not a false-positive reduction in general. The 38 benign events were ALREADY
+    known benign from Phase 5; Phase 6 automates the split the analyst made by
+    hand and records the reason per event. The detection's hit count is
+    unchanged at 39. Treat this as a TRIAGE-EFFICIENCY change.
+  - Not production telemetry and not production SOC experience. This is a
+    single-host lab with an authored test event.
+  - Not a compromise verdict. DET-001 and DET-002 say 'look' and 'how',
+    never 'malicious'.

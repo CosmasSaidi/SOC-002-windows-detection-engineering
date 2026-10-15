@@ -1,0 +1,47 @@
+=== SOC-002 PHASE 8 :: LIMITATIONS ===
+Detection SOC002-DET-003 · Phase 8 · SOC-002 operations-centre lab
+
+OBSERVED / INFERRED / NOT VERIFIED labels apply. This is a controlled lab.
+
+ 1. TEXT-ONLY TRIGGER. DET-003 matches text in CommandLine/ScriptBlockText. A
+    reconstruction assembled from fragments, performed by a custom decoder, by
+    certutil -decode, by a compiled binary, or by a non-PowerShell host, is NOT
+    covered. NOT VERIFIED as detectable.
+
+ 2. DECODE-AND-EXECUTE IS NOT OBSERVED. DET-003 raises severity when an
+    execution primitive CO-OCCURS in text (CTX-EXEC-ADJACENT), but it does not
+    observe that the decoded content was executed. That is INFERRED from text
+    proximity, not OBSERVED behaviour.
+
+ 3. COMMENT HANDLING IS APPROXIMATE. Line comments, block comments and
+    single/double-quoted strings are handled. HERE-STRINGS (@' ... '@, @" ... "@)
+    are not specially handled; a decode call inside a here-string could be
+    mis-classified either way.
+
+ 4. PID REUSE. Correlation joins by PID with a +/-120 s tolerance and prefers
+    ProcessGuid agreement when both sides carry it. A process created outside the
+    retained window, or a broader PID collision, can still yield a correlation
+    gap; gaps are printed, never hidden.
+
+ 5. WINDOW DEPENDENCE. The live run used a 60-minute window. Coverage depends on
+    events surviving in ForwardedEvents/retention; a payload whose 4688 and
+    Sysmon records both aged out, leaving only 4104 (or nothing), is weaker.
+
+ 6. ONE HOST, ONE REPRESENTATION, ONE RUN. The live validation is a single
+    benign execution using one reconstruction style on one host. No rate is
+    measured and no generalisation is claimed.
+
+ 7. OPERATOR PLUMBING INFLATES VOLUME. See t12: the SOC's own file transfer uses
+    FromBase64String and appears as a DET-003 candidate. This is a real, measured
+    precision cost in any operator session.
+
+ 8. NO ADVERSARY, NOT PRODUCTION. No adversary is present and this is not
+    production. The absence of other activity is NOT OBSERVED, not DISPROVED.
+
+ 9. DET-002 IS HIGH-VOLUME CONTEXT. It flags any WinRM-rooted PowerShell lineage,
+    which in this lab is every remote administration call. It is context, not a
+    verdict, and DET-003 must not be read as more than that when DET-002 links.
+
+10. RELIANCE ON PHASE 4 ENABLERS. The chain depends on 4688 CommandLine auditing,
+    ScriptBlockLogging and Sysmon/4104 operational logs being enabled. If an
+    enabler is turned off, DET-003 silently loses inputs.

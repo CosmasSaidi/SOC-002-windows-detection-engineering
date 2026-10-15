@@ -1,0 +1,57 @@
+SOC-002 PHASE 7 - EXCLUSIVITY AND CONTAINMENT CHECKS
+====================================================
+Derived offline from the captured raw XML (evidence/raw/) for WS001.
+
+1) EXACTLY ONE CONTROLLED EXECUTION
+   Count of Sysmon Event 1 records in the session + controlled extracts where the
+   image is powershell.exe AND the command line contains -Command AND
+   [Convert]::FromBase64String:
+
+     RecId=4142  2026-10-14T23:06:42.046Z  PID=1428  parent=powershell.exe (PID 2936)
+
+   The two raw files overlap by design (the controlled window is a subset of the
+   session window), so RecId 4142 is the SAME event counted in both extracts.
+   Distinct payload-shaped process creations = 1.
+   => exactly one controlled execution occurred.
+
+   Corroborated by the run output itself: exactly one marker block, one
+   CHILD_PID (1428), one exit code (0).
+
+2) NO PERSISTENCE-SHAPED ACTIVITY IN THE SESSION
+   Search of every Sysmon Event 1 record in the session window for
+   schtasks / Register-ScheduledTask / New-Service / "sc.exe create" / "reg add" /
+   Run-key paths / wmic / bcdedit / netsh:
+
+     persistence-shaped hits = 0
+
+   Consistent with the payload, which only builds a string, writes it to stdout
+   and reads the clock.
+
+   NOTE: this disproves persistence-shaped PROCESS CREATION in the captured
+   window. It is not an exhaustive persistence audit of the host (file-system,
+   WMI subscription and service-configuration residue were not enumerated) -
+   that would require host-side inspection beyond Phase 7's scope.
+
+3) THE PLAIN TEXT MARKER NEVER APPEARS IN RAW TELEMETRY
+   Records in the raw captures whose serialised text contains
+   "SOC002-PHASE7-BLINDSPOT-TEST" verbatim:
+
+     records = 0
+
+   The marker exists on the wire only inside the base64 blob, and in the payload
+   process's stdout. Consequence: no DET-001 v2 alert in Phase 7 can reference the
+   marker, so no alert in this phase can be mistaken for a detection of the
+   controlled activity.
+
+4) CONTAINMENT
+   * Network initiated by the payload or its transport parent: none
+     (Sysmon Event 3 in the controlled window shows only the operator's inbound
+     WinRM connections to WS001:5985 and one lsass.exe domain-auth connection
+     to DC1).
+   * Files written on WS001 by the controlled execution: none. The only files
+     Phase 7 placed on the hosts were the staged working files under
+     C:\Windows\Temp\soc002-phase7, which were removed afterwards
+     (evidence/t9_integrity_and_cleanup.txt).
+   * Configuration changed on any host: none.
+   * Privilege escalation / lateral movement: none - the session already ran as
+     the elevated lab administrator and no inter-host activity was generated.

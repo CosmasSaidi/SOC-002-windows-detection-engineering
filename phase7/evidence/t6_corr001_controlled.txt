@@ -1,0 +1,44 @@
+### PHASE7 DETECTION STACK RUN ===
+RunOn        = SOC002-DC1
+WindowUtc    = 2026-10-14T23:06:30Z .. 2026-10-14T23:07:30Z
+WindowLocal  = 2026-10-15 02:06:30 .. 2026-10-15 02:07:30   (collector local, as passed to the Phase 6 detectors)
+Marker       = SOC002-PHASE7-BLINDSPOT-TEST
+LibDir       = C:\Windows\Temp\soc002-phase7\detections
+--- Phase 6 detection file integrity (sha256 taken NOW, on the collector) ---
+lib_soc002_v2.ps1                      3C332445BFB69045E2AD3B135C8184086D91979D8FC03C1BBEAD79D17B69D09F
+lib_soc002_windows.ps1                 3404A8BF210FDE3AC1418F1FD7DAE15251BC8F3DAE6AE717C453FFAA28ED4C7D
+detect_encoded_powershell_v2.ps1       C9B73426134571DFA6A26DF3CB39E4D6030CE5886720CF7679DE575845B0D16C
+detect_powershell_lineage.ps1          86149F2559512515CE2A97F54BBEE1D54E788CC21D5346C34278326434668BAE
+correlate_det001_det002.ps1            D4D5D12FA62AB856816EA5B81CE4D0F2E154FA614764B05F34AC9C510930C974
+
+##################### SOC002-CORR-001 #####################
+=== SOC002-CORR-001 :: DET-001 x DET-002 correlation ===
+Library=phase6-v2.0 sha256=3C332445BFB69045E2AD3B135C8184086D91979D8FC03C1BBEAD79D17B69D09F
+Log=ForwardedEvents  Window=2026-10-15 02:06:30 .. 2026-10-15 02:07:30 (collector local)
+Purpose: one encoded-PowerShell signal + process lineage context = better investigation context.
+Correlation is CONTEXT, not a compromise verdict.
+-------------------------------------------------------------------
+
+[CORRELATION 001] CORR-SOC002-WS001-2936-20261014T230641Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 2936  {edcef402-0b01-6ad0-b205-000000000700}
+  EventUtc         = 2026-10-14T23:06:41.712Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+--- SOC002-CORR-001 summary -----------------------------------------
+DET-001 signals in window                     = 1
+DET-001 signals with a DET-002 lineage record = 1
+DET-001 signals with NO lineage (explanation gap) = 0
+DET-001 signals escalated by the payload screen   = 0
+Correlation records produced                  = 1
+No correlation record here is a verdict: the analyst still has to check authorisation and payload intent.
+
+
+### END PHASE7 DETECTION STACK RUN ###
+
+[RC]=0

@@ -1,0 +1,47 @@
+{
+  "generated_utc": "2026-10-14T23:45:50Z",
+  "replays": [
+    {
+      "Replay": "replay_1_ws001_controlled",
+      "Label": "phase7 WS001 local controlled window",
+      "Events": 17,
+      "Examined": 8,
+      "Candidates": 3,
+      "Low": 3,
+      "Medium": 0,
+      "PayloadPid1428Hits": 3
+    },
+    {
+      "Replay": "replay_2_dc1_forwarded_controlled",
+      "Label": "phase7 DC1 ForwardedEvents controlled window",
+      "Events": 17,
+      "Examined": 8,
+      "Candidates": 3,
+      "Low": 3,
+      "Medium": 0,
+      "PayloadPid1428Hits": 3
+    },
+    {
+      "Replay": "replay_3_ws001_session",
+      "Label": "phase7 WS001 local session window",
+      "Events": 342,
+      "Examined": 112,
+      "Candidates": 6,
+      "Low": 6,
+      "Medium": 0,
+      "PayloadPid1428Hits": 3
+    },
+    {
+      "Replay": "replay_4_dc1_forwarded_session",
+      "Label": "phase7 DC1 ForwardedEvents session window",
+      "Events": 340,
+      "Examined": 112,
+      "Candidates": 6,
+      "Low": 6,
+      "Medium": 0,
+      "PayloadPid1428Hits": 3
+    }
+  ],
+  "payload_identified_in_replays": 4,
+  "total_replays": 4
+}

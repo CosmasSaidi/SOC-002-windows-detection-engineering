@@ -1,0 +1,20 @@
+=== reg query exact value ===
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Audit
+    ProcessCreationIncludeCmdLine_Enabled    REG_DWORD    0x1
+
+=== full key dump ===
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Audit
+    ProcessCreationIncludeCmdLine_Enabled    REG_DWORD    0x1
+
+=== key LastWriteTime (P/Invoke) ===
+AuditKeyLastWriteTime=2026-10-14 23:54:10
+=== effective machine time ===
+2026-10-15 00:30:01 +03:00
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.102:5985/wsman

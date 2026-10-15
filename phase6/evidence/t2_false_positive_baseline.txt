@@ -1,0 +1,91 @@
+=====================================================================
+ SOC-002 PHASE 6 / TASK 1 - WHY THE PHASE 5 DETECTION WAS NOISY
+=====================================================================
+Source: ./phase5/evidence (read-only; Phase 5 files are not modified)
+Phase 5 alert records parsed   : 39   (Phase 5 reported 'Total alerts = 39')
+Process-create records indexed : 27
+
+1.1  The trigger itself is coarse, by design
+     Phase 5 fired on: Sysmon Event 1 AND Image ~ powershell.exe/pwsh.exe AND CommandLine matches
+     an encoded-command switch. That condition cannot distinguish intent, and in this lab the
+     operator's own remote management satisfies it on every single call.
+
+1.2  Measured reason the 38 benign alerts existed
+     - Alerts whose IMMEDIATE PARENT is cmd.exe running the WinRS wrapper
+       ('cmd.exe /C powershell -encodedcommand <b64>')          : 38 of 39
+     - Alerts whose immediate parent is powershell.exe (the nested operator runner,
+       i.e. the controlled test's own transport hop)            : 1 of 39  (alert indexes: 10)
+     - Distinct parent images observed                          : cmd.exe(38), powershell.exe(1)
+     - Distinct users observed                                  : SOC002\Administrator(39)
+     - Distinct LogonIds observed                               : 38   (one per remote session - NOT a stable identifier)
+     - Distinct collector Computers                             : 1
+
+     READING: the noise is structural, not random. Every one of those alerts was produced by
+     the SOC team executing a command on a remote host through WinRM: pywinrm/WinRS delivers
+     the command as "cmd.exe /C powershell -encodedcommand <base64>", so each administrative
+     call looks exactly like the indicator. The Phase 5 analyst separated them by hand.
+
+1.3  4104 corroboration availability in the Phase 5 run
+     - alerts WITH a corroborating 4104 block : 31
+     - alerts with NO 4104 found              : 8   (alert indexes: 32,33,34,35,36,37,38,39)
+     READING: 4104 is a useful corroborator when it exists, but it is not a dependable
+     enrichment source on its own - it was missing for a large part of the same window.
+
+=====================================================================
+ TASK 2 - FIELD-BY-FIELD: WHAT IS OBSERVED AND WHAT IS USEFUL
+=====================================================================
+Legend: OBSERVED = present in the preserved telemetry; NOT PRESENT = not in the event at all.
+
+Sysmon Event 1 fields actually present in the forwarded XML:
+  CommandLine, Company, CurrentDirectory, Description, FileVersion, Hashes, Image, IntegrityLevel, LogonGuid, LogonId, OriginalFileName, ParentCommandLine, ParentImage, ParentProcessGuid, ParentProcessId, ParentUser, ProcessGuid, ProcessId, Product, RuleName, TerminalSessionId, User, UtcTime
+
+Security 4688 fields actually present in the forwarded XML:
+  CommandLine, MandatoryLabel, NewProcessId, NewProcessName, ParentProcessName, ProcessId, SubjectDomainName, SubjectLogonId, SubjectUserName, SubjectUserSid, TargetDomainName, TargetLogonId, TargetUserName, TargetUserSid, TokenElevationType
+
+PowerShell 4104 fields actually present in the forwarded XML (EventData):
+  MessageNumber, MessageTotal, ScriptBlockText, ScriptBlockId, Path
+  plus System/Execution/@ProcessID - which is the EXECUTING PROCESS ID of the 4104 event.
+  NOTE: the field is NOT an EventData attribute named ExecProcessId; a rule that looks for
+  ExecProcessId in EventData finds nothing (that mistake is visible in the Phase 5 evidence,
+  where ExecProcessId printed empty while System/Execution/@ProcessID carried 1500).
+
+  Field                     Source            Observed?  Useful for discrimination?
+  ------------------------- ----------------- ---------- -----------------------------------------
+  ParentImage               Sysmon Ev1        YES        STRONG - the Benign lineage's immediate parent is cmd.exe; the controlled event's parent was powershell.exe
+  ParentCommandLine         Sysmon Ev1        YES        STRONG - carries the WinRS wrapper "cmd.exe /C powershell -encodedcommand <b64>" that BASE-01 keys on
+  Grandparent (image only)  Sysmon Ev1 child  YES*       *only as ParentImage of the PARENT's own record - a lookup, not a field on the child event
+  Grandparent (full hop)    2nd Ev1 record    YES*       STRONG when the parent's create event survives; missing for 33 of 38 in the preserved set
+  ProcessId (child)         Sysmon Ev1        YES        STRONG - joins to 4104 System/Execution ProcessID and to 4688 NewProcessId
+  ParentProcessId           Sysmon Ev1        YES        MEDIUM - PID reuse makes it unsafe alone; needs the image-name guard used in Phase 6
+  ParentProcessGuid         Sysmon Ev1        YES        STRONG - exact parent link with no PID-reuse ambiguity (Phase 6 resolves with this first)
+  ProcessGuid (child)       Sysmon Ev1        YES        STRONG - stable identity for the execution; correlation key
+  User                      Sysmon Ev1        YES        WEAK here - every alert was SOC002\Administrator, so it separates nothing in this lab
+  ParentUser                Sysmon Ev1        YES        WEAK for the same reason (also Administrator on every alert)
+  LogonId                   Sysmon Ev1        YES        WEAK as a discriminator (changes every session) but good for grouping one session's calls
+  Computer                  both              YES        NEUTRAL - a single source host produced all 39 alerts
+  CommandLine (child)       Sysmon Ev1/4688   YES        STRONG - it is the trigger and the source of the decode; truncated in the Phase 5 broad-run evidence
+  TimeCreated               both              YES        MEDIUM - sequencing and correlation windows; no value on its own
+  Hashes                    Sysmon Ev1        YES        WEAK - the same Microsoft binary hash on all 39 events
+  IntegrityLevel            Sysmon Ev1        YES        WEAK - High on all 39
+  4104 ScriptBlockId        PowerShell 4104   PARTIAL    MEDIUM - identifies the decoded block; present for only part of the set
+  4104 Execution ProcessID  PS 4104 System    PARTIAL    STRONG when present - ties a decoded script block to the executing process id
+
+  NOT PRESENT anywhere in this telemetry (so Phase 6 does not use them):
+    - GrandparentImage / GrandparentCommandLine as FIELDS on the child event (Sysmon 1 has none)
+    - a "ParentProcessGuid exists in the index" guarantee - the parent's event may have rolled out
+    - session/authentication context (4688 Subject* + Security logon events were not forwarded)
+    - the ORIGINATING IP of the WinRM session (it lives in WinRM operational logs, not forwarded)
+
+  Discriminating characteristics of the benign WinRM lineage (all OBSERVED):
+    1. parent image leaf      = cmd.exe
+    2. parent command line    = <...>\cmd.exe /C powershell -encodedcommand <b64>     (WinRS wrapper)
+    3. grandparent image leaf = winrshost.exe  (WinRM shell host; 4/4 samples with a surviving parent event)
+    4. the payload decodes to plain administrative PowerShell (Get-WinEvent / Get-ChildItem / Write-Host ...)
+    5. user = the domain Administrator account that operates the lab
+  Characteristics 1-3 are what BASE-01 uses; 4 is the ESC screen; 5 is NOT used (too broad).
+
+  What remains suspicious even inside a matching transport pattern:
+    - a payload that decodes to download/execute/persistence/credential constructs (ESC-01..08)
+    - an encoded execution that is NOT delivered by the WinRS wrapper (nested runners, other parents)
+    - a WinRM-rooted run whose payload cannot be decoded at all (screen NOT VERIFIED -> weaker tier)
+

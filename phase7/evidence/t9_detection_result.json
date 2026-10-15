@@ -1,0 +1,48 @@
+{
+  "phase": "SOC-002 Phase 7",
+  "case_id": "SOC002-CASE-0002",
+  "marker": "SOC002-PHASE7-BLINDSPOT-TEST",
+  "controlled_window_utc": "2026-10-14T23:06:30Z .. 2026-10-14T23:07:30Z",
+  "session_window_utc": "2026-10-14T23:03:00Z .. 2026-10-14T23:09:30Z",
+  "execution": {
+    "runs": 1,
+    "exit_code": 0,
+    "payload_pid": 1428,
+    "payload_process": "powershell.exe",
+    "payload_parent": "powershell.exe (WinRS transport, PID 2936)",
+    "payload_command_line_form": "-NoProfile -NonInteractive -Command \"...\" with [Convert]::FromBase64String",
+    "encoded_command_switch_used": false,
+    "reconstructed_text": "harmless plain text: the phase marker + purpose line (never executed)",
+    "persisted": false,
+    "network_contact": "none observed in the controlled window",
+    "config_change": false
+  },
+  "controlled_window": {
+    "det001_candidates": 1,
+    "det001_investigation": 0,
+    "det001_baselined": 1,
+    "det001_escalated_by_payload": 0,
+    "det001_payload_process_detected": false,
+    "det002_lineage_records": 2,
+    "det002_records_with_winrm_root": 2,
+    "det002_records_for_payload_pid": 1,
+    "corr001_records": 1,
+    "corr001_correlated_payload_pid": 1
+  },
+  "session_window": {
+    "det001_candidates": 25,
+    "det001_investigation": 3,
+    "det001_baselined": 22,
+    "det001_escalated_by_payload": 3,
+    "escalation_cause": "operator's own staged-file transfers (payload = [Convert]::FromBase64String of the .b64 upload)",
+    "escalation_is_the_test": false
+  },
+  "conclusions": {
+    "det001_detected_payload_process": "NO",
+    "det001_trigger_result": "BYPASSED - the payload command line carries -Command, not an encoded-command switch",
+    "det002_observed_payload_process": "YES - lineage record with \"Encoded switch = absent\"",
+    "corr001_correlated_payload_process": "NO - CORR-001 iterates DET-001 candidates only",
+    "blind_spot_confirmed": "YES",
+    "outcome": "OUTCOME B"
+  }
+}

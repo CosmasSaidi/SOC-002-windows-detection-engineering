@@ -1,0 +1,59 @@
+=== SOC-002 PHASE 7 :: PHASE 6/5 WinRM BASELINE vs PHASE 7 CONTROLLED ACTIVITY ===
+Generated (operator UTC) = 2026-10-14T23:14:07Z
+
+--- PHASE 7 process tree (Sysmon Event 1, controlled window) ----------
+  23:06:41.614  PID=2992  PPID=716   winrshost.exe
+  23:06:41.622  PID=3404  PPID=2992  conhost.exe
+  23:06:41.693  PID=1808  PPID=2992  cmd.exe
+  23:06:41.712  PID=2936  PPID=1808  powershell.exe
+  23:06:42.046  PID=1428  PPID=2936  powershell.exe
+
+--- PHASE 5 controlled test process tree (preserved evidence) ---------
+  21:59:47.472  PID=5800  PPID=716   winrshost.exe  <- svchost.exe
+  21:59:47.482  PID=2212  PPID=5800  conhost.exe  <- winrshost.exe
+  21:59:47.564  PID=3596  PPID=5800  cmd.exe  <- winrshost.exe
+  21:59:47.583  PID=4576  PPID=3596  powershell.exe  <- cmd.exe
+  21:59:48.080  PID=1500  PPID=4576  powershell.exe  <- powershell.exe
+
+--- FIELD-BY-FIELD COMPARISON -----------------------------------------
+  Field                      | PHASE 6 BASELINE (Phase 5 run)                 | PHASE 7 CONTROLLED RUN
+  Host                       | SOC002-WS001.soc002.local                      | SOC002-WS001.soc002.local
+  Account                    | SOC002\Administrator (Phase 5 investigation no...[cut] | SOC002\Administrator
+  LogonId                    | 0x615937 (Phase 5 t3y Sysmon window)           | 0x644e0e
+  Tree depth to payload      | 3 (winrshost -> cmd -> powershell -> powershel...[cut] | 3 (winrshost -> cmd -> powershell -> powershel...[cut]
+  Root process               | winrshost.exe (parent svchost.exe)             | winrshost.exe (parent svchost.exe)
+  Transport cmd.exe          | cmd.exe /C powershell -encodedcommand <b64> (P...[cut] | C:\Windows\system32\cmd.exe /C powershell -enc...[cut]
+  Payload parent             | powershell.exe (the WinRS transport powershell...[cut] | powershell.exe
+  Payload command form       | -EncodedCommand <b64>  (encoded-command CLI sw...[cut] | -Command "<... [Convert]::FromBase64String(......[cut]
+  Sysmon ProcessGuid (payload) | RecId 3535 / PID 1500 (Phase 5 raw: see t3a_sy...[cut] | {edcef402-0b02-6ad0-b305-000000000700}
+  4104 ScriptBlockId (payload) | RecId 72974 (Phase 5 correlation timeline)     | 96c73586-2334-4bbd-a1c7-e2e5163f19c0
+  Delta between transport and payload create | ~0.52 s (21:59:47.564 -> 21:59:48.080)         | 0.333 s
+
+--- DISTINGUISHABILITY -------------------------------------------------
+  Identical to the baseline : the delivery path (WinRM/WinRS), the parentage of every
+                              hop, the account, the LogonId class, the integrity level, the
+                              binary hashes (both powershell.exe processes share the same
+                              SHA256), the tree depth and the substitution of one
+                              powershell.exe for another as the payload parent.
+  Different from the baseline: the payload process command line. Phase 5 used the
+                              encoded-command CLI switch; Phase 7 used -Command with
+                              [Convert]::FromBase64String(...) inside the script text.
+  Consequence                  : DET-001 v2 keys on exactly that one field, so the
+                              difference that separates the two runs is also the
+                              difference that decides whether DET-001 sees them.
+  DET-002 evidence             : the Phase 7 payload process IS recorded by DET-002 with
+                              "Encoded switch = absent", which is the only field-level
+                              discriminator the existing stack exposes. INFERRED, not proof
+                              of intent.
+
+--- BASELINE-DRIFT CHECK (Phase 6 BASE-01 in the Phase 7 session) ------
+  BASE-01 matches in the Phase 7 session window : 22
+  INVESTIGATION records in the session window    : 3  (all three are the operator's own base64 file-transfer steps - see t6 session output)
+  Drift observed : none in the baseline pattern. Every WinRS transport wrapper in the
+                   session still matched BASE-01 and resolved to a winrshost.exe ancestor.
+  Drift NOTE     : the Phase 7 payload ran one level BELOW the baselined transport
+                   powershell, exactly as the Phase 5 controlled test did. So BASE-01 did
+                   not hide the Phase 7 activity - DET-001 simply never produced a
+                   candidate for it. Broadening BASE-01 to depth-3 powershell-in-
+                   powershell would be a real risk of hiding future activity and is
+                   explicitly NOT done in this phase.

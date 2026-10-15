@@ -1,0 +1,38 @@
+SOC-002 PHASE 5 - MITRE ATT&CK MAPPING (evidence-bounded)
+=========================================================
+Rule: only map what the telemetry actually shows, and label how confident that is.
+
+OBSERVED TECHNIQUE-LIKE BEHAVIOUR (directly supported by the artifacts)
+  T1059.001  Command and Scripting Interpreter: PowerShell
+             Supported by: powershell.exe is the executing image (Sysmon Ev1 RecId 3535,
+             Security 4688 RecId 15141, PowerShell 4104 RecId 72974).
+  T1027      Obfuscated Files or Information
+             Supported by: the command was supplied as a base64 -EncodedCommand
+             (a base64-encoded script block is a standard obfuscation/encoding form).
+             NOTE: the encoding here is PowerShell's own parameter, not a custom packer.
+  T1021.006  Remote Services: Windows Remote Management
+             Supported by: the process ancestry root is winrshost.exe, i.e. the execution
+             was delivered by a WinRM session (Sysmon Ev1 ancestry, 4688 chain).
+             CAVEAT: in this lab that WinRM channel IS the authorised operator access,
+             not adversary behaviour. It is recorded as observed context, not as an attack.
+
+DETECTION MAPPING (what SOC002-DET-001 is a detector for)
+  - Coverage: T1059.001 with an encoded command line, i.e. the T1059.001 + T1027 pattern.
+  - The detection is deliberately written to fire on the *pattern*, and to require
+    human interpretation, so it must not be reported as "T1059.001 = compromised".
+
+NOT MAPPED (no evidence, so deliberately excluded)
+  - No persistence technique (T1547/T1053/T1543): none observed (see investigation notes).
+  - No privilege escalation technique (T1068/T1548): the token was already elevated.
+  - No credential access (T1003/T1555): no access to credential material was observed.
+  - No lateral movement from WS001 (T1021.x to other hosts): no network from the process.
+  - No defence evasion specific to logging (T1562): no logging/config change was made.
+  - No data encoded/decoded file technique (T1140) claim: the script decoded nothing.
+
+LIMITATIONS OF THIS MAPPING
+  - ATT&CK maps behaviour, not intent; the same T1059.001 covers a benign admin one-liner
+    and a malicious stager. The mapping says nothing about intent by itself.
+  - T1021.006 describes how this lab is *operated*; it would only be "adversary" mapping
+    in an environment where WinRM was not the sanctioned management path.
+  - Because only Sysmon 1/3 and a limited Security/PowerShell set are forwarded, the
+    absence of other techniques is "not observed", not "disproved".

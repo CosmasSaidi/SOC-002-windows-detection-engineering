@@ -1,0 +1,28 @@
+=== Generating harmless process ===
+SOC002-PHASE4-T1-4688-VALIDATION
+=== Fresh 4688 for marker ===
+--- NEW 4688 (CommandLine-bearing) ---
+EventID        = 4688
+EventRecordID  = 14686
+System TimeUTC = 2026-10-14T21:30:10.285Z
+System Local   = 2026-10-15 00:30:10
+Computer       = SOC002-WS001.soc002.local
+Channel        = Security
+Provider       = Microsoft-Windows-Security-Auditing
+NewProcessId   = 0x5a4
+NewProcessName = C:\Windows\System32\cmd.exe
+CommandLine    = "C:\Windows\system32\cmd.exe" /c "echo SOC002-PHASE4-T1-4688-VALIDATION"
+ParentProcess  = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+CreatorProcessId(ProcessId) = 0x13bc
+SubjectUserSid = S-1-5-21-1571239376-360375575-1388094843-500
+SubjectUser    = SOC002\Administrator
+SubjectLogonId = 0x45db87
+TokenElevationType = %%1936
+MandatoryLabel = S-1-16-12288
+
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.102:5985/wsman

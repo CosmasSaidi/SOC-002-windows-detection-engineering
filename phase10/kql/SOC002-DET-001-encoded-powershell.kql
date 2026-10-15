@@ -1,0 +1,54 @@
+// =============================================================================
+// SOC-002 | PHASE 10 (closure) | SOC002-DET-001  --  KQL translation (PORTABLE)
+// -----------------------------------------------------------------------------
+// TRANSLATION ARTEFACT - NOT A NEW DETECTION.
+//   derived from : phase9/sigma/SOC002-DET-001-encoded-powershell.yml
+//                  (portable Sigma representation of the existing, already
+//                   validated lab detector
+//                   phase5/detections/detect_encoded_powershell.ps1)
+//   this file    : faithful KQL translation of the PORTABLE Sigma form, i.e.
+//                  "CommandLine contains the long switch -EncodedCommand".
+//                  The closer translation of the original PowerShell detector's
+//                  short-switch regex is the companion file
+//                  SOC002-DET-001-encoded-powershell-regex.kql - read them together.
+//
+// ASSUMED SOURCE MODEL (assumption, not verified against a live workspace):
+//   Microsoft Sentinel "Event" table carrying Sysmon Event ID 1 (Process Create)
+//   forwarded from the Windows event channel Microsoft-Windows-Sysmon/Operational
+//   by the Log Analytics agent (MMA) or the Azure Monitor Agent.
+//   EventData is treated as a dynamic (JSON) column - the modern AMA/MMA shape.
+//   See KQL_NOTES.md (section "Source table assumption") for the alternative
+//   shapes (ParameterXml / XML) and when to use them.
+//
+// SCOPE: the primary DET-001 trigger ONLY.
+//   - no enrichment logic is merged in
+//   - no other detection's logic is merged in
+//   - no environment-specific baseline suppression is applied
+//   This query is a static, offline translation. It has NOT been executed
+//   against any live backend and makes no deployment claim.
+// =============================================================================
+
+Event
+| where EventID == 1
+| where Source == "Microsoft-Windows-Sysmon"
+     or EventLog == "Microsoft-Windows-Sysmon/Operational"
+| extend
+    Image       = tostring(EventData.Image),
+    CommandLine = tostring(EventData.CommandLine)
+| where Image endswith @"\powershell.exe"
+     or Image endswith @"\pwsh.exe"
+| where CommandLine contains "-EncodedCommand"
+| project
+    TimeGenerated,
+    Computer,
+    DetectionName      = "SOC002-DET-001",
+    Severity           = "Medium",
+    SysmonEventId      = EventID,
+    ProcessImage       = Image,
+    ProcessCommandLine = CommandLine,
+    ProcessId          = tostring(EventData.ProcessId),
+    ParentImage        = tostring(EventData.ParentImage),
+    ParentCommandLine  = tostring(EventData.ParentCommandLine),
+    User               = tostring(EventData.User),
+    Hashes             = tostring(EventData.Hashes)
+| order by TimeGenerated desc

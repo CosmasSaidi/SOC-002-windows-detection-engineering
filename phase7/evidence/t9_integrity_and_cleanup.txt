@@ -1,0 +1,26 @@
+### PHASE 7 POST-RUN INTEGRITY + CLEANUP ###
+run utc : 2026-10-14T23:17:49Z
+
+--- staged files on WS001 (live listing, taken before removal) ---
+    (DC1's staged copies are not listed here - the removal below ran after this
+     listing. Their SHA256 values are recorded in evidence/t2_staging_transcript.txt,
+     where each push prints the remote LEN and SHA256 and they match the local
+     Phase 6 detection files byte for byte.)
+763E5A86C92BFEA05281F0BE6ACCC6AE2C27C061DBB773AABDF5053A18954A84  C:\Windows\Temp\soc002-phase7\collect_phase7_telemetry.ps1
+4AC23816A1528A524AC0C21486CFC882BD6E0297D72B9DD3945A0B7283EDA365  C:\Windows\Temp\soc002-phase7\phase7_child_command.txt
+795131F37365A5D1CB7A663CCF734C63CDA3941D77FF2A39B65E9727A37310A4  C:\Windows\Temp\soc002-phase7\phase7_run_ws001.ps1
+9671EC85705835F7347C085135DDD5F364375CC383B3A7C160D8A3B72EE488E5  C:\Windows\Temp\soc002-phase7\run_phase7_detections_dc1.ps1
+
+[RC]=0
+
+--- removing Phase 7 temp working directories from both hosts ---
+False
+
+[RC]=0
+False
+
+[RC]=0
+
+--- Phase 5 / Phase 6 preservation re-check (post) ---
+  phase5 : UNCHANGED (88 files re-hashed, 0 differences)
+  phase6 : UNCHANGED (34 files re-hashed, 0 differences)

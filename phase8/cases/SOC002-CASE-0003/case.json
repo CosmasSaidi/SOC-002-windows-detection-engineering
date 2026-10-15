@@ -1,0 +1,234 @@
+{
+  "case_id": "SOC002-CASE-0003",
+  "case_version": "1.0",
+  "status": "CLOSED",
+  "title": "Phase 8 complementary detection: SOC002-DET-003 identifies the PowerShell Base64 reconstruction behaviour that the SOC002-DET-001 v2 blind spot missed",
+  "phase": "SOC-002 Phase 8",
+  "labeling_convention": {
+    "OBSERVED": "read directly out of a telemetry field",
+    "INFERRED": "conclusion drawn from several observations",
+    "NOT_VERIFIED": "not tested / not auditable in this lab"
+  },
+  "detection": {
+    "new_detection": "SOC002-DET-003",
+    "title": "PowerShell Base64 Reconstruction / Decode Behaviour",
+    "relationship": "complementary and separate from SOC002-DET-001 v2 (not modified or extended)",
+    "source_files": [
+      "phase8/detections/lib_soc002_phase8.ps1",
+      "phase8/detections/detect_base64_reconstruction.ps1"
+    ],
+    "correlation": "SOC002-CORR-002 (DET-003 x Sysmon1 x Security4688 x PowerShell4104 x DET-002 lineage)",
+    "trigger": "Base64 reconstruction CALL (REC-01..REC-05); the literal word 'Base64' never triggers",
+    "indicators": {
+      "REC-01": "[Convert]::FromBase64String",
+      "REC-02": "[System.Convert]::FromBase64String",
+      "REC-03": "FromBase64String(",
+      "REC-04": "FromBase64CharArray(",
+      "REC-05": "[Convert]::FromBase64CharArray"
+    },
+    "context_flags": [
+      "CTX-EXEC-ADJACENT",
+      "CTX-STRING-ROUNDTRIP",
+      "CTX-REMOTE-RETRIEVAL",
+      "CTX-PLUMBING"
+    ],
+    "severity_model": {
+      "LOW": "RECONSTRUCTION-OBSERVED",
+      "MEDIUM": "RECONSTRUCTION-WITH-EXECUTION-ADJACENT"
+    },
+    "never_executes_decoded_content": true
+  },
+  "phase7_blind_spot": {
+    "case": "SOC002-CASE-0002",
+    "confirmed": "OUTCOME B - blind spot confirmed",
+    "shape": "powershell.exe -Command \"... [Convert]::FromBase64String(...) ...\" with no -EncodedCommand/-enc/-e/-en",
+    "det001_v2": "MISS",
+    "det002": "CONTEXT",
+    "det003_expected": "IDENTIFY the Base64 reconstruction indicator"
+  },
+  "alerts": [
+    {
+      "detection": "SOC002-DET-003",
+      "phase": "live",
+      "host": "SOC002-WS001.soc002.local",
+      "record": "Security 4688 RecId 16123",
+      "utc": "2026-10-14T23:35:07.263Z",
+      "pid": "1268",
+      "logon_id": "0x695d72",
+      "indicator": "[Convert]::FromBase64String",
+      "severity": "LOW"
+    },
+    {
+      "detection": "SOC002-DET-003",
+      "phase": "live",
+      "host": "SOC002-WS001.soc002.local",
+      "record": "Sysmon Event 1 RecId 4600",
+      "utc": "2026-10-14T23:35:07.272Z",
+      "pid": "1268",
+      "process_guid": "{edcef402-11ab-6ad0-5706-000000000700}",
+      "indicator": "[Convert]::FromBase64String",
+      "severity": "LOW"
+    },
+    {
+      "detection": "SOC002-DET-003",
+      "phase": "live",
+      "host": "SOC002-WS001.soc002.local",
+      "record": "PowerShell 4104 RecId 77450",
+      "utc": "2026-10-14T23:35:07.598Z",
+      "exec_pid": "1268",
+      "script_block_id": "50aa4a2f-00ff-4f0f-b0d4-2f5f2543ccae",
+      "indicator": "[Convert]::FromBase64String",
+      "severity": "LOW"
+    },
+    {
+      "detection": "SOC002-DET-003",
+      "phase": "live-operator-plumbing",
+      "host": "SOC002-WS001.soc002.local",
+      "record": "PowerShell 4104 RecId 77434",
+      "utc": "2026-10-14T23:35:06.453Z",
+      "exec_pid": "1996",
+      "script_block_id": "a8662866-d48c-4970-98ef-e10ec1eb1c40",
+      "indicator": "[Convert]::FromBase64String",
+      "severity": "LOW",
+      "context": [
+        "CTX-STRING-ROUNDTRIP",
+        "CTX-PLUMBING"
+      ],
+      "note": "operator staging script carrying the payload text as a literal - not the activity under test"
+    }
+  ],
+  "source_records": {
+    "payload_process": {
+      "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "pid": "1268",
+      "ppid": "5468",
+      "parent_image": "powershell.exe",
+      "command_has_encoded_switch": false,
+      "reconstructs_with": "[Convert]::FromBase64String"
+    },
+    "transport_chain_live": [
+      "winrshost.exe(4008)",
+      "cmd.exe(5652)",
+      "powershell.exe(5468)",
+      "powershell.exe(1268)"
+    ],
+    "det001_v2_live": {
+      "transport_pid": "5468",
+      "result": "TRIGGER (encoded switch)",
+      "payload_pid": "1268",
+      "payload_result": "MISS"
+    },
+    "det003_live": {
+      "transport_pid": "5468",
+      "result": "miss",
+      "payload_pid": "1268",
+      "payload_result": "TRIGGER (REC-01, LOW)"
+    }
+  },
+  "affected": {
+    "host": "SOC002-WS001.soc002.local",
+    "ip": "192.168.56.102",
+    "collector": "SOC002-DC1 (192.168.56.10)",
+    "account": "SOC002\\Administrator",
+    "logon_id": "0x695d72"
+  },
+  "timestamps": {
+    "controlled_window_utc": "2026-10-14T23:35:06Z..2026-10-14T23:35:09Z",
+    "session_window_utc": "2026-10-14T23:34:45Z..2026-10-14T23:37:00Z",
+    "marker_printed_utc": "2026-10-14T23:35:08Z"
+  },
+  "controlled_command": {
+    "marker": "SOC002-PHASE8-DET003-TEST",
+    "loader_line": "$c=[IO.File]::ReadAllText('C:\\Windows\\Temp\\soc002-phase8\\phase8_child_command.txt'); powershell.exe -NoProfile -NonInteractive -Command $c",
+    "payload_child_command": "powershell.exe -NoProfile -NonInteractive -Command \"$b='<base64>';$t=[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($b));Write-Output $t\"",
+    "uses_encoded_command_switch": false,
+    "decodes_to": "plain text only (marker + purpose line); never executed",
+    "payload_body_sha256": "C1735EFCFEEF584F529B922BC64A5A815FF0521C934E6B9E55A1AE65DBF58FD2",
+    "executions": 1,
+    "network_contact_by_payload": false,
+    "persistence": false,
+    "config_change": false,
+    "permanent_files": false
+  },
+  "evidence_references": {
+    "design": "phase8/evidence/DET003_DESIGN.md",
+    "replay_inputs": "phase8/evidence/replay_inputs.txt",
+    "replay_phase7_controlled_ws001": "phase8/evidence/replay_1_ws001_controlled.txt",
+    "replay_phase7_controlled_dc1": "phase8/evidence/replay_2_dc1_forwarded_controlled.txt",
+    "replay_phase7_session_ws001": "phase8/evidence/replay_3_ws001_session.txt",
+    "replay_phase7_session_dc1": "phase8/evidence/replay_4_dc1_forwarded_session.txt",
+    "benign_comparison": "phase8/evidence/t05_benign_comparison.txt",
+    "phase7_detection_result": "phase8/evidence/t06_phase7_detection_result.txt",
+    "live_validation": "phase8/evidence/t07_live_validation.txt",
+    "local_telemetry": "phase8/evidence/t08_local_telemetry_ws001.txt",
+    "central_telemetry": "phase8/evidence/t09_central_telemetry_dc1.txt",
+    "det003_live_dc1": "phase8/evidence/t09c_det003_live_dc1.txt",
+    "correlation": "phase8/evidence/t10_correlation.txt",
+    "investigation_notes": "phase8/evidence/t11_investigation_notes.txt",
+    "false_positives": "phase8/evidence/t12_false_positive_considerations.txt",
+    "limitations": "phase8/evidence/t13_limitations.txt",
+    "det001_vs_det003": "phase8/evidence/t14_det001_vs_det003.txt",
+    "integrity": "phase8/evidence/t15_integrity.txt",
+    "manifest": "phase8/SHA256_MANIFEST.txt",
+    "report": "phase8/PHASE8_REPORT.md",
+    "raw_captures": "phase8/evidence/raw/"
+  },
+  "detection_references": {
+    "det003_library": "phase8/detections/lib_soc002_phase8.ps1",
+    "det003_live_detector": "phase8/detections/detect_base64_reconstruction.ps1",
+    "det003_replay_harness": "phase8/analysis/replay_phase8_phase7_evidence.ps1",
+    "det001_v2_unmodified": "phase6/detections/detect_encoded_powershell_v2.ps1",
+    "det002_unmodified": "phase6/detections/detect_powershell_lineage.ps1",
+    "corr001_unmodified": "phase6/detections/correlate_det001_det002.ps1"
+  },
+  "investigation_summary": "DET-003 was built to cover the switch-free Base64 reconstruction behaviour DET-001 v2 misses. It was first replayed against the preserved Phase 7 evidence (the known blind spot), then exercised with a small benign comparison suite, then validated by one controlled live run on SOC002-WS001. DET-003 identified the reconstruction in every view; the live transport remained a DET-001 candidate and a DET-003 non-trigger, showing the two detections are complementary rather than overlapping.",
+  "observed_facts": [
+    "The Phase 7 blind-spot payload (PID 1428) was flagged by DET-003 (REC-01) in all four preserved Phase 7 views (WS001 local + DC1 ForwardedEvents, controlled + session windows).",
+    "In every preserved view the payload was DET-001-miss / DET-003-hit and the WinRS transport (PID 2936) was DET-001-hit / DET-003-miss.",
+    "One controlled benign execution ran on SOC002-WS001; the marker SOC002-PHASE8-DET003-TEST was printed; exit code 0.",
+    "The payload child command line carried -Command + [Convert]::FromBase64String and no encoded-command switch.",
+    "Security 4688 (RecId 16123), Sysmon Event 1 (RecId 4600) and PowerShell 4104 (RecId 77450) captured the payload locally; the same RecordIDs reached DC1 ForwardedEvents.",
+    "DET-003 flagged the live payload (PID 1268) in all three sources; the live WinRS transport (PID 5468) was a DET-003 non-trigger and a DET-001 candidate.",
+    "Correlation linked the DET-003 record with Sysmon Event 1, Security 4688, the 4104 script block and the DET-002 lineage chain to winrshost.exe.",
+    "The payload initiated no network connection; the temp body was removed (TMP_REMOVED=True).",
+    "The lab's own staging script block (4104 RecId 77434) is a DET-003 candidate labelled CTX-PLUMBING - a documented false-positive source.",
+    "A naive 'match Base64' keyword rule fires on benign cases where DET-003 does not (word-only and comment-only mentions)."
+  ],
+  "inferred_facts": [
+    "DET-003 closes the specific Phase 7 gap because it keys on the decode call, not the encoded-command CLI switch.",
+    "DET-001 and DET-003 are disjoint on the observed cases; neither is a superset of the other.",
+    "CTX-EXEC-ADJACENT raises triage priority but does not prove that decoded content was executed."
+  ],
+  "not_verified": [
+    "Generalisation to other reconstruction styles: custom decoders, fragment-assembled method names, compressed/hex blobs, certutil -decode, multi-stage decoding, non-PowerShell hosts.",
+    "Whether DET-003 catches reconstruct-and-execute in practice (execution is inferred from text proximity only).",
+    "Behaviour outside this lab, at scale, or where WinRM is not the sanctioned management channel.",
+    "Any false-positive RATE (the benign suite is a small synthetic set).",
+    "This is not production validation."
+  ],
+  "final_classification": "CONTROLLED TEST ACTIVITY / AUTHORISED BENIGN",
+  "classification_authority": "Lab operator (SOC-002 operations-centre lab); controlled, benign, authorised technique-shape validation.",
+  "detection_result": {
+    "det001_v2": "MISS on the payload (trigger = encoded-command CLI switch only)",
+    "det002": "CONTEXT - WinRM-rooted lineage recorded, no verdict",
+    "det003": "IDENTIFIED - REC-01 [Convert]::FromBase64String",
+    "corr002": "CONNECTED - Sysmon1 + Security4688 + PowerShell4104 + DET-002 lineage",
+    "phase7_back_test": "4 of 4 preserved views identified the exact Phase 7 payload"
+  },
+  "analyst_conclusion": "DET-003 is implemented separately from DET-001 v2 and identifies the Base64 reconstruction behaviour the DET-001 v2 blind spot missed, without alerting on the literal word Base64. The controlled activity was benign and did nothing beyond reconstructing and printing a marker. No compromise, attack or adversary is claimed.",
+  "recommended_follow_up": [
+    "Decide whether CORR-001 should correlate on DET-002 lineage alone now that DET-003 supplies a switch-free signal.",
+    "Consider handling operator staging traffic (CTX-PLUMBING) with a separately auditable enrichment rather than raw volume.",
+    "Keep DET-001 v2 and DET-003 as two separately auditable coverage claims; do not fold DET-003 into DET-001's trigger.",
+    "Do not broaden the BASE-01 baseline to depth-3 powershell-in-powershell."
+  ],
+  "provenance": {
+    "phase5_evidence_modified": false,
+    "phase6_evidence_modified": false,
+    "phase7_evidence_modified": false,
+    "det001_v2_sha256": "c9b73426134571dfa6a26df3cb39e4d6030ce5886720cf7679de575845b0d16c",
+    "det001_v2_unchanged_by_phase8": true,
+    "credentials_in_case": false,
+    "manifest": "phase8/SHA256_MANIFEST.txt"
+  }
+}

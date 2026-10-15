@@ -1,0 +1,67 @@
+=== SOC-002 PHASE 8 :: FALSE-POSITIVE CONSIDERATIONS ===
+Detection SOC002-DET-003 · status: design-reviewed + observed on benign cases
+
+This file documents EXPECTED and OBSERVED benign behaviour. It is NOT a measured
+false-positive rate: a handful of synthetic cases and one lab window cannot
+establish a rate. Language is deliberately precise: benign test case, candidate,
+observed behaviour, not sufficient to establish maliciousness.
+
+-------------------------------------------------------------------------------
+1. WHY DET-003 IS NOT A KEYWORD RULE (the precision argument)
+-------------------------------------------------------------------------------
+The trigger keys on a Base64 RECONSTRUCTION CALL, never on the literal word
+"Base64". Measured in t05_benign_comparison.txt:
+
+  case  description                                   keyword-rule  DET-003
+  B01   plain PowerShell, no base64 at all            clear         clear
+  B02   word "Base64" in harmless commentary          FIRE          clear
+  B03   explicit FromBase64String reconstruction      FIRE          FIRE (LOW)
+  B04   the real Phase 7 blind-spot command line      FIRE          FIRE (LOW)
+  B05   decode call ONLY inside a comment             FIRE          clear (suppressed)
+  B06   decode + Invoke-Expression adjacency          FIRE          FIRE (MEDIUM)
+  B07   operator WinRM file-transfer plumbing         FIRE          FIRE (LOW, CTX-PLUMBING)
+
+  OBSERVED  A naive `match "Base64"` rule fires on B02 and B05; DET-003 does not.
+            That is the concrete precision gain over a keyword rule.
+  OBSERVED  DET-003 still fires on real reconstruction (B03/B04/B06) and on the
+            lab's own plumbing (B07). It is a CONTEXT signal, not a verdict.
+
+-------------------------------------------------------------------------------
+2. DOCUMENTED FALSE-POSITIVE SOURCE: THE LAB'S OWN TOOLING
+-------------------------------------------------------------------------------
+  OBSERVED  DC1->WS001 file transfer in this lab uses
+            [Convert]::FromBase64String to write the staged bytes. Every such
+            transfer therefore appears as a DET-003 candidate.
+  OBSERVED  In the live DC1 run (60-minute window) 13 DET-003 candidates were
+            produced: 3 for the Phase 8 payload, 3 for the Phase 7 payload
+            (still inside the hour), 1 for the Phase 8 staging transport, and
+            6 for operator collection/staging script blocks, each labelled
+            CTX-PLUMBING.
+  INFERRED  Operator plumbing is a predictable, label-able share of the alert
+            volume. It is reported (never suppressed) so the analyst can decide.
+
+-------------------------------------------------------------------------------
+3. CONTEXT FLAGS THAT HELP TRIAGE
+-------------------------------------------------------------------------------
+  CTX-PLUMBING          decode sits next to [IO.File]::* / Set-Content staging =>
+                        usually the SOC's own transfer, but STILL user-decided.
+  CTX-STRING-ROUNDTRIP  decoded bytes turned back into a string (common, benign).
+  CTX-EXEC-ADJACENT     decode + execution primitive => severity MEDIUM (raises
+                        triage priority; it is NOT proof that anything ran).
+  CTX-REMOTE-RETRIEVAL  decode + network retrieval => severity MEDIUM.
+
+-------------------------------------------------------------------------------
+4. WHAT WOULD MAKE A DET-003 CANDIDATE MORE INTERESTING (triage, not a verdict)
+-------------------------------------------------------------------------------
+  * reconstruction followed by an execution primitive (CTX-EXEC-ADJACENT), or
+  * reconstruction of data fetched from the network (CTX-REMOTE-RETRIEVAL), or
+  * a lineage that is NOT the sanctioned WinRM/administration path, or
+  * an account/time that does not match known operator activity.
+None of these is asserted by DET-003; each is an analyst question.
+
+-------------------------------------------------------------------------------
+5. EXPLICIT NON-CLAIMS
+-------------------------------------------------------------------------------
+  NOT a statistical false-positive rate.
+  NOT production validation.
+  DET-003 output is NOT a verdict of maliciousness, compromise, or attack.

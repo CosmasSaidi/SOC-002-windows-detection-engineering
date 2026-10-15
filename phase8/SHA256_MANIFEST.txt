@@ -1,0 +1,102 @@
+SOC-002 PHASE 8 - SHA256 INTEGRITY MANIFEST
+===============================================================================
+Generated (utc) : 2026-10-14T23:45:53Z
+Scope           : every file under ~/soc-lab/phase8 (EXCLUDING this manifest),
+                  plus a byte-for-byte preservation check of the DET-001 v2 /
+                  Phase 6 detection stack and of the Phase 5/6/7 trees, against
+                  hashes taken BEFORE any Phase 8 work.
+Method          : sha256sum, paths relative to the directory being hashed.
+No credentials or secrets are stored anywhere in this tree.
+
+-------------------------------------------------------------------------------
+SECTION A - PHASE 8 ARTEFACTS  (sha256 | relative path)
+-------------------------------------------------------------------------------
+4d3ebf53e7dfa3060de102b50b1692ac4a693ecb555dd3b8a736d28c4d5eddc9  ./PHASE8_REPORT.md
+dd2e23962c83a7f66dbfcc7e8d69e7c50b6f141e64caae4253b2dbe8674b85d4  ./README.md
+c24813014a70e3822f754fbabce3865187866a1e36a2a64632c3c166192aa647  ./analysis/benign_comparison_phase8.ps1
+44e7974c1d6507b16a991e1920d39aede43a4b8e00929cde61a1e22e5af91bc4  ./analysis/build_manifest.sh
+6753f6bf2479f7f95a57d77f6daa1a83008dd01316f67e80cf4c8798e366dc02  ./analysis/det_comparison_phase8.ps1
+08f0bbf4e8a13b19d1f74ff1e2f2134ee4eb484038eb55fe545231142ccc69be  ./analysis/format_phase8_telemetry.ps1
+133682e3bf35e482bf497a45d7793d3b056649ab8f0319c9e24698e4fbbc2ab1  ./analysis/phase8_integrity_and_cleanup.sh
+c9f455e732097630b2dba131bdf591fc917780e05cfd18cdebabe96e205ed1d3  ./analysis/phase8_result_summary.ps1
+03d6391c81ec27934fa20139987e3fdb98f4a8f3bbc6646e86b5c23a272dc5ca  ./analysis/replay_phase8_phase7_evidence.ps1
+899e438af9324c168ac465daa9cbe16d328d286917f12e82e5b62305404e3e9e  ./analysis/run_all_offline_phase8.sh
+c28eec75059d088a2599daa5e6db3059c2e65b5badaaa6d88891d2ba6d2842f2  ./cases/SOC002-CASE-0003/CASE.md
+e87822882b9ae6495ccbfd810ccbf21705fe6247394c477098472056816a4609  ./cases/SOC002-CASE-0003/case.json
+1f7ed2e0c4826be1fd2e63f21bda5c89f861fda0835ebb376422a31e7f981352  ./detections/detect_base64_reconstruction.ps1
+ec519ae9c313c3360d39f97404e828d19189a701d4570fdac6641e3703238181  ./detections/lib_soc002_phase8.ps1
+7a3bef396afc62fe6685274724451cb77e818c7afa5c89e0c90a074726669f0f  ./evidence/DET003_DESIGN.md
+2d2da50f80f5134126c67ec6c90c0938ea711c9af5146ee99c2916d2d10b3a63  ./evidence/pre_state_sha256.txt
+61e2079b7b5f18dee18ee7dedc0b653f9ab56eb42e08322005a1e109ac7c80f8  ./evidence/raw/p8_raw_central_dc1.txt
+607b46e610776c48e44da7f8a85b338a516135fd01a41a9f9ada2c5f0e68adfb  ./evidence/raw/p8_raw_local_ws001.txt
+95c8ae660c6173fc5acd80f9ecd8b26e3c13257ab58a632499c757696bdd06ee  ./evidence/replay_1_ws001_controlled.json
+a4f7f2771efbdf4409ac6e8574a9c0f114bc9b60bf81fa8ea2bcdda6f5e8d342  ./evidence/replay_1_ws001_controlled.txt
+8916f3ba0ad44f898003503099423b404c21b23c3db5e20b3ba27f7c60927dfe  ./evidence/replay_2_dc1_forwarded_controlled.json
+794690dd2198db02e8e1acc915e81ab1e9088167f57d2781fd8e3e74804a82b9  ./evidence/replay_2_dc1_forwarded_controlled.txt
+bcb38738a614bdab9ff52893bacaa5e2cde4751bb7a49ab0cd8d5fe5594c477b  ./evidence/replay_3_ws001_session.json
+7663eb518304cc5edf1a12db24726f48e6efb2268b8f7e7565cb35d59fde13db  ./evidence/replay_3_ws001_session.txt
+c075e0f516b076a34a6e8981bb39b5e1095817d22dca856adacbc3c197689866  ./evidence/replay_4_dc1_forwarded_session.json
+c8dd8be4b54653103bbc62a12382099b30d2b6949c782cf7e3b08f0112acd820  ./evidence/replay_4_dc1_forwarded_session.txt
+52b8e7a970d54fb51fef4d9e0bb560f4c0a3689aaf064bbdc68bca472588441c  ./evidence/replay_inputs.txt
+849f53cb278486f19f6847183cc5cf57a7a7643f14eacc01fcde131f916d0353  ./evidence/t05_benign_comparison.json
+29e51686339e0b21f161d7ec44c3fd3ba2366e7c0cf317b692d168e3975f826b  ./evidence/t05_benign_comparison.txt
+7621a0a6203f4b05eb463ed2b49c32e40c657cd9ae4fd71f100a331c72ecc8f0  ./evidence/t06_phase7_detection_result.json
+ad3e15cecacd88ce67da167b32efbf642571c07eb068c29c133a5c02be2efee8  ./evidence/t06_phase7_detection_result.txt
+c3a135c9ee886a15bd48e3fea22f735a509674dd38f538a7e9fdfd75df1ebbea  ./evidence/t07_live_validation.txt
+21087b6ce9e4ddddf02553562402a36f584966760dde6b4bda53359715f4fed7  ./evidence/t08_local_telemetry_ws001.txt
+024a8ba2e934ff1df8ad445a4a884bb64805bd0e0dadf51436dee44fcc5a84b4  ./evidence/t08b_det003_local_live.json
+cdcdb9b5791e9d3001a182d2f56543cd7d148000111a4aadce0e592760b0c865  ./evidence/t08b_det003_local_live.txt
+1c640101f0d43e79a0b3037d9669391e16739ea9c4ca1db56720d9bbe5c478d3  ./evidence/t09_central_telemetry_dc1.txt
+7f00190b45c349585e5787bcbb30a8ad7b5d466bda0264ecd0e5f72d0e2f2c20  ./evidence/t09b_det003_central_live.json
+c73b05f83bf8f426f553057d2769a88e6336f45be0ce4deb236d4069d5bc4fe1  ./evidence/t09b_det003_central_live.txt
+51727b24f45773cdac829abd1fd2b9f4061e74d1969a0eb012fe0f94d04cbcf3  ./evidence/t09c_det003_live_dc1.txt
+ee2b8b05b8829d3dce1fd1110825aa7bd2e2b95bc299b6cad31d257677a3be47  ./evidence/t10_correlation.txt
+3ea47c2992ded125654d3be0f6866fdff32fba27a580ff046b4c72a59b740c35  ./evidence/t11_investigation_notes.txt
+9ad05af9606f2adaba9d67b20924f097194cc08f0df40ff9c16c1f59c1e21aef  ./evidence/t12_false_positive_considerations.txt
+0948dc97128de8c5937e9f9fab2c74a35aa651cfdfc8cc7fbd51cc630f960827  ./evidence/t13_limitations.txt
+ea4abdee645b2d8f30155b034e0b396a174ea59cde42701aa747cc424c2c1c16  ./evidence/t14_det001_vs_det003.txt
+d63e2d27f57915577947c3bcde371469030b6d1d730355088f4c1e8352130bc1  ./evidence/t15_integrity.txt
+54e5d996c372053263113c8dad4c34fc3f18b056a8d7d1276b87da33be334147  ./scripts/build_phase8_payload.py
+485df111c01b63b98f90dd2ea25df375296a7348a413755f647d184047b3a69d  ./scripts/execute_phase8_once.py
+c1735efcfeef584f529b922bc64a5a815ff0521c934e6b9e55a1ae65dbf58fd2  ./scripts/phase8_child_command.txt
+12ccd1b9170886ce3e5dafafab4c3b4f3759033da38b4fccecf7a12780f8e42f  ./scripts/phase8_payload_metadata.json
+5bf659916353a8be2464a55f0397c3f321447129c05f2fb29781eff7634d7d59  ./scripts/run_det003_on_dc1.py
+975414c30fbae068078aaba1d30cdd7504bd3ab56fbf5cb504b7821d4301055a  ./tools/collect_raw_events.py
+
+Phase 8 files hashed = 51
+
+-------------------------------------------------------------------------------
+SECTION B - DET-001 v2 AND THE PHASE 6 DETECTION STACK (must be unchanged)
+-------------------------------------------------------------------------------
+6e0651dc43f781e9d71bc2ebc6b7c74d4d882a30799a61372945cceda0d5efca  phase5/detections/detect_encoded_powershell.ps1
+d4d5d12fa62ab856816ea5b81ce4d0f2e154fa614764b05f34ac9c510930c974  phase6/detections/correlate_det001_det002.ps1
+c9b73426134571dfa6a26df3cb39e4d6030ce5886720cf7679de575845b0d16c  phase6/detections/detect_encoded_powershell_v2.ps1
+86149f2559512515ce2a97f54bbee1d54e788cc21d5346c34278326434668bae  phase6/detections/detect_powershell_lineage.ps1
+3c332445bfb69045e2ad3b135c8184086d91979d8fc03c1bbead79d17b69d09f  phase6/detections/lib_soc002_v2.ps1
+3404a8bf210fde3ac1418f1fd7dae15251bc8f3dae6ae717c453ffaa28ed4c7d  phase6/detections/lib_soc002_windows.ps1
+
+DET-001 v2 pre-Phase-8 hash : c9b73426134571dfa6a26df3cb39e4d6030ce5886720cf7679de575845b0d16c
+DET-001 v2 post-Phase-8 hash: c9b73426134571dfa6a26df3cb39e4d6030ce5886720cf7679de575845b0d16c
+RESULT: DET-001 v2 is byte-identical. It was NOT modified, extended or rewritten.
+
+-------------------------------------------------------------------------------
+SECTION C - PHASE 5 / PHASE 6 / PHASE 7 PRESERVATION CHECK
+-------------------------------------------------------------------------------
+phase5 : files=88  changed=0  missing=0  added=0
+phase6 : files=34  changed=0  missing=0  added=0
+phase7 : files=51  changed=0  missing=0  added=0
+
+RESULT: Phase 5, Phase 6 and Phase 7 evidence is byte-for-byte unchanged
+        (changed=0, missing=0, added=0 for every tree).
+
+-------------------------------------------------------------------------------
+SECTION D - NOTES
+-------------------------------------------------------------------------------
+- This manifest excludes itself; it is the only Phase 8 file not hashed above.
+- evidence/raw/ holds the unmodified EventData XML captured in Phase 8.
+- Replay inputs are the preserved phase7/evidence/raw/ files (hashes in
+  evidence/replay_inputs.txt); they were read-only and never modified.
+- Lab temp dirs C:\Windows\Temp\soc002-phase8 and
+  C:\Windows\Temp\soc002-phase8-det003 were removed from both hosts; see
+  evidence/t15_integrity.txt.
+- SOC002-CASE-0003 is the case for the Phase 8 work.

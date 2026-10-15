@@ -1,0 +1,63 @@
+SOC-002 PHASE 5 - CENTRAL CORRELATION TIMELINE
+==============================================
+Controlled event : single encoded PowerShell execution (benign, marked)
+Marker           : SOC002-PHASE5-ENCODED-POWERSHELL
+Origin host      : SOC002-WS001.soc002.local (192.168.56.102)
+Collector host   : SOC002-DC1  (192.168.56.10)  -> ForwardedEvents
+Clock            : VM local = Africa/Nairobi EAT (UTC+3).  UTC = local - 03:00.
+Correlation keys : Computer | RecordId (preserved end-to-end by WEF) | TimeCreated |
+                   ProcessGuid | ProcessId (0x5dc = 1500) | LogonId 0x5c764d |
+                   ScriptBlockId | exact CommandLine | marker text
+
+TIME (local EAT)   TIME (UTC)            SOURCE                              OBSERVATION
+------------------------------------------------------------------------------------------------------------------------------------
+00:59:47.459       2026-10-14T21:59:47.459Z  Sysmon Ev1  RecId3531  (WS001)   winrshost.exe PID 5800 created by svchost.exe  (PID 716).
+                                                                             = Windows Remote Management shell host = remote session.
+00:59:47.476       2026-10-14T21:59:47.476Z  Security 4688          (WS001)   conhost.exe PID 0x8a4 (2212) created by winrshost 0x16a8 (5800).
+00:59:47.547       2026-10-14T21:59:47.547Z  Security 4688          (WS001)   cmd.exe PID 0xe0c (3596) created by winrshost 0x16a8 (5800).
+00:59:47.564       2026-10-14T21:59:47.564Z  Sysmon Ev1  RecId3533  (WS001)   cmd.exe PID 3596 (parent winrshost.exe 5800).
+00:59:47.574       2026-10-14T21:59:47.574Z  Security 4688          (WS001)   powershell.exe PID 0x11e0 (4576) created by cmd.exe 0xe0c (3596).
+00:59:47.583       2026-10-14T21:59:47.583Z  Sysmon Ev1  RecId3534  (WS001)   powershell.exe PID 4576 (parent cmd.exe 3596).
+                                                                             = the operator/runner shell. Its own command line is also
+                                                                               "powershell -encodedcommand <b64>" (WinRM transport).
+00:59:47.908       2026-10-14T21:59:47.908Z  PowerShell 4104 RecId72965       ScriptBlockId e02842dc-7c5f-4bde-b18d-6ad4d161aa11
+                                                 ExecPID 4576     (WS001)    = the runner script block (contains the marker text).
+00:59:48.071       2026-10-14T21:59:48.071Z  Security 4688 RecId15141 (WS001)   *** CONTROLLED EVENT ***
+                                                                             NewProcessName = ...\powershell.exe
+                                                                             NewProcessId   = 0x5dc (1500)
+                                                                             Creator(ProcessId) = 0x11e0 (4576)
+                                                                             CommandLine    = "...powershell.exe" -NoProfile -EncodedCommand IwAgAF...
+                                                                             Subject        = SOC002\Administrator  LogonId 0x5c764d
+                                                                             TokenElevationType=%%1936 (Full)  MandatoryLabel S-1-16-12288 (High)
+00:59:48.080       2026-10-14T21:59:48.080Z  Sysmon Ev1 RecId3535    (WS001)   *** CONTROLLED EVENT (primary signal) ***
+                                                                             ProcessGuid = {edcef402-fb54-6acf-ef04-000000000700}
+                                                                             ProcessId   = 1500   Image = ...\powershell.exe
+                                                                             CommandLine contains -EncodedCommand  (base64 payload)
+                                                                             User=SOC002\Administrator  LogonId=0x5c764d
+                                                                             Parent = ...\powershell.exe (4576)  -> ...\cmd.exe (3596)
+                                                                                  -> winrshost.exe (5800) -> svchost.exe (716)
+                                                                             Hashes = SHA256=B4E7BC24BF3F5C3DA2EB6E9EC5EC10F9
+                                                                                      0099DEFA91B820F2F3FC70DD9E4785C4
+                                                                             IntegrityLevel=High  CurrentDirectory=C:\Users\Administrator\
+00:59:48.392       2026-10-14T21:59:48.392Z  PowerShell 4104 RecId72974       *** CORROBORATION ***
+                                                 ExecPID 1500     (WS001)    ScriptBlockId = 039b9c99-15fb-488d-8046-46e868aa9a39
+                                                                             Message 1/1 (single part, not fragmented)
+                                                                             ScriptBlockText = decoded benign payload, contains the
+                                                                                               marker SOC002-PHASE5-ENCODED-POWERSHELL
+                                                                             ExecPID 1500 == Sysmon ProcessId 1500  (exact process match)
+00:59:48.553       2026-10-14T21:59:48.553Z  child stdout (captured)  (WS001)  START_UTC=2026-10-14T21:59:48.553Z  (payload began)
+00:59:48.663-.664  2026-10-14T21:59:48.663Z  Sysmon Ev3 RecId3536-3538(WS001)  Unrelated transport traffic only:
+                                                                             System PID 4 -> 192.168.56.102:5985 (local WinRM listener)
+                                                                             lsass.exe PID 628 -> SOC002-DC1:49668
+                                                                             NONE of these carry ProcessGuid {..fb54..} = the encoded process.
+00:59:51.567       2026-10-14T21:59:51.567Z  child stdout (captured)  (WS001)  END_UTC=...+3.567Z, B..._COMPLETE, process exit RC=0
+                                                        (elapsed 3706 ms, matching the Start-Sleep 3s in the payload)
+
+NETWORK CHECK: Sysmon Event 3 filtered for ProcessGuid {edcef402-fb54-6acf-ef04-000000000700}
+               over a 2-hour window on WS001  ->  count = 0.  The encoded process made NO network connections.
+
+CENTRAL CORRELATION (DC1 ForwardedEvents - same RecordId, same TimeCreated, same fields):
+  Sysmon Ev1    RecId 3535  -> identical ProcessGuid/ProcessId/CommandLine/parent/Hashes
+  Security 4688 RecId 15141 -> identical NewProcessId/Parent/CommandLine/Subject
+  PowerShell4104 RecId 72974 -> identical ScriptBlockId + ScriptBlockText, ExecPID 1500
+  (Raw XML for source and centralized copies: evidence/raw/*-ws001.xml and *-dc1.xml)

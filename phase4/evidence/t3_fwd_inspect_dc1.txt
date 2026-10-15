@@ -1,0 +1,27 @@
+=== ForwardedEvents: provider/ID summary ===
+
+Name                                      Count
+----                                      -----
+Microsoft-Windows-Security-Auditing, 4688   194
+Microsoft-Windows-PowerShell, 4104          168
+Microsoft-Windows-Security-Auditing, 4624    38
+
+
+
+=== Sample centralized 4688 (raw XML) ===
+ProviderName=Microsoft-Windows-Security-Auditing  RecordId=14987  TimeCreated=10/15/2026 00:42:43
+--- System.Computer = SOC002-WS001.soc002.local
+--- EventData field names present ---
+SubjectUserSid, SubjectUserName, SubjectDomainName, SubjectLogonId, NewProcessId, NewProcessName, TokenElevationType, ProcessId, CommandLine, TargetUserSid, TargetUserName, TargetDomainName, TargetLogonId, ParentProcessName, MandatoryLabel
+--- CommandLine value ---
+powershell  -encodedcommand JABiAD0AWwBDAG8AbgB2AGUAcgB0AF0AOgA6AFQAbwBCAGEAcwBlADYANABTAHQAcgBpAG4AZwAoAFsASQBPAC4ARgBpAGwAZQBdADoAOgBSAGUAYQBkAEEAbABsAEIAeQB0AGUAcwAoACcAQwA6AFwAVABlAG0AcABcAHMAbwBjADAAMAAyAF8AcABoAGEAcwBlADQAXwBiAGEAYwBrAHUAcABcAHMAeQBzAG0AbwBuAF8AcgB1AG4AbgBpAG4AZwBfAGMAbwBuAGYAaQBnAC4AMgAwADIANgAxADAAMQA1AC0AMAAwADMANQAyADAALgB0AHgAdAAnACkAKQA7ACAAVwByAGkAdABlAC0ATwB1AHQAcAB1AHQAIAAkAGIA
+--- UserData? ---
+none
+--- first 1200 chars of raw XML ---
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event' xml:lang='en-US'><System><Provider Name='Microsoft-Windows-Security-Auditing' Guid='{54849625-5478-4994-a5ba-3e3b0328c30d}'/><EventID>4688</EventID><Version>2</Version><Level>0</Level><Task>13312</Task><Opcode>0</Opcode><Keywords>0x8020000000000000</Keywords><TimeCreated SystemTime='2026-10-14T21:42:43.6283962Z'/><EventRecordID>14987</EventRecordID><Correlation/><Execution ProcessID='4' ThreadID='3244'/><Channel>Security</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security/></System><EventData><Data Name='SubjectUserSid'>S-1-5-21-1571239376-360375575-1388094843-500</Data><Data Name='SubjectUserName'>Administrator</Data><Data Name='SubjectDomainName'>SOC002</Data><Data Name='SubjectLogonId'>0x5a5fd7</Data><Data Name='NewProcessId'>0x14dc</Data><Data Name='NewProcessName'>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data><Data Name='TokenElevationType'>%%1936</Data><Data Name='ProcessId'>0x14b0</Data><Data Name='CommandLine'>powershell  -encodedcommand JABiAD0AWwBDAG8AbgB2AGUAcgB0AF0AOgA6AFQAbwBCAGEAcwBlADYANABTAHQAcgBpAG4AZwAoAFsASQBPAC4ARgBpAGwAZQBdADoAOgBSAGUAYQBkAEEAbABsAEIAeQB0AGUAcwAo
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.10:5985/wsman

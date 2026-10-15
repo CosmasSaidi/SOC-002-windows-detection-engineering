@@ -1,0 +1,26 @@
+### PHASE 8 :: SINGLE CONTROLLED LIVE VALIDATION (DET-003) ###
+Target            = 192.168.56.102 (SOC002-WS001)
+Account           = SOC002\Administrator
+Payload body sha256 = C1735EFCFEEF584F529B922BC64A5A815FF0521C934E6B9E55A1AE65DBF58FD2
+Payload child cmd = powershell.exe -NoProfile -NonInteractive -Command "$b='U09DMDAyLVBIQVNFOC1ERVQwMDMtVEVTVApTT0MwMDIgUEhBU0UgOCBDT05UUk9MTEVEIERFVC0wMDMgVkFMSURBVElPTgpNYXJrZXI6IFNPQzAwMi1QSEFTRTgtREVUMDAzLVRFU1QKUHVycG9zZTogaGFybWxlc3MgbWFya2VyIHJlY29uc3RydWN0aW9uIG9ubHkuCg==';$t=[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($b));Write-Output $t"
+Encoded switch?   = NO
+Reconstructs with = [Convert]::FromBase64String
+Decoded content   = 'SOC002-PHASE8-DET003-TEST\nSOC002 PHASE 8 CONTROLLED DET-003 '
+========================================================================
+OperatorUtcBefore = 2026-10-14T23:35:06.021Z
+OperatorUtcStage  = 2026-10-14T23:35:06.021Z .. 2026-10-14T23:35:06.795Z
+  stage rc=0 out=STAGED=293
+OperatorUtcExec   = 2026-10-14T23:35:06.795Z .. 2026-10-14T23:35:08.139Z
+--- payload stdout ---
+SOC002-PHASE8-DET003-TEST
+SOC002 PHASE 8 CONTROLLED DET-003 VALIDATION
+Marker: SOC002-PHASE8-DET003-TEST
+Purpose: harmless marker reconstruction only.
+
+--- end payload stdout ---
+RC                = 0
+MARKER_PRESENT    = True
+OperatorUtcCleanup= 2026-10-14T23:35:08.139Z .. 2026-10-14T23:35:08.875Z
+  cleanup out=TMP_REMOVED=True
+OperatorUtcAfter  = 2026-10-14T23:35:08.875Z
+### END SINGLE CONTROLLED LIVE VALIDATION ###

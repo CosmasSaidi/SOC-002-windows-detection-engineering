@@ -1,0 +1,647 @@
+=== SOC002-DET-002 :: PowerShell lineage - delivery through a WinRM host process ===
+Library=phase6-v2.0 sha256=3C332445BFB69045E2AD3B135C8184086D91979D8FC03C1BBEAD79D17B69D09F
+Log=ForwardedEvents  Window=2026-10-15 00:04:46 .. 2026-10-15 01:05:46 (collector local)
+IndexFrom=2026-10-14 22:04:46  index records=1163  powershell/pwsh create records in window=42
+Pattern LIN-01 = winrshost.exe -> cmd.exe -> powershell.exe (OBSERVED in Phase 5, authorised management channel)
+CONTEXT ONLY - this detection never asserts maliciousness.
+-------------------------------------------------------------------
+
+[LINEAGE 001] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T22:05:32.172Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5812)
+  User             = SOC002\Administrator   LogonId=0x5e33b7
+  Chain            = powershell.exe(5812) <- cmd.exe(5264) <- winrshost.exe(2780) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 002] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T22:05:17.770Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3440)
+  User             = SOC002\Administrator   LogonId=0x5e11aa
+  Chain            = powershell.exe(3440) <- cmd.exe(5860) <- winrshost.exe(6072) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 003] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T22:05:05.767Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 4284)
+  User             = SOC002\Administrator   LogonId=0x5dedc9
+  Chain            = powershell.exe(4284) <- cmd.exe(4536) <- winrshost.exe(2568) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 004] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T22:02:56.236Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3660)
+  User             = SOC002\Administrator   LogonId=0x5da88e
+  Chain            = powershell.exe(3660) <- cmd.exe(5432) <- winrshost.exe(4460) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 005] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T22:01:58.952Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 852)
+  User             = SOC002\Administrator   LogonId=0x5d841a
+  Chain            = powershell.exe(852) <- cmd.exe(4396) <- winrshost.exe(3144) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 006] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T22:01:57.028Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 2832)
+  User             = SOC002\Administrator   LogonId=0x5d69a0
+  Chain            = powershell.exe(2832) <- cmd.exe(5848) <- winrshost.exe(4976) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 007] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T22:01:55.201Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3412)
+  User             = SOC002\Administrator   LogonId=0x5d4f23
+  Chain            = powershell.exe(3412) <- cmd.exe(2860) <- winrshost.exe(2456) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 008] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T22:01:53.341Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1444)
+  User             = SOC002\Administrator   LogonId=0x5d2ef4
+  Chain            = powershell.exe(1444) <- cmd.exe(344) <- winrshost.exe(5428) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 009] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T22:00:54.447Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5944)
+  User             = SOC002\Administrator   LogonId=0x5d09bc
+  Chain            = powershell.exe(5944) <- cmd.exe(3416) <- winrshost.exe(5852) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 010] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T22:00:52.463Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5920)
+  User             = SOC002\Administrator   LogonId=0x5ced15
+  Chain            = powershell.exe(5920) <- cmd.exe(2380) <- winrshost.exe(3348) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 011] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T22:00:49.872Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 4012)
+  User             = SOC002\Administrator   LogonId=0x5cd149
+  Chain            = powershell.exe(4012) <- cmd.exe(5548) <- winrshost.exe(2964) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 012] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T22:00:47.365Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 4348)
+  User             = SOC002\Administrator   LogonId=0x5cb42c
+  Chain            = powershell.exe(4348) <- cmd.exe(1004) <- winrshost.exe(4772) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 013] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:59:48.080Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1500)
+  User             = SOC002\Administrator   LogonId=0x5c764d
+  Chain            = powershell.exe(1500) <- powershell.exe(4576) <- cmd.exe(3596) <- winrshost.exe(5800) <- svchost.exe(716) <- services.exe(604)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:powershell.exe[OBSERVED-PARENT-EVENT] d2:cmd.exe[OBSERVED-PARENT-EVENT] d3:winrshost.exe[OBSERVED-PARENT-EVENT] d4:svchost.exe[OBSERVED-PARENT-EVENT] d5:services.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = not matched   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 014] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:59:47.583Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 4576)
+  User             = SOC002\Administrator   LogonId=0x5c764d
+  Chain            = powershell.exe(4576) <- cmd.exe(3596) <- winrshost.exe(5800) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 015] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:59:09.175Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 4372)
+  User             = SOC002\Administrator   LogonId=0x5c51ef
+  Chain            = powershell.exe(4372) <- cmd.exe(5368) <- winrshost.exe(5672) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 016] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:58:52.617Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5452)
+  User             = SOC002\Administrator   LogonId=0x5c2c6d
+  Chain            = powershell.exe(5452) <- cmd.exe(6120) <- winrshost.exe(5432) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 017] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:48:01.288Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3156)
+  User             = SOC002\Administrator   LogonId=0x5b86d1
+  Chain            = powershell.exe(3156) <- cmd.exe(2200) <- winrshost.exe(4876) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 018] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:46:53.466Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 996)
+  User             = SOC002\Administrator   LogonId=0x5b4a18
+  Chain            = powershell.exe(996) <- cmd.exe(220) <- winrshost.exe(1144) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 019] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:44:30.124Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 6096)
+  User             = SOC002\Administrator   LogonId=0x5aca1d
+  Chain            = powershell.exe(6096) <- cmd.exe(3316) <- winrshost.exe(5900) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 020] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:42:43.634Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5340)
+  User             = SOC002\Administrator   LogonId=0x5a5fd7
+  Chain            = powershell.exe(5340) <- cmd.exe(5296) <- winrshost.exe(5960) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 021] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:42:42.153Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 2040)
+  User             = SOC002\Administrator   LogonId=0x5a4803
+  Chain            = powershell.exe(2040) <- cmd.exe(5552) <- winrshost.exe(5144) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 022] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:42:40.652Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 4548)
+  User             = SOC002\Administrator   LogonId=0x5a3025
+  Chain            = powershell.exe(4548) <- cmd.exe(6092) <- winrshost.exe(3572) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 023] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:42:39.172Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3352)
+  User             = SOC002\Administrator   LogonId=0x5a1834
+  Chain            = powershell.exe(3352) <- cmd.exe(3400) <- winrshost.exe(3616) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 024] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:42:37.705Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5360)
+  User             = SOC002\Administrator   LogonId=0x59ff87
+  Chain            = powershell.exe(5360) <- cmd.exe(5312) <- winrshost.exe(3432) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 025] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:42:29.742Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 3156)
+  User             = SOC002\Administrator   LogonId=0x59e945
+  Chain            = powershell.exe(3156) <- cmd.exe(5768) <- winrshost.exe(5748) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 026] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:42:28.258Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5812)
+  User             = SOC002\Administrator   LogonId=0x59d0f1
+  Chain            = powershell.exe(5812) <- cmd.exe(5372) <- winrshost.exe(1744) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 027] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:42:20.396Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 2460)
+  User             = SOC002\Administrator   LogonId=0x59bb68
+  Chain            = powershell.exe(2460) <- cmd.exe(996) <- winrshost.exe(568) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 028] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:42:19.058Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 4324)
+  User             = SOC002\Administrator   LogonId=0x59a67b
+  Chain            = powershell.exe(4324) <- cmd.exe(4616) <- winrshost.exe(196) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 029] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:42:17.729Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5496)
+  User             = SOC002\Administrator   LogonId=0x59910a
+  Chain            = powershell.exe(5496) <- cmd.exe(2504) <- winrshost.exe(3388) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 030] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:42:16.392Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 2436)
+  User             = SOC002\Administrator   LogonId=0x597c5d
+  Chain            = powershell.exe(2436) <- cmd.exe(5500) <- winrshost.exe(1028) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 031] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:42:15.054Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 4044)
+  User             = SOC002\Administrator   LogonId=0x596727
+  Chain            = powershell.exe(4044) <- cmd.exe(4704) <- winrshost.exe(5216) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 032] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:41:51.898Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 4696)
+  User             = SOC002\Administrator   LogonId=0x59484c
+  Chain            = powershell.exe(4696) <- cmd.exe(336) <- winrshost.exe(5436) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 033] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:41:22.230Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 6072)
+  User             = SOC002\Administrator   LogonId=0x592742
+  Chain            = powershell.exe(6072) <- cmd.exe(1368) <- winrshost.exe(6124) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 034] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:41:10.485Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1832)
+  User             = SOC002\Administrator   LogonId=0x590556
+  Chain            = powershell.exe(1832) <- cmd.exe(4932) <- winrshost.exe(960) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 035] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:07:38.959Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5684)
+  User             = SOC002\Administrator   LogonId=0x429cc7
+  Chain            = powershell.exe(5684) <- cmd.exe(4328) <- winrshost.exe(5148) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 036] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:07:23.160Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1212)
+  User             = SOC002\Administrator   LogonId=0x427fd2
+  Chain            = powershell.exe(1212) <- cmd.exe(5292) <- winrshost.exe(2840) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 037] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:07:22.238Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5344)
+  User             = SOC002\Administrator   LogonId=0x42661a
+  Chain            = powershell.exe(5344) <- cmd.exe(6048) <- winrshost.exe(4932) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 038] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:07:21.263Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1004)
+  User             = SOC002\Administrator   LogonId=0x424c1c
+  Chain            = powershell.exe(1004) <- cmd.exe(5564) <- winrshost.exe(576) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 039] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:07:20.227Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 4488)
+  User             = SOC002\Administrator   LogonId=0x423032
+  Chain            = powershell.exe(4488) <- cmd.exe(1608) <- winrshost.exe(5844) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 040] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:05:36.696Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 196)
+  User             = SOC002\Administrator   LogonId=0x41ec4c
+  Chain            = powershell.exe(196) <- cmd.exe(4412) <- winrshost.exe(1784) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 041] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:05:20.404Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 5848)
+  User             = SOC002\Administrator   LogonId=0x4196a8
+  Chain            = powershell.exe(5848) <- cmd.exe(1840) <- winrshost.exe(5880) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+[LINEAGE 042] SOC002-DET-002 PowerShell delivered through a WinRM host process - CONTEXT ONLY
+  Host             = SOC002-WS001.soc002.local
+  EventUtc         = 2026-10-14T21:05:18.830Z
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 2276)
+  User             = SOC002\Administrator   LogonId=0x41722a
+  Chain            = powershell.exe(2276) <- cmd.exe(4772) <- winrshost.exe(996) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+  Chain hops       = d0:powershell.exe[OBSERVED-CHILD-EVENT] d1:cmd.exe[OBSERVED-PARENT-EVENT] d2:winrshost.exe[OBSERVED-PARENT-EVENT] d3:svchost.exe[OBSERVED-PARENT-EVENT] d4:services.exe[OBSERVED-PARENT-EVENT] d5:wininit.exe[OBSERVED-PARENT-EVENT]
+  Shape LIN-01     = MATCHED   (winrshost.exe -> cmd.exe -> powershell.exe is the Phase 5 OBSERVED shape)
+  Encoded switch   = present
+  Meaning          = execution was delivered through a WinRM host process (INFERRED from the chain)
+  Trust call       = winrshost.exe / wsmprovhost.exe is the SANCTIONED administration channel in this lab - this record is context, NOT evidence of maliciousness
+  Limit            = This detection is about HOW a process was created, not about WHAT it did.
+  Limit            = A WinRM-rooted lineage is expected for all operator activity, including this lab's own data collection.
+  Limit            = Lineage depth depends on the surviving process events: a missing parent event truncates the chain silently.
+
+--- SOC002-DET-002 summary ------------------------------------------
+PowerShell process-create records examined    = 42
+Lineages with a WinRM host in the ancestry    = 42
+   of which LIN-01 exact shape (winrshost->cmd->powershell) = 41
+PowerShell creates whose ancestry did NOT resolve = 0  (context gap, reported not hidden)
+CONTEXT, NOT ACCUSATION: a winrshost.exe-rooted lineage is expected for every remote administration call in this lab, including the SOC team's own collection runs.
+
+
+[RC]=0

@@ -1,0 +1,26 @@
+ForwardedEvents RecordCount = 2265
+newestRecordId=3440  oldestRecordId=6340
+maxRecordId=72838
+=== Is EventRecordID the source's or the collector's own sequence? ===
+RecordCount=2265 vs maxRecordId=72838  -> if maxRecordId >> RecordCount then source IDs are preserved
+=== Existing telemetry preserved after subscription change (by provider/id, newest timestamps) ===
+Microsoft-Windows-Security-Auditing 4688: newest TimeCreated=2026-10-15 00:44:30 FwdRecId=15044
+Microsoft-Windows-Security-Auditing 4624: newest TimeCreated=2026-10-15 00:44:30 FwdRecId=15038
+Microsoft-Windows-PowerShell 4104: newest TimeCreated=2026-10-15 00:44:40 FwdRecId=72838
+Microsoft-Windows-Sysmon 1: newest TimeCreated=2026-10-15 00:44:30 FwdRecId=3423
+Microsoft-Windows-Sysmon 3: newest TimeCreated=2026-10-15 00:45:47 FwdRecId=3440
+=== wecutil gr ===
+﻿
+Subscription: SOC002-WS001-Security
+	RunTimeStatus: Active
+	LastError: 0
+	EventSources:
+		SOC002-WS001.soc002.local
+			RunTimeStatus: Active
+			LastError: 0
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.10:5985/wsman

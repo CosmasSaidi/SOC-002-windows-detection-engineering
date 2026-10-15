@@ -1,0 +1,36 @@
+=== HOST ===
+SOC002-WS001
+=== OS ===
+Microsoft Windows 10 Pro
+=== KEY: HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Audit ===
+
+
+ProcessCreationIncludeCmdLine_Enabled : 1
+
+
+
+
+ProcessCreationIncludeCmdLine_Enabled value: 1
+=== KEY: HKLM\SOFTWARE\Policies\Microsoft\Windows\System (AuditProcessCreation) ===
+
+=== auditpol Process Creation ===
+System audit policy
+Category/Subcategory                      Setting
+Detailed Tracking
+  Process Creation                        Success and Failure
+=== auditpol Detailed Tracking overview ===
+System audit policy
+Category/Subcategory                      Setting
+Detailed Tracking
+  Process Termination                     No Auditing
+  DPAPI Activity                          No Auditing
+  RPC Events                              No Auditing
+  Plug and Play Events                    No Auditing
+  Token Right Adjusted Events             No Auditing
+  Process Creation                        Success and Failure
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">2</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="2"><TNRef RefId="0" /><MS><I64 N="SourceId">2</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.102:5985/wsman

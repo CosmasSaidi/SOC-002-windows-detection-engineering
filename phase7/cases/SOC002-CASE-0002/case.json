@@ -1,0 +1,290 @@
+{
+  "case_id": "SOC002-CASE-0002",
+  "case_version": "1.0",
+  "status": "CLOSED",
+  "title": "Phase 7 controlled blind-spot validation - DET-001 v2 does not cover -Command with [Convert]::FromBase64String",
+  "labeling_convention": {
+    "OBSERVED": "directly present in captured telemetry or in a preserved artefact",
+    "INFERRED": "a conclusion drawn from the observations, stated as such",
+    "NOT VERIFIED": "not established by the evidence available in this phase"
+  },
+  "alerts": [
+    {
+      "alert_id": "SOC002-DET-001-v2/BASE-001",
+      "detection": "SOC002-DET-001 v2",
+      "tier": "BASELINE-TRANSPORT-CONFIRMED",
+      "severity": "INFO",
+      "utc": "2026-10-14T23:06:41.712Z",
+      "record_id": "4141",
+      "process": "powershell.exe PID 2936",
+      "why": "WinRS transport wrapper of the operator's own WinRM call; BASE-01 matched and the winrshost.exe ancestry resolved",
+      "is_the_test_subject": false
+    },
+    {
+      "alert_id": "SOC002-DET-001-v2/ALERT-001..003",
+      "detection": "SOC002-DET-001 v2",
+      "tier": "INVESTIGATION",
+      "severity": "MEDIUM",
+      "utc": "2026-10-14T23:04-23:06Z (session window only)",
+      "process": "powershell.exe PID 3308 / others",
+      "why": "BASE-01 OVERRIDDEN by payload escalation ESC-03: the decoded payload of the operator's own staged-file transfer contains [Convert]::FromBase64String",
+      "is_the_test_subject": false
+    },
+    {
+      "alert_id": "SOC002-DET-002/LINEAGE-001",
+      "detection": "SOC002-DET-002",
+      "tier": "CONTEXT",
+      "severity": "CONTEXT",
+      "utc": "2026-10-14T23:06:42.046Z",
+      "record_id": "4142",
+      "process": "powershell.exe PID 1428",
+      "why": "chain powershell(1428) <- powershell(2936) <- cmd.exe(1808) <- winrshost(2992); Shape LIN-01 not matched; Encoded switch = absent",
+      "is_the_test_subject": true
+    },
+    {
+      "alert_id": "SOC002-CORR-001/CORRELATION-001",
+      "detection": "SOC002-CORR-001",
+      "tier": "CONTEXT",
+      "severity": "CONTEXT",
+      "utc": "2026-10-14T23:06:41.712Z",
+      "process": "powershell.exe PID 2936",
+      "why": "joined the single DET-001 candidate (the transport) with its DET-002 lineage",
+      "is_the_test_subject": false
+    }
+  ],
+  "source_records": [
+    {
+      "source": "Security 4688",
+      "record_ids": [
+        "15754",
+        "15755",
+        "15756",
+        "15757",
+        "15758"
+      ],
+      "utc_first": "2026-10-14T23:06:41.601Z",
+      "utc_last": "2026-10-14T23:06:42.031Z"
+    },
+    {
+      "source": "Sysmon Event 1",
+      "record_ids": [
+        "4138",
+        "4139",
+        "4140",
+        "4141",
+        "4142"
+      ],
+      "utc_first": "2026-10-14T23:06:41.614Z",
+      "utc_last": "2026-10-14T23:06:42.046Z"
+    },
+    {
+      "source": "PowerShell 4104",
+      "record_ids": [
+        "74338",
+        "74343",
+        "74350",
+        "74354"
+      ],
+      "utc_first": "2026-10-14T23:06:42.015Z",
+      "utc_last": "2026-10-14T23:06:42.693Z"
+    },
+    {
+      "source": "Sysmon Event 3",
+      "record_ids": [
+        "4144",
+        "4145",
+        "4146"
+      ],
+      "note": "two inbound connections to WS001:5985 from the operator host, one lsass.exe connection to DC1 (domain auth); neither the payload nor the transport initiated network activity"
+    },
+    {
+      "source": "DC1 ForwardedEvents",
+      "note": "the same 14 events with identical RecordIDs arrived centrally via WEF"
+    }
+  ],
+  "affected": {
+    "host": {
+      "name": "SOC002-WS001.soc002.local",
+      "ip": "192.168.56.102",
+      "OS": "Windows 10 Pro",
+      "domain": "soc002.local"
+    },
+    "collector": {
+      "name": "SOC002-DC1",
+      "ip": "192.168.56.10",
+      "role": "WEF collector / ForwardedEvents"
+    },
+    "user": {
+      "account": "SOC002\\Administrator"
+    },
+    "logon_id": {
+      "value": "0x644e0e",
+      "note": "identifier, not a secret"
+    },
+    "process": {
+      "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "pid": "1428",
+      "parent_image": "same powershell.exe (PID 2936, WinRS transport)",
+      "integrity": "High"
+    },
+    "binary_sha256": {
+      "payload_and_transport_powershell": "B4E7BC24BF3F5C3DA2EB6E9EC5EC10F90099DEFA91B820F2F3FC70DD9E4785C4"
+    }
+  },
+  "timestamps": [
+    {
+      "utc": "2026-10-14T23:04:27.966Z",
+      "event": "first (failed) delivery attempt; blocked by WS001 execution policy, payload did not run"
+    },
+    {
+      "utc": "2026-10-14T23:06:23Z",
+      "event": "payload staged on WS001"
+    },
+    {
+      "utc": "2026-10-14T23:06:41.685Z",
+      "event": "WinRS transport cmd.exe created (cmd.exe /C powershell -encodedcommand <b64>)"
+    },
+    {
+      "utc": "2026-10-14T23:06:41.712Z",
+      "event": "transport powershell.exe PID 2936 created (DET-001 candidate -> BASE-01)"
+    },
+    {
+      "utc": "2026-10-14T23:06:42.046Z",
+      "event": "PAYLOAD powershell.exe PID 1428 created with -Command + [Convert]::FromBase64String (NOT a DET-001 candidate)"
+    },
+    {
+      "utc": "2026-10-14T23:06:42.488Z",
+      "event": "payload reconstructed and printed the marker (child START_UTC)"
+    },
+    {
+      "utc": "2026-10-14T23:06:42.951Z",
+      "event": "execution returned, exit code 0"
+    },
+    {
+      "utc": "2026-10-14T23:10:35Z",
+      "event": "central ForwardedEvents collection confirmed the same 14 events"
+    }
+  ],
+  "controlled_command": {
+    "loader_line": "$c=[IO.File]::ReadAllText('C:\\Windows\\Temp\\soc002-phase7\\phase7_child_command.txt'); powershell.exe -NoProfile -NonInteractive -Command $c",
+    "payload_process_command_form": "powershell.exe -NoProfile -NonInteractive -Command \"$b='<base64>';$t=[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($b));Write-Output $t;...\"",
+    "encoded_command_switch_used": false,
+    "reconstruction_method": "[Convert]::FromBase64String",
+    "decoded_content": "plain text only: the marker SOC002-PHASE7-BLINDSPOT-TEST plus a purpose line; never executed",
+    "executions": 1,
+    "persistence": false,
+    "configuration_change": false,
+    "network_contact_by_payload": false,
+    "marker_observed": "SOC002-PHASE7-BLINDSPOT-TEST"
+  },
+  "evidence_references": {
+    "phase5_preserved": [
+      "evidence/pre_state_phase5_sha256.txt (88 files, unchanged)"
+    ],
+    "phase6_preserved": [
+      "evidence/pre_state_phase6_sha256.txt (34 files, unchanged)"
+    ],
+    "phase7": [
+      "evidence/t1_preflight_blindspot_check.txt",
+      "evidence/t2_staging_transcript.txt",
+      "evidence/t3_controlled_execution_ws001.txt",
+      "evidence/t4_local_telemetry_ws001_controlled.txt",
+      "evidence/t5_central_telemetry_dc1_controlled.txt",
+      "evidence/t6_det001_controlled.txt",
+      "evidence/t6_det002_controlled.txt",
+      "evidence/t6_corr001_controlled.txt",
+      "evidence/t6_detection_stack_session.txt",
+      "evidence/t7_baseline_comparison.txt",
+      "evidence/t8_process_lineage.txt",
+      "evidence/t9_detection_result.json",
+      "evidence/t10_investigation_notes.txt",
+      "evidence/t11_limitations.txt",
+      "evidence/phase7_payload_decoded.txt",
+      "evidence/phase7_payload_metadata.json",
+      "evidence/raw/",
+      "SHA256_MANIFEST.txt"
+    ]
+  },
+  "detection_references": [
+    {
+      "detection": "SOC002-DET-001 v2",
+      "file": "phase6/detections/detect_encoded_powershell_v2.ps1",
+      "sha256": "C9B73426134571DFA6A26DF3CB39E4D6030CE5886720CF7679DE575845B0D16C",
+      "modified_in_phase7": false
+    },
+    {
+      "detection": "SOC002-DET-002",
+      "file": "phase6/detections/detect_powershell_lineage.ps1",
+      "sha256": "86149F2559512515CE2A97F54BBEE1D54E788CC21D5346C34278326434668BAE",
+      "modified_in_phase7": false
+    },
+    {
+      "detection": "SOC002-CORR-001",
+      "file": "phase6/detections/correlate_det001_det002.ps1",
+      "sha256": "D4D5D12FA62AB856816EA5B81CE4D0F2E154FA614764B05F34AC9C510930C974",
+      "modified_in_phase7": false
+    },
+    {
+      "detection": "shared library",
+      "file": "phase6/detections/lib_soc002_v2.ps1",
+      "sha256": "3C332445BFB69045E2AD3B135C8184086D91979D8FC03C1BBEAD79D17B69D09F",
+      "modified_in_phase7": false
+    }
+  ],
+  "investigation_summary": "One controlled, benign true-positive validation was executed against the Phase 6 blind spot: a PowerShell process started normally and reconstructed a harmless marker from base64 using [Convert]::FromBase64String inside a -Command script, with no encoded-command CLI switch anywhere in its command line. The existing Phase 6 detection stack was then run unmodified over the controlled window and the surrounding session. DET-001 v2 produced no candidate for the payload process, DET-002 recorded it as WinRM-delivered lineage context with 'Encoded switch = absent', and CORR-001 produced nothing for it because it iterates DET-001 candidates. The blind spot is confirmed.",
+  "observed_facts": [
+    "OBSERVED: exactly one controlled execution occurred; the marker SOC002-PHASE7-BLINDSPOT-TEST was printed by PID 1428 and the process exited 0.",
+    "OBSERVED: the payload process command line is powershell.exe -NoProfile -NonInteractive -Command \"... [Convert]::FromBase64String($b) ...\" and contains no -EncodedCommand/-enc/-e/-en switch.",
+    "OBSERVED: Security 4688, Sysmon Event 1 and PowerShell 4104 all captured the payload process locally on WS001 (5, 5 and 4 records respectively in the controlled window).",
+    "OBSERVED: the same 14 events, with identical RecordIDs, arrived in DC1 ForwardedEvents through WEF.",
+    "OBSERVED: the process tree is winrshost.exe -> cmd.exe(/C powershell -encodedcommand) -> powershell.exe(transport) -> powershell.exe(payload), i.e. depth 3 to the payload, matching the Phase 5 controlled test.",
+    "OBSERVED: DET-001 v2 produced 1 candidate in the controlled window, all of it the transport powershell (PID 2936), which BASE-01 baselined as INFO; 0 INVESTIGATION records; 0 payload-screen escalations.",
+    "OBSERVED: the DET-001 v2 trigger returns no match when the unmodified Phase 6 library is applied to the payload's exact command line.",
+    "OBSERVED: DET-002 produced a lineage record for the payload process (PID 1428) with 'Encoded switch = absent'; CORR-001 produced no record for it.",
+    "OBSERVED: in the wider session window DET-001 v2 produced 3 INVESTIGATION records, all of them the operator's own staged-file transfers escalated by ESC-03; none is the payload process.",
+    "OBSERVED: the only network events in the controlled window are two inbound connections to WS001:5985 from the operator host and one lsass.exe connection to DC1; the payload and the transport initiated none.",
+    "OBSERVED: the first delivery attempt (a staged .ps1 executed with &) was refused by WS001's Restricted execution policy and the payload did not run; no policy was changed afterwards.",
+    "OBSERVED: Phase 5 and Phase 6 trees are byte-for-byte unchanged (88 and 34 files re-hashed and compared)."
+  ],
+  "inferred_facts": [
+    "INFERRED: the Phase 6 blind spot is real and reproducible - DET-001 v2's coverage is bounded by the encoded-command CLI switch, not by whether a base64 reconstruction occurred.",
+    "INFERRED: the correlation layer inherits that blind spot by construction, because CORR-001 only consumes DET-001 candidates.",
+    "INFERRED: within this lab, DET-002 is currently the only existing component that surfaces this behaviour, and only as context ('Encoded switch = absent'), not as a detection of the technique.",
+    "INFERRED: BASE-01 did not hide the Phase 7 activity; it simply never had to make a decision about it, because no candidate was created for the payload process."
+  ],
+  "not_verified": [
+    "NOT VERIFIED: whether other switch-free representations of the same idea (call operator with a decoded string, Invoke-Expression, compressed/hex blobs, multi-stage decoding) are equally invisible - only the -Command + FromBase64String form was tested.",
+    "NOT VERIFIED: whether the stack would detect reconstruct-and-EXECUTE behaviour, since the decoded content in this test is plain text and is never executed.",
+    "NOT VERIFIED: the alert volume or precision of any candidate Phase 8 detection, since none was written or tested in Phase 7.",
+    "NOT VERIFIED: behaviour in any environment where WinRM is not the sanctioned management path, or at scale (one host, one run).",
+    "NOT VERIFIED: whether an attacker would use this representation at all - the test is adversary-emulation of a technique shape, not evidence of adversary intent."
+  ],
+  "final_classification": "CONTROLLED TEST ACTIVITY / AUTHORISED BENIGN",
+  "classification_authority": "Phase 7 lab design: one documented, benign, authorised validation run performed by the lab operator through the sanctioned WinRM management channel, with a confirmed detection gap recorded rather than hidden.",
+  "detection_result": {
+    "det001_v2_detected_the_activity": "NO (trigger bypassed; the payload process never became a candidate)",
+    "det002_detected_the_activity": "NO detection - it recorded CONTEXT for the payload process (lineage, 'Encoded switch = absent')",
+    "corr001_correlated_the_activity": "NO (no DET-001 candidate existed for the payload process)",
+    "blind_spot_confirmed": "YES",
+    "outcome": "OUTCOME B",
+    "detections_modified_in_phase7": false
+  },
+  "analyst_conclusion": "The controlled activity did exactly what the Phase 7 design required and nothing more: it decoded a fixed base64 blob to plain text and printed it. The Phase 6 detection stack was run unchanged and behaved exactly as its documentation predicted. DET-001 v2 cannot see a base64 reconstruction that is expressed inside a -Command script, because its trigger keys on the encoded-command CLI switch - this is now CONFIRMED by measurement on live activity rather than by reasoning over preserved evidence. The activity is benign, authorised lab activity and is classified as such; the finding of value is the detection gap, not the activity. No detection was modified to change the outcome.",
+  "recommended_follow_up": [
+    "Phase 8 (detection engineering, NOT performed here): add a SECOND, complementary detection that keys on in-PowerShell base64 reconstruction ([Convert]::FromBase64String / FromBase64CharArray) and on decode-then-execute adjacency, rather than extending the DET-001 trigger. Keep it separate so DET-001's coverage claim stays auditable.",
+    "Phase 8: decide explicitly whether CORR-001 should be able to correlate on DET-002 lineage alone, since today anything the trigger misses is invisible to the correlation layer.",
+    "Phase 8: keep the operator's own staging traffic in view - the ESC-03 escalations caused by ordinary file transfers are a measurable precision cost that will grow with tooling use.",
+    "Do NOT broaden BASE-01 to depth-3 powershell-in-powershell; that would hide exactly the activity Phase 7 just demonstrated.",
+    "Re-run this exact controlled test unchanged after any Phase 8 detection work, so the before/after is comparable."
+  ],
+  "provenance": {
+    "created_in": "SOC-002 Phase 7",
+    "derived_from": "controlled execution on SOC002-WS001 plus unmodified Phase 6 detection output over DC1 ForwardedEvents",
+    "new_activity_generated": true,
+    "activity_description": "one benign base64-reconstruction validation; no persistence, no configuration change, no payload network contact, no privilege escalation, no lateral movement",
+    "phase5_evidence_modified": false,
+    "phase6_evidence_modified": false,
+    "detections_modified": false,
+    "credentials_or_secrets_included": false
+  }
+}

@@ -1,0 +1,24 @@
+total4688=2280
+emptyCommandLine=2105
+nonEmptyCommandLine=175
+earliestNonEmptyTime=10/14/2026 23:54:10
+latestEmptyTime=10/14/2026 23:54:09
+=== Registry key LastWriteTime via P/Invoke ===
+AuditKeyLastWriteTime=
+
+[STDERR]
+Add-Type : Cannot add type. Compilation errors occurred.
+At line:40 char:1
++ Add-Type -TypeDefinition $code -ErrorAction SilentlyContinue
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidData: (:) [Add-Type], InvalidOperationException
+    + FullyQualifiedErrorId : COMPILER_ERRORS,Microsoft.PowerShell.Commands.AddTypeCommand
+ 
+Unable to find type [RegTime].
+At line:41 char:6
++ $t = [RegTime]::GetLastWrite('SOFTWARE\Microsoft\Windows\CurrentVersi ...
++      ~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (RegTime:TypeName) [], RuntimeException
+    + FullyQualifiedErrorId : TypeNotFound
+[RC]=0
+[EP]=http://192.168.56.102:5985/wsman

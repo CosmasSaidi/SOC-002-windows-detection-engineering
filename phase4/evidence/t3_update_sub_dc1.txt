@@ -1,0 +1,43 @@
+=== Applying via: wecutil ss SOC002-WS001-Security /c:C:\Temp\wef_subscription.phase4.xml ===
+ExitCode=87
+=== VERIFY: wecutil gs ===
+﻿Subscription Id: SOC002-WS001-Security
+SubscriptionType: CollectorInitiated
+Description: Known-good Security 4624 4625 4688 plus PowerShell 4104
+Enabled: true
+Uri: http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog
+ConfigurationMode: Custom
+DeliveryMode: Pull
+DeliveryMaxItems: 1
+DeliveryMaxLatencyTime: 5000
+HeartbeatInterval: 5000
+Query: <QueryList><Query Id="0"><Select Path="Security">*[System[(EventID=4624 or EventID=4625 or EventID=4688)]]</Select><Select Path="Microsoft-Windows-PowerShell/Operational">*[System[(EventID=4104)]]</Select></Query></QueryList>
+ReadExistingEvents: false
+TransportName: HTTP
+TransportPort: 5985
+ContentFormat: RenderedText
+Locale: en-US
+LogFile: ForwardedEvents
+PublisherName: Microsoft-Windows-EventCollector
+CredentialsType: Default
+
+EventSource[0]:
+	Address: SOC002-WS001.soc002.local
+	Enabled: true
+=== VERIFY: wecutil gr ===
+﻿
+Subscription: SOC002-WS001-Security
+	RunTimeStatus: Active
+	LastError: 0
+	EventSources:
+		SOC002-WS001.soc002.local
+			RunTimeStatus: Active
+			LastError: 0
+
+[STDERR]
+#< CLIXML
+Too many arguments are specified. Error = 0x57.
+The parameter is incorrect.
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.10:5985/wsman

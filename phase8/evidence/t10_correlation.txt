@@ -1,0 +1,371 @@
+=== SOC-002 PHASE 8 :: CORRELATION EVIDENCE (SOC002-CORR-002) ===
+Generated (utc): 2026-10-14T23:40:24Z
+
+CORR-002 ties a DET-003 reconstruction observation to:
+  * the matching Sysmon Event 1  (process, ProcessGuid, LogonId, hashes)
+  * the matching Security 4688   (creator chain, subject, LogonId)
+  * the PowerShell 4104 block    (ScriptBlockId, ExecPID, text)
+  * the DET-002 lineage context  (WinRM-rooted delivery chain), when it exists
+
+Correlation is CONTEXT, not a verdict. Gaps are printed, never hidden.
+
+################################################################
+SECTION A - CORRELATION OVER THE PRESERVED PHASE 7 CONTROLLED WINDOW (WS001)
+################################################################
+--- D) CORRELATION (CORR-002) OVER THE REPLAYED EVIDENCE ----------------------
+
+[CORR-002 001] CORR2-SOC002-WS001-1428-20261014T230642Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 1428
+  EventUtc         = 2026-10-14T23:06:42.031Z
+  User             = SOC002\Administrator
+  ProcessGuid      = 
+  ScriptBlockId    = 
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=False  DET-002=True
+  DET-002 lineage  = powershell.exe(1428) <- powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716)
+  Correlation gap  = no PowerShell 4104 block linked to this process
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0b02-6ad0-b305-000000000700}, PID 1428)
+  Reading          = linked Security 4688 (RecordId 15758, PID 1428)
+  Reading          = NO linked PowerShell 4104 script block for this PID/window (correlation gap)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 002] CORR2-SOC002-WS001-1428-20261014T230642Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 1428
+  EventUtc         = 2026-10-14T23:06:42.046Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0b02-6ad0-b305-000000000700}
+  ScriptBlockId    = 
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=False  DET-002=True
+  DET-002 lineage  = powershell.exe(1428) <- powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716)
+  Correlation gap  = no PowerShell 4104 block linked to this process
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0b02-6ad0-b305-000000000700}, PID 1428)
+  Reading          = linked Security 4688 (RecordId 15758, PID 1428)
+  Reading          = NO linked PowerShell 4104 script block for this PID/window (correlation gap)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 003] CORR2-SOC002-WS001-1428-20261014T230642Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 1428
+  EventUtc         = 2026-10-14T23:06:42.336Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0b02-6ad0-b305-000000000700}
+  ScriptBlockId    = 96c73586-2334-4bbd-a1c7-e2e5163f19c0
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(1428) <- powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0b02-6ad0-b305-000000000700}, PID 1428)
+  Reading          = linked Security 4688 (RecordId 15758, PID 1428)
+  Reading          = linked PowerShell 4104 (ScriptBlockId 96c73586-2334-4bbd-a1c7-e2e5163f19c0, ExecPID 1428)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+--- E) TARGETED PHASE 7 CROSS-CHECK (payload located by its blob signature) ---
+
+################################################################
+SECTION B - CORRELATION OVER THE PRESERVED PHASE 7 SESSION WINDOW (WS001)
+################################################################
+--- D) CORRELATION (CORR-002) OVER THE REPLAYED EVIDENCE ----------------------
+
+[CORR-002 001] CORR2-SOC002-WS001-1428-20261014T230642Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 1428
+  EventUtc         = 2026-10-14T23:06:42.031Z
+  User             = SOC002\Administrator
+  ProcessGuid      = 
+  ScriptBlockId    = 
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=False  DET-002=True
+  DET-002 lineage  = powershell.exe(1428) <- powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716)
+  Correlation gap  = no PowerShell 4104 block linked to this process
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0b02-6ad0-b305-000000000700}, PID 1428)
+  Reading          = linked Security 4688 (RecordId 15758, PID 1428)
+  Reading          = NO linked PowerShell 4104 script block for this PID/window (correlation gap)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 002] CORR2-SOC002-WS001-1428-20261014T230642Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 1428
+  EventUtc         = 2026-10-14T23:06:42.046Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0b02-6ad0-b305-000000000700}
+  ScriptBlockId    = 
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=False  DET-002=True
+  DET-002 lineage  = powershell.exe(1428) <- powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716)
+  Correlation gap  = no PowerShell 4104 block linked to this process
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0b02-6ad0-b305-000000000700}, PID 1428)
+  Reading          = linked Security 4688 (RecordId 15758, PID 1428)
+  Reading          = NO linked PowerShell 4104 script block for this PID/window (correlation gap)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 003] CORR2-SOC002-WS001-5700-20261014T230408Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 5700
+  EventUtc         = 2026-10-14T23:04:08.539Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0a68-6ad0-6805-000000000700}
+  ScriptBlockId    = a48c77fe-9496-4e0b-959b-4df3cc602b9c
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(5700) <- cmd.exe(3988) <- winrshost.exe(4572) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0a68-6ad0-6805-000000000700}, PID 5700)
+  Reading          = linked Security 4688 (RecordId 15562, PID 5700)
+  Reading          = linked PowerShell 4104 (ScriptBlockId a48c77fe-9496-4e0b-959b-4df3cc602b9c, ExecPID 5700)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 004] CORR2-SOC002-WS001-3948-20261014T230415Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 3948
+  EventUtc         = 2026-10-14T23:04:15.800Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0a6f-6ad0-8c05-000000000700}
+
+################################################################
+SECTION C - CORRELATION FROM THE LIVE DET-003 RUN ON SOC002-DC1 (ForwardedEvents)
+################################################################
+=== SOC002-CORR-002 :: DET-003 x process telemetry x DET-002 ===
+Purpose: tie a reconstruction observation to the process, the 4688, the 4104 block and the WinRM context.
+-------------------------------------------------------------------
+
+[CORR-002 001] CORR2-SOC002-WS001-1268-20261014T233507Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 1268
+  EventUtc         = 2026-10-14T23:35:07.272Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-11ab-6ad0-5706-000000000700}
+  ScriptBlockId    = 
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=False  DET-002=True
+  DET-002 lineage  = powershell.exe(1268) <- powershell.exe(5468) <- cmd.exe(5652) <- winrshost.exe(4008) <- svchost.exe(716)
+  Correlation gap  = no PowerShell 4104 block linked to this process
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-11ab-6ad0-5706-000000000700}, PID 1268)
+  Reading          = linked Security 4688 (RecordId 16123, PID 1268)
+  Reading          = NO linked PowerShell 4104 script block for this PID/window (correlation gap)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 002] CORR2-SOC002-WS001-1428-20261014T230642Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 1428
+  EventUtc         = 2026-10-14T23:06:42.046Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0b02-6ad0-b305-000000000700}
+  ScriptBlockId    = 
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=False  DET-002=True
+  DET-002 lineage  = powershell.exe(1428) <- powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716)
+  Correlation gap  = no PowerShell 4104 block linked to this process
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0b02-6ad0-b305-000000000700}, PID 1428)
+  Reading          = linked Security 4688 (RecordId 15758, PID 1428)
+  Reading          = NO linked PowerShell 4104 script block for this PID/window (correlation gap)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 003] CORR2-SOC002-WS001-1268-20261014T233507Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 1268
+  EventUtc         = 2026-10-14T23:35:07.263Z
+  User             = SOC002\Administrator
+  ProcessGuid      = 
+  ScriptBlockId    = 
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=False  DET-002=True
+  DET-002 lineage  = powershell.exe(1268) <- powershell.exe(5468) <- cmd.exe(5652) <- winrshost.exe(4008) <- svchost.exe(716)
+  Correlation gap  = no PowerShell 4104 block linked to this process
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-11ab-6ad0-5706-000000000700}, PID 1268)
+  Reading          = linked Security 4688 (RecordId 16123, PID 1268)
+  Reading          = NO linked PowerShell 4104 script block for this PID/window (correlation gap)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 004] CORR2-SOC002-WS001-1428-20261014T230642Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 1428
+  EventUtc         = 2026-10-14T23:06:42.031Z
+  User             = SOC002\Administrator
+  ProcessGuid      = 
+  ScriptBlockId    = 
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=False  DET-002=True
+  DET-002 lineage  = powershell.exe(1428) <- powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716)
+  Correlation gap  = no PowerShell 4104 block linked to this process
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0b02-6ad0-b305-000000000700}, PID 1428)
+  Reading          = linked Security 4688 (RecordId 15758, PID 1428)
+  Reading          = NO linked PowerShell 4104 script block for this PID/window (correlation gap)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 005] CORR2-SOC002-WS001-1268-20261014T233507Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 1268
+  EventUtc         = 2026-10-14T23:35:07.598Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-11ab-6ad0-5706-000000000700}
+  ScriptBlockId    = 50aa4a2f-00ff-4f0f-b0d4-2f5f2543ccae
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(1268) <- powershell.exe(5468) <- cmd.exe(5652) <- winrshost.exe(4008) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-11ab-6ad0-5706-000000000700}, PID 1268)
+  Reading          = linked Security 4688 (RecordId 16123, PID 1268)
+  Reading          = linked PowerShell 4104 (ScriptBlockId 50aa4a2f-00ff-4f0f-b0d4-2f5f2543ccae, ExecPID 1268)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 006] CORR2-SOC002-WS001-1996-20261014T233506Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 1996
+  EventUtc         = 2026-10-14T23:35:06.453Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-11aa-6ad0-5206-000000000700}
+  ScriptBlockId    = a8662866-d48c-4970-98ef-e10ec1eb1c40
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(1996) <- cmd.exe(2632) <- winrshost.exe(4048) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-11aa-6ad0-5206-000000000700}, PID 1996)
+  Reading          = linked Security 4688 (RecordId 16114, PID 1996)
+  Reading          = linked PowerShell 4104 (ScriptBlockId a8662866-d48c-4970-98ef-e10ec1eb1c40, ExecPID 1996)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 007] CORR2-SOC002-WS001-4916-20261014T231004Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 4916
+  EventUtc         = 2026-10-14T23:10:04.317Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0bcb-6ad0-2006-000000000700}
+  ScriptBlockId    = ee1d9ebc-5192-4c59-9069-f126daef1d7d
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(4916) <- cmd.exe(3596) <- winrshost.exe(3012) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0bcb-6ad0-2006-000000000700}, PID 4916)
+  Reading          = linked Security 4688 (RecordId 15975, PID 4916)
+  Reading          = linked PowerShell 4104 (ScriptBlockId ee1d9ebc-5192-4c59-9069-f126daef1d7d, ExecPID 4916)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 008] CORR2-SOC002-WS001-5288-20261014T230959Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 5288
+  EventUtc         = 2026-10-14T23:09:59.166Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0bc6-6ad0-0806-000000000700}
+  ScriptBlockId    = ae861039-1a99-4985-9f54-6b7ac55ef62f
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(5288) <- cmd.exe(1040) <- winrshost.exe(4048) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0bc6-6ad0-0806-000000000700}, PID 5288)
+  Reading          = linked Security 4688 (RecordId 15927, PID 5288)
+  Reading          = linked PowerShell 4104 (ScriptBlockId ae861039-1a99-4985-9f54-6b7ac55ef62f, ExecPID 5288)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 009] CORR2-SOC002-WS001-5824-20261014T230951Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 5824
+  EventUtc         = 2026-10-14T23:09:51.469Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0bbf-6ad0-e005-000000000700}
+  ScriptBlockId    = a1cd3847-8bfe-41ac-ba94-632dd556e746
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(5824) <- cmd.exe(5984) <- winrshost.exe(3352) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0bbf-6ad0-e005-000000000700}, PID 5824)
+  Reading          = linked Security 4688 (RecordId 15847, PID 5824)
+  Reading          = linked PowerShell 4104 (ScriptBlockId a1cd3847-8bfe-41ac-ba94-632dd556e746, ExecPID 5824)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 010] CORR2-SOC002-WS001-1428-20261014T230642Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 1428
+  EventUtc         = 2026-10-14T23:06:42.336Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0b02-6ad0-b305-000000000700}
+  ScriptBlockId    = 96c73586-2334-4bbd-a1c7-e2e5163f19c0
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(1428) <- powershell.exe(2936) <- cmd.exe(1808) <- winrshost.exe(2992) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0b02-6ad0-b305-000000000700}, PID 1428)
+  Reading          = linked Security 4688 (RecordId 15758, PID 1428)
+  Reading          = linked PowerShell 4104 (ScriptBlockId 96c73586-2334-4bbd-a1c7-e2e5163f19c0, ExecPID 1428)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 011] CORR2-SOC002-WS001-3308-20261014T230626Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 3308
+  EventUtc         = 2026-10-14T23:06:26.397Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0af2-6ad0-aa05-000000000700}
+  ScriptBlockId    = 2af19541-a9f9-4686-9652-87b7d74245a4
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(3308) <- cmd.exe(1736) <- winrshost.exe(6140) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0af2-6ad0-aa05-000000000700}, PID 3308)
+  Reading          = linked Security 4688 (RecordId 15740, PID 3308)
+  Reading          = linked PowerShell 4104 (ScriptBlockId 2af19541-a9f9-4686-9652-87b7d74245a4, ExecPID 3308)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 012] CORR2-SOC002-WS001-3948-20261014T230415Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 3948
+  EventUtc         = 2026-10-14T23:04:15.800Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0a6f-6ad0-8c05-000000000700}
+  ScriptBlockId    = d2f57fe7-7871-4c78-b0d9-068472d7b8fe
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(3948) <- cmd.exe(5900) <- winrshost.exe(5540) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0a6f-6ad0-8c05-000000000700}, PID 3948)
+  Reading          = linked Security 4688 (RecordId 15634, PID 3948)
+  Reading          = linked PowerShell 4104 (ScriptBlockId d2f57fe7-7871-4c78-b0d9-068472d7b8fe, ExecPID 3948)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+[CORR-002 013] CORR2-SOC002-WS001-5700-20261014T230408Z
+  Host/PID         = SOC002-WS001.soc002.local  PID 5700
+  EventUtc         = 2026-10-14T23:04:08.539Z
+  User             = SOC002\Administrator
+  ProcessGuid      = {edcef402-0a68-6ad0-6805-000000000700}
+  ScriptBlockId    = a48c77fe-9496-4e0b-959b-4df3cc602b9c
+  Indicator        = [Convert]::FromBase64String   severity=LOW
+  Links            = Sysmon1=True  Security4688=True  PowerShell4104=True  DET-002=True
+  DET-002 lineage  = powershell.exe(5700) <- cmd.exe(3988) <- winrshost.exe(4572) <- svchost.exe(716)
+  Reading          = DET-003 supplies the WHAT: a base64 reconstruction call was observed in the text.
+  Reading          = DET-002 (when present) supplies the HOW: the process was delivered through a WinRM host process.
+  Reading          = linked Sysmon Event 1 (ProcessGuid {edcef402-0a68-6ad0-6805-000000000700}, PID 5700)
+  Reading          = linked Security 4688 (RecordId 15562, PID 5700)
+  Reading          = linked PowerShell 4104 (ScriptBlockId a48c77fe-9496-4e0b-959b-4df3cc602b9c, ExecPID 5700)
+  Reading          = Correlation is CONTEXT, not a verdict. Authorisation and payload content still decide the reading.
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT.
+
+Correlation records = 13
+Correlation is CONTEXT, not a compromise verdict.
+
+=== DET-002 lineage context (from the unmodified Phase 6 detection) ===

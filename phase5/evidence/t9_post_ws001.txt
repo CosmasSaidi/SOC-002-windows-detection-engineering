@@ -1,0 +1,27 @@
+=== POST-ACTIVITY SNAPSHOT (WS001) ===
+TIME_LOCAL=2026-10-15 01:05:50
+
+
+Name      : Sysmon64
+Status    : Running
+StartType : Automatic
+
+
+
+=== Network (Sysmon Ev3) for the encoded process ProcessGuid over last 2h ===
+Ev3 for {edcef402-fb54-6acf-ef04-000000000700} count = 0
+=== Local 4104 for the marker (still retained) ===
+local 4104 marker events = 5
+  RecId=73521 01:05:50.871 ExecPID=196
+  RecId=73355 01:01:57.371 ExecPID=2832
+  RecId=73166 01:00:52.798 ExecPID=5920
+  RecId=72974 00:59:48.392 ExecPID=1500
+  RecId=72965 00:59:47.908 ExecPID=4576
+=== Services / autoruns sanity (no new service) ===
+=== done ===
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="2"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.102:5985/wsman

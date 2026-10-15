@@ -1,0 +1,69 @@
+SOC-002 PHASE 6 | TASK 8 - CASE-MANAGEMENT EVIDENCE
+===================================================
+Why this file exists
+  The case artefacts live under phase6/cases/ (they are case management, not
+  telemetry). This file is the index + audit trail that ties them back to the
+  detection and correlation records in THIS evidence directory.
+
+CASE COUNT AND THE DECISION BEHIND IT
+  Cases created                          : 1
+  Case ID                                : SOC002-CASE-0001
+  Cases NOT created (deliberate)         : 38
+  Why: the 38 alerted events in the Phase 5 window are the lab's own WinRM
+       administration. Phase 6 auto-classifies them as baseline transport with a
+       recorded per-event reason, so no human triage is required for them. Opening
+       38 cases for routine administrative calls would recreate exactly the triage
+       load Phase 6 exists to remove. They are instead recorded as a single
+       "bulk_baseline_observation" inside SOC002-CASE-0001, with the per-event
+       reasons left in t6_phase6_det001_v2_live_dc1.txt.
+  Third candidate in the live run: 2 events (Sysmon RecId 2975 and 3045) were
+       re-opened by the ESC-03 payload screen. They are NOT closed as benign:
+       they are flagged as follow-up items in SOC002-CASE-0001 section 12
+       (recommended follow-up) so the shape stays visible rather than being
+       quietly absorbed. They are not elevated to their own case because their
+       population is known lab Sysmon-configuration work.
+
+CASE ARTEFACTS
+  cases/README.md                              case-management conventions
+  cases/SOC002-CASE-0001/CASE.md               human-readable case record
+  cases/SOC002-CASE-0001/case.json             the same case, structured
+  cases/SOC002-CASE-0001/CASE.md sha256        (see SHA256_MANIFEST.txt)
+  cases/SOC002-CASE-0001/case.json sha256      (see SHA256_MANIFEST.txt)
+
+REQUIRED FIELDS - WHERE THEY LIVE
+  case ID                  -> CASE.md header table / case.json .case_id
+  alert IDs                -> CASE.md §1 / case.json .alerts + .source_records
+  affected host            -> CASE.md §2 / case.json .affected
+  user                     -> CASE.md §2 / case.json .affected.user
+  timestamps               -> CASE.md §3 / case.json .timestamps
+  evidence references      -> CASE.md §4 / case.json .evidence_references
+  detection references     -> CASE.md §5 / case.json .detection_references
+  investigation summary    -> CASE.md §6 / case.json .investigation_summary
+  observed facts           -> CASE.md §7 / case.json .observed_facts
+  inferred facts           -> CASE.md §8 / case.json .inferred_facts
+  not-verified items       -> CASE.md §9 / case.json .not_verified
+  final classification     -> CASE.md §10 / case.json .final_classification
+  analyst conclusion       -> CASE.md §11 / case.json .analyst_conclusion
+  recommended follow-up    -> CASE.md §12 / case.json .recommended_follow_up
+
+CLASSIFICATION OF THE CASE
+  CONTROLLED TEST ACTIVITY / AUTHORISED BENIGN   (unchanged from Phase 5)
+
+AUDIT TRAIL - WHICH RECORDS OPEN THE CASE
+  Detection records : t6_phase6_det001_v2_live_dc1.txt  [ALERT 001]
+                      t6_phase6_det001_v2_replay.txt    [ALERT 001]
+                      phase5/evidence/t6_detection_broad60_dc1.txt [ALERT 010]
+                      phase5/evidence/t6_detection_tight_dc1.txt   [ALERT 001]
+  Lineage record    : t6_phase6_det002_lineage_live_dc1.txt [LINEAGE 013]
+  Correlation record: t6_phase6_correlation_live_dc1.txt
+                      CORR-SOC002-WS001-1500-20261014T215948Z
+  Primary sources   : Sysmon Ev1 RecId 3535, Security 4688 RecId 15141,
+                      PowerShell 4104 RecId 72974 (WS001 and DC1 copies agree)
+
+PHASE 6 GUARANTEES STILL HONOURED BY THIS CASE
+  - OBSERVED / INFERRED / NOT VERIFIED are kept distinct throughout
+    (6 NOT VERIFIED items are listed explicitly, not quietly dropped).
+  - The classification does NOT assert that encoded PowerShell is benign in
+    general, and does NOT baseline the powershell.exe -> powershell.exe shape.
+  - No credentials or secrets are stored in the case.
+  - Phase 5 evidence is referenced, never rewritten.

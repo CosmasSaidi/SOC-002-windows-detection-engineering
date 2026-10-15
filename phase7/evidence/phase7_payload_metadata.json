@@ -1,0 +1,20 @@
+{
+  "phase": "SOC-002 Phase 7",
+  "marker": "SOC002-PHASE7-BLINDSPOT-TEST",
+  "delivery": "WinRM/WinRS as SOC002\\Administrator (existing authorised lab admin context)",
+  "loader_line": "$c=[IO.File]::ReadAllText('C:\\Windows\\Temp\\soc002-phase7\\phase7_child_command.txt'); powershell.exe -NoProfile -NonInteractive -Command $c",
+  "payload_process_command": "powershell.exe -NoProfile -NonInteractive -Command \"$b='<base64>';$t=[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($b));Write-Output $t;...\"",
+  "uses_encoded_command_switch": false,
+  "reconstructs_with": "[Convert]::FromBase64String",
+  "decodes_to": "plain text only (marker + purpose line); never executed",
+  "payload_sha256": "328FA865BAFF3EDBC991482684B60855164C7031ED3EF439B71A2E32A8E8499C",
+  "payload_bytes": 242,
+  "base64_len": 324,
+  "child_command_file_sha256": "4AC23816A1528A524AC0C21486CFC882BD6E0297D72B9DD3945A0B7283EDA365",
+  "runner_file_sha256_blocked_by_policy": "795131F37365A5D1CB7A663CCF734C63CDA3941D77FF2A39B65E9727A37310A4",
+  "executions": 1,
+  "persistence": false,
+  "config_change": false,
+  "network_contact_by_payload": false,
+  "file_writes_by_payload": false
+}

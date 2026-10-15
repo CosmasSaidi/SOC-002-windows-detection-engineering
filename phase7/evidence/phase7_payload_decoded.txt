@@ -1,0 +1,23 @@
+SOC-002 PHASE 7 - PAYLOAD ARTEFACT (preserved)
+==============================================
+Marker            : SOC002-PHASE7-BLINDSPOT-TEST
+Encoding used     : base64 of UTF-8 plain text (reconstructed with [Convert]::FromBase64String)
+Payload bytes     : 242
+Payload SHA256    : 328FA865BAFF3EDBC991482684B60855164C7031ED3EF439B71A2E32A8E8499C
+base64 length     : 324
+base64 (verbatim) : U09DMDAyLVBIQVNFNy1CTElORFNQT1QtVEVTVApTT0MwMDIgUEhBU0UgNyBDT05UUk9MTEVEIEJMSU5ELVNQT1QgVkFMSURBVElPTgpNYXJrZXI6IFNPQzAwMi1QSEFTRTctQkxJTkRTUE9ULVRFU1QKUHVycG9zZTogaGFybWxlc3MgbWFya2VyIHJlY29uc3RydWN0aW9uIG9ubHkuIE5vIHBlcnNpc3RlbmNlLCBubyBuZXR3b3JrLApubyBjb25maWd1cmF0aW9uIGNoYW5nZSwgbm8gYXJiaXRyYXJ5IGNvZGUgZXhlY3V0aW9uLgo=
+
+DECODED CONTENT (verbatim, plain text only - NEVER executed as code):
+--------------------------------------------------------------------
+SOC002-PHASE7-BLINDSPOT-TEST
+SOC002 PHASE 7 CONTROLLED BLIND-SPOT VALIDATION
+Marker: SOC002-PHASE7-BLINDSPOT-TEST
+Purpose: harmless marker reconstruction only. No persistence, no network,
+no configuration change, no arbitrary code execution.
+--------------------------------------------------------------------
+NOTES
+  The decoded content is plain text. It contains no script, no command, no
+  pipeline, no expression, no call operator and no second decode layer: a static
+  screen of the decoded text against the Phase 6 payload screen (ESC-01..08)
+  returns zero hits (see evidence/t1_preflight_blindspot_check.txt).
+  The PowerShell command that reconstructs it only writes the text to stdout.

@@ -1,0 +1,108 @@
+SOC-002 PHASE 7 - SHA256 INTEGRITY MANIFEST
+===============================================================================
+Generated (utc) : 2026-10-14T23:20:14Z
+Scope           : every file under ~/soc-lab/phase7, EXCLUDING this manifest,
+                  plus a byte-for-byte preservation check of Phase 5 and
+                  Phase 6 against hashes taken BEFORE any Phase 7 lab activity.
+Method          : sha256sum, paths relative to the directory being hashed.
+No credentials or secrets are stored anywhere in this tree.
+
+-------------------------------------------------------------------------------
+SECTION A - PHASE 7 ARTEFACTS  (sha256 | relative path)
+-------------------------------------------------------------------------------
+f4015b3611778abc82d91126b58f534a38ca686a68bf1229c459dc953bf12b32  ./PHASE7_REPORT.md
+71eb7956453c92b594f66b4aa8d164ada055bd8494b2ecdc427a0dc7da70cdff  ./README.md
+e802aacd8b764687770e6e16073fa2ec4ee29f2334b27e4172879d07a5538bc5  ./analysis/build_manifest.sh
+661383403fec0f3c6f45b7974a7131abaa19452191eb4b89dc1138271214418f  ./analysis/compare_phase6_phase7.ps1
+94a414df2e1baace0067dc6c81516473ec735508ae5ba75ba34d57055f138a36  ./analysis/format_phase7_evidence.ps1
+e5612ecbe2a0724f78d29ad2b8b1e7b306d9221d19b87b40a1d6c303a5659571  ./analysis/phase7_process_lineage.ps1
+a9ad9b294caea1e9e7c6079c7e232a3932def12424b24fde05232de8b39ec161  ./analysis/phase7_result_summary.ps1
+5f680dc967c50fe28a94d58af271e0773176ad4399f67fe073e37313db534c7b  ./analysis/preflight_phase7.ps1
+25148c30352696b2a0af7ac80911c68c389a9a4a0d406bd10de3691a8c1c09b7  ./cases/SOC002-CASE-0002/CASE.md
+7521ac278d84a22600bf38450c96cd4cef57d2040ea7f8b8229c5c43352aab24  ./cases/SOC002-CASE-0002/case.json
+caba938e2da87c2bd6360a5774464c0496d760619b417d3bd613458511899522  ./evidence/phase7_payload_decoded.txt
+a3c85e2773593c99b4e825d744f5c7a9cdaf35dfedf91cc62fa4482db65e758a  ./evidence/phase7_payload_metadata.json
+9ef65f1deb582f0dbddb2b35026097cc728338cba8abd79309816495ebb40658  ./evidence/pre_state_phase5_sha256.txt
+3b01ca9e0d754b337cd0c0df4068e6a913093357dc001f8f756855560c93d2f7  ./evidence/pre_state_phase6_detections_sha256.txt
+9317bea4875cacf1590af7fb58915576e86560aa3f195b8568ede5545d24abed  ./evidence/pre_state_phase6_sha256.txt
+7dc749b0ba9183a2b99d862d05704bfc0c00325e1874535130c94c65ace4ed9d  ./evidence/raw/post_state_phase5_sha256.txt
+4235f6fe1d1b3875506e744a24b043fd7b97b75b212c7d5d07bcfb3b9f3a1082  ./evidence/raw/post_state_phase6_sha256.txt
+6d3b222642950e1319e8823f440e16bae8197556f118b77bd19e3d21d7faed4b  ./evidence/raw/t4_raw_local_ws001_controlled.txt
+551473e24037cba734491aaef8a4ecc5db29c8b6802823f8bdb4d5e44bae6fb6  ./evidence/raw/t4b_raw_local_ws001_session.txt
+d117ae5f151d3cd528dfa5c37a4dae47355c4f74af6deecb804f3df39d55aeb0  ./evidence/raw/t5_raw_central_dc1_controlled.txt
+5979510698ce2ab2909c7c30437eb2e7a736060a6679271ecb6086501628bff9  ./evidence/raw/t5b_raw_central_dc1_session.txt
+dca8da0f27d95451284af5350b4dadf503cb94563e6f341e56dc59549141656f  ./evidence/t10_investigation_notes.txt
+d3380f0c082e8e83ffc484974d22f11a4e4b5cbd6769a30eb472cb6332f5760e  ./evidence/t11_limitations.txt
+90bb44b9a1bb45f3e7c0e9224ac3f25470d3256b763346e73b10d1b3922a9350  ./evidence/t12_exclusivity_checks.txt
+9f991a2450c4ae6047615abefff6764cdd072060d35dd249cb84e186b6a5111d  ./evidence/t1_preflight_blindspot_check.txt
+a2f85adc5708f2111540aab50739858827d2b7cc3233428b762c3c5b4c4b5fdc  ./evidence/t2_staging_transcript.txt
+389a2c0183574de68771406f0b8db622e3029efabe9d82133aec6e45e156e2ee  ./evidence/t3_controlled_execution_ws001.txt
+9349994490281b6055ed93d1961f1cf59d106aaffeb3781414a17e185d432e1d  ./evidence/t4_local_telemetry_ws001_controlled.txt
+e4d49a17343a36c877d36b28767f44868cda570ded2ec09c21058d98ad868020  ./evidence/t4b_local_telemetry_ws001_session.txt
+1d0783113cb415abc5e05de826baaad1f7e7b4b56ad75208e724e873ce37d27b  ./evidence/t5_central_telemetry_dc1_controlled.txt
+f63e21c3f1884ff82ca1fe297fe3afe3a467598f77d2d79f5fe2fb5f402536ad  ./evidence/t5b_central_telemetry_dc1_session.txt
+df8efd98d26968aa9777cdde825495c526baa130c203ed6b402fd2f9ad25f2aa  ./evidence/t6_corr001_controlled.txt
+130a713733ae18bb3566e9be7d54b22ca2b53287b40eb65894c28d7412dda2a5  ./evidence/t6_det001_controlled.txt
+455e90fe3e501799107613381aad8b08b38d170a6ded7af0a8e17aa943e2bf40  ./evidence/t6_det002_controlled.txt
+f04897dbf2677d1e057efbd821fac3e1d2b014fbc0d09cbc646fb0819ab4109b  ./evidence/t6_detection_stack_controlled.txt
+d6a0db6e95b95b4ce24a1a287f54e56d38e6a14607af88faca9f8b082734bfb4  ./evidence/t6_detection_stack_session.txt
+5a0f345e59fbde95e8c0b852bb1d1907f4266630dad829e18d9d461e52c7dc0b  ./evidence/t7_baseline_comparison.txt
+0f7178f0c41fae6a0b87c439e5859ebb5844b538ea49980327095c38a256e7a1  ./evidence/t8_process_lineage.txt
+d20b1fe01f5146138f948caea45e8d6cf68422146e8668a38e039f891560bea3  ./evidence/t9_detection_result.json
+b26f7d67cd2fcf8d42a5bb3f8b0069c994ecdecce696ff3d569f96a8fedc275e  ./evidence/t9_detection_result.txt
+e9f1bc0c5d8f48f51e94b68246fcb070056232a274e4e96680b9c0a450c3c0ec  ./evidence/t9_integrity_and_cleanup.txt
+763e5a86c92bfea05281f0be6accc6ae2c27c061dbb773aabdf5053a18954a84  ./scripts/collect_phase7_telemetry.ps1
+8b3a72e4145f95d719edfaf9eda5d84c606a8bd4e3c579871531937a124363f9  ./scripts/collect_raw_events.py
+45b932a3f86d8897691c0630d3ff3fc5e64664d3da085a9304f15c04f8723732  ./scripts/collect_via_winrm.py
+e737addda0b585f2aebba2922b91805002669b95d271c973cd24d564924b0e3c  ./scripts/execute_phase7_once.py
+4ac23816a1528a524ac0c21486cfc882bd6e0297d72b9dd3945a0b7283eda365  ./scripts/phase7_child_command.txt
+3263d321f8285b8726fdeb319e4f3a3e7114bd5e6d8d0b34b7ace479027ea461  ./scripts/phase7_cleanup_and_integrity.sh
+795131f37365a5d1cb7a663ccf734c63cda3941d77ff2a39b65e9727a37310a4  ./scripts/phase7_run_ws001.ps1
+9671ec85705835f7347c085135ddd5f364375cc383b3a7c160d8a3b72ee488e5  ./scripts/run_phase7_detections_dc1.ps1
+a3231befddd93e3acae49fb90c52005a0d2649ca7b4738b2e609be81ebccd654  ./scripts/snapshot_tree_hashes.sh
+
+Phase 7 files hashed = 50
+
+-------------------------------------------------------------------------------
+SECTION B - PHASE 5 PRESERVATION CHECK
+-------------------------------------------------------------------------------
+Each Phase 5 file is re-hashed now and compared with the snapshot taken at
+2026-10-14T23:02Z, BEFORE the Phase 7 controlled activity. Any difference would
+mean Phase 7 modified Phase 5 evidence, which it must not do.
+
+Phase 5 files verified unchanged : 88
+Phase 5 files CHANGED            : 0
+Phase 5 files MISSING (pre-only) : 0
+
+RESULT: Phase 5 evidence is byte-for-byte preserved. Phase 7 added only new files.
+
+-------------------------------------------------------------------------------
+SECTION C - PHASE 6 PRESERVATION CHECK
+-------------------------------------------------------------------------------
+Phase 6 files verified unchanged : 34
+Phase 6 files CHANGED            : 0
+
+RESULT: Phase 6 evidence is byte-for-byte preserved. Phase 7 added only new files.
+
+-------------------------------------------------------------------------------
+SECTION D - DETECTION STACK AS USED  (the four files that decided Phase 7)
+-------------------------------------------------------------------------------
+These hash values were taken from the LOCAL Phase 6 files before staging, and
+were independently re-printed on DC1 by the runner at detection time; all three
+sets agree, which is what backs the 'no detection logic was changed' claim.
+
+3c332445bfb69045e2ad3b135c8184086d91979d8fc03c1bbead79d17b69d09f  lib_soc002_v2.ps1
+3404a8bf210fde3ac1418f1fd7dae15251bc8f3dae6ae717c453ffaa28ed4c7d  lib_soc002_windows.ps1
+c9b73426134571dfa6a26df3cb39e4d6030ce5886720cf7679de575845b0d16c  detect_encoded_powershell_v2.ps1
+86149f2559512515ce2a97f54bbee1d54e788cc21d5346c34278326434668bae  detect_powershell_lineage.ps1
+d4d5d12fa62ab856816ea5b81ce4d0f2e154fa614764b05f34ac9c510930c974  correlate_det001_det002.ps1
+
+-------------------------------------------------------------------------------
+SECTION E - NOTES
+-------------------------------------------------------------------------------
+- This manifest excludes itself; it is the only Phase 7 file not hashed above.
+- evidence/raw/ holds the unmodified EventData XML exactly as captured from
+  WS001 (local logs) and DC1 (ForwardedEvents), one EVXML| line per event.
+- The Phase 7 working directory C:\Windows\Temp\soc002-phase7 was removed from
+  both lab hosts after collection; see evidence/t9_integrity_and_cleanup.txt.
+- SOC002-CASE-0002 is the case for the single controlled execution in this phase.

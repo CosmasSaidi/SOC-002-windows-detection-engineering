@@ -1,0 +1,294 @@
+=== SYSMON EVENT 3 (all in window) ===
+COUNT=26
+--- RecId=3584 ---
+TimeUtc=2026-10-14T22:00:53.460Z
+ProcessGuid={edcef402-d855-6acf-eb03-000000000000}
+Image=System
+DestinationIp=192.168.56.102
+DestinationPort=5985
+DestinationHostname=SOC002-WS001.soc002.local
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3584===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T22:00:53.4608495Z'/><EventRecordID>3584</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 22:00:51.022</Data><Data Name='ProcessGuid'>{edcef402-d855-6acf-eb03-000000000000}</Data><Data Name='ProcessId'>4</Data><Data Name='Image'>System</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>false</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.1</Data><Data Name='SourceHostname'>-</Data><Data Name='SourcePort'>42390</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.102</Data><Data Name='DestinationHostname'>SOC002-WS001.soc002.local</Data><Data Name='DestinationPort'>5985</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3583 ---
+TimeUtc=2026-10-14T22:00:53.460Z
+ProcessGuid={edcef402-d855-6acf-eb03-000000000000}
+Image=System
+DestinationIp=192.168.56.102
+DestinationPort=5985
+DestinationHostname=SOC002-WS001.soc002.local
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3583===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T22:00:53.4608325Z'/><EventRecordID>3583</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 22:00:51.018</Data><Data Name='ProcessGuid'>{edcef402-d855-6acf-eb03-000000000000}</Data><Data Name='ProcessId'>4</Data><Data Name='Image'>System</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>false</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.1</Data><Data Name='SourceHostname'>-</Data><Data Name='SourcePort'>42374</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.102</Data><Data Name='DestinationHostname'>SOC002-WS001.soc002.local</Data><Data Name='DestinationPort'>5985</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3574 ---
+TimeUtc=2026-10-14T22:00:50.808Z
+ProcessGuid={edcef402-d855-6acf-eb03-000000000000}
+Image=System
+DestinationIp=192.168.56.102
+DestinationPort=5985
+DestinationHostname=SOC002-WS001.soc002.local
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3574===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T22:00:50.8082254Z'/><EventRecordID>3574</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 22:00:48.433</Data><Data Name='ProcessGuid'>{edcef402-d855-6acf-eb03-000000000000}</Data><Data Name='ProcessId'>4</Data><Data Name='Image'>System</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>false</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.1</Data><Data Name='SourceHostname'>-</Data><Data Name='SourcePort'>42360</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.102</Data><Data Name='DestinationHostname'>SOC002-WS001.soc002.local</Data><Data Name='DestinationPort'>5985</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3573 ---
+TimeUtc=2026-10-14T22:00:50.808Z
+ProcessGuid={edcef402-d855-6acf-eb03-000000000000}
+Image=System
+DestinationIp=192.168.56.102
+DestinationPort=5985
+DestinationHostname=SOC002-WS001.soc002.local
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3573===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T22:00:50.8082102Z'/><EventRecordID>3573</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 22:00:48.429</Data><Data Name='ProcessGuid'>{edcef402-d855-6acf-eb03-000000000000}</Data><Data Name='ProcessId'>4</Data><Data Name='Image'>System</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>false</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.1</Data><Data Name='SourceHostname'>-</Data><Data Name='SourcePort'>42358</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.102</Data><Data Name='DestinationHostname'>SOC002-WS001.soc002.local</Data><Data Name='DestinationPort'>5985</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3564 ---
+TimeUtc=2026-10-14T22:00:48.351Z
+ProcessGuid={edcef402-d859-6acf-0c00-000000000700}
+Image=C:\Windows\System32\lsass.exe
+DestinationIp=192.168.56.10
+DestinationPort=49668
+DestinationHostname=SOC002-DC1
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3564===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T22:00:48.3511539Z'/><EventRecordID>3564</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 22:00:45.918</Data><Data Name='ProcessGuid'>{edcef402-d859-6acf-0c00-000000000700}</Data><Data Name='ProcessId'>628</Data><Data Name='Image'>C:\Windows\System32\lsass.exe</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>true</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.102</Data><Data Name='SourceHostname'>SOC002-WS001.soc002.local</Data><Data Name='SourcePort'>49943</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.10</Data><Data Name='DestinationHostname'>SOC002-DC1</Data><Data Name='DestinationPort'>49668</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3563 ---
+TimeUtc=2026-10-14T22:00:48.351Z
+ProcessGuid={edcef402-d855-6acf-eb03-000000000000}
+Image=System
+DestinationIp=192.168.56.102
+DestinationPort=5985
+DestinationHostname=SOC002-WS001.soc002.local
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3563===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T22:00:48.3511440Z'/><EventRecordID>3563</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 22:00:45.910</Data><Data Name='ProcessGuid'>{edcef402-d855-6acf-eb03-000000000000}</Data><Data Name='ProcessId'>4</Data><Data Name='Image'>System</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>false</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.1</Data><Data Name='SourceHostname'>-</Data><Data Name='SourcePort'>42344</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.102</Data><Data Name='DestinationHostname'>SOC002-WS001.soc002.local</Data><Data Name='DestinationPort'>5985</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3562 ---
+TimeUtc=2026-10-14T22:00:48.351Z
+ProcessGuid={edcef402-d855-6acf-eb03-000000000000}
+Image=System
+DestinationIp=192.168.56.102
+DestinationPort=5985
+DestinationHostname=SOC002-WS001.soc002.local
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3562===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T22:00:48.3511281Z'/><EventRecordID>3562</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 22:00:45.907</Data><Data Name='ProcessGuid'>{edcef402-d855-6acf-eb03-000000000000}</Data><Data Name='ProcessId'>4</Data><Data Name='Image'>System</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>false</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.1</Data><Data Name='SourceHostname'>-</Data><Data Name='SourcePort'>42330</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.102</Data><Data Name='DestinationHostname'>SOC002-WS001.soc002.local</Data><Data Name='DestinationPort'>5985</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3561 ---
+TimeUtc=2026-10-14T22:00:47.588Z
+ProcessGuid={edcef402-d855-6acf-eb03-000000000000}
+Image=System
+DestinationIp=192.168.56.10
+DestinationPort=445
+DestinationHostname=SOC002-DC1
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3561===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T22:00:47.5884414Z'/><EventRecordID>3561</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 22:00:45.128</Data><Data Name='ProcessGuid'>{edcef402-d855-6acf-eb03-000000000000}</Data><Data Name='ProcessId'>4</Data><Data Name='Image'>System</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>true</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.102</Data><Data Name='SourceHostname'>SOC002-WS001.soc002.local</Data><Data Name='SourcePort'>49942</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.10</Data><Data Name='DestinationHostname'>SOC002-DC1</Data><Data Name='DestinationPort'>445</Data><Data Name='DestinationPortName'>microsoft-ds</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3556 ---
+TimeUtc=2026-10-14T22:00:39.583Z
+ProcessGuid={edcef402-d85b-6acf-1a00-000000000700}
+Image=C:\Windows\System32\svchost.exe
+DestinationIp=192.168.56.10
+DestinationPort=53
+DestinationHostname=SOC002-DC1
+User=NT AUTHORITY\NETWORK SERVICE
+===RAWXML-BEGIN Sysmon3-Rec3556===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T22:00:39.5837410Z'/><EventRecordID>3556</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 22:00:37.205</Data><Data Name='ProcessGuid'>{edcef402-d85b-6acf-1a00-000000000700}</Data><Data Name='ProcessId'>1088</Data><Data Name='Image'>C:\Windows\System32\svchost.exe</Data><Data Name='User'>NT AUTHORITY\NETWORK SERVICE</Data><Data Name='Protocol'>udp</Data><Data Name='Initiated'>true</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.102</Data><Data Name='SourceHostname'>SOC002-WS001.soc002.local</Data><Data Name='SourcePort'>64369</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.10</Data><Data Name='DestinationHostname'>SOC002-DC1</Data><Data Name='DestinationPort'>53</Data><Data Name='DestinationPortName'>domain</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3555 ---
+TimeUtc=2026-10-14T22:00:39.583Z
+ProcessGuid={edcef402-d85b-6acf-1a00-000000000700}
+Image=C:\Windows\System32\svchost.exe
+DestinationIp=224.0.0.252
+DestinationPort=5355
+DestinationHostname=-
+User=NT AUTHORITY\NETWORK SERVICE
+===RAWXML-BEGIN Sysmon3-Rec3555===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T22:00:39.5837148Z'/><EventRecordID>3555</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 22:00:37.199</Data><Data Name='ProcessGuid'>{edcef402-d85b-6acf-1a00-000000000700}</Data><Data Name='ProcessId'>1088</Data><Data Name='Image'>C:\Windows\System32\svchost.exe</Data><Data Name='User'>NT AUTHORITY\NETWORK SERVICE</Data><Data Name='Protocol'>udp</Data><Data Name='Initiated'>true</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.102</Data><Data Name='SourceHostname'>SOC002-WS001.soc002.local</Data><Data Name='SourcePort'>58102</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>224.0.0.252</Data><Data Name='DestinationHostname'>-</Data><Data Name='DestinationPort'>5355</Data><Data Name='DestinationPortName'>llmnr</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3554 ---
+TimeUtc=2026-10-14T22:00:39.583Z
+ProcessGuid={edcef402-d85b-6acf-1a00-000000000700}
+Image=C:\Windows\System32\svchost.exe
+DestinationIp=ff02:0:0:0:0:0:1:3
+DestinationPort=5355
+DestinationHostname=-
+User=NT AUTHORITY\NETWORK SERVICE
+===RAWXML-BEGIN Sysmon3-Rec3554===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T22:00:39.5836865Z'/><EventRecordID>3554</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 22:00:37.199</Data><Data Name='ProcessGuid'>{edcef402-d85b-6acf-1a00-000000000700}</Data><Data Name='ProcessId'>1088</Data><Data Name='Image'>C:\Windows\System32\svchost.exe</Data><Data Name='User'>NT AUTHORITY\NETWORK SERVICE</Data><Data Name='Protocol'>udp</Data><Data Name='Initiated'>true</Data><Data Name='SourceIsIpv6'>true</Data><Data Name='SourceIp'>fe80:0:0:0:73f0:1da1:b17d:98a2</Data><Data Name='SourceHostname'>SOC002-WS001.soc002.local</Data><Data Name='SourcePort'>58102</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>true</Data><Data Name='DestinationIp'>ff02:0:0:0:0:0:1:3</Data><Data Name='DestinationHostname'>-</Data><Data Name='DestinationPort'>5355</Data><Data Name='DestinationPortName'>llmnr</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3553 ---
+TimeUtc=2026-10-14T22:00:39.583Z
+ProcessGuid={edcef402-d85b-6acf-1a00-000000000700}
+Image=C:\Windows\System32\svchost.exe
+DestinationIp=192.168.56.10
+DestinationPort=53
+DestinationHostname=SOC002-DC1
+User=NT AUTHORITY\NETWORK SERVICE
+===RAWXML-BEGIN Sysmon3-Rec3553===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T22:00:39.5836382Z'/><EventRecordID>3553</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 22:00:37.195</Data><Data Name='ProcessGuid'>{edcef402-d85b-6acf-1a00-000000000700}</Data><Data Name='ProcessId'>1088</Data><Data Name='Image'>C:\Windows\System32\svchost.exe</Data><Data Name='User'>NT AUTHORITY\NETWORK SERVICE</Data><Data Name='Protocol'>udp</Data><Data Name='Initiated'>true</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.102</Data><Data Name='SourceHostname'>SOC002-WS001.soc002.local</Data><Data Name='SourcePort'>63943</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.10</Data><Data Name='DestinationHostname'>SOC002-DC1</Data><Data Name='DestinationPort'>53</Data><Data Name='DestinationPortName'>domain</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3552 ---
+TimeUtc=2026-10-14T22:00:23.802Z
+ProcessGuid={edcef402-d859-6acf-0c00-000000000700}
+Image=C:\Windows\System32\lsass.exe
+DestinationIp=192.168.56.10
+DestinationPort=49668
+DestinationHostname=SOC002-DC1
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3552===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T22:00:23.8025980Z'/><EventRecordID>3552</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 22:00:21.406</Data><Data Name='ProcessGuid'>{edcef402-d859-6acf-0c00-000000000700}</Data><Data Name='ProcessId'>628</Data><Data Name='Image'>C:\Windows\System32\lsass.exe</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>true</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.102</Data><Data Name='SourceHostname'>SOC002-WS001.soc002.local</Data><Data Name='SourcePort'>49941</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.10</Data><Data Name='DestinationHostname'>SOC002-DC1</Data><Data Name='DestinationPort'>49668</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3551 ---
+TimeUtc=2026-10-14T22:00:23.802Z
+ProcessGuid={edcef402-d855-6acf-eb03-000000000000}
+Image=System
+DestinationIp=192.168.56.102
+DestinationPort=5985
+DestinationHostname=SOC002-WS001.soc002.local
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3551===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T22:00:23.8025883Z'/><EventRecordID>3551</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 22:00:21.396</Data><Data Name='ProcessGuid'>{edcef402-d855-6acf-eb03-000000000000}</Data><Data Name='ProcessId'>4</Data><Data Name='Image'>System</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>false</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.1</Data><Data Name='SourceHostname'>-</Data><Data Name='SourcePort'>34828</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.102</Data><Data Name='DestinationHostname'>SOC002-WS001.soc002.local</Data><Data Name='DestinationPort'>5985</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3550 ---
+TimeUtc=2026-10-14T22:00:23.802Z
+ProcessGuid={edcef402-d855-6acf-eb03-000000000000}
+Image=System
+DestinationIp=192.168.56.102
+DestinationPort=5985
+DestinationHostname=SOC002-WS001.soc002.local
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3550===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T22:00:23.8025725Z'/><EventRecordID>3550</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 22:00:21.392</Data><Data Name='ProcessGuid'>{edcef402-d855-6acf-eb03-000000000000}</Data><Data Name='ProcessId'>4</Data><Data Name='Image'>System</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>false</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.1</Data><Data Name='SourceHostname'>-</Data><Data Name='SourcePort'>34812</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.102</Data><Data Name='DestinationHostname'>SOC002-WS001.soc002.local</Data><Data Name='DestinationPort'>5985</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3538 ---
+TimeUtc=2026-10-14T21:59:48.664Z
+ProcessGuid={edcef402-d859-6acf-0c00-000000000700}
+Image=C:\Windows\System32\lsass.exe
+DestinationIp=192.168.56.10
+DestinationPort=49668
+DestinationHostname=SOC002-DC1
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3538===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T21:59:48.6640129Z'/><EventRecordID>3538</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 21:59:46.137</Data><Data Name='ProcessGuid'>{edcef402-d859-6acf-0c00-000000000700}</Data><Data Name='ProcessId'>628</Data><Data Name='Image'>C:\Windows\System32\lsass.exe</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>true</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.102</Data><Data Name='SourceHostname'>SOC002-WS001.soc002.local</Data><Data Name='SourcePort'>49940</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.10</Data><Data Name='DestinationHostname'>SOC002-DC1</Data><Data Name='DestinationPort'>49668</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3537 ---
+TimeUtc=2026-10-14T21:59:48.663Z
+ProcessGuid={edcef402-d855-6acf-eb03-000000000000}
+Image=System
+DestinationIp=192.168.56.102
+DestinationPort=5985
+DestinationHostname=SOC002-WS001.soc002.local
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3537===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T21:59:48.6639966Z'/><EventRecordID>3537</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 21:59:46.128</Data><Data Name='ProcessGuid'>{edcef402-d855-6acf-eb03-000000000000}</Data><Data Name='ProcessId'>4</Data><Data Name='Image'>System</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>false</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.1</Data><Data Name='SourceHostname'>-</Data><Data Name='SourcePort'>59216</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.102</Data><Data Name='DestinationHostname'>SOC002-WS001.soc002.local</Data><Data Name='DestinationPort'>5985</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3536 ---
+TimeUtc=2026-10-14T21:59:48.663Z
+ProcessGuid={edcef402-d855-6acf-eb03-000000000000}
+Image=System
+DestinationIp=192.168.56.102
+DestinationPort=5985
+DestinationHostname=SOC002-WS001.soc002.local
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3536===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T21:59:48.6639664Z'/><EventRecordID>3536</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 21:59:46.125</Data><Data Name='ProcessGuid'>{edcef402-d855-6acf-eb03-000000000000}</Data><Data Name='ProcessId'>4</Data><Data Name='Image'>System</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>false</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.1</Data><Data Name='SourceHostname'>-</Data><Data Name='SourcePort'>59212</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.102</Data><Data Name='DestinationHostname'>SOC002-WS001.soc002.local</Data><Data Name='DestinationPort'>5985</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3526 ---
+TimeUtc=2026-10-14T21:59:10.228Z
+ProcessGuid={edcef402-d859-6acf-0c00-000000000700}
+Image=C:\Windows\System32\lsass.exe
+DestinationIp=192.168.56.10
+DestinationPort=49668
+DestinationHostname=SOC002-DC1
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3526===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T21:59:10.2289652Z'/><EventRecordID>3526</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 21:59:07.736</Data><Data Name='ProcessGuid'>{edcef402-d859-6acf-0c00-000000000700}</Data><Data Name='ProcessId'>628</Data><Data Name='Image'>C:\Windows\System32\lsass.exe</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>true</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.102</Data><Data Name='SourceHostname'>SOC002-WS001.soc002.local</Data><Data Name='SourcePort'>49939</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.10</Data><Data Name='DestinationHostname'>SOC002-DC1</Data><Data Name='DestinationPort'>49668</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3525 ---
+TimeUtc=2026-10-14T21:59:10.228Z
+ProcessGuid={edcef402-d855-6acf-eb03-000000000000}
+Image=System
+DestinationIp=192.168.56.102
+DestinationPort=5985
+DestinationHostname=SOC002-WS001.soc002.local
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3525===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T21:59:10.2289515Z'/><EventRecordID>3525</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 21:59:07.724</Data><Data Name='ProcessGuid'>{edcef402-d855-6acf-eb03-000000000000}</Data><Data Name='ProcessId'>4</Data><Data Name='Image'>System</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>false</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.1</Data><Data Name='SourceHostname'>-</Data><Data Name='SourcePort'>51706</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.102</Data><Data Name='DestinationHostname'>SOC002-WS001.soc002.local</Data><Data Name='DestinationPort'>5985</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3524 ---
+TimeUtc=2026-10-14T21:59:10.228Z
+ProcessGuid={edcef402-d855-6acf-eb03-000000000000}
+Image=System
+DestinationIp=192.168.56.102
+DestinationPort=5985
+DestinationHostname=SOC002-WS001.soc002.local
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3524===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T21:59:10.2289313Z'/><EventRecordID>3524</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 21:59:07.720</Data><Data Name='ProcessGuid'>{edcef402-d855-6acf-eb03-000000000000}</Data><Data Name='ProcessId'>4</Data><Data Name='Image'>System</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>false</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.1</Data><Data Name='SourceHostname'>-</Data><Data Name='SourcePort'>51696</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.102</Data><Data Name='DestinationHostname'>SOC002-WS001.soc002.local</Data><Data Name='DestinationPort'>5985</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3517 ---
+TimeUtc=2026-10-14T21:58:53.679Z
+ProcessGuid={edcef402-d859-6acf-0c00-000000000700}
+Image=C:\Windows\System32\lsass.exe
+DestinationIp=192.168.56.10
+DestinationPort=49668
+DestinationHostname=SOC002-DC1
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3517===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T21:58:53.6797006Z'/><EventRecordID>3517</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 21:58:51.147</Data><Data Name='ProcessGuid'>{edcef402-d859-6acf-0c00-000000000700}</Data><Data Name='ProcessId'>628</Data><Data Name='Image'>C:\Windows\System32\lsass.exe</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>true</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.102</Data><Data Name='SourceHostname'>SOC002-WS001.soc002.local</Data><Data Name='SourcePort'>49938</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.10</Data><Data Name='DestinationHostname'>SOC002-DC1</Data><Data Name='DestinationPort'>49668</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3516 ---
+TimeUtc=2026-10-14T21:58:53.679Z
+ProcessGuid={edcef402-d859-6acf-0c00-000000000700}
+Image=C:\Windows\System32\lsass.exe
+DestinationIp=192.168.56.10
+DestinationPort=135
+DestinationHostname=SOC002-DC1
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3516===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T21:58:53.6796727Z'/><EventRecordID>3516</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 21:58:51.144</Data><Data Name='ProcessGuid'>{edcef402-d859-6acf-0c00-000000000700}</Data><Data Name='ProcessId'>628</Data><Data Name='Image'>C:\Windows\System32\lsass.exe</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>true</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.102</Data><Data Name='SourceHostname'>SOC002-WS001.soc002.local</Data><Data Name='SourcePort'>49937</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.10</Data><Data Name='DestinationHostname'>SOC002-DC1</Data><Data Name='DestinationPort'>135</Data><Data Name='DestinationPortName'>epmap</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3513 ---
+TimeUtc=2026-10-14T21:58:53.429Z
+ProcessGuid={edcef402-d859-6acf-0c00-000000000700}
+Image=C:\Windows\System32\lsass.exe
+DestinationIp=192.168.56.10
+DestinationPort=389
+DestinationHostname=SOC002-DC1
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3513===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T21:58:53.4291396Z'/><EventRecordID>3513</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 21:58:51.040</Data><Data Name='ProcessGuid'>{edcef402-d859-6acf-0c00-000000000700}</Data><Data Name='ProcessId'>628</Data><Data Name='Image'>C:\Windows\System32\lsass.exe</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>udp</Data><Data Name='Initiated'>true</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.102</Data><Data Name='SourceHostname'>SOC002-WS001.soc002.local</Data><Data Name='SourcePort'>63646</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.10</Data><Data Name='DestinationHostname'>SOC002-DC1</Data><Data Name='DestinationPort'>389</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3512 ---
+TimeUtc=2026-10-14T21:58:53.429Z
+ProcessGuid={edcef402-d855-6acf-eb03-000000000000}
+Image=System
+DestinationIp=192.168.56.102
+DestinationPort=5985
+DestinationHostname=SOC002-WS001.soc002.local
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3512===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T21:58:53.4291274Z'/><EventRecordID>3512</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 21:58:51.027</Data><Data Name='ProcessGuid'>{edcef402-d855-6acf-eb03-000000000000}</Data><Data Name='ProcessId'>4</Data><Data Name='Image'>System</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>false</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.1</Data><Data Name='SourceHostname'>-</Data><Data Name='SourcePort'>53706</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.102</Data><Data Name='DestinationHostname'>SOC002-WS001.soc002.local</Data><Data Name='DestinationPort'>5985</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+--- RecId=3511 ---
+TimeUtc=2026-10-14T21:58:53.429Z
+ProcessGuid={edcef402-d855-6acf-eb03-000000000000}
+Image=System
+DestinationIp=192.168.56.102
+DestinationPort=5985
+DestinationHostname=SOC002-WS001.soc002.local
+User=NT AUTHORITY\SYSTEM
+===RAWXML-BEGIN Sysmon3-Rec3511===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Sysmon' Guid='{5770385f-c22a-43e0-bf4c-06f5698ffbd9}'/><EventID>3</EventID><Version>5</Version><Level>4</Level><Task>3</Task><Opcode>0</Opcode><Keywords>0x8000000000000000</Keywords><TimeCreated SystemTime='2026-10-14T21:58:53.4291089Z'/><EventRecordID>3511</EventRecordID><Correlation/><Execution ProcessID='2152' ThreadID='3512'/><Channel>Microsoft-Windows-Sysmon/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-18'/></System><EventData><Data Name='RuleName'>SOC002-Phase4-NetworkConnect</Data><Data Name='UtcTime'>2026-10-14 21:58:51.022</Data><Data Name='ProcessGuid'>{edcef402-d855-6acf-eb03-000000000000}</Data><Data Name='ProcessId'>4</Data><Data Name='Image'>System</Data><Data Name='User'>NT AUTHORITY\SYSTEM</Data><Data Name='Protocol'>tcp</Data><Data Name='Initiated'>false</Data><Data Name='SourceIsIpv6'>false</Data><Data Name='SourceIp'>192.168.56.1</Data><Data Name='SourceHostname'>-</Data><Data Name='SourcePort'>53704</Data><Data Name='SourcePortName'>-</Data><Data Name='DestinationIsIpv6'>false</Data><Data Name='DestinationIp'>192.168.56.102</Data><Data Name='DestinationHostname'>SOC002-WS001.soc002.local</Data><Data Name='DestinationPort'>5985</Data><Data Name='DestinationPortName'>-</Data></EventData></Event>
+===RAWXML-END===
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.102:5985/wsman

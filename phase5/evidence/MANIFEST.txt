@@ -1,0 +1,137 @@
+SOC-002 PHASE 5 - EVIDENCE MANIFEST
+===================================
+Controlled event : single benign -EncodedCommand PowerShell execution on SOC002-WS001
+Marker           : SOC002-PHASE5-ENCODED-POWERSHELL
+Execution (UTC)  : 2026-10-14T21:59:48.553Z .. 21:59:51.567Z (local EAT 00:59:48 .. 00:59:51)
+Collection host  : Kali (./phase5). Transport: WinRM/NTLM over HTTP 5985.
+Clock            : VM local = Africa/Nairobi (UTC+3). UTC = local - 03:00.
+Correlation keys : Computer, RecordId (WEF-preserved), TimeCreated, ProcessGuid,
+                   ProcessId 1500, LogonId 0x5c764d, ScriptBlockId, marker text.
+
+No passwords, keys or tokens are stored in this tree (WinRM creds come from env vars).
+
+FILES (path | bytes | sha256)
+-----------------------------
+detections/detect_encoded_powershell.ps1 | 4937 | 6e0651dc43f781e9d71bc2ebc6b7c74d4d882a30799a61372945cceda0d5efca
+evidence/ATTACK_MAPPING.txt | 2601 | 32ce65c1f5c6987a6bc1fb9b1f5c50cc9527b680536155ab740241ce0358311c
+evidence/CORRELATION_TIMELINE.txt | 6779 | 50818423e6c8257c60353c5dfcccd04d6374084527aafd1b5e39ab3e1eea1441
+evidence/DECODED_TEST_COMMAND.txt | 3583 | 3ddeb032a6b29731b97e941ee8b132ac5e351bd310ddef5d7859eca5fa67a543
+evidence/DETECTION_LIMITATIONS.txt | 3975 | a357b12e1330e3b52c1a757a28283b95564a0b9961dbab31f4b18d93ce3e88de
+evidence/INVESTIGATION_NOTES.txt | 5908 | d74d9a66743d33279f933e9dbefd97c57a2a3b02a31aa3ea18832c3198129e1f
+evidence/raw/powershell4104-recid72965-dc1.xml | 6558 | c0b2b16c9480897c0c8b3e6a1a362a76638eae0458f223b6dd70a93bd36e5c58
+evidence/raw/powershell4104-recid72965-ws001.xml | 3556 | 2c0d9810783baed8be2a8311f8b1a034f019b49e8e9739eb297faeada24c2a84
+evidence/raw/powershell4104-recid72974-dc1.xml | 2510 | 3025a513b7e52ffccb992394ee065dd3333f40fbc86755c83218ba7168a15419
+evidence/raw/powershell4104-recid72974-ws001.xml | 1532 | 62cfef27aab93d3daccb13abb7b21547da7851417633b4a979fb586dbd0bf700
+evidence/raw/security4688-recid15141-dc1.xml | 6840 | 201a779d409631420f89c00e5e954f36d4e5eff30d8819dc53210ac44fd75804
+evidence/raw/security4688-recid15141-ws001.xml | 3111 | ef74e0c97c3a3b878cf16c14fb1f9f3a28d96a42a8770335070aa695e600ca04
+evidence/raw/sysmon1-recid3535-dc1.xml | 20721 | 8855b24a77be2bacc132ac0af88b637709f429dc39013cb9f41d0f13cd770fa0
+evidence/raw/sysmon1-recid3535-ws001.xml | 10761 | 8f053aa127cf5b38dec10d3b1405840ab5533a2bd3199dfd0b1133d5c78b3bad
+evidence/t1_baseline_dc1.txt | 2144 | 3025e7cf6d74a2f0857d3dd5da41046a7c37963403961f09eb983f6d917f76cd
+evidence/t1_baseline_ws001.txt | 1792 | b3257cba64e600ab2a5a0650d608d1a5b961f7d7d4e12e1ba8e3f6f59e80b54c
+evidence/t2_execute_ws001.txt | 3069 | 4f1c1d29269c92ffc52ffba1319c9a481482df580889b6cfb9040a10d9a9c13a
+evidence/t2_operator_time.txt | 80 | ec0966064dfa878dc79e28b150d57316f876a48c8b40ffb914dd54d9d8b5cc61
+evidence/t3_collect_ws001.txt | 87 | 478f8da50a8df927c5136f7765906e8cb6d769a96da627ad341c9d76dfc726e3
+evidence/t3a_sysmon1_ws001.txt | 163738 | d9e1e107a7365a1e9d55a122995cf026f9c4da55ae06158ff235261b2d04e0c2
+evidence/t3b_4688_ws001.txt | 141260 | 9aad852edebf02ede3fb743cd64404381988ea94a004b1856a5f5cfbf67b5f69
+evidence/t3c_4104_ws001.txt | 9770 | a3567c1ab8e642fd366b81290730388f5afa4eb908938ba20bb4ded2df28eefb
+evidence/t3d_sysmon3_ws001.txt | 45211 | a33850eab2a1921cf6c26085ff599cadba5ed313ebe5498ad6efa4255399a865
+evidence/t3x_a_sysmon1_dc1.txt | 716 | de948097e451b78ca40cc7204e49ea461da1633880a11cbbae52030ede951942
+evidence/t3x_a_sysmon1_ws001.txt | 21033 | 51a54fa1b011970cd8b353115237c5ab3082a21e0882504eee492ec62d429c22
+evidence/t3x_b_4688_dc1.txt | 715 | 2948fc5f42a3ce1682ad066b24127b454f8f7da684e3095ef20ab475af9a2cbc
+evidence/t3x_b_4688_ws001.txt | 6191 | fd3de0d32809de470e09a107c3df3e2efc76b8c6b6cb85690ae9f34b96acd8b9
+evidence/t3x_c_4104_dc1.txt | 726 | 2e8b88bcbbc3a2e8ff0615c0755caf18bc40f473e89286d607b5b0d8a517db2d
+evidence/t3x_c_4104_ws001.txt | 9812 | 736f91d236deaf48ad69e53cf0d8566efb246a22986ae9235e525285c5ba83ca
+evidence/t3x_d_net_dc1.txt | 1517 | 9d274deb3486400de30dd4607358d98e5d39951184b6eb11aa98bb7ee23e549d
+evidence/t3x_d_net_ws001.txt | 1518 | 9845f396fe1e6f4c4bcc5c8fb49564206b2af2701b4f2ba86c6ee44ff2724f5c
+evidence/t3y_a_sysmon1_dc1.txt | 31015 | ceea0cf3eb04218e132895577e6b572f01b677736ab105e2829fa6d6e4fe38b3
+evidence/t3y_b_4688_dc1.txt | 9948 | 54524ea0851e4e856d4e48896148b8bce2d4009c76cf7cd7bf134146a9841a79
+evidence/t3y_c_4104_dc1.txt | 13799 | 598701a48f3914d055b6dfc2f7669472bb92da301c1f826e2441d9af9f16968c
+evidence/t3z_ancestry_ws001.txt | 1370 | c692369b000667f006c68a1a4f4b3bc26fe2a603c0a45c8096551d83f5889018
+evidence/t6_detection_broad60_dc1.txt | 65709 | 7a2b2ca3a406502d0123f6c420ff63e756c8002227882f8ffa205d5213004c6f
+evidence/t6_detection_output_dc1.txt | 275845 | 2fddb08b422ef1b64406aa32a6cbf21fc93cd2b829973d1102d5781c4f1f76fa
+evidence/t6_detection_tight_dc1.txt | 3639 | 9b40b065f82555b38364715ae8d6ec0a581b4b0df5441bdefecf53b8619192a0
+evidence/t7_integrity_ws001.txt | 1478 | 1bb61dd36421a3a41c368df9764880d0f264f4c09ca791877cce5daec82bef71
+evidence/t7_tasks2_ws001.txt | 1021 | 5de03aca2d5849df0100d8969a6f0399f2e1d6f79c5301142c7054c7091462c4
+evidence/t7_tasks_ws001.txt | 1234 | e19d98b5d8c7f6878562b3f9efb0af830373bedce9b600defd7af58e753939fe
+evidence/t8_cleanup_dc1.txt | 820 | 74c61ae4c694cad2828ebd10a601809ea0b9ee25cb0258ca519520d0814bab98
+evidence/t9_post_dc1.txt | 1119 | 58c77c19bad4df7d0f3fd25a2261efdf6c0fb18c9c81816163acfbce019d37be
+evidence/t9_post_ws001.txt | 1534 | 2e5324f7e3eabdb40e45656bef8d0871ba18203874352daeb1c73382bcd5fb77
+scripts/push.py | 1477 | fc6d741feee98182300fc5501f3d2605c91bb178c1cd63bca9140bb3c46cb2c3
+scripts/t1_baseline_dc1.ps1 | 1100 | 71507e32850298ea4b2511606446c71298ee50319240831f6f475362884b0c7e
+scripts/t1_baseline_ws001.ps1 | 1663 | 283c32e73dbdb41fd76ccbe525de1e63edec0d88b048793faedd2e686f606ce6
+scripts/t2_encoded_payload.b64 | 1689 | 95623a11fd618a07c8c15f34f9f55d5cf2531a2a0bba316d58c8e9e37777fa9e
+scripts/t2_execute_encoded.ps1 | 2645 | f4bdc6352d2be833e87d47f6ec1b4dadba29479e163508799286efa115957cc4
+scripts/t2_payload_decoded.ps1 | 632 | 89652b0022c32a1d5a2dd8aa215223797c5255f259b97f5797da4761fec81adc
+scripts/t3_collect_dc1.ps1 | 5267 | 64b79dd2f2027597f72fe5725ff68f66e379af3c08899124a271de2b7cd2bbe2
+scripts/t3_collect_template.ps1 | 5254 | dea9be7dd4265079204c6b57426e5c417fd7408bb2970bf4806a97f56c7851cc
+scripts/t3_collect_ws001.ps1 | 5306 | 3d2da60143e735816bdf9a306d28d2dd59bb4be2740ffee444f7a6c49e3cbf1a
+scripts/t3a_sysmon1.tmpl | 1020 | 9bc8afd3f9da2558b48a337d3f19c74c7621dbe36807e19ab1e6b5aed43f14f3
+scripts/t3a_sysmon1_dc1.ps1 | 1030 | cb7b5d02ed589ba8615962da0a2c4e13326677549fbc771db1f2c8060a8e31ae
+scripts/t3a_sysmon1_ws001.ps1 | 1051 | 482e70834688506d9608ab173ea2e45721642b36eba20c02e0e91abbeef9b65e
+scripts/t3b_4688.tmpl | 997 | 4c314303436601fb8564a9e876dd2ac153356022a04f8b669b4c513ebb89afa2
+scripts/t3b_4688_dc1.ps1 | 1007 | 927d1fe112286214527eb47e5d62bfb0e1e628ab7fa2a81420da6fc2a54ed0e0
+scripts/t3b_4688_ws001.ps1 | 1000 | 97a6a24da2190bcf19522ebf5aa522cde9ebe394a20275bed5be456eaef2465d
+scripts/t3c_4104.tmpl | 980 | 7fc3776ec59326e2d80617b0cf1f57e08dec1cf4849eeac80475da218c09bf8b
+scripts/t3c_4104_dc1.ps1 | 990 | aa5e4d12289de40557f86256dc4bcf8751f2ce418e20b082363afaf0d8cccf2b
+scripts/t3c_4104_ws001.ps1 | 1015 | a1d690b40362796a46039f915f00c715eb4d871ee217b933fb18e869878e51d2
+scripts/t3d_sysmon3.tmpl | 741 | 8db2a02efdc1d0e40ec072b741e7b01c06638ea7de63cbbedf391c4c2b63e039
+scripts/t3d_sysmon3_dc1.ps1 | 751 | 8cd025e08bfc1fb1d5cb30cb316cf65f71c264c93a9ca265f0409eef963787ab
+scripts/t3d_sysmon3_ws001.ps1 | 772 | 6d1fb5f422822476b23d831840a3891546ab9a94991b90cd78d169333c019331
+scripts/t3x_a_sysmon1.tmpl | 1027 | f38b9c127872ddaf769b27f2aaf2a0baab313e0b29614b03daff4140aee05cbd
+scripts/t3x_a_sysmon1_dc1.ps1 | 1037 | 3e21ff0b2b72e7787b06bc8b62d5d0835ea04f252c6b773e2ccf533fb639a657
+scripts/t3x_a_sysmon1_ws001.ps1 | 1058 | ebd4f7c3e74000c795715140061c598e561bf8618e2958ba5b5922caff61df1d
+scripts/t3x_b_4688.tmpl | 1004 | 778ef98309d33f135d7c68ebc1d51a3dd691c9cd76f718055c549d34dabf5b6f
+scripts/t3x_b_4688_dc1.ps1 | 1014 | af41456223679caa3bf0244accdd31f1cc021a0fe35a7e75934cf6fc5902f671
+scripts/t3x_b_4688_ws001.ps1 | 1007 | da5f78b814d06a004db51d03221f7788acc3c45eaeea387b5324a959cf2b1ebf
+scripts/t3x_c_4104.tmpl | 1046 | 2977587bdadcf73262fd5751f3f905339dfdabc05130246a0dbd0ec1bd201c16
+scripts/t3x_c_4104_dc1.ps1 | 1056 | 21b200065a95747cbebb199c32aeee2d1372dd50a22622af4809075a65cd6c1b
+scripts/t3x_c_4104_ws001.ps1 | 1081 | 4f85fc04bc75f3e4c22c07ee924b8931e9f4b0b7a7eca4907ef515276c550ec6
+scripts/t3x_d_net.tmpl | 689 | c3b0b62c4845fc34f49c7462468860b4087c53a1dfca1bfaa30b68a381204b6f
+scripts/t3x_d_net_dc1.ps1 | 699 | 1f03214707c5522426edd3308ea56f3fda27c91b1be5c760d308f13638ac06dc
+scripts/t3x_d_net_ws001.ps1 | 720 | 927f92c69132b037c253c76f2734a940891d6fc959d98947efed377a41a1dc12
+scripts/t3y_a_sysmon1_dc1.ps1 | 1037 | 79fc7b3a8cefc73cad29b00c49c1813dde946072077ace7835b99d822f4f6e45
+scripts/t3y_b_4688_dc1.ps1 | 1014 | e693d949ebe77fdf7706159e6e7ffbe88a1757764239877223143af6d913a7ea
+scripts/t3y_c_4104_dc1.ps1 | 1039 | c631dd045b1557715565f2a721022b2229449b541c635f9266603d2712c2619e
+scripts/t3z_ancestry_ws001.ps1 | 701 | ae7874f2161c1c10ef87e91a09dd153508af2d4b1b62f72d902b77f3e486ed3f
+scripts/t7_integrity_ws001.ps1 | 1100 | cc23fff2dc8c2768bf8c65b8f9c12af4f6ec49962dd9aef64c53bb55324d349f
+scripts/t7_tasks2_ws001.ps1 | 987 | 4dcb829fce30d8dd68cc354209b989e2b98619e771e82d03f3984fe78e017757
+scripts/t7_tasks_ws001.ps1 | 1257 | da5212cad65ff43c3379d750b2bd58b29b3b495822bc33db52a54e177a210d79
+scripts/t9_post_dc1.ps1 | 445 | 1b8d94d0b662a5912148e328b02378a7a5ed47f88f4460ac78f2a648c989b81c
+scripts/t9_post_ws001.ps1 | 1100 | fa394758353cf572bb877ae36a4910932fe0a391bd872f4419da98e822de731e
+scripts/wr.py | 1733 | e254ea76edba669c6f29a8d88ce160106b1a1606a4ccd8fd3b8e3c5facb65281
+
+KEY ARTEFACTS
+-------------
+evidence/t2_execute_ws001.txt          exact command construction, timestamp, account, hostname, program output
+evidence/t3x_a_sysmon1_ws001.txt       Sysmon Ev1 (primary signal), targeted, COUNT=1
+evidence/t3x_b_4688_ws001.txt          Security 4688 for the same process, targeted, COUNT=1
+evidence/t3x_c_4104_ws001.txt          PowerShell 4104 (decoded payload + runner), targeted
+evidence/t3x_d_net_ws001.txt           Sysmon Ev3 in the window (none for the encoded process)
+evidence/t3y_a_sysmon1_dc1.txt         centralised Sysmon Ev1 copy (ForwardedEvents)
+evidence/t3y_b_4688_dc1.txt            centralised 4688 copy
+evidence/t3y_c_4104_dc1.txt            centralised 4104 copy + raw XML (Execution ProcessID)
+evidence/t3z_ancestry_ws001.txt        full Sysmon Ev1 process ancestry
+evidence/raw/*.xml                     raw XML of the 3 event families, source AND centralised
+evidence/t6_detection_tight_dc1.txt    detection scoped to the event  -> 1 alert, corroborated
+evidence/t6_detection_broad60_dc1.txt  detection over 60 min           -> 39 alerts (38 benign WinRM)
+evidence/t7_integrity_ws001.txt        persistence/EoP integrity checks + audit-policy gaps
+evidence/t7_tasks2_ws001.txt           TaskScheduler 106 = 0 in window (log enabled)
+evidence/t9_post_*.txt                 post-activity health + retention confirmation
+evidence/CORRELATION_TIMELINE.txt      TIME/SOURCE/EVENT/OBSERVATION timeline
+evidence/INVESTIGATION_NOTES.txt       the 12 analyst questions and answers
+evidence/DECODED_TEST_COMMAND.txt      verbatim decoded benign script + base64 + hash
+evidence/DETECTION_LIMITATIONS.txt     false positives / false negatives / gaps
+evidence/ATTACK_MAPPING.txt            evidence-bounded ATT&CK mapping
+detections/detect_encoded_powershell.ps1   the detection (canonical copy)
+
+TRANSIENT ON-TARGET ARTEFACT (removed)
+--------------------------------------
+C:\Windows\Temp\soc002-phase5\detect_encoded_powershell.ps1 on SOC002-DC1 was used to run
+the detection against ForwardedEvents, then deleted (see evidence/t8_cleanup_dc1.txt).
+Transient copy SHA256 matched the local canonical copy exactly (6e0651dc43f781e9...).
+
+CLASSIFICATION
+--------------
+OBSERVED     = read directly from a host, an event, or command output.
+INFERRED     = conclusion drawn from multiple observations.
+NOT VERIFIED = not tested, or not auditable in this lab (e.g. 4697/4698 not audited).

@@ -1,0 +1,88 @@
+=== SOC002-DET-001 v2 :: REPLAY over preserved Phase 5 evidence ===
+Library=phase6-v2.0 sha256=3C332445BFB69045E2AD3B135C8184086D91979D8FC03C1BBEAD79D17B69D09F
+Evidence root=./phase5/evidence
+Evidence files read=16   process-create records indexed=27   candidates replayed=39
+Baseline=BASE-01 (narrow WinRS transport wrapper 'cmd.exe /C powershell -encodedcommand <b64>')   Payload screen=ESC-01..08
+
+REPLAY LIMITS (read these before the numbers):
+ 1. Phase 5 broad-run evidence preserved only short prefixes of the command lines/decoded payloads, so the ESC-* screen runs on the prefix that survived.
+ 2. Payload text used per candidate: 2 candidate(s) used the full 4104 ScriptBlockText where Phase 5 preserved it; the rest used the Phase 5 decoded snippet (truncated).
+ 3. Ancestry could be walked as far as a WinRM host for 6 of the 39 candidates. The walk reached a record-level root for 0 - the remaining parent cmd.exe process-create events are not in the retained evidence, and the topmost hops are known only from the image name recorded by their child's event.
+ 4. Of the 38 baselined events: 5 reached the ancestry-confirmed tier, 33 were baselined on the transport pattern alone (their parent cmd.exe event did not survive in the retained evidence).
+ 5. 39 candidates replayed = the Phase 5 broad 60-minute window (2026-10-15 00:04:46 .. 01:05:46 local). This is a re-decision over known data, not a fresh detection run.
+-------------------------------------------------------------------
+
+[BASE 001] rec=3645 utc=2026-10-14T22:02:56.236Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=3660 parent=cmd.exe(5432) lineage=powershell.exe(3660) <- cmd.exe(5432) rule=BASE-01 payload=True
+[BASE 002] rec=3635 utc=2026-10-14T22:01:58.952Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=852 parent=cmd.exe(4396) lineage=powershell.exe(852) <- cmd.exe(4396) rule=BASE-01 payload=True
+[BASE 003] rec=3625 utc=2026-10-14T22:01:57.028Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=2832 parent=cmd.exe(5848) lineage=powershell.exe(2832) <- cmd.exe(5848) rule=BASE-01 payload=True
+[BASE 004] rec=3615 utc=2026-10-14T22:01:55.201Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=3412 parent=cmd.exe(2860) lineage=powershell.exe(3412) <- cmd.exe(2860) rule=BASE-01 payload=True
+[BASE 005] rec=3603 utc=2026-10-14T22:01:53.341Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=1444 parent=cmd.exe(344) lineage=powershell.exe(1444) <- cmd.exe(344) rule=BASE-01 payload=True
+[BASE 006] rec=3592 utc=2026-10-14T22:00:54.447Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=5944 parent=cmd.exe(3416) lineage=powershell.exe(5944) <- cmd.exe(3416) rule=BASE-01 payload=True
+[BASE 007] rec=3582 utc=2026-10-14T22:00:52.463Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=5920 parent=cmd.exe(2380) lineage=powershell.exe(5920) <- cmd.exe(2380) rule=BASE-01 payload=True
+[BASE 008] rec=3572 utc=2026-10-14T22:00:49.872Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=4012 parent=cmd.exe(5548) lineage=powershell.exe(4012) <- cmd.exe(5548) <- winrshost.exe(2964) rule=BASE-01 payload=True
+[BASE 009] rec=3560 utc=2026-10-14T22:00:47.365Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=4348 parent=cmd.exe(1004) lineage=powershell.exe(4348) <- cmd.exe(1004) <- winrshost.exe(4772) rule=BASE-01 payload=True
+[BASE 010] rec=3534 utc=2026-10-14T21:59:47.583Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=4576 parent=cmd.exe(3596) lineage=powershell.exe(4576) <- cmd.exe(3596) <- winrshost.exe(5800) <- svchost.exe(716) rule=BASE-01 payload=True
+[BASE 011] rec=3523 utc=2026-10-14T21:59:09.175Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=4372 parent=cmd.exe(5368) lineage=powershell.exe(4372) <- cmd.exe(5368) <- winrshost.exe(5672) rule=BASE-01 payload=True
+[BASE 012] rec=3508 utc=2026-10-14T21:58:52.617Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5452 parent=cmd.exe(6120) lineage=powershell.exe(5452) <- cmd.exe(6120) <- winrshost.exe(5432) rule=BASE-01 payload=True
+[BASE 013] rec=3465 utc=2026-10-14T21:48:01.288Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=3156 parent=cmd.exe(2200) lineage=powershell.exe(3156) <- cmd.exe(2200) rule=BASE-01 payload=True
+[BASE 014] rec=3444 utc=2026-10-14T21:46:53.466Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=996 parent=cmd.exe(220) lineage=powershell.exe(996) <- cmd.exe(220) rule=BASE-01 payload=True
+[BASE 015] rec=3422 utc=2026-10-14T21:44:30.124Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=6096 parent=cmd.exe(3316) lineage=powershell.exe(6096) <- cmd.exe(3316) rule=BASE-01 payload=True
+[BASE 016] rec=3406 utc=2026-10-14T21:42:43.634Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=5340 parent=cmd.exe(5296) lineage=powershell.exe(5340) <- cmd.exe(5296) rule=BASE-01 payload=True
+[BASE 017] rec=3396 utc=2026-10-14T21:42:42.153Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=2040 parent=cmd.exe(5552) lineage=powershell.exe(2040) <- cmd.exe(5552) rule=BASE-01 payload=True
+[BASE 018] rec=3386 utc=2026-10-14T21:42:40.652Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=4548 parent=cmd.exe(6092) lineage=powershell.exe(4548) <- cmd.exe(6092) rule=BASE-01 payload=True
+[BASE 019] rec=3376 utc=2026-10-14T21:42:39.172Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=3352 parent=cmd.exe(3400) lineage=powershell.exe(3352) <- cmd.exe(3400) rule=BASE-01 payload=True
+[BASE 020] rec=3366 utc=2026-10-14T21:42:37.705Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=5360 parent=cmd.exe(5312) lineage=powershell.exe(5360) <- cmd.exe(5312) rule=BASE-01 payload=True
+[BASE 021] rec=3356 utc=2026-10-14T21:42:29.742Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=3156 parent=cmd.exe(5768) lineage=powershell.exe(3156) <- cmd.exe(5768) rule=BASE-01 payload=True
+[BASE 022] rec=3346 utc=2026-10-14T21:42:28.258Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=5812 parent=cmd.exe(5372) lineage=powershell.exe(5812) <- cmd.exe(5372) rule=BASE-01 payload=True
+[BASE 023] rec=3336 utc=2026-10-14T21:42:20.396Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=2460 parent=cmd.exe(996) lineage=powershell.exe(2460) <- cmd.exe(996) rule=BASE-01 payload=True
+[BASE 024] rec=3326 utc=2026-10-14T21:42:19.058Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=4324 parent=cmd.exe(4616) lineage=powershell.exe(4324) <- cmd.exe(4616) rule=BASE-01 payload=True
+[BASE 025] rec=3316 utc=2026-10-14T21:42:17.729Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=5496 parent=cmd.exe(2504) lineage=powershell.exe(5496) <- cmd.exe(2504) rule=BASE-01 payload=True
+[BASE 026] rec=3306 utc=2026-10-14T21:42:16.392Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=2436 parent=cmd.exe(5500) lineage=powershell.exe(2436) <- cmd.exe(5500) rule=BASE-01 payload=True
+[BASE 027] rec=3295 utc=2026-10-14T21:42:15.054Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=4044 parent=cmd.exe(4704) lineage=powershell.exe(4044) <- cmd.exe(4704) rule=BASE-01 payload=True
+[BASE 028] rec=3283 utc=2026-10-14T21:41:51.898Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=4696 parent=cmd.exe(336) lineage=powershell.exe(4696) <- cmd.exe(336) rule=BASE-01 payload=True
+[BASE 029] rec=3268 utc=2026-10-14T21:41:22.230Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=6072 parent=cmd.exe(1368) lineage=powershell.exe(6072) <- cmd.exe(1368) rule=BASE-01 payload=True
+[BASE 030] rec=3252 utc=2026-10-14T21:41:10.485Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=1832 parent=cmd.exe(4932) lineage=powershell.exe(1832) <- cmd.exe(4932) rule=BASE-01 payload=True
+[BASE 031] rec=3053 utc=2026-10-14T21:07:38.959Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=5684 parent=cmd.exe(4328) lineage=powershell.exe(5684) <- cmd.exe(4328) rule=BASE-01 payload=True
+[BASE 032] rec=3045 utc=2026-10-14T21:07:23.160Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=1212 parent=cmd.exe(5292) lineage=powershell.exe(1212) <- cmd.exe(5292) rule=BASE-01 payload=True
+[BASE 033] rec=3037 utc=2026-10-14T21:07:22.238Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=5344 parent=cmd.exe(6048) lineage=powershell.exe(5344) <- cmd.exe(6048) rule=BASE-01 payload=True
+[BASE 034] rec=3029 utc=2026-10-14T21:07:21.263Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=1004 parent=cmd.exe(5564) lineage=powershell.exe(1004) <- cmd.exe(5564) rule=BASE-01 payload=True
+[BASE 035] rec=3020 utc=2026-10-14T21:07:20.227Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=4488 parent=cmd.exe(1608) lineage=powershell.exe(4488) <- cmd.exe(1608) rule=BASE-01 payload=True
+[BASE 036] rec=3011 utc=2026-10-14T21:05:36.696Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=196 parent=cmd.exe(4412) lineage=powershell.exe(196) <- cmd.exe(4412) rule=BASE-01 payload=True
+[BASE 037] rec=2983 utc=2026-10-14T21:05:20.404Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=5848 parent=cmd.exe(1840) lineage=powershell.exe(5848) <- cmd.exe(1840) rule=BASE-01 payload=True
+[BASE 038] rec=2975 utc=2026-10-14T21:05:18.830Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-PATTERN sev=LOW pid=2276 parent=cmd.exe(4772) lineage=powershell.exe(2276) <- cmd.exe(4772) rule=BASE-01 payload=True
+
+[ALERT 001] Encoded PowerShell execution observed - INVESTIGATION REQUIRED
+  Detection        = SOC002-DET-001 v2  tier=INVESTIGATION severity=MEDIUM
+  Why retained     = not baselined: parent leaf 'powershell.exe' is not cmd.exe
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator   LogonId=0x5c764d
+  EventUtc         = 2026-10-14T21:59:48.080Z
+  RecordId/Source  = 3535 / Phase 5 evidence: t6_detection_broad60_dc1.txt ([ALERT 010])
+  ProcessGuid      = {edcef402-fb54-6acf-ef04-000000000700}
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1500)
+  Parent           = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe  (PPID 4576)
+  ParentCommandLine= powershell  -encodedcommand JABFAHIAcgBvAHIAQQBjAHQAaQBvAG4A...[cut]
+  Hashes           = SHA256=B4E7BC24BF3F5C3DA2EB6E9EC5EC10F90099DEFA91B820F2F3FC70DD9E4785C4
+  CommandLine      = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" ...[cut]
+  DecodedScript    = <<<# SOC-002 PHASE 5 - CONTROLLED BENIGN TEST # Marker: SOC002-PHASE5-ENCODED-POWERSHELL # Purpose: harmless observable output only. No persistence, no network, no modification. $marker = 'SOC002-PHASE5-ENCODED-POWERSHELL' Write-Output $marker Write-Output ('HOST=' + $env:COMPUTERNAME) Write-Output ('USER=' + [System.Security.Principal.WindowsIdentity]::GetCurrent().Name) Write-Output ('START_UTC=' + (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ')) Start-Sleep -Seconds 3 Write-Output ('END_UTC=' + (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ')) Write-Output 'BENIGN_CONTROLLED_TEST_COMPLETE' >>>  [decoded by detection - NOT executed]
+  Lineage          = powershell.exe(1500) <- powershell.exe(4576) <- cmd.exe(3596) <- winrshost.exe(5800) <- svchost.exe(716)
+                     depth 0: powershell.exe [OBSERVED-CHILD-EVENT]
+                     depth 1: powershell.exe [OBSERVED-PARENT-EVENT]
+                     depth 2: cmd.exe [OBSERVED-PARENT-EVENT]
+                     depth 3: winrshost.exe [OBSERVED-PARENT-EVENT]
+                     depth 4: svchost.exe [OBSERVED-CHILD-EVENT]
+  Corroboration    = PowerShell 4104 RecId=72974 ExecPID=1500 ScriptBlockId=039b9c99-15fb-488d-8046-46e868aa9a39 Msg=1/1
+                     4104Text=# SOC-002 PHASE 5 - CONTROLLED BENIGN TEST # Marker: SOC002-PHASE5-ENCODED-POWERSHELL # Purpose: harmless observable output only. No persistence, no network, no modification. $marker = 'SOC002-PHASE5-
+  Note             = retained also because the lineage does NOT match the shape BASE-01 baselines; observed chain: powershell.exe(1500) <- powershell.exe(4576) <- cmd.exe(3596) <- winrshost.exe(5800) <- svchost.exe(716)
+
+--- SOC002-DET-001 v2 REPLAY summary ---------------------------------
+Candidate alerts (encoded PowerShell matched)  = 39
+Retained investigation candidates              = 1   -> alert indexes: 10
+Suppressed by narrow baseline (BASE-01)        = 38
+   - BASELINE-TRANSPORT-CONFIRMED (INFO)       = 5   -> 8,9,11,12,13
+   - BASELINE-TRANSPORT-PATTERN   (LOW)        = 33   (ancestry not resolvable from retained evidence)
+Escalated back by payload screen (ESC-*)       = 0
+Payload screen actually ran                    = 39 of 39
+Suppressed by a general 'powershell' rule      = 0 (no such rule exists)
+Suppressed by a general '-EncodedCommand' rule = 0 (no such rule exists)
+

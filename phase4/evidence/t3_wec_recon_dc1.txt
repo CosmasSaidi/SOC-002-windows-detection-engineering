@@ -1,0 +1,92 @@
+=== wecutil gs SOC002-WS001-Security ===
+﻿Subscription Id: SOC002-WS001-Security
+SubscriptionType: CollectorInitiated
+Description: Known-good Security 4624 4625 4688 plus PowerShell 4104
+Enabled: true
+Uri: http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog
+ConfigurationMode: Custom
+DeliveryMode: Pull
+DeliveryMaxItems: 1
+DeliveryMaxLatencyTime: 5000
+HeartbeatInterval: 5000
+Query: <QueryList><Query Id="0"><Select Path="Security">*[System[(EventID=4624 or EventID=4625 or EventID=4688)]]</Select><Select Path="Microsoft-Windows-PowerShell/Operational">*[System[(EventID=4104)]]</Select></Query></QueryList>
+ReadExistingEvents: false
+TransportName: HTTP
+TransportPort: 5985
+ContentFormat: RenderedText
+Locale: en-US
+LogFile: ForwardedEvents
+PublisherName: Microsoft-Windows-EventCollector
+CredentialsType: Default
+
+EventSource[0]:
+	Address: SOC002-WS001.soc002.local
+	Enabled: true
+=== wecutil gr (runtime status) ===
+﻿
+Subscription: SOC002-WS001-Security
+	RunTimeStatus: Active
+	LastError: 0
+	EventSources:
+		SOC002-WS001.soc002.local
+			RunTimeStatus: Active
+			LastError: 0
+=== wecutil gs /format:xml ===
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
+	<SubscriptionId>SOC002-WS001-Security</SubscriptionId>
+	<SubscriptionType>CollectorInitiated</SubscriptionType>
+	<Description>Known-good Security 4624 4625 4688 plus PowerShell 4104</Description>
+	<Enabled>true</Enabled>
+	<Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
+	<ConfigurationMode>Custom</ConfigurationMode>
+	<Delivery Mode="Pull">
+		<Batching>
+			<MaxItems>1</MaxItems>
+			<MaxLatencyTime>5000</MaxLatencyTime>
+		</Batching>
+		<PushSettings>
+			<Heartbeat Interval="5000"/>
+		</PushSettings>
+	</Delivery>
+	<Query>
+		<![CDATA[
+<QueryList><Query Id="0"><Select Path="Security">*[System[(EventID=4624 or EventID=4625 or EventID=4688)]]</Select><Select Path="Microsoft-Windows-PowerShell/Operational">*[System[(EventID=4104)]]</Select></Query></QueryList>
+		]]>
+	</Query>
+	<ReadExistingEvents>false</ReadExistingEvents>
+	<TransportName>HTTP</TransportName>
+	<TransportPort>5985</TransportPort>
+	<ContentFormat>RenderedText</ContentFormat>
+	<Locale Language="en-US"/>
+	<LogFile>ForwardedEvents</LogFile>
+	<PublisherName>Microsoft-Windows-EventCollector</PublisherName>
+	<CredentialsType>Default</CredentialsType>
+	<EventSources>
+		<EventSource Enabled="true">
+			<Address>SOC002-WS001.soc002.local</Address>
+		</EventSource>
+	</EventSources>
+</Subscription>
+=== WEC service ===
+
+
+Name      : Wecsvc
+Status    : Running
+StartType : Automatic
+
+
+
+
+=== ForwardedEvents log info ===
+IsEnabled=True LogMode=Circular MaxKB=20480 RecordCount=1917
+=== EventCollector/Operational recent ===
+Id=4 2026-10-14 02:18:41 :: The Subscription SOC002-WS001-Security could not be activated on target machine SOC002-WS001.soc002.local due to communication error.  Error Code is 15000.  The subscription will be in retrying state until the subscription becomes active or all retries have been performed. Additional fault message:<f:WSManFault xmlns:f="http://schemas.microsoft.com/wbem/wsman/1/wsmanfault" Code="15000" Machine="SOC002-WS001.soc002.local"><f:Message><f:ProviderFault provider="Event Forwarding Plugin" path="C:\Windows\system32\wevtfwd.dll">The specified channel path is invalid. </f:ProviderFault></f:Message></f:WSManFault>
+Id=4 2026-10-13 20:20:53 :: The Subscription SOC002-WS001-Security could not be activated on target machine SOC002-WS001.soc002.local due to communication error.  Error Code is 2150859015.  The subscription will be in retrying state until the subscription becomes active or all retries have been performed. Additional fault message:<f:WSManFault xmlns:f="http://schemas.microsoft.com/wbem/wsman/1/wsmanfault" Code="2150859015" Machine="SOC002-DC1.soc002.local"><f:Message>The WS-Management service cannot process the request because the filter XML is invalid. </f:Message></f:WSManFault>
+Id=4 2026-10-14 02:11:45 :: The Subscription SOC002-WS001-Security could not be activated on target machine SOC002-WS001.soc002.local due to communication error.  Error Code is 1398.  The subscription will be in retrying state until the subscription becomes active or all retries have been performed. Additional fault message:<f:WSManFault xmlns:f="http://schemas.microsoft.com/wbem/wsman/1/wsmanfault" Code="1398" Machine="SOC002-DC1.soc002.local"><f:Message>WinRM cannot process the request. The following error with errorcode 0x80090324 occurred while using Kerberos authentication: There is a time and/or date difference between the client and server.   |  Possible causes are: |   -The user name or password specified are invalid. |   -Kerberos is used when no authentication method and no user name are specified. |   -Kerberos accepts domain user names, but not local user names. |   -The Service Principal Name (SPN) for the remote computer name and port does not exist. |   -The client and remote computers are in different domains and there is no trust between the two domains. |  After checking for the above issues, try the following: |   -Check the Event Viewer for events related to authentication. |   -Change the authentication method; add the destination computer to the WinRM TrustedHosts configuration setting or use HTTPS transport. |  Note that computers in the TrustedHosts list might not be authenticated. |    -For more information about WinRM configuration, run the following command: winrm help config. </f:Message></f:WSManFault>
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="2"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.10:5985/wsman

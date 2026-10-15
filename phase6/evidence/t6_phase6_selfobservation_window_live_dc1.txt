@@ -1,0 +1,54 @@
+=== SOC002-DET-001 v2 :: Encoded PowerShell Execution - classified ===
+Library=phase6-v2.0 sha256=3C332445BFB69045E2AD3B135C8184086D91979D8FC03C1BBEAD79D17B69D09F
+Log=ForwardedEvents  Window=2026-10-15 00:44:20 .. 2026-10-15 01:35:20 (collector local)
+IndexFrom=2026-10-14 22:44:20  index records=1019
+Baseline=BASE-01 (narrow WinRS transport wrapper)   Payload screen=ESC-01..08   Trigger=unchanged from Phase 5
+-------------------------------------------------------------------
+
+[ALERT 001] Encoded PowerShell execution observed - INVESTIGATION REQUIRED
+  Detection        = SOC002-DET-001 v2  tier=INVESTIGATION severity=MEDIUM
+  Why retained     = not baselined: parent leaf 'powershell.exe' is not cmd.exe
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator   LogonId=0x5c764d
+  EventUtc         = 2026-10-14T21:59:48.080Z
+  RecordId/Source  = 3535 / Sysmon-Event1
+  ProcessGuid      = {edcef402-fb54-6acf-ef04-000000000700}
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1500)
+  Parent           = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe  (PPID 4576)
+  ParentCommandLine= powershell  -encodedcommand JABFAHIAcgBvAHIAQQBjAHQAaQBvAG4AUAByAGUAZgBlAHIAZQBuAGMAZQA9ACcAQwBvAG4AdABpAG4AdQBlACcACgAkAG0AYQByAGsAZQByACAAPQAgACcAUwBPAEMAMAAwADIALQBQAEgAQQBTAEUANQAtAEUATgBDAE8ARABFAEQALQBQAE8AVwBFAFIAUwBIAEUATABMACcACgAkAGIANgA0ACAAPQAgACcASQB3AEEAZwBBAEYATQBBAFQAdwBCAEQAQQBDADAAQQBNAEEAQQB3AEEARABJAEEASQBBAEIAUQBBAEUAZwBBAFEAUQBCAFQAQQBFAFUAQQBJAEEAQQAxAEEAQwBBAEEATABRAEEAZwBBAEUATQBBAFQAdwBCAE8AQQBGAFEAQQBVAGcAQgBQAEEARQB3AEEAVABBAEIARgBBAEUAUQBBAEkAQQBCAEMAQQBFAFUAQQBUAGcAQgBKAEEARQBjAEEAVABnAEEAZwBBAEYAUQBBAFIAUQBCAFQAQQBGAFEAQQBDAGcAQQBqAEEAQwBBAEEAVABRAEIAaABBAEgASQBBAGEAdwBCAGwAQQBIAEkAQQBPAGcAQQBnAEEARgBNAEEAVAB3AEIARABBAEQAQQBBAE0AQQBBAHkAQQBDADAAQQBVAEEAQgBJAEEARQBFAEEAVQB3AEIARgBBAEQAVQBBAEwAUQBCAEYAQQBFADQAQQBRAHcAQgBQAEEARQBRAEEAUgBRAEIARQBBAEMAMABBAFUAQQBCAFAAQQBGAGMAQQBSAFEAQgBTAEEARgBNAEEAUwBBAEIARgBBAEUAdwBBAFQAQQBBAEsAQQBDAE0AQQBJAEEAQgBRAEEASABVAEEAYwBnAEIAdwBBAEcAOABBAGMAdwBCAGwAQQBEAG8AQQBJAEEAQgBvAEEARwBFAEEAYwBnAEIAdABBAEcAdwBBAFoAUQBCAHoAQQBIAE0AQQBJAEEAQgB2AEEARwBJAEEAYwB3AEIAbABBAEgASQBBAGQAZwBCAGgAQQBHAEkAQQBiAEEAQgBsAEEAQwBBAEEAYgB3AEIAMQBBAEgAUQBBAGMAQQBCADEAQQBIAFEAQQBJAEEAQgB2AEEARwA0AEEAYgBBAEIANQBBAEMANABBAEkAQQBCAE8AQQBHADgAQQBJ...[cut]
+  Hashes           = SHA256=B4E7BC24BF3F5C3DA2EB6E9EC5EC10F90099DEFA91B820F2F3FC70DD9E4785C4
+  CommandLine      = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -EncodedCommand IwAgAFMATwBDAC0AMAAwADIAIABQAEgAQQBTAEUAIAA1ACAALQAgAEMATwBOAFQAUgBPAEwATABFAEQAIABCAEUATgBJAEcATgAgAFQARQBTAFQACgAjACAATQBhAHIAawBlAHIAOgAgAFMATwBDADAAMAAyAC0AUABIAEEAUwBFADUALQBFAE4AQwBPAEQARQBEAC0AUABPAFcARQBSAFMASABFAEwATAAKACMAIABQAHUAcgBwAG8AcwBlADoAIABoAGEAcgBtAGwAZQBzAHMAIABvAGIAcwBlAHIAdgBhAGIAbABlACAAbwB1AHQAcAB1AHQAIABvAG4AbAB5AC4AIABOAG8AIABwAGUAcgBzAGkAcwB0AGUAbgBjAGUALAAgAG4AbwAgAG4AZQB0AHcAbwByAGsALAAgAG4AbwAgAG0AbwBkAGkAZgBpAGMAYQB0AGkAbwBuAC4ACgAkAG0AYQByAGsAZQByACAAPQAgACcAUwBPAEMAMAAwADIALQBQAEgAQQBTAEUANQAtAEUATgBDAE8ARABFAEQALQBQAE8AVwBFAFIAUwBIAEUATABMACcACgBXAHIAaQB0AGUALQBPAHUAdABwAHUAdAAgACQAbQBhAHIAawBlAHIACgBXAHIAaQB0AGUALQBPAHUAdABwAHUAdAAgACgAJwBIAE8AUwBUAD0AJwAgACsAIAAkAGUAbgB2ADoAQwBPAE0AUABVAFQARQBSAE4AQQBNAEUAKQAKAFcAcgBpAHQAZQAtAE8AdQB0AHAAdQB0ACAAKAAnAFUAUwBFAFIAPQAnACAAKwAgAFsAUwB5AHMAdABlAG0ALgBTAGUAYwB1AHIAaQB0AHkALgBQAHIAaQBuAGMAaQBwAGEAbAAuAFcAaQBuAGQAbwB3AHMASQBkAGUAbgB0AGkAdAB5AF0AOgA6AEcAZQB0AEMAdQByAHIAZQBuAHQAKAApAC4ATgBhAG0AZQApAAoAVwByAGkAdABlAC0ATwB1AHQAcAB1AHQAIAAoACcAUwBUAEEAUgBUAF8AVQBUAEMAPQAnACAAKwAgACgARwBlAHQALQBEAGEAdABlACkALgBUAG8AVQBuAGkAd...[cut]
+  DecodedScript    = <<<# SOC-002 PHASE 5 - CONTROLLED BENIGN TEST
+# Marker: SOC002-PHASE5-ENCODED-POWERSHELL
+# Purpose: harmless observable output only. No persistence, no network, no modification.
+$marker = 'SOC002-PHASE5-ENCODED-POWERSHELL'
+Write-Output $marker
+Write-Output ('HOST=' + $env:COMPUTERNAME)
+Write-Output ('USER=' + [System.Security.Principal.WindowsIdentity]::GetCurrent().Name)
+Write-Output ('START_UTC=' + (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ'))
+Start-Sleep -Seconds 3
+Write-Output ('END_UTC=' + (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ'))
+Write-Output 'BENIGN_CONTROLLED_TEST_COMPLETE'
+>>>  [decoded by detection - NOT executed]
+  Lineage          = powershell.exe(1500) <- powershell.exe(4576) <- cmd.exe(3596) <- winrshost.exe(5800) <- svchost.exe(716)
+                     depth 0: powershell.exe [OBSERVED-CHILD-EVENT]
+                     depth 1: powershell.exe [OBSERVED-PARENT-EVENT]
+                     depth 2: cmd.exe [OBSERVED-PARENT-EVENT]
+                     depth 3: winrshost.exe [OBSERVED-PARENT-EVENT]
+                     depth 4: svchost.exe [OBSERVED-CHILD-EVENT]
+  Corroboration    = PowerShell 4104 RecId= ExecPID= ScriptBlockId= Msg=/
+  Note             = retained also because the lineage does NOT match the shape BASE-01 baselines; observed chain: powershell.exe(1500) <- powershell.exe(4576) <- cmd.exe(3596) <- winrshost.exe(5800) <- svchost.exe(716)
+
+--- SOC002-DET-001 v2 summary ---------------------------------------
+Candidate alerts (encoded PowerShell matched)  = 20
+Retained investigation candidates              = 1
+Suppressed by narrow baseline (BASE-01)        = 19
+   - baseline + WinRM ancestry resolved       = 19   (INFO)
+   - baseline pattern, ancestry NOT resolved  = 0   (LOW)
+Escalated back by payload screen (ESC-*)       = 0
+Suppressed by a general 'powershell' rule      = 0 (no such rule exists)
+Suppressed by a general '-EncodedCommand' rule = 0 (no such rule exists)
+Security 4688 fallback                         = disabled
+
+
+[RC]=0

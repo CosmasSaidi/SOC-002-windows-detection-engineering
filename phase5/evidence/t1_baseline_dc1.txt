@@ -1,0 +1,47 @@
+=== SOC-002 PHASE5 TASK1 BASELINE (DC1) ===
+HOST           = SOC002-DC1
+TIME_LOCAL     = 2026-10-15 00:59:08
+TIME_UTC       = 2026-10-15T00:59:08Z
+TZ             = E. Africa Standard Time
+=== WEF subscription runtime status (wecutil gr) ===
+﻿
+Subscription: SOC002-WS001-Security
+	RunTimeStatus: Active
+	LastError: 0
+	EventSources:
+		SOC002-WS001.soc002.local
+			RunTimeStatus: Active
+			LastError: 0
+=== Subscription config summary (wecutil gs) ===
+
+Subscription Id: SOC002-WS001-Security
+Enabled: true
+DeliveryMode: Pull
+Query: 
+<QueryList><Query Id="0"><Select Path="Security">*[System[(EventID=4624 or EventID=4625 or 
+EventID=4688)]]</Select><Select 
+Path="Microsoft-Windows-PowerShell/Operational">*[System[(EventID=4104)]]</Select><Select 
+Path="Microsoft-Windows-Sysmon/Operational">*[System[(EventID=1 or EventID=3)]]</Select></Query></QueryList>
+LogFile: ForwardedEvents
+	Enabled: true
+=== ForwardedEvents accessibility ===
+ForwardedEvents ACCESSIBLE
+  newest: Id=4688 RecId=15125 Time=2026-10-15 00:58:53 Prov=Microsoft-Windows-Security-Auditing
+  newest Computer=SOC002-WS001.soc002.local
+=== Windows Event Collector service ===
+
+
+
+
+Name      : Wecsvc
+Status    : Running
+StartType : Automatic
+
+
+
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="2"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.10:5985/wsman

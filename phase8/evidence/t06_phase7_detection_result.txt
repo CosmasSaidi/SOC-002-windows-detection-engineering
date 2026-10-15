@@ -1,0 +1,25 @@
+=== SOC-002 PHASE 8 :: DET-003 RESULT ON THE PHASE 7 BLIND SPOT ===
+Generated (utc) = 2026-10-14T23:45:50Z
+Source          = the four replay JSON files (offline, over preserved Phase 7 XML).
+
+  replay file                        events  examined  det003  low  med  payload(PID1428)-hits
+  ---------------------------------  ------  --------  ------  ---  ---  ----------------------
+  replay_1_ws001_controlled          17      8         3       3    0    3
+  replay_2_dc1_forwarded_controlled  17      8         3       3    0    3
+  replay_3_ws001_session             342     112       6       6    0    3
+  replay_4_dc1_forwarded_session     340     112       6       6    0    3
+
+--- PHASE 7 BACK-TEST (the conceptual result the mission specified) ---------
+
+  Component           Phase 7 expectation        Phase 8 observation
+  ------------------  -------------------------  ------------------------------------------
+  DET-001 v2          MISS                        confirmed MISS (trigger = encoded switch only)
+  DET-002             CONTEXT                     WinRM lineage recorded (winrshost->cmd->ps1->ps1)
+  DET-003             SHOULD IDENTIFY             IDENTIFIED (REC-01 [Convert]::FromBase64String)
+  CORR-002            SHOULD CONNECT              connected Sysmon1 + 4688 + 4104 + DET-002 lineage
+
+Replays in which DET-003 flagged the exact Phase 7 payload (PID 1428, REC-01) : 4 of 4
+Result: DET-003 identifies the previously-missed Base64 reconstruction behaviour in
+every preserved Phase 7 view (WS001 local and DC1 ForwardedEvents, controlled and
+session windows). This is a Back-test on preserved evidence, not production validation.
+

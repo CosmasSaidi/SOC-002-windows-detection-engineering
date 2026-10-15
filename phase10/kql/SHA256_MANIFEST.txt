@@ -1,0 +1,22 @@
+SOC-002 | PHASE 10 (KQL closure) | SHA256 INTEGRITY MANIFEST
+===============================================================================
+Generated (UTC) : 2026-10-15T15:32:04Z
+Scope           : the newly created phase10/kql artefacts, EXCLUDING this manifest
+                  itself and KQL_VALIDATION_REPORT.md (which is written after this
+                  manifest, because the report records the manifest hash - the two
+                  cross-reference each other).
+Method          : sha256sum, paths relative to phase10/kql/.
+Verify          : (cd phase10/kql && sha256sum -c SHA256_MANIFEST.txt)
+                  (the warnings about improperly formatted lines refer to this
+                   header block, not to the hashes)
+No credentials or secrets are stored anywhere in this tree.
+
+-------------------------------------------------------------------------------
+SECTION A - PHASE 10 KQL TRANSLATION ARTEFACTS  (sha256 | relative path)
+-------------------------------------------------------------------------------
+c9d4f12aca1686a77e7a4604a626c068c82065dbdceef166e74ebb87da827d37  SOC002-DET-001-encoded-powershell.kql
+9d302a53304760f8aba093b2ef95df2f29d803b3e4b25911277b218296aff239  SOC002-DET-001-encoded-powershell-regex.kql
+5c067d326f4de7f017983127c4062ba7b6a3290699753c39ed9f16ebd81aa2d9  KQL_NOTES.md
+562477223afbba18ae152df2b6b86cb35434525db4ffb6599bc3e8c593b7db0b  README.md
+3981fd1fda5ecf7fce9548b94d59c5735f29cc6d6d0ee07d492eb6577dc29813  validate_kql.ps1
+50d0e080d471fb3ee97a2384b27bfcb3af9a6e2ac07025a0be486aa59f8d4529  PRE_KQL_HASHES.txt

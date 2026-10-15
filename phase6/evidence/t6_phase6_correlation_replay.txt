@@ -1,0 +1,442 @@
+=== SOC002-CORR-001 :: REPLAY - DET-001 x DET-002 correlation ===
+Library=phase6-v2.0 sha256=3C332445BFB69045E2AD3B135C8184086D91979D8FC03C1BBEAD79D17B69D09F
+Purpose: show that one encoded-PowerShell signal + process lineage context = better investigation context.
+Correlation is CONTEXT, not a compromise verdict.
+-------------------------------------------------------------------
+
+[CORRELATION 001] CORR-SOC002-WS001-3660-20261014T220256Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 3660  {edcef402-fc10-6acf-1705-000000000700}
+  EventUtc         = 2026-10-14T22:02:56.236Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(3660) <- cmd.exe(5432))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 002] CORR-SOC002-WS001-852-20261014T220158Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 852  {edcef402-fbd6-6acf-1305-000000000700}
+  EventUtc         = 2026-10-14T22:01:58.952Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(852) <- cmd.exe(4396))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 003] CORR-SOC002-WS001-2832-20261014T220157Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 2832  {edcef402-fbd5-6acf-0f05-000000000700}
+  EventUtc         = 2026-10-14T22:01:57.028Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(2832) <- cmd.exe(5848))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 004] CORR-SOC002-WS001-3412-20261014T220155Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 3412  {edcef402-fbd3-6acf-0b05-000000000700}
+  EventUtc         = 2026-10-14T22:01:55.201Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(3412) <- cmd.exe(2860))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 005] CORR-SOC002-WS001-1444-20261014T220153Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 1444  {edcef402-fbd1-6acf-0605-000000000700}
+  EventUtc         = 2026-10-14T22:01:53.341Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(1444) <- cmd.exe(344))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 006] CORR-SOC002-WS001-5944-20261014T220054Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5944  {edcef402-fb96-6acf-0205-000000000700}
+  EventUtc         = 2026-10-14T22:00:54.447Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(5944) <- cmd.exe(3416))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 007] CORR-SOC002-WS001-5920-20261014T220052Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5920  {edcef402-fb94-6acf-fe04-000000000700}
+  EventUtc         = 2026-10-14T22:00:52.463Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(5920) <- cmd.exe(2380))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 008] CORR-SOC002-WS001-4012-20261014T220049Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 4012  {edcef402-fb91-6acf-fa04-000000000700}
+  EventUtc         = 2026-10-14T22:00:49.872Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(4012) <- cmd.exe(5548) <- winrshost.exe(2964))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(4012) <- cmd.exe(5548) <- winrshost.exe(2964))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 009] CORR-SOC002-WS001-4348-20261014T220047Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 4348  {edcef402-fb8f-6acf-f604-000000000700}
+  EventUtc         = 2026-10-14T22:00:47.365Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(4348) <- cmd.exe(1004) <- winrshost.exe(4772))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(4348) <- cmd.exe(1004) <- winrshost.exe(4772))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 010] CORR-SOC002-WS001-1500-20261014T215948Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 1500  {edcef402-fb54-6acf-ef04-000000000700}
+  EventUtc         = 2026-10-14T21:59:48.080Z
+  User             = SOC002\Administrator
+  DET-001          = tier=INVESTIGATION severity=MEDIUM rule=
+  DET-002          = lineage record present (lineage powershell.exe(1500) <- powershell.exe(4576) <- cmd.exe(3596) <- winrshost.exe(5800) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution NOT explained by the narrow baseline
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(1500) <- powershell.exe(4576) <- cmd.exe(3596) <- winrshost.exe(5800) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 011] CORR-SOC002-WS001-4576-20261014T215947Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 4576  {edcef402-fb53-6acf-ee04-000000000700}
+  EventUtc         = 2026-10-14T21:59:47.583Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(4576) <- cmd.exe(3596) <- winrshost.exe(5800) <- svchost.exe(716))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(4576) <- cmd.exe(3596) <- winrshost.exe(5800) <- svchost.exe(716))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 012] CORR-SOC002-WS001-4372-20261014T215909Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 4372  {edcef402-fb2d-6acf-ea04-000000000700}
+  EventUtc         = 2026-10-14T21:59:09.175Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(4372) <- cmd.exe(5368) <- winrshost.exe(5672))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(4372) <- cmd.exe(5368) <- winrshost.exe(5672))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 013] CORR-SOC002-WS001-5452-20261014T215852Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5452  {edcef402-fb1c-6acf-e404-000000000700}
+  EventUtc         = 2026-10-14T21:58:52.617Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-CONFIRMED severity=INFO rule=BASE-01
+  DET-002          = lineage record present (lineage powershell.exe(5452) <- cmd.exe(6120) <- winrshost.exe(5432))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-CONFIRMED)
+  Reading          = lineage context: delivered by a WinRM host process (powershell.exe(5452) <- cmd.exe(6120) <- winrshost.exe(5432))
+  Reading          = combined reading: remote/interactive administration context, consistent with the sanctioned WinRM management path; authorisation of the operator and the payload content still decide the verdict
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 014] CORR-SOC002-WS001-3156-20261014T214801Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 3156  {edcef402-f891-6acf-de04-000000000700}
+  EventUtc         = 2026-10-14T21:48:01.288Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(3156) <- cmd.exe(2200))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 015] CORR-SOC002-WS001-996-20261014T214653Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 996  {edcef402-f84d-6acf-d704-000000000700}
+  EventUtc         = 2026-10-14T21:46:53.466Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(996) <- cmd.exe(220))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 016] CORR-SOC002-WS001-6096-20261014T214430Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 6096  {edcef402-f7be-6acf-d204-000000000700}
+  EventUtc         = 2026-10-14T21:44:30.124Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(6096) <- cmd.exe(3316))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 017] CORR-SOC002-WS001-5340-20261014T214243Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5340  {edcef402-f753-6acf-cc04-000000000700}
+  EventUtc         = 2026-10-14T21:42:43.634Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(5340) <- cmd.exe(5296))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 018] CORR-SOC002-WS001-2040-20261014T214242Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 2040  {edcef402-f752-6acf-c804-000000000700}
+  EventUtc         = 2026-10-14T21:42:42.153Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(2040) <- cmd.exe(5552))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 019] CORR-SOC002-WS001-4548-20261014T214240Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 4548  {edcef402-f750-6acf-c404-000000000700}
+  EventUtc         = 2026-10-14T21:42:40.652Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(4548) <- cmd.exe(6092))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 020] CORR-SOC002-WS001-3352-20261014T214239Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 3352  {edcef402-f74f-6acf-c004-000000000700}
+  EventUtc         = 2026-10-14T21:42:39.172Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(3352) <- cmd.exe(3400))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 021] CORR-SOC002-WS001-5360-20261014T214237Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5360  {edcef402-f74d-6acf-bc04-000000000700}
+  EventUtc         = 2026-10-14T21:42:37.705Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(5360) <- cmd.exe(5312))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 022] CORR-SOC002-WS001-3156-20261014T214229Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 3156  {edcef402-f745-6acf-b804-000000000700}
+  EventUtc         = 2026-10-14T21:42:29.742Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(3156) <- cmd.exe(5768))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 023] CORR-SOC002-WS001-5812-20261014T214228Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5812  {edcef402-f744-6acf-b404-000000000700}
+  EventUtc         = 2026-10-14T21:42:28.258Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(5812) <- cmd.exe(5372))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 024] CORR-SOC002-WS001-2460-20261014T214220Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 2460  {edcef402-f73c-6acf-b004-000000000700}
+  EventUtc         = 2026-10-14T21:42:20.396Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(2460) <- cmd.exe(996))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 025] CORR-SOC002-WS001-4324-20261014T214219Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 4324  {edcef402-f73b-6acf-ac04-000000000700}
+  EventUtc         = 2026-10-14T21:42:19.058Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(4324) <- cmd.exe(4616))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 026] CORR-SOC002-WS001-5496-20261014T214217Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5496  {edcef402-f739-6acf-a804-000000000700}
+  EventUtc         = 2026-10-14T21:42:17.729Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(5496) <- cmd.exe(2504))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 027] CORR-SOC002-WS001-2436-20261014T214216Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 2436  {edcef402-f738-6acf-a404-000000000700}
+  EventUtc         = 2026-10-14T21:42:16.392Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(2436) <- cmd.exe(5500))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 028] CORR-SOC002-WS001-4044-20261014T214215Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 4044  {edcef402-f737-6acf-a004-000000000700}
+  EventUtc         = 2026-10-14T21:42:15.054Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(4044) <- cmd.exe(4704))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 029] CORR-SOC002-WS001-4696-20261014T214151Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 4696  {edcef402-f71f-6acf-9c04-000000000700}
+  EventUtc         = 2026-10-14T21:41:51.898Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(4696) <- cmd.exe(336))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 030] CORR-SOC002-WS001-6072-20261014T214122Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 6072  {edcef402-f702-6acf-9604-000000000700}
+  EventUtc         = 2026-10-14T21:41:22.230Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(6072) <- cmd.exe(1368))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 031] CORR-SOC002-WS001-1832-20261014T214110Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 1832  {edcef402-f6f6-6acf-9004-000000000700}
+  EventUtc         = 2026-10-14T21:41:10.485Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(1832) <- cmd.exe(4932))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 032] CORR-SOC002-WS001-5684-20261014T210738Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5684  {edcef402-ef1a-6acf-ef03-000000000700}
+  EventUtc         = 2026-10-14T21:07:38.959Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(5684) <- cmd.exe(4328))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 033] CORR-SOC002-WS001-1212-20261014T210723Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 1212  {edcef402-ef0b-6acf-eb03-000000000700}
+  EventUtc         = 2026-10-14T21:07:23.160Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(1212) <- cmd.exe(5292))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 034] CORR-SOC002-WS001-5344-20261014T210722Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5344  {edcef402-ef0a-6acf-e703-000000000700}
+  EventUtc         = 2026-10-14T21:07:22.238Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(5344) <- cmd.exe(6048))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 035] CORR-SOC002-WS001-1004-20261014T210721Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 1004  {edcef402-ef09-6acf-e303-000000000700}
+  EventUtc         = 2026-10-14T21:07:21.263Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(1004) <- cmd.exe(5564))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 036] CORR-SOC002-WS001-4488-20261014T210720Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 4488  {edcef402-ef08-6acf-df03-000000000700}
+  EventUtc         = 2026-10-14T21:07:20.227Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(4488) <- cmd.exe(1608))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 037] CORR-SOC002-WS001-196-20261014T210536Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 196  {edcef402-eea0-6acf-db03-000000000700}
+  EventUtc         = 2026-10-14T21:05:36.696Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(196) <- cmd.exe(4412))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 038] CORR-SOC002-WS001-5848-20261014T210520Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 5848  {edcef402-ee90-6acf-cb03-000000000700}
+  EventUtc         = 2026-10-14T21:05:20.404Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(5848) <- cmd.exe(1840))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+[CORRELATION 039] CORR-SOC002-WS001-2276-20261014T210518Z
+  Host/Process     = SOC002-WS001.soc002.local  PID 2276  {edcef402-ee8e-6acf-c703-000000000700}
+  EventUtc         = 2026-10-14T21:05:18.830Z
+  User             = SOC002\Administrator
+  DET-001          = tier=BASELINE-TRANSPORT-PATTERN severity=LOW rule=BASE-01
+  DET-002          = NO lineage record (lineage powershell.exe(2276) <- cmd.exe(4772))
+  Reading          = single signal: encoded PowerShell execution that matches the narrow baseline (BASELINE-TRANSPORT-PATTERN)
+  Reading          = lineage context: NOT AVAILABLE - the encoded execution could not be tied to a resolved process chain
+  Reading          = combined reading: LESS context than with lineage, therefore lower confidence and higher triage priority - the missing hop is itself an investigative gap
+  REMINDER         = CORRELATION IS CONTEXT, NOT A VERDICT. Det-001 + Det-002 agreeing does not make this a compromise; it means the analyst gets the "what" and the "how" in one view.
+
+--- SOC002-CORR-001 REPLAY summary ----------------------------------
+DET-001 signals                                  = 39
+DET-001 signals with a DET-002 lineage record     = 6
+DET-001 signals with NO lineage (explanation gap) = 33
+Correlation records                               = 39
+Retained investigation candidates that ALSO have lineage context = 1 / 1
+

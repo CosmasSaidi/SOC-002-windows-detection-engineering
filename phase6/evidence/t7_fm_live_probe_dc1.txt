@@ -1,0 +1,37 @@
+=== SOC-002 PHASE 6 | TASK 7 - FAILURE-MODE PROBE (READ-ONLY, SOC002-DC1) ===
+Log=ForwardedEvents  Window=2026-10-15 00:04:46 .. 2026-10-15 01:04:46 (collector local)
+No logging subsystem was disabled, reconfigured or restarted for this measurement:
+each figure is computed by NOT reading one source and observing what remains.
+-------------------------------------------------------------------
+FM-1 / baseline: Sysmon Event 1 encoded-PowerShell candidates in window = 39
+FM-1 / Security 4688 encoded-PowerShell records in window               = 52
+FM-1 / 4688 encoded-PowerShell with NO Sysmon Ev1 twin (same host+pid+second) = 21
+FM-1 / Sysmon Ev1 encoded-PowerShell with NO 4688 twin (same host+pid+second) = 8
+FM-1 / distinct host+pid+SECOND keys (Sysmon->4688 join, +/- within same second): Sysmon=39 4688=52 union=60
+
+FM-2 / candidates WITH a binding 4104 block (executing PID match)       = 33
+FM-2 / candidates WITHOUT any 4104 block                                = 6
+FM-2 / 4104 blocks in window that bind to no candidate executing PID    = 142
+
+FM-3 / candidates whose immediate-parent process-create record was found = 39
+FM-3 / candidates whose immediate-parent record was NOT found            = 0
+
+FM-4 / powershell.exe 4688 records in window (any command line)          = 52
+FM-4 / ... of which command line is EMPTY (trigger could not evaluate)   = 0
+FM-4 / Sysmon Ev1 candidates whose command line is empty                 = 0
+
+FM-1b / encoded-PowerShell candidates per 10-minute bucket (local):
+bucket      SysmonEv1       4688
+00:00               8          3
+00:20               0          4
+00:30               0         13
+00:40              18         19
+00:50               4          4
+01:00               9          9
+
+FM-1c / largest gap between consecutive Sysmon Ev1 candidates = 2012 s  (00:07:38 -> 00:41:10)
+      (a period with zero Sysmon Ev1 candidates is NOT the same as a period with zero activity:
+       compare the 4688 column above before reading any gap as "nothing happened")
+
+
+[RC]=0

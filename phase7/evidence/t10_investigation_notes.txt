@@ -1,0 +1,153 @@
+SOC-002 PHASE 7 - INVESTIGATION NOTES
+=====================================
+Case          : SOC002-CASE-0002
+Host          : SOC002-WS001 (192.168.56.102), domain soc002.local
+Account       : SOC002\Administrator (the existing authorised lab administrator context)
+Marker        : SOC002-PHASE7-BLINDSPOT-TEST
+Windows (UTC) : controlled 2026-10-14T23:06:30Z .. 2026-10-14T23:07:30Z
+                session    2026-10-14T23:03:00Z .. 2026-10-14T23:09:30Z
+
+WHAT WAS EXECUTED (OBSERVED)
+----------------------------
+Exactly one controlled execution. The payload process was:
+
+  powershell.exe -NoProfile -NonInteractive -Command
+    "$b='<base64>';$t=[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($b));
+     Write-Output $t; ... host/user/PID/time ..."
+
+  PID 1428, parent powershell.exe (PID 2936, the WinRS transport powershell),
+  created 2026-10-14T23:06:42.046Z, exit code 0.
+
+Output (captured, evidence/t3_controlled_execution_ws001.txt):
+  SOC002-PHASE7-BLINDSPOT-TEST
+  SOC002 PHASE 7 CONTROLLED BLIND-SPOT VALIDATION
+  Marker: SOC002-PHASE7-BLINDSPOT-TEST
+  Purpose: harmless marker reconstruction only. No persistence, no network,
+  no configuration change, no arbitrary code execution.
+  HOST=SOC002-WS001
+  USER=SOC002\Administrator
+  CHILD_PID=1428
+  START_UTC=2026-10-14T23:06:42.488Z
+
+The base64 blob decodes to 242 bytes of PLAIN TEXT (the marker and a purpose
+line). It was never executed, invoked, piped, or evaluated. No second decode
+layer, no IEX/Invoke-Expression, no download, no file write, no persistence, no
+configuration change. The decoded content is preserved in
+evidence/phase7_payload_decoded.txt; its SHA256 is in the manifest.
+
+WHY IT WAS EXECUTED
+-------------------
+Phase 6 documented a specific coverage limitation of SOC002-DET-001 v2: the
+trigger matches an encoded-command CLI switch (-EncodedCommand/-enc/-e/-en), so a
+command that instead reconstructs text inside PowerShell with
+[Convert]::FromBase64String(...) is not matched. Phase 7 exists to test exactly
+that limitation with one benign, documented, reversible action - a true-positive
+validation of the detection stack, not a new attack scenario.
+
+HOW IT WAS DELIVERED (OBSERVED)
+-------------------------------
+The lab administers WS001 over WinRM, and the WinRS client delivers every remote
+call as "cmd.exe /C powershell -EncodedCommand <b64>". That transport wrapper is
+part of the baseline, not part of the test. Two operational constraints shaped
+delivery and neither was worked around by weakening anything:
+
+  * WS001's effective execution policy is Restricted (every scope Undefined), so
+    a staged .ps1 cannot be executed there. Phase 7 therefore did NOT use
+    -ExecutionPolicy Bypass and did NOT change any policy;
+  * a WinRS transport command line is bounded (~8 KB), so a 6 KB collection
+    body cannot be sent inline.
+
+The controlled payload was therefore staged as a small text file and handed to a
+plainly started powershell.exe via -Command by a one-line WinRM loader:
+  $c=[IO.File]::ReadAllText('...\phase7_child_command.txt');
+  powershell.exe -NoProfile -NonInteractive -Command $c
+That loader line contains no encoded-command switch and no base64-decode literal.
+
+ONE FAILED FIRST ATTEMPT (OBSERVED, benign)
+-------------------------------------------
+The first attempt invoked a staged runner file with "& '<path>.ps1'". WS001
+refused it: "running scripts is disabled on this system" (RC=1). The payload did
+NOT execute, no marker was produced, and no child PowerShell process was created
+(see the session Sysmon evidence: the only powershell.exe creates belong to the
+WinRS transport and to the successful run). No policy was changed in response.
+The transcript is preserved in evidence/t3_controlled_execution_ws001.txt.
+
+WHAT THE TELEMETRY OBSERVED (OBSERVED)
+--------------------------------------
+Controlled window, WS001 local: 14 events - 5x Security 4688, 5x Sysmon Event 1,
+4x PowerShell 4104.
+Controlled window, DC1 ForwardedEvents: the SAME 14 events with identical
+RecordIDs (15754, 15755, 15756, 15757, 15758 / 4138, 4139, 4140, 4141, 4142 /
+74338, 74343, 74350, 74354) - i.e. WEF delivered the whole set.
+
+Lineage (evidence/t8_process_lineage.txt):
+  depth 0  winrshost.exe  PID 2992  <- svchost.exe 716
+  depth 1  conhost.exe    PID 3404  <- winrshost.exe
+  depth 1  cmd.exe        PID 1808  <- winrshost.exe   "cmd.exe /C powershell -encodedcommand <b64>"
+  depth 2  powershell.exe PID 2936  <- cmd.exe         "powershell  -encodedcommand <b64>"   <- THE TRANSPORT
+  depth 3  powershell.exe PID 1428  <- powershell.exe  "... -Command "<...FromBase64String...>""  <- THE PAYLOAD
+
+Network (Sysmon Event 3, controlled window, 3 records - OBSERVED):
+  * two INBOUND connections to WS001:5985 from 192.168.56.1 (the operator's own
+    WinRM session into the WinRM listener);
+  * one connection by lsass.exe (PID 628) to DC1 192.168.56.10:49668 (domain
+    authentication).
+  Neither the payload process (PID 1428) nor the transport powershell (PID 2936)
+  initiated any network connection. The payload made no outbound contact; the
+  two events above are the operator's transport session and normal domain
+  authentication, not the payload. See evidence/t4_local_telemetry_ws001_controlled.txt
+  section D.
+
+4104: the transport's script blocks (ExecutingPID 2936) show the decoded loader
+line; the payload's script block (ExecutingPID 1428, ScriptBlockId
+96c73586-2334-4bbd-a1c7-e2e5163f19c0) contains the base64 and the
+[Convert]::FromBase64String call. The 4104 text carries the blob, NOT the decoded
+marker - the marker exists only in the payload's stdout.
+
+WHAT THE EXISTING STACK DID (OBSERVED)
+--------------------------------------
+DET-001 v2 over the controlled window: 1 candidate, 0 investigation records,
+1 baselined by BASE-01 (that candidate is the WinRS transport powershell,
+PID 2936, not the payload), 0 payload-screen escalations.
+=> The payload process (PID 1428) was NEVER a DET-001 candidate. The trigger
+   requires an encoded-command CLI switch and its command line has none.
+   A static check of that exact command line against the unmodified Phase 6
+   library returns False (evidence/t1_preflight_blindspot_check.txt).
+
+DET-002 over the controlled window: 2 lineage records. One is the payload process
+(PID 1428) with the chain powershell(1428) <- powershell(2936) <- cmd.exe(1808)
+<- winrshost(2992), Shape LIN-01 "not matched", "Encoded switch = absent". The
+other is the transport (PID 2936), LIN-01 MATCHED.
+=> A second, independent telemetry source DID surface the payload process. This
+   is a separate observation and is NOT a DET-001 detection.
+
+CORR-001 over the controlled window: 1 correlation record, for the transport
+(PID 2936) only. The payload process is absent because CORR-001 iterates DET-001
+candidates - it inherits DET-001's blind spot. This is a real structural finding
+of Phase 7: the correlation layer cannot see what the trigger never produced.
+
+SESSION WINDOW, FOR COMPLETENESS (OBSERVED)
+-------------------------------------------
+25 candidates / 22 baselined / 3 INVESTIGATION. All three INVESTIGATION records
+are the operator's own staged-file transfers: the payload and its decoded upload
+payloads contain [Convert]::FromBase64String($b), which trips ESC-03 and
+overrides the baseline. This is the exact precision cost Phase 6 already
+documented and accepted (its live window had two of the same). None of the three
+is the Phase 7 payload process. DET-001 therefore never reported the activity
+under test, in either window.
+
+BASELINE-DRIFT CHECK
+--------------------
+All 22 WinRS transport wrappers in the session matched BASE-01 and resolved to a
+winrshost.exe ancestor: the baseline still behaves as Phase 6 documented. The
+Phase 7 payload sits one level BELOW the baselined transport, exactly where the
+Phase 5 controlled test sat. BASE-01 did not hide the Phase 7 activity - DET-001
+never produced a candidate for it. See evidence/t7_baseline_comparison.txt.
+
+CONCLUSION
+----------
+Outcome B. The Phase 6 blind spot is confirmed by direct measurement on the
+controlled activity: a PowerShell execution that reconstructs text with
+[Convert]::FromBase64String(...) through -Command is invisible to the DET-001 v2
+trigger, visible to DET-002 as lineage context, and not correlated by CORR-001.
+No detection was modified in Phase 7 to change this result.

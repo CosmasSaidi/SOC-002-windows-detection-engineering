@@ -1,0 +1,54 @@
+=== now ===
+2026-10-15 00:37:13 +03:00
+=== last 6 EventID 1 (ProcessCreate) ===
+RecId=3054  2026-10-15 00:07:47  C:\Windows\Sysmon64.exe
+RecId=3053  2026-10-15 00:07:38  C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+RecId=3052  2026-10-15 00:07:38  C:\Windows\System32\cmd.exe
+RecId=3051  2026-10-15 00:07:38  C:\Windows\System32\conhost.exe
+RecId=3050  2026-10-15 00:07:38  C:\Windows\System32\winrshost.exe
+RecId=3045  2026-10-15 00:07:23  C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+=== first 6 EventID 5 after 2026-10-15 00:00 local ===
+RecId=3185  2026-10-15 00:36:53
+RecId=3184  2026-10-15 00:36:46
+RecId=3183  2026-10-15 00:36:38
+RecId=3182  2026-10-15 00:36:38
+RecId=3181  2026-10-15 00:36:38
+RecId=3180  2026-10-15 00:36:38
+=== counts by ID in LAST 15 MINUTES ===
+
+Name Count
+---- -----
+16       1
+5       81
+
+
+
+=== last 5 records overall ===
+RecId=3185 Id=5 2026-10-15 00:36:53
+RecId=3184 Id=5 2026-10-15 00:36:46
+RecId=3183 Id=5 2026-10-15 00:36:38
+RecId=3182 Id=5 2026-10-15 00:36:38
+RecId=3181 Id=5 2026-10-15 00:36:38
+=== Driver / service process ===
+
+
+State     : Running
+ProcessId : 2152
+
+
+
+
+
+Name       Status
+----       ------
+Sysmon64  Running
+SysmonDrv Running
+
+
+
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="2"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="3"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.102:5985/wsman

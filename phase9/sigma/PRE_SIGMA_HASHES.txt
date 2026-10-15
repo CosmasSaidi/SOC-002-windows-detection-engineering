@@ -1,0 +1,29 @@
+SOC-002 | PHASE 9 | PRE-SIGMA INTEGRITY BASELINE
+Purpose: SHA256 of the authoritative DET-001 sources (and related DET-002/DET-003 artifacts),
+recorded BEFORE any phase9/sigma artifact was created, so these files can be proven unchanged.
+Algorithm: SHA256. Paths are relative to the repository root (.).
+Recorded (UTC): 2026-10-15T15:02:30Z
+
+== A) AUTHORITATIVE DET-001 SOURCE FILES (the Sigma rule is derived from these) ==
+6e0651dc43f781e9d71bc2ebc6b7c74d4d882a30799a61372945cceda0d5efca  phase5/detections/detect_encoded_powershell.ps1
+c9b73426134571dfa6a26df3cb39e4d6030ce5886720cf7679de575845b0d16c  phase6/detections/detect_encoded_powershell_v2.ps1
+3c332445bfb69045e2ad3b135c8184086d91979d8fc03c1bbead79d17b69d09f  phase6/detections/lib_soc002_v2.ps1
+3404a8bf210fde3ac1418f1fd7dae15251bc8f3dae6ae717c453ffaa28ed4c7d  phase6/detections/lib_soc002_windows.ps1
+8f053aa127cf5b38dec10d3b1405840ab5533a2bd3199dfd0b1133d5c78b3bad  phase5/evidence/raw/sysmon1-recid3535-ws001.xml
+ef74e0c97c3a3b878cf16c14fb1f9f3a28d96a42a8770335070aa695e600ca04  phase5/evidence/raw/security4688-recid15141-ws001.xml
+62cfef27aab93d3daccb13abb7b21547da7851417633b4a979fb586dbd0bf700  phase5/evidence/raw/powershell4104-recid72974-ws001.xml
+a357b12e1330e3b52c1a757a28283b95564a0b9961dbab31f4b18d93ce3e88de  phase5/evidence/DETECTION_LIMITATIONS.txt
+4cc229769b7ab0438ed99f5e6974beb1e87dc50c4c0666ad57b98472d807ece2  phase6/README.md
+b71641f9609d1f59335f06e054ee2403af65d3dac950f9663ac73f240b198da3  phase6/evidence/TUNING_RATIONALE.txt
+
+== B) RELATED DETECTIONS + PHASE 6/7/8 REPORTS (must stay unchanged; DET-002/DET-003 remain separate) ==
+1f7ed2e0c4826be1fd2e63f21bda5c89f861fda0835ebb376422a31e7f981352  phase8/detections/detect_base64_reconstruction.ps1
+ec519ae9c313c3360d39f97404e828d19189a701d4570fdac6641e3703238181  phase8/detections/lib_soc002_phase8.ps1
+86149f2559512515ce2a97f54bbee1d54e788cc21d5346c34278326434668bae  phase6/detections/detect_powershell_lineage.ps1
+d4d5d12fa62ab856816ea5b81ce4d0f2e154fa614764b05f34ac9c510930c974  phase6/detections/correlate_det001_det002.ps1
+f4015b3611778abc82d91126b58f534a38ca686a68bf1229c459dc953bf12b32  phase7/PHASE7_REPORT.md
+4d3ebf53e7dfa3060de102b50b1692ac4a693ecb555dd3b8a736d28c4d5eddc9  phase8/PHASE8_REPORT.md
+
+== C) RECURSIVE PHASE 5-8 TREE DIGEST (every file under phase5, phase6, phase7, phase8) ==
+digest = sha256( sha256sum output of every file, paths sorted with LC_ALL=C sort -z )
+26e3e636c24dde731d32e3a070956a9e326d4743f5f4e922441d8daf1eb9b702  -

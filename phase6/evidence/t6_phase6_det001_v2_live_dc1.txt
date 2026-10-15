@@ -1,0 +1,151 @@
+=== SOC002-DET-001 v2 :: Encoded PowerShell Execution - classified ===
+Library=phase6-v2.0 sha256=3C332445BFB69045E2AD3B135C8184086D91979D8FC03C1BBEAD79D17B69D09F
+Log=ForwardedEvents  Window=2026-10-15 00:04:46 .. 2026-10-15 01:05:46 (collector local)
+IndexFrom=2026-10-14 22:04:46  index records=1163
+Baseline=BASE-01 (narrow WinRS transport wrapper)   Payload screen=ESC-01..08   Trigger=unchanged from Phase 5
+-------------------------------------------------------------------
+[BASE 001] rec=3688 utc=2026-10-14T22:05:32.172Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5812 parent=cmd.exe(5264) lineage=powershell.exe(5812) <- cmd.exe(5264) <- winrshost.exe(2780) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 002] rec=3677 utc=2026-10-14T22:05:17.770Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=3440 parent=cmd.exe(5860) lineage=powershell.exe(3440) <- cmd.exe(5860) <- winrshost.exe(6072) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 003] rec=3661 utc=2026-10-14T22:05:05.767Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=4284 parent=cmd.exe(4536) lineage=powershell.exe(4284) <- cmd.exe(4536) <- winrshost.exe(2568) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 004] rec=3645 utc=2026-10-14T22:02:56.236Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=3660 parent=cmd.exe(5432) lineage=powershell.exe(3660) <- cmd.exe(5432) <- winrshost.exe(4460) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 005] rec=3635 utc=2026-10-14T22:01:58.952Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=852 parent=cmd.exe(4396) lineage=powershell.exe(852) <- cmd.exe(4396) <- winrshost.exe(3144) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 006] rec=3625 utc=2026-10-14T22:01:57.028Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=2832 parent=cmd.exe(5848) lineage=powershell.exe(2832) <- cmd.exe(5848) <- winrshost.exe(4976) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 007] rec=3615 utc=2026-10-14T22:01:55.201Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=3412 parent=cmd.exe(2860) lineage=powershell.exe(3412) <- cmd.exe(2860) <- winrshost.exe(2456) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 008] rec=3603 utc=2026-10-14T22:01:53.341Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=1444 parent=cmd.exe(344) lineage=powershell.exe(1444) <- cmd.exe(344) <- winrshost.exe(5428) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 009] rec=3592 utc=2026-10-14T22:00:54.447Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5944 parent=cmd.exe(3416) lineage=powershell.exe(5944) <- cmd.exe(3416) <- winrshost.exe(5852) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 010] rec=3582 utc=2026-10-14T22:00:52.463Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5920 parent=cmd.exe(2380) lineage=powershell.exe(5920) <- cmd.exe(2380) <- winrshost.exe(3348) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 011] rec=3572 utc=2026-10-14T22:00:49.872Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=4012 parent=cmd.exe(5548) lineage=powershell.exe(4012) <- cmd.exe(5548) <- winrshost.exe(2964) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 012] rec=3560 utc=2026-10-14T22:00:47.365Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=4348 parent=cmd.exe(1004) lineage=powershell.exe(4348) <- cmd.exe(1004) <- winrshost.exe(4772) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+
+[ALERT 001] Encoded PowerShell execution observed - INVESTIGATION REQUIRED
+  Detection        = SOC002-DET-001 v2  tier=INVESTIGATION severity=MEDIUM
+  Why retained     = not baselined: parent leaf 'powershell.exe' is not cmd.exe
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator   LogonId=0x5c764d
+  EventUtc         = 2026-10-14T21:59:48.080Z
+  RecordId/Source  = 3535 / Sysmon-Event1
+  ProcessGuid      = {edcef402-fb54-6acf-ef04-000000000700}
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1500)
+  Parent           = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe  (PPID 4576)
+  ParentCommandLine= powershell  -encodedcommand JABFAHIAcgBvAHIAQQBjAHQAaQBvAG4AUAByAGUAZgBlAHIAZQBuAGMAZQA9ACcAQwBvAG4AdABpAG4AdQBlACcACgAkAG0AYQByAGsAZQByACAAPQAgACcAUwBPAEMAMAAwADIALQBQAEgAQQBTAEUANQAtAEUATgBDAE8ARABFAEQALQBQAE8AVwBFAFIAUwBIAEUATABMACcACgAkAGIANgA0ACAAPQAgACcASQB3AEEAZwBBAEYATQBBAFQAdwBCAEQAQQBDADAAQQBNAEEAQQB3AEEARABJAEEASQBBAEIAUQBBAEUAZwBBAFEAUQBCAFQAQQBFAFUAQQBJAEEAQQAxAEEAQwBBAEEATABRAEEAZwBBAEUATQBBAFQAdwBCAE8AQQBGAFEAQQBVAGcAQgBQAEEARQB3AEEAVABBAEIARgBBAEUAUQBBAEkAQQBCAEMAQQBFAFUAQQBUAGcAQgBKAEEARQBjAEEAVABnAEEAZwBBAEYAUQBBAFIAUQBCAFQAQQBGAFEAQQBDAGcAQQBqAEEAQwBBAEEAVABRAEIAaABBAEgASQBBAGEAdwBCAGwAQQBIAEkAQQBPAGcAQQBnAEEARgBNAEEAVAB3AEIARABBAEQAQQBBAE0AQQBBAHkAQQBDADAAQQBVAEEAQgBJAEEARQBFAEEAVQB3AEIARgBBAEQAVQBBAEwAUQBCAEYAQQBFADQAQQBRAHcAQgBQAEEARQBRAEEAUgBRAEIARQBBAEMAMABBAFUAQQBCAFAAQQBGAGMAQQBSAFEAQgBTAEEARgBNAEEAUwBBAEIARgBBAEUAdwBBAFQAQQBBAEsAQQBDAE0AQQBJAEEAQgBRAEEASABVAEEAYwBnAEIAdwBBAEcAOABBAGMAdwBCAGwAQQBEAG8AQQBJAEEAQgBvAEEARwBFAEEAYwBnAEIAdABBAEcAdwBBAFoAUQBCAHoAQQBIAE0AQQBJAEEAQgB2AEEARwBJAEEAYwB3AEIAbABBAEgASQBBAGQAZwBCAGgAQQBHAEkAQQBiAEEAQgBsAEEAQwBBAEEAYgB3AEIAMQBBAEgAUQBBAGMAQQBCADEAQQBIAFEAQQBJAEEAQgB2AEEARwA0AEEAYgBBAEIANQBBAEMANABBAEkAQQBCAE8AQQBHADgAQQBJ...[cut]
+  Hashes           = SHA256=B4E7BC24BF3F5C3DA2EB6E9EC5EC10F90099DEFA91B820F2F3FC70DD9E4785C4
+  CommandLine      = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -EncodedCommand IwAgAFMATwBDAC0AMAAwADIAIABQAEgAQQBTAEUAIAA1ACAALQAgAEMATwBOAFQAUgBPAEwATABFAEQAIABCAEUATgBJAEcATgAgAFQARQBTAFQACgAjACAATQBhAHIAawBlAHIAOgAgAFMATwBDADAAMAAyAC0AUABIAEEAUwBFADUALQBFAE4AQwBPAEQARQBEAC0AUABPAFcARQBSAFMASABFAEwATAAKACMAIABQAHUAcgBwAG8AcwBlADoAIABoAGEAcgBtAGwAZQBzAHMAIABvAGIAcwBlAHIAdgBhAGIAbABlACAAbwB1AHQAcAB1AHQAIABvAG4AbAB5AC4AIABOAG8AIABwAGUAcgBzAGkAcwB0AGUAbgBjAGUALAAgAG4AbwAgAG4AZQB0AHcAbwByAGsALAAgAG4AbwAgAG0AbwBkAGkAZgBpAGMAYQB0AGkAbwBuAC4ACgAkAG0AYQByAGsAZQByACAAPQAgACcAUwBPAEMAMAAwADIALQBQAEgAQQBTAEUANQAtAEUATgBDAE8ARABFAEQALQBQAE8AVwBFAFIAUwBIAEUATABMACcACgBXAHIAaQB0AGUALQBPAHUAdABwAHUAdAAgACQAbQBhAHIAawBlAHIACgBXAHIAaQB0AGUALQBPAHUAdABwAHUAdAAgACgAJwBIAE8AUwBUAD0AJwAgACsAIAAkAGUAbgB2ADoAQwBPAE0AUABVAFQARQBSAE4AQQBNAEUAKQAKAFcAcgBpAHQAZQAtAE8AdQB0AHAAdQB0ACAAKAAnAFUAUwBFAFIAPQAnACAAKwAgAFsAUwB5AHMAdABlAG0ALgBTAGUAYwB1AHIAaQB0AHkALgBQAHIAaQBuAGMAaQBwAGEAbAAuAFcAaQBuAGQAbwB3AHMASQBkAGUAbgB0AGkAdAB5AF0AOgA6AEcAZQB0AEMAdQByAHIAZQBuAHQAKAApAC4ATgBhAG0AZQApAAoAVwByAGkAdABlAC0ATwB1AHQAcAB1AHQAIAAoACcAUwBUAEEAUgBUAF8AVQBUAEMAPQAnACAAKwAgACgARwBlAHQALQBEAGEAdABlACkALgBUAG8AVQBuAGkAd...[cut]
+  DecodedScript    = <<<# SOC-002 PHASE 5 - CONTROLLED BENIGN TEST
+# Marker: SOC002-PHASE5-ENCODED-POWERSHELL
+# Purpose: harmless observable output only. No persistence, no network, no modification.
+$marker = 'SOC002-PHASE5-ENCODED-POWERSHELL'
+Write-Output $marker
+Write-Output ('HOST=' + $env:COMPUTERNAME)
+Write-Output ('USER=' + [System.Security.Principal.WindowsIdentity]::GetCurrent().Name)
+Write-Output ('START_UTC=' + (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ'))
+Start-Sleep -Seconds 3
+Write-Output ('END_UTC=' + (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ'))
+Write-Output 'BENIGN_CONTROLLED_TEST_COMPLETE'
+>>>  [decoded by detection - NOT executed]
+  Lineage          = powershell.exe(1500) <- powershell.exe(4576) <- cmd.exe(3596) <- winrshost.exe(5800) <- svchost.exe(716) <- services.exe(604)
+                     depth 0: powershell.exe [OBSERVED-CHILD-EVENT]
+                     depth 1: powershell.exe [OBSERVED-PARENT-EVENT]
+                     depth 2: cmd.exe [OBSERVED-PARENT-EVENT]
+                     depth 3: winrshost.exe [OBSERVED-PARENT-EVENT]
+                     depth 4: svchost.exe [OBSERVED-PARENT-EVENT]
+                     depth 5: services.exe [OBSERVED-PARENT-EVENT]
+  Corroboration    = PowerShell 4104 RecId= ExecPID= ScriptBlockId= Msg=/
+  Note             = retained also because the lineage does NOT match the shape BASE-01 baselines; observed chain: powershell.exe(1500) <- powershell.exe(4576) <- cmd.exe(3596) <- winrshost.exe(5800) <- svchost.exe(716) <- services.exe(604)
+[BASE 013] rec=3534 utc=2026-10-14T21:59:47.583Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=4576 parent=cmd.exe(3596) lineage=powershell.exe(4576) <- cmd.exe(3596) <- winrshost.exe(5800) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 014] rec=3523 utc=2026-10-14T21:59:09.175Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=4372 parent=cmd.exe(5368) lineage=powershell.exe(4372) <- cmd.exe(5368) <- winrshost.exe(5672) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 015] rec=3508 utc=2026-10-14T21:58:52.617Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5452 parent=cmd.exe(6120) lineage=powershell.exe(5452) <- cmd.exe(6120) <- winrshost.exe(5432) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 016] rec=3465 utc=2026-10-14T21:48:01.288Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=3156 parent=cmd.exe(2200) lineage=powershell.exe(3156) <- cmd.exe(2200) <- winrshost.exe(4876) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 017] rec=3444 utc=2026-10-14T21:46:53.466Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=996 parent=cmd.exe(220) lineage=powershell.exe(996) <- cmd.exe(220) <- winrshost.exe(1144) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 018] rec=3422 utc=2026-10-14T21:44:30.124Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=6096 parent=cmd.exe(3316) lineage=powershell.exe(6096) <- cmd.exe(3316) <- winrshost.exe(5900) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 019] rec=3406 utc=2026-10-14T21:42:43.634Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5340 parent=cmd.exe(5296) lineage=powershell.exe(5340) <- cmd.exe(5296) <- winrshost.exe(5960) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 020] rec=3396 utc=2026-10-14T21:42:42.153Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=2040 parent=cmd.exe(5552) lineage=powershell.exe(2040) <- cmd.exe(5552) <- winrshost.exe(5144) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 021] rec=3386 utc=2026-10-14T21:42:40.652Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=4548 parent=cmd.exe(6092) lineage=powershell.exe(4548) <- cmd.exe(6092) <- winrshost.exe(3572) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 022] rec=3376 utc=2026-10-14T21:42:39.172Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=3352 parent=cmd.exe(3400) lineage=powershell.exe(3352) <- cmd.exe(3400) <- winrshost.exe(3616) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 023] rec=3366 utc=2026-10-14T21:42:37.705Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5360 parent=cmd.exe(5312) lineage=powershell.exe(5360) <- cmd.exe(5312) <- winrshost.exe(3432) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 024] rec=3356 utc=2026-10-14T21:42:29.742Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=3156 parent=cmd.exe(5768) lineage=powershell.exe(3156) <- cmd.exe(5768) <- winrshost.exe(5748) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 025] rec=3346 utc=2026-10-14T21:42:28.258Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5812 parent=cmd.exe(5372) lineage=powershell.exe(5812) <- cmd.exe(5372) <- winrshost.exe(1744) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 026] rec=3336 utc=2026-10-14T21:42:20.396Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=2460 parent=cmd.exe(996) lineage=powershell.exe(2460) <- cmd.exe(996) <- winrshost.exe(568) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 027] rec=3326 utc=2026-10-14T21:42:19.058Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=4324 parent=cmd.exe(4616) lineage=powershell.exe(4324) <- cmd.exe(4616) <- winrshost.exe(196) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 028] rec=3316 utc=2026-10-14T21:42:17.729Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5496 parent=cmd.exe(2504) lineage=powershell.exe(5496) <- cmd.exe(2504) <- winrshost.exe(3388) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 029] rec=3306 utc=2026-10-14T21:42:16.392Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=2436 parent=cmd.exe(5500) lineage=powershell.exe(2436) <- cmd.exe(5500) <- winrshost.exe(1028) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 030] rec=3295 utc=2026-10-14T21:42:15.054Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=4044 parent=cmd.exe(4704) lineage=powershell.exe(4044) <- cmd.exe(4704) <- winrshost.exe(5216) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 031] rec=3283 utc=2026-10-14T21:41:51.898Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=4696 parent=cmd.exe(336) lineage=powershell.exe(4696) <- cmd.exe(336) <- winrshost.exe(5436) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 032] rec=3268 utc=2026-10-14T21:41:22.230Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=6072 parent=cmd.exe(1368) lineage=powershell.exe(6072) <- cmd.exe(1368) <- winrshost.exe(6124) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 033] rec=3252 utc=2026-10-14T21:41:10.485Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=1832 parent=cmd.exe(4932) lineage=powershell.exe(1832) <- cmd.exe(4932) <- winrshost.exe(960) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 034] rec=3053 utc=2026-10-14T21:07:38.959Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5684 parent=cmd.exe(4328) lineage=powershell.exe(5684) <- cmd.exe(4328) <- winrshost.exe(5148) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+
+[ALERT 002] Encoded PowerShell execution observed - INVESTIGATION REQUIRED
+  Detection        = SOC002-DET-001 v2  tier=INVESTIGATION severity=MEDIUM
+  Why retained     = BASE-01 OVERRIDDEN by payload escalation: ESC-03
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator   LogonId=0x427fd2
+  EventUtc         = 2026-10-14T21:07:23.160Z
+  RecordId/Source  = 3045 / Sysmon-Event1
+  ProcessGuid      = {edcef402-ef0b-6acf-eb03-000000000700}
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 1212)
+  Parent           = C:\Windows\System32\cmd.exe  (PPID 5292)
+  ParentCommandLine= C:\Windows\system32\cmd.exe /C powershell -encodedcommand CgAkAGIAPQAnAFAARgBOADUAYwAyADEAdgBiAGkAQgB6AFkAMgBoAGwAYgBXAEYAMgBaAFgASgB6AGEAVwA5AHUAUABTAEkAMABMAGoAawB3AEkAagA0AEsASQBDAEEAOABTAEcARgB6AGEARQBGAHMAWgAyADkAeQBhAFgAUgBvAGIAWABNACsAVQAwAGgAQgBNAGoAVQAyAFAAQwA5AEkAWQBYAE4AbwBRAFcAeABuAGIAMwBKAHAAZABHAGgAdABjAHoANABLAEkAQwBBADgAUgBYAFoAbABiAG4AUgBHAGEAVwB4ADAAWgBYAEoAcABiAG0AYwArAEMAaQBBAGcASQBDAEEAOABVAG4AVgBzAFoAVQBkAHkAYgAzAFYAdwBJAEcANQBoAGIAVwBVADkASQBsAE4AUABRAHoAQQB3AE0AaQAxAFEAYQBHAEYAegBaAFQAUQB0AFQAVwBsAHUAYQBXADEAaABiAEMASQBnAFoAMwBKAHYAZABYAEIAUwBaAFcAeABoAGQARwBsAHYAYgBqADAAaQBiADMASQBpAFAAZwBvAGcASQBDAEEAZwBJAEMAQQA4AFUASABKAHYAWQAyAFYAegBjADAATgB5AFoAVwBGADAAWgBTAEIAdgBiAG0AMQBoAGQARwBOAG8AUABTAEoAcABiAG0ATgBzAGQAVwBSAGwASQBqADQASwBJAEMAQQBnAEkAQwBBAGcAUABDADkAUQBjAG0AOQBqAFoAWABOAHoAUQAzAEoAbABZAFgAUgBsAFAAZwBvAGcASQBDAEEAZwBJAEMAQQA4AFQAbQBWADAAZAAyADkAeQBhADAATgB2AGIAbQA1AGwAWQAzAFEAZwBiADIANQB0AFkAWABSAGoAYQBEADAAaQBhAFcANQBqAGIASABWAGsAWgBTAEkAKwBDAGkAQQBnAEkAQwBBAGcASQBEAHcAdgBUAG0AVgAwAGQAMgA5AHkAYQAwAE4AdgBiAG0ANQBsAFkAMwBRACsAQwBpAEEAZwBJAEMAQQA4AEwAMQBKADEAYgBHAFYASABjAG0AOQAxAGMARAA0AEsASQBDAEEAOABMADAAVgAyAFoAVwA1ADAAUgBtAGwAcwBkAEcAVgB5AGEAVwA1AG...[cut]
+  Hashes           = SHA256=B4E7BC24BF3F5C3DA2EB6E9EC5EC10F90099DEFA91B820F2F3FC70DD9E4785C4
+  CommandLine      = powershell  -encodedcommand CgAkAGIAPQAnAFAARgBOADUAYwAyADEAdgBiAGkAQgB6AFkAMgBoAGwAYgBXAEYAMgBaAFgASgB6AGEAVwA5AHUAUABTAEkAMABMAGoAawB3AEkAagA0AEsASQBDAEEAOABTAEcARgB6AGEARQBGAHMAWgAyADkAeQBhAFgAUgBvAGIAWABNACsAVQAwAGgAQgBNAGoAVQAyAFAAQwA5AEkAWQBYAE4AbwBRAFcAeABuAGIAMwBKAHAAZABHAGgAdABjAHoANABLAEkAQwBBADgAUgBYAFoAbABiAG4AUgBHAGEAVwB4ADAAWgBYAEoAcABiAG0AYwArAEMAaQBBAGcASQBDAEEAOABVAG4AVgBzAFoAVQBkAHkAYgAzAFYAdwBJAEcANQBoAGIAVwBVADkASQBsAE4AUABRAHoAQQB3AE0AaQAxAFEAYQBHAEYAegBaAFQAUQB0AFQAVwBsAHUAYQBXADEAaABiAEMASQBnAFoAMwBKAHYAZABYAEIAUwBaAFcAeABoAGQARwBsAHYAYgBqADAAaQBiADMASQBpAFAAZwBvAGcASQBDAEEAZwBJAEMAQQA4AFUASABKAHYAWQAyAFYAegBjADAATgB5AFoAVwBGADAAWgBTAEIAdgBiAG0AMQBoAGQARwBOAG8AUABTAEoAcABiAG0ATgBzAGQAVwBSAGwASQBqADQASwBJAEMAQQBnAEkAQwBBAGcAUABDADkAUQBjAG0AOQBqAFoAWABOAHoAUQAzAEoAbABZAFgAUgBsAFAAZwBvAGcASQBDAEEAZwBJAEMAQQA4AFQAbQBWADAAZAAyADkAeQBhADAATgB2AGIAbQA1AGwAWQAzAFEAZwBiADIANQB0AFkAWABSAGoAYQBEADAAaQBhAFcANQBqAGIASABWAGsAWgBTAEkAKwBDAGkAQQBnAEkAQwBBAGcASQBEAHcAdgBUAG0AVgAwAGQAMgA5AHkAYQAwAE4AdgBiAG0ANQBsAFkAMwBRACsAQwBpAEEAZwBJAEMAQQA4AEwAMQBKADEAYgBHAFYASABjAG0AOQAxAGMARAA0AEsASQBDAEEAOABMADAAVgAyAFoAVwA1ADAAUgBtAGwAcwBkAEcAVgB5AGEAVwA1AG4AUABnAG8AOABMADEATgA1AGMAMgAx...[cut]
+  DecodedScript    = <<<
+$b='PFN5c21vbiBzY2hlbWF2ZXJzaW9uPSI0LjkwIj4KICA8SGFzaEFsZ29yaXRobXM+U0hBMjU2PC9IYXNoQWxnb3JpdGhtcz4KICA8RXZlbnRGaWx0ZXJpbmc+CiAgICA8UnVsZUdyb3VwIG5hbWU9IlNPQzAwMi1QaGFzZTQtTWluaW1hbCIgZ3JvdXBSZWxhdGlvbj0ib3IiPgogICAgICA8UHJvY2Vzc0NyZWF0ZSBvbm1hdGNoPSJpbmNsdWRlIj4KICAgICAgPC9Qcm9jZXNzQ3JlYXRlPgogICAgICA8TmV0d29ya0Nvbm5lY3Qgb25tYXRjaD0iaW5jbHVkZSI+CiAgICAgIDwvTmV0d29ya0Nvbm5lY3Q+CiAgICA8L1J1bGVHcm91cD4KICA8L0V2ZW50RmlsdGVyaW5nPgo8L1N5c21vbj4K'
+[IO.File]::WriteAllBytes('C:\Temp\soc002_sysmon_minimal.xml', [Convert]::FromBase64String($b))
+Write-Host "Written to C:\Temp bytes $((Get-Item 'C:\Temp\soc002_sysmon_minimal.xml').Length)"
+Get-Content 'C:\Temp\soc002_sysmon_minimal.xml' | Out-String -Width 1000
+>>>  [decoded by detection - NOT executed]
+  Lineage          = powershell.exe(1212) <- cmd.exe(5292) <- winrshost.exe(2840) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+                     depth 0: powershell.exe [OBSERVED-CHILD-EVENT]
+                     depth 1: cmd.exe [OBSERVED-PARENT-EVENT]
+                     depth 2: winrshost.exe [OBSERVED-PARENT-EVENT]
+                     depth 3: svchost.exe [OBSERVED-PARENT-EVENT]
+                     depth 4: services.exe [OBSERVED-PARENT-EVENT]
+                     depth 5: wininit.exe [OBSERVED-PARENT-EVENT]
+  Corroboration    = PowerShell 4104 RecId= ExecPID= ScriptBlockId= Msg=/
+[BASE 035] rec=3037 utc=2026-10-14T21:07:22.238Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5344 parent=cmd.exe(6048) lineage=powershell.exe(5344) <- cmd.exe(6048) <- winrshost.exe(4932) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 036] rec=3029 utc=2026-10-14T21:07:21.263Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=1004 parent=cmd.exe(5564) lineage=powershell.exe(1004) <- cmd.exe(5564) <- winrshost.exe(576) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 037] rec=3020 utc=2026-10-14T21:07:20.227Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=4488 parent=cmd.exe(1608) lineage=powershell.exe(4488) <- cmd.exe(1608) <- winrshost.exe(5844) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 038] rec=3011 utc=2026-10-14T21:05:36.696Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=196 parent=cmd.exe(4412) lineage=powershell.exe(196) <- cmd.exe(4412) <- winrshost.exe(1784) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+[BASE 039] rec=2983 utc=2026-10-14T21:05:20.404Z SOC002-WS001.soc002.local tier=BASELINE-TRANSPORT-CONFIRMED sev=INFO pid=5848 parent=cmd.exe(1840) lineage=powershell.exe(5848) <- cmd.exe(1840) <- winrshost.exe(5880) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500) rule=BASE-01 payload=True
+
+[ALERT 003] Encoded PowerShell execution observed - INVESTIGATION REQUIRED
+  Detection        = SOC002-DET-001 v2  tier=INVESTIGATION severity=MEDIUM
+  Why retained     = BASE-01 OVERRIDDEN by payload escalation: ESC-03
+  Host             = SOC002-WS001.soc002.local
+  User             = SOC002\Administrator   LogonId=0x41722a
+  EventUtc         = 2026-10-14T21:05:18.830Z
+  RecordId/Source  = 2975 / Sysmon-Event1
+  ProcessGuid      = {edcef402-ee8e-6acf-c703-000000000700}
+  Process          = C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe   (PID 2276)
+  Parent           = C:\Windows\System32\cmd.exe  (PPID 4772)
+  ParentCommandLine= C:\Windows\system32\cmd.exe /C powershell -encodedcommand CgAkAGIAPQAnAFAARgBOADUAYwAyADEAdgBiAGkAQgB6AFkAMgBoAGwAYgBXAEYAMgBaAFgASgB6AGEAVwA5AHUAUABTAEkAMABMAGoAawB3AEkAagA0AEsASQBDAEEAOABTAEcARgB6AGEARQBGAHMAWgAyADkAeQBhAFgAUgBvAGIAWABNACsAVQAwAGgAQgBNAGoAVQAyAFAAQwA5AEkAWQBYAE4AbwBRAFcAeABuAGIAMwBKAHAAZABHAGgAdABjAHoANABLAEkAQwBBADgAUgBYAFoAbABiAG4AUgBHAGEAVwB4ADAAWgBYAEoAcABiAG0AYwArAEMAaQBBAGcASQBDAEEAOABVAG4AVgBzAFoAVQBkAHkAYgAzAFYAdwBJAEcANQBoAGIAVwBVADkASQBsAE4AUABRAHoAQQB3AE0AaQAxAFEAYQBHAEYAegBaAFQAUQB0AFQAVwBsAHUAYQBXADEAaABiAEMASQBnAFoAMwBKAHYAZABYAEIAUwBaAFcAeABoAGQARwBsAHYAYgBqADAAaQBiADMASQBpAFAAZwBvAGcASQBDAEEAZwBJAEMAQQA4AFUASABKAHYAWQAyAFYAegBjADAATgB5AFoAVwBGADAAWgBTAEIAdgBiAG0AMQBoAGQARwBOAG8AUABTAEoAcABiAG0ATgBzAGQAVwBSAGwASQBqADQASwBJAEMAQQBnAEkAQwBBAGcAUABDADkAUQBjAG0AOQBqAFoAWABOAHoAUQAzAEoAbABZAFgAUgBsAFAAZwBvAGcASQBDAEEAZwBJAEMAQQA4AFQAbQBWADAAZAAyADkAeQBhADAATgB2AGIAbQA1AGwAWQAzAFEAZwBiADIANQB0AFkAWABSAGoAYQBEADAAaQBhAFcANQBqAGIASABWAGsAWgBTAEkAKwBDAGkAQQBnAEkAQwBBAGcASQBEAHcAdgBUAG0AVgAwAGQAMgA5AHkAYQAwAE4AdgBiAG0ANQBsAFkAMwBRACsAQwBpAEEAZwBJAEMAQQA4AEwAMQBKADEAYgBHAFYASABjAG0AOQAxAGMARAA0AEsASQBDAEEAOABMADAAVgAyAFoAVwA1ADAAUgBtAGwAcwBkAEcAVgB5AGEAVwA1AG...[cut]
+  Hashes           = SHA256=B4E7BC24BF3F5C3DA2EB6E9EC5EC10F90099DEFA91B820F2F3FC70DD9E4785C4
+  CommandLine      = powershell  -encodedcommand CgAkAGIAPQAnAFAARgBOADUAYwAyADEAdgBiAGkAQgB6AFkAMgBoAGwAYgBXAEYAMgBaAFgASgB6AGEAVwA5AHUAUABTAEkAMABMAGoAawB3AEkAagA0AEsASQBDAEEAOABTAEcARgB6AGEARQBGAHMAWgAyADkAeQBhAFgAUgBvAGIAWABNACsAVQAwAGgAQgBNAGoAVQAyAFAAQwA5AEkAWQBYAE4AbwBRAFcAeABuAGIAMwBKAHAAZABHAGgAdABjAHoANABLAEkAQwBBADgAUgBYAFoAbABiAG4AUgBHAGEAVwB4ADAAWgBYAEoAcABiAG0AYwArAEMAaQBBAGcASQBDAEEAOABVAG4AVgBzAFoAVQBkAHkAYgAzAFYAdwBJAEcANQBoAGIAVwBVADkASQBsAE4AUABRAHoAQQB3AE0AaQAxAFEAYQBHAEYAegBaAFQAUQB0AFQAVwBsAHUAYQBXADEAaABiAEMASQBnAFoAMwBKAHYAZABYAEIAUwBaAFcAeABoAGQARwBsAHYAYgBqADAAaQBiADMASQBpAFAAZwBvAGcASQBDAEEAZwBJAEMAQQA4AFUASABKAHYAWQAyAFYAegBjADAATgB5AFoAVwBGADAAWgBTAEIAdgBiAG0AMQBoAGQARwBOAG8AUABTAEoAcABiAG0ATgBzAGQAVwBSAGwASQBqADQASwBJAEMAQQBnAEkAQwBBAGcAUABDADkAUQBjAG0AOQBqAFoAWABOAHoAUQAzAEoAbABZAFgAUgBsAFAAZwBvAGcASQBDAEEAZwBJAEMAQQA4AFQAbQBWADAAZAAyADkAeQBhADAATgB2AGIAbQA1AGwAWQAzAFEAZwBiADIANQB0AFkAWABSAGoAYQBEADAAaQBhAFcANQBqAGIASABWAGsAWgBTAEkAKwBDAGkAQQBnAEkAQwBBAGcASQBEAHcAdgBUAG0AVgAwAGQAMgA5AHkAYQAwAE4AdgBiAG0ANQBsAFkAMwBRACsAQwBpAEEAZwBJAEMAQQA4AEwAMQBKADEAYgBHAFYASABjAG0AOQAxAGMARAA0AEsASQBDAEEAOABMADAAVgAyAFoAVwA1ADAAUgBtAGwAcwBkAEcAVgB5AGEAVwA1AG4AUABnAG8AOABMADEATgA1AGMAMgAx...[cut]
+  DecodedScript    = <<<
+$b='PFN5c21vbiBzY2hlbWF2ZXJzaW9uPSI0LjkwIj4KICA8SGFzaEFsZ29yaXRobXM+U0hBMjU2PC9IYXNoQWxnb3JpdGhtcz4KICA8RXZlbnRGaWx0ZXJpbmc+CiAgICA8UnVsZUdyb3VwIG5hbWU9IlNPQzAwMi1QaGFzZTQtTWluaW1hbCIgZ3JvdXBSZWxhdGlvbj0ib3IiPgogICAgICA8UHJvY2Vzc0NyZWF0ZSBvbm1hdGNoPSJpbmNsdWRlIj4KICAgICAgPC9Qcm9jZXNzQ3JlYXRlPgogICAgICA8TmV0d29ya0Nvbm5lY3Qgb25tYXRjaD0iaW5jbHVkZSI+CiAgICAgIDwvTmV0d29ya0Nvbm5lY3Q+CiAgICA8L1J1bGVHcm91cD4KICA8L0V2ZW50RmlsdGVyaW5nPgo8L1N5c21vbj4K'
+[IO.File]::WriteAllBytes('C:\Temp\soc002_sysmon_minimal.xml', [Convert]::FromBase64String($b))
+Write-Host "Written bytes $((Get-Item 'C:\Temp\soc002_sysmon_minimal.xml').Length)"
+try {[xml]$x=Get-Content 'C:\Temp\soc002_sysmon_minimal.xml' -Raw; Write-Host "XML VALID schemaversion $($x.Sysmon.schemaversion) Has $($x.Sysmon.HashAlgorithms)"} catch{Write-Host "INVALID $_"}
+Get-Content 'C:\Temp\soc002_sysmon_minimal.xml' | Out-String -Width 1000
+>>>  [decoded by detection - NOT executed]
+  Lineage          = powershell.exe(2276) <- cmd.exe(4772) <- winrshost.exe(996) <- svchost.exe(716) <- services.exe(604) <- wininit.exe(500)
+                     depth 0: powershell.exe [OBSERVED-CHILD-EVENT]
+                     depth 1: cmd.exe [OBSERVED-PARENT-EVENT]
+                     depth 2: winrshost.exe [OBSERVED-PARENT-EVENT]
+                     depth 3: svchost.exe [OBSERVED-PARENT-EVENT]
+                     depth 4: services.exe [OBSERVED-PARENT-EVENT]
+                     depth 5: wininit.exe [OBSERVED-PARENT-EVENT]
+  Corroboration    = PowerShell 4104 RecId= ExecPID= ScriptBlockId= Msg=/
+
+--- SOC002-DET-001 v2 summary ---------------------------------------
+Candidate alerts (encoded PowerShell matched)  = 42
+Retained investigation candidates              = 3
+Suppressed by narrow baseline (BASE-01)        = 39
+   - baseline + WinRM ancestry resolved       = 39   (INFO)
+   - baseline pattern, ancestry NOT resolved  = 0   (LOW)
+Escalated back by payload screen (ESC-*)       = 2
+Suppressed by a general 'powershell' rule      = 0 (no such rule exists)
+Suppressed by a general '-EncodedCommand' rule = 0 (no such rule exists)
+Security 4688 fallback                         = disabled
+
+
+[RC]=0

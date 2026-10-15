@@ -1,0 +1,33 @@
+=== SOC-002 PHASE 6 :: PHASE 5 vs PHASE 6 DET-001 COMPARISON ===
+Scope: the SAME 39 Sysmon Event 1 encoded-PowerShell events from the Phase 5
+broad 60-minute window. Phase 5 numbers are from the preserved file
+phase5/evidence/t6_detection_broad60_dc1.txt ("Total alerts = 39"), Phase 6
+numbers are the replay of Phase 6 logic over that same evidence.
+-------------------------------------------------------------------
+Metric                                                        Phase 5    Phase 6
+Detection trigger (encoded PowerShell)                      unchanged  unchanged
+Candidate alerts produced                                          39         39
+Alerts needing human triage (retained)                       39 (all)          1
+Alerts auto-classified as baseline transport               0 (manual)         38
+   of which ancestry-confirmed WinRM (INFO)                0 (manual)          5
+   of which pattern-only, ancestry missing (LOW)                  n/a         33
+Escalated back by payload screen                                  n/a          0
+Benchmark: benign authorised WinRM alerts                          38         38
+Benchmark: controlled-test alert (RetId 3535)                       1          1
+
+DID THE FALSE POSITIVES GO DOWN?  Measured answer, stated precisely:
+  - The DETECTION HIT COUNT did not go down: 39 encoded-PowerShell events are still detected in both phases.
+  - The TRIAGE COUNT went from 39 alerts requiring manual review to 1 retained candidate(s), because 38 events were auto-classified as baseline WinRS transport.
+  - The Phase 5 analyst reached the same split by hand (38 benign WinRM, 1 controlled):
+    the Phase 6 baseline reproduces that human decision automatically, with the reason recorded per event.
+  - What is NOT demonstrated: that this reduces false positives in general. The 38 were
+    already known-benign, and no adversary telemetry exists in this lab to test the
+    other direction. Treat the baseline as a triage-efficiency change, NOT as a
+    measured improvement in detection quality.
+
+CORRELATION EFFECT (Phase 6 only):
+  - 6 of 39 signals now arrive with the process lineage attached (1 of the 1 retained candidate(s)).
+  - The one retained candidate (Phase 5 [ALERT 010], Sysmon RecId 3535, PID 1500) carries the
+    complete chain powershell.exe(1500) <- powershell.exe(4576) <- cmd.exe(3596) <- winrshost.exe(5800) <- svchost.exe(716).
+    Phase 5 had to establish that chain by hand from three different logs.
+

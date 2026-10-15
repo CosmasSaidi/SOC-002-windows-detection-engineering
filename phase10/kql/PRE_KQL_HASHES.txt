@@ -1,0 +1,38 @@
+SOC-002 | PHASE 10 (KQL closure) | PRE-KQL INTEGRITY BASELINE
+===============================================================================
+Purpose  : SHA256 of the authoritative DET-001 sources and of every Phase 5-9
+           artifact relevant to this closure, recorded BEFORE any phase10/kql
+           artifact was created, so those files can be proven byte-identical
+           afterwards.
+Algorithm: SHA256.
+Base     : paths are relative to the repository root (.).
+Recorded : 2026-10-15T15:29:22Z (UTC)
+
+== A) AUTHORITATIVE DET-001 SOURCE FILES (the KQL is derived from these) ==
+6e0651dc43f781e9d71bc2ebc6b7c74d4d882a30799a61372945cceda0d5efca  phase5/detections/detect_encoded_powershell.ps1
+c9b73426134571dfa6a26df3cb39e4d6030ce5886720cf7679de575845b0d16c  phase6/detections/detect_encoded_powershell_v2.ps1
+3c332445bfb69045e2ad3b135c8184086d91979d8fc03c1bbead79d17b69d09f  phase6/detections/lib_soc002_v2.ps1
+3404a8bf210fde3ac1418f1fd7dae15251bc8f3dae6ae717c453ffaa28ed4c7d  phase6/detections/lib_soc002_windows.ps1
+8f053aa127cf5b38dec10d3b1405840ab5533a2bd3199dfd0b1133d5c78b3bad  phase5/evidence/raw/sysmon1-recid3535-ws001.xml
+a357b12e1330e3b52c1a757a28283b95564a0b9961dbab31f4b18d93ce3e88de  phase5/evidence/DETECTION_LIMITATIONS.txt
+7a2b2ca3a406502d0123f6c420ff63e756c8002227882f8ffa205d5213004c6f  phase5/evidence/t6_detection_broad60_dc1.txt
+b71641f9609d1f59335f06e054ee2403af65d3dac950f9663ac73f240b198da3  phase6/evidence/TUNING_RATIONALE.txt
+
+== B) PHASE 9 SIGMA PREDECESSOR + RELATED DETECTIONS / REPORTS (must stay unchanged) ==
+335e405109119c67983e3c026b35fba5e76cd2e84c1664fce82343ff22c375c1  phase9/sigma/SOC002-DET-001-encoded-powershell.yml
+ac33ebbcf281ddcd0c0b7d2dbb0118e29e77460d2f1ddaf1ba42fac88144b586  phase9/sigma/SIGMA_NOTES.md
+6fa0d07e9955ba7b07b96dea5864f03a953d850ade4ee599688a3c4567a68ea8  phase9/sigma/README.md
+f9e908bcf32711ce131e026c1adcf1054e1cb165a1dcd5f09367edb10dc3c561  phase9/sigma/validate_sigma.ps1
+8a2b38052aa51804ca84d4808d3b0b24afcc5957987b18d8f4f91ea576ff9292  phase9/sigma/PRE_SIGMA_HASHES.txt
+7288ebb82d698df0e0cdf72aa3c1e1291960349087257d21caaf8c7402c24b3a  phase9/sigma/SHA256_MANIFEST.txt
+55ee0deef34cb4e6277ad050c1314313b5ec046e7d325f32c81d82a6b72877dd  phase9/sigma/SIGMA_VALIDATION_REPORT.md
+1f7ed2e0c4826be1fd2e63f21bda5c89f861fda0835ebb376422a31e7f981352  phase8/detections/detect_base64_reconstruction.ps1
+4d3ebf53e7dfa3060de102b50b1692ac4a693ecb555dd3b8a736d28c4d5eddc9  phase8/PHASE8_REPORT.md
+f4015b3611778abc82d91126b58f534a38ca686a68bf1229c459dc953bf12b32  phase7/PHASE7_REPORT.md
+
+== C) RECURSIVE PHASE 5-9 TREE DIGEST (every file under phase5, phase6, phase7, phase8, phase9) ==
+Method : digest = sha256( sha256sum output of every file under the five roots,
+         the file list produced with `find <root> -type f -print0` and ordered
+         with `LC_ALL=C sort -z`; each line formatted "<hash>  <relpath>" ).
+Files  : 232
+d7e98c4a27a2dc0d0e410e7f88ad0794e1ec99d4760073db05a6c8455a788db5  -

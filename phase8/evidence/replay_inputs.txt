@@ -1,0 +1,41 @@
+=== SOC-002 PHASE 8 :: REPLAY INPUT INVENTORY ===
+Generated (utc): 2026-10-14T23:40:15Z
+
+All Phase 7 replay inputs are the PRESERVED, UNMODIFIED phase7/evidence/raw/ files.
+They were read-only; DET-003 parsed the EventData XML as text. Nothing was executed.
+
+--- Phase 7 preserved evidence (replay inputs) ---
+phase7/evidence/raw/t4_raw_local_ws001_controlled.txt
+   events=17 sha256=6D3B222642950E1319E8823F440E16BAE8197556F118B77BD19E3D21D7FAED4B
+phase7/evidence/raw/t5_raw_central_dc1_controlled.txt
+   events=17 sha256=D117AE5F151D3CD528DFA5C37A4DAE47355C4F74AF6DEECB804F3DF39D55AEB0
+phase7/evidence/raw/t4b_raw_local_ws001_session.txt
+   events=342 sha256=551473E24037CBA734491AAEF8A4ECC5DB29C8B6802823F8BDB4D5E44BAE6FB6
+phase7/evidence/raw/t5b_raw_central_dc1_session.txt
+   events=340 sha256=5979510698CE2AB2909C7C30437EB2E7A736060A6679271ECB6086501628BFF9
+
+--- Phase 7 script/evidence cross-references ---
+phase7/scripts/phase7_child_command.txt
+   sha256=4AC23816A1528A524AC0C21486CFC882BD6E0297D72B9DD3945A0B7283EDA365
+phase7/evidence/phase7_payload_decoded.txt
+   sha256=CABA938E2DA87C2BD6360A5774464C0496D760619B417D3BD613458511899522
+phase7/evidence/phase7_payload_metadata.json
+   sha256=A3C85E2773593C99B4E825D744F5C7A9CDAF35DFEDF91CC62FA4482DB65E758A
+
+--- Phase 8 live-capture inputs (produced by this phase) ---
+phase8/evidence/raw/p8_raw_local_ws001.txt
+   events=50 sha256=607B46E610776C48E44DA7F8A85B338A516135FD01A41A9F9ADA2C5F0E68ADFB
+phase8/evidence/raw/p8_raw_central_dc1.txt
+   events=57 sha256=61E2079B7B5F18DEE18EE7DEDC0B653F9AB56EB42E08322005A1E109AC7C80F8
+
+--- Phase 5 positive-control input (DET-001 contrast) ---
+phase5/evidence/t2_execute_ws001.txt
+   sha256=4F1C1D29269C92FFC52FFBA1319C9A481482DF580889B6CFB9040A10D9A9C13A
+
+--- Phase 6 detection library used read-only for contrast/lineage ---
+phase6/detections/lib_soc002_v2.ps1
+   sha256=3C332445BFB69045E2AD3B135C8184086D91979D8FC03C1BBEAD79D17B69D09F
+phase6/detections/lib_soc002_windows.ps1
+   sha256=3404A8BF210FDE3AC1418F1FD7DAE15251BC8F3DAE6AE717C453FFAA28ED4C7D
+phase6/detections/detect_encoded_powershell_v2.ps1
+   sha256=C9B73426134571DFA6A26DF3CB39E4D6030CE5886720CF7679DE575845B0D16C

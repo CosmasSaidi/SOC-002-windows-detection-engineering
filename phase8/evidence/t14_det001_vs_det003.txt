@@ -1,0 +1,25 @@
+=== SOC-002 PHASE 8 :: DET-001 v2 vs DET-003 (same command lines, both real triggers) ===
+DET-001 library = phase6-v2.0 sha256=3C332445BFB69045E2AD3B135C8184086D91979D8FC03C1BBEAD79D17B69D09F
+DET-003 library = phase8-v1.0 sha256=EC519AE9C313C3360D39F97404E828D19189A701D4570FDAC6641E3703238181
+DET-001 trigger = (?i)\s-(e|en|enc|encodedcommand)(\s|$)   (encoded-command CLI switch)
+DET-003 trigger = Base64 reconstruction CALL (REC-01..05), never the word 'Base64'
+
+  case                                det001   det003   det003-severity  det003-context
+  ----------------------------------  -------  -------  ---------------  --------------
+  Phase 5 control: -EncodedCommand    TRIGGER  miss     -                -
+  Phase 7 blind spot: -Command + decode  miss     TRIGGER  LOW              CTX-STRING-ROUNDTRIP
+  Phase 8 live: -Command + decode     miss     TRIGGER  LOW              CTX-STRING-ROUNDTRIP
+  Benign: plain PowerShell            miss     miss     -                -
+  Benign: word Base64 only            miss     miss     -                -
+  Benign: decode + Invoke-Expression  miss     TRIGGER  MEDIUM           CTX-EXEC-ADJACENT
+  Benign: comment-only decode mention  miss     miss     -                -
+
+Reading:
+  * DET-001 covers the encoded-command SWITCH; DET-003 covers the decode CALL.
+  * They are DISJOINT on these cases: neither is a superset of the other.
+  * In Phase 7 the two blind spots complemented each other: the payload was
+    DET-001-miss / DET-003-hit, and the WinRS transport was the reverse.
+  * DET-002 is not a text trigger: it is CONTEXT derived from the process
+    chain (delivery through winrshost.exe/wsmprovhost.exe). It never decides
+    DET-003, and DET-003 never decides DET-002.
+  * Neither detection says "malicious". Both say "investigate with context".

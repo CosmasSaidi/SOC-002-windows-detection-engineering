@@ -1,0 +1,53 @@
+{
+  "label": "PHASE 8 live DC1 ForwardedEvents capture",
+  "raw": "phase8/evidence/raw/p8_raw_central_dc1.txt",
+  "events": 57,
+  "records_examined": 23,
+  "det003_candidates": 4,
+  "det003_low": 4,
+  "det003_medium": 0,
+  "word_only_non_triggers": 0,
+  "comment_suppressed": 0,
+  "candidates": [
+    {
+      "source": "Security-4688",
+      "recordid": "16123",
+      "pid": "1268",
+      "scriptblockid": "",
+      "indicator": "[Convert]::FromBase64String",
+      "severity": "LOW",
+      "class": "RECONSTRUCTION-OBSERVED",
+      "host": "SOC002-WS001.soc002.local"
+    },
+    {
+      "source": "Sysmon-Event1",
+      "recordid": "4600",
+      "pid": "1268",
+      "scriptblockid": "",
+      "indicator": "[Convert]::FromBase64String",
+      "severity": "LOW",
+      "class": "RECONSTRUCTION-OBSERVED",
+      "host": "SOC002-WS001.soc002.local"
+    },
+    {
+      "source": "PowerShell-4104",
+      "recordid": "77434",
+      "pid": "1996",
+      "scriptblockid": "a8662866-d48c-4970-98ef-e10ec1eb1c40",
+      "indicator": "[Convert]::FromBase64String",
+      "severity": "LOW",
+      "class": "RECONSTRUCTION-OBSERVED",
+      "host": "SOC002-WS001.soc002.local"
+    },
+    {
+      "source": "PowerShell-4104",
+      "recordid": "77450",
+      "pid": "1268",
+      "scriptblockid": "50aa4a2f-00ff-4f0f-b0d4-2f5f2543ccae",
+      "indicator": "[Convert]::FromBase64String",
+      "severity": "LOW",
+      "class": "RECONSTRUCTION-OBSERVED",
+      "host": "SOC002-WS001.soc002.local"
+    }
+  ]
+}

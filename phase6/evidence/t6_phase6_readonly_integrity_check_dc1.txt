@@ -1,0 +1,9 @@
+--- Phase 6 read-only integrity check on SOC002-DC1 ---
+service WinRM = Running / start=Automatic
+ForwardedEvents = 2612 records, size=20MB, newest=2026-10-15T01:35:36.6718828+03:00
+ForwardedEvents file sha256 = 
+WEF subscription file = True
+Phase6 tmpdir present = True  files=7
+Phase5 tmpdir present = False
+
+[RC]=0

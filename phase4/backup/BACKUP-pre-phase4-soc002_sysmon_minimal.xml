@@ -1,0 +1,11 @@
+<Sysmon schemaversion="4.90">
+  <HashAlgorithms>SHA256</HashAlgorithms>
+  <EventFiltering>
+    <RuleGroup name="SOC002-Phase4-Minimal" groupRelation="or">
+      <ProcessCreate onmatch="include">
+      </ProcessCreate>
+      <NetworkConnect onmatch="include">
+      </NetworkConnect>
+    </RuleGroup>
+  </EventFiltering>
+</Sysmon>

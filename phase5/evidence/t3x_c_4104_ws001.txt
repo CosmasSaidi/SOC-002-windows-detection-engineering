@@ -1,0 +1,100 @@
+=== C. POWERSHELL 4104 targeted (marker) ===
+COUNT=2
+--- RecId=72974 ---
+TimeLocal=2026-10-15 00:59:48.392
+TimeUtc=2026-10-14T21:59:48.392Z
+Computer=SOC002-WS001.soc002.local
+ExecProcessId=
+ExecThreadId=
+MessageNumber=<<<1>>>
+MessageTotal=<<<1>>>
+ScriptBlockId=<<<039b9c99-15fb-488d-8046-46e868aa9a39>>>
+Path=<<<>>>
+ScriptBlockText=<<<# SOC-002 PHASE 5 - CONTROLLED BENIGN TEST
+# Marker: SOC002-PHASE5-ENCODED-POWERSHELL
+# Purpose: harmless observable output only. No persistence, no network, no modification.
+$marker = 'SOC002-PHASE5-ENCODED-POWERSHELL'
+Write-Output $marker
+Write-Output ('HOST=' + $env:COMPUTERNAME)
+Write-Output ('USER=' + [System.Security.Principal.WindowsIdentity]::GetCurrent().Name)
+Write-Output ('START_UTC=' + (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ'))
+Start-Sleep -Seconds 3
+Write-Output ('END_UTC=' + (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ'))
+Write-Output 'BENIGN_CONTROLLED_TEST_COMPLETE'
+>>>
+===RAWXML-BEGIN PowerShell4104-Rec72974===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-PowerShell' Guid='{a0c1853b-5c40-4b15-8766-3cf1c58f985a}'/><EventID>4104</EventID><Version>1</Version><Level>5</Level><Task>2</Task><Opcode>15</Opcode><Keywords>0x0</Keywords><TimeCreated SystemTime='2026-10-14T21:59:48.3924613Z'/><EventRecordID>72974</EventRecordID><Correlation ActivityID='{76f7e10b-5c12-0000-1d84-f876125cdd01}'/><Execution ProcessID='1500' ThreadID='3044'/><Channel>Microsoft-Windows-PowerShell/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-21-1571239376-360375575-1388094843-500'/></System><EventData><Data Name='MessageNumber'>1</Data><Data Name='MessageTotal'>1</Data><Data Name='ScriptBlockText'># SOC-002 PHASE 5 - CONTROLLED BENIGN TEST
+# Marker: SOC002-PHASE5-ENCODED-POWERSHELL
+# Purpose: harmless observable output only. No persistence, no network, no modification.
+$marker = 'SOC002-PHASE5-ENCODED-POWERSHELL'
+Write-Output $marker
+Write-Output ('HOST=' + $env:COMPUTERNAME)
+Write-Output ('USER=' + [System.Security.Principal.WindowsIdentity]::GetCurrent().Name)
+Write-Output ('START_UTC=' + (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ'))
+Start-Sleep -Seconds 3
+Write-Output ('END_UTC=' + (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ'))
+Write-Output 'BENIGN_CONTROLLED_TEST_COMPLETE'
+</Data><Data Name='ScriptBlockId'>039b9c99-15fb-488d-8046-46e868aa9a39</Data><Data Name='Path'></Data></EventData></Event>
+===RAWXML-END===
+--- RecId=72965 ---
+TimeLocal=2026-10-15 00:59:47.908
+TimeUtc=2026-10-14T21:59:47.908Z
+Computer=SOC002-WS001.soc002.local
+ExecProcessId=
+ExecThreadId=
+MessageNumber=<<<1>>>
+MessageTotal=<<<1>>>
+ScriptBlockId=<<<e02842dc-7c5f-4bde-b18d-6ad4d161aa11>>>
+Path=<<<>>>
+ScriptBlockText=<<<$ErrorActionPreference='Continue'
+$marker = 'SOC002-PHASE5-ENCODED-POWERSHELL'
+$b64 = 'IwAgAFMATwBDAC0AMAAwADIAIABQAEgAQQBTAEUAIAA1ACAALQAgAEMATwBOAFQAUgBPAEwATABFAEQAIABCAEUATgBJAEcATgAgAFQARQBTAFQACgAjACAATQBhAHIAawBlAHIAOgAgAFMATwBDADAAMAAyAC0AUABIAEEAUwBFADUALQBFAE4AQwBPAEQARQBEAC0AUABPAFcARQBSAFMASABFAEwATAAKACMAIABQAHUAcgBwAG8AcwBlADoAIABoAGEAcgBtAGwAZQBzAHMAIABvAGIAcwBlAHIAdgBhAGIAbABlACAAbwB1AHQAcAB1AHQAIABvAG4AbAB5AC4AIABOAG8AIABwAGUAcgBzAGkAcwB0AGUAbgBjAGUALAAgAG4AbwAgAG4AZQB0AHcAbwByAGsALAAgAG4AbwAgAG0AbwBkAGkAZgBpAGMAYQB0AGkAbwBuAC4ACgAkAG0AYQByAGsAZQByACAAPQAgACcAUwBPAEMAMAAwADIALQBQAEgAQQBTAEUANQAtAEUATgBDAE8ARABFAEQALQBQAE8AVwBFAFIAUwBIAEUATABMACcACgBXAHIAaQB0AGUALQBPAHUAdABwAHUAdAAgACQAbQBhAHIAawBlAHIACgBXAHIAaQB0AGUALQBPAHUAdABwAHUAdAAgACgAJwBIAE8AUwBUAD0AJwAgACsAIAAkAGUAbgB2ADoAQwBPAE0AUABVAFQARQBSAE4AQQBNAEUAKQAKAFcAcgBpAHQAZQAtAE8AdQB0AHAAdQB0ACAAKAAnAFUAUwBFAFIAPQAnACAAKwAgAFsAUwB5AHMAdABlAG0ALgBTAGUAYwB1AHIAaQB0AHkALgBQAHIAaQBuAGMAaQBwAGEAbAAuAFcAaQBuAGQAbwB3AHMASQBkAGUAbgB0AGkAdAB5AF0AOgA6AEcAZQB0AEMAdQByAHIAZQBuAHQAKAApAC4ATgBhAG0AZQApAAoAVwByAGkAdABlAC0ATwB1AHQAcAB1AHQAIAAoACcAUwBUAEEAUgBUAF8AVQBUAEMAPQAnACAAKwAgACgARwBlAHQALQBEAGEAdABlACkALgBUAG8AVQBuAGkAdgBlAHIAcwBhAGwAVABpAG0AZQAoACkALgBUAG8AUwB0AHIAaQBuAGcAKAAnAHkAeQB5AHkALQBNAE0ALQBkAGQAVABIAEgAOgBtAG0AOgBzAHMALgBmAGYAZgBaACcAKQApAAoAUwB0AGEAcgB0AC0AUwBsAGUAZQBwACAALQBTAGUAYwBvAG4AZABzACAAMwAKAFcAcgBpAHQAZQAtAE8AdQB0AHAAdQB0ACAAKAAnAEUATgBEAF8AVQBUAEMAPQAnACAAKwAgACgARwBlAHQALQBEAGEAdABlACkALgBUAG8AVQBuAGkAdgBlAHIAcwBhAGwAVABpAG0AZQAoACkALgBUAG8AUwB0AHIAaQBuAGcAKAAnAHkAeQB5AHkALQBNAE0ALQBkAGQAVABIAEgAOgBtAG0AOgBzAHMALgBmAGYAZgBaACcAKQApAAoAVwByAGkAdABlAC0ATwB1AHQAcAB1AHQAIAAnAEIARQBOAEkARwBOAF8AQwBPAE4AVABSAE8ATABMAEUARABfAFQARQBTAFQAXwBDAE8ATQBQAEwARQBUAEUAJwAKAA=='
+"=== SOC-002 PHASE5 TASK2 CONTROLLED ENCODED POWERSHELL ==="
+"MARKER          = $marker"
+"OPERATOR_HOST   = $env:COMPUTERNAME"
+"OPERATOR_ACCT   = $([System.Security.Principal.WindowsIdentity]::GetCurrent().Name)"
+"PRE_LOCAL       = $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss.fff')"
+"PRE_UTC         = $((Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ'))"
+"PAYLOAD_B64_LEN = $($b64.Length)"
+"CHILD_CMD       = powershell.exe -NoProfile -EncodedCommand $b64"
+"--- executing (SINGLE run) ---"
+$sw = [Diagnostics.Stopwatch]::StartNew()
+$out = & powershell.exe -NoProfile -EncodedCommand $b64 2>&1
+$sw.Stop()
+"CHILD_RC        = $LASTEXITCODE"
+"CHILD_DUR_MS    = $($sw.ElapsedMilliseconds)"
+"POST_UTC        = $((Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ'))"
+"--- child stdout ---"
+$out | ForEach-Object { "$_" }
+"--- end child stdout ---"
+>>>
+===RAWXML-BEGIN PowerShell4104-Rec72965===
+<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-PowerShell' Guid='{a0c1853b-5c40-4b15-8766-3cf1c58f985a}'/><EventID>4104</EventID><Version>1</Version><Level>5</Level><Task>2</Task><Opcode>15</Opcode><Keywords>0x0</Keywords><TimeCreated SystemTime='2026-10-14T21:59:47.9084205Z'/><EventRecordID>72965</EventRecordID><Correlation ActivityID='{76f7e10b-5c12-0000-0f84-f876125cdd01}'/><Execution ProcessID='4576' ThreadID='5164'/><Channel>Microsoft-Windows-PowerShell/Operational</Channel><Computer>SOC002-WS001.soc002.local</Computer><Security UserID='S-1-5-21-1571239376-360375575-1388094843-500'/></System><EventData><Data Name='MessageNumber'>1</Data><Data Name='MessageTotal'>1</Data><Data Name='ScriptBlockText'>$ErrorActionPreference='Continue'
+$marker = 'SOC002-PHASE5-ENCODED-POWERSHELL'
+$b64 = 'IwAgAFMATwBDAC0AMAAwADIAIABQAEgAQQBTAEUAIAA1ACAALQAgAEMATwBOAFQAUgBPAEwATABFAEQAIABCAEUATgBJAEcATgAgAFQARQBTAFQACgAjACAATQBhAHIAawBlAHIAOgAgAFMATwBDADAAMAAyAC0AUABIAEEAUwBFADUALQBFAE4AQwBPAEQARQBEAC0AUABPAFcARQBSAFMASABFAEwATAAKACMAIABQAHUAcgBwAG8AcwBlADoAIABoAGEAcgBtAGwAZQBzAHMAIABvAGIAcwBlAHIAdgBhAGIAbABlACAAbwB1AHQAcAB1AHQAIABvAG4AbAB5AC4AIABOAG8AIABwAGUAcgBzAGkAcwB0AGUAbgBjAGUALAAgAG4AbwAgAG4AZQB0AHcAbwByAGsALAAgAG4AbwAgAG0AbwBkAGkAZgBpAGMAYQB0AGkAbwBuAC4ACgAkAG0AYQByAGsAZQByACAAPQAgACcAUwBPAEMAMAAwADIALQBQAEgAQQBTAEUANQAtAEUATgBDAE8ARABFAEQALQBQAE8AVwBFAFIAUwBIAEUATABMACcACgBXAHIAaQB0AGUALQBPAHUAdABwAHUAdAAgACQAbQBhAHIAawBlAHIACgBXAHIAaQB0AGUALQBPAHUAdABwAHUAdAAgACgAJwBIAE8AUwBUAD0AJwAgACsAIAAkAGUAbgB2ADoAQwBPAE0AUABVAFQARQBSAE4AQQBNAEUAKQAKAFcAcgBpAHQAZQAtAE8AdQB0AHAAdQB0ACAAKAAnAFUAUwBFAFIAPQAnACAAKwAgAFsAUwB5AHMAdABlAG0ALgBTAGUAYwB1AHIAaQB0AHkALgBQAHIAaQBuAGMAaQBwAGEAbAAuAFcAaQBuAGQAbwB3AHMASQBkAGUAbgB0AGkAdAB5AF0AOgA6AEcAZQB0AEMAdQByAHIAZQBuAHQAKAApAC4ATgBhAG0AZQApAAoAVwByAGkAdABlAC0ATwB1AHQAcAB1AHQAIAAoACcAUwBUAEEAUgBUAF8AVQBUAEMAPQAnACAAKwAgACgARwBlAHQALQBEAGEAdABlACkALgBUAG8AVQBuAGkAdgBlAHIAcwBhAGwAVABpAG0AZQAoACkALgBUAG8AUwB0AHIAaQBuAGcAKAAnAHkAeQB5AHkALQBNAE0ALQBkAGQAVABIAEgAOgBtAG0AOgBzAHMALgBmAGYAZgBaACcAKQApAAoAUwB0AGEAcgB0AC0AUwBsAGUAZQBwACAALQBTAGUAYwBvAG4AZABzACAAMwAKAFcAcgBpAHQAZQAtAE8AdQB0AHAAdQB0ACAAKAAnAEUATgBEAF8AVQBUAEMAPQAnACAAKwAgACgARwBlAHQALQBEAGEAdABlACkALgBUAG8AVQBuAGkAdgBlAHIAcwBhAGwAVABpAG0AZQAoACkALgBUAG8AUwB0AHIAaQBuAGcAKAAnAHkAeQB5AHkALQBNAE0ALQBkAGQAVABIAEgAOgBtAG0AOgBzAHMALgBmAGYAZgBaACcAKQApAAoAVwByAGkAdABlAC0ATwB1AHQAcAB1AHQAIAAnAEIARQBOAEkARwBOAF8AQwBPAE4AVABSAE8ATABMAEUARABfAFQARQBTAFQAXwBDAE8ATQBQAEwARQBUAEUAJwAKAA=='
+"=== SOC-002 PHASE5 TASK2 CONTROLLED ENCODED POWERSHELL ==="
+"MARKER          = $marker"
+"OPERATOR_HOST   = $env:COMPUTERNAME"
+"OPERATOR_ACCT   = $([System.Security.Principal.WindowsIdentity]::GetCurrent().Name)"
+"PRE_LOCAL       = $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss.fff')"
+"PRE_UTC         = $((Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ'))"
+"PAYLOAD_B64_LEN = $($b64.Length)"
+"CHILD_CMD       = powershell.exe -NoProfile -EncodedCommand $b64"
+"--- executing (SINGLE run) ---"
+$sw = [Diagnostics.Stopwatch]::StartNew()
+$out = &amp; powershell.exe -NoProfile -EncodedCommand $b64 2&gt;&amp;1
+$sw.Stop()
+"CHILD_RC        = $LASTEXITCODE"
+"CHILD_DUR_MS    = $($sw.ElapsedMilliseconds)"
+"POST_UTC        = $((Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ'))"
+"--- child stdout ---"
+$out | ForEach-Object { "$_" }
+"--- end child stdout ---"
+</Data><Data Name='ScriptBlockId'>e02842dc-7c5f-4bde-b18d-6ad4d161aa11</Data><Data Name='Path'></Data></EventData></Event>
+===RAWXML-END===
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.102:5985/wsman

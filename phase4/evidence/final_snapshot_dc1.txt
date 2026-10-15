@@ -1,0 +1,41 @@
+########## DC1 ##########
+NOW=2026-10-15 00:48:24 +03:00
+--- WEF subscription ---
+
+Subscription Id: SOC002-WS001-Security
+Description: SOC-002 Phase 4: Security 4624/4625/4688, PowerShell 4104, Sysmon 1/3
+Enabled: true
+DeliveryMode: Pull
+<QueryList><Query Id="0"><Select Path="Security">*[System[(EventID=4624 or EventID=4625 or 
+EventID=4688)]]</Select><Select 
+Path="Microsoft-Windows-PowerShell/Operational">*[System[(EventID=4104)]]</Select><Select 
+Path="Microsoft-Windows-Sysmon/Operational">*[System[(EventID=1 or EventID=3)]]</Select></Query></QueryList>
+	Enabled: true
+--- WEF runtime ---
+﻿
+Subscription: SOC002-WS001-Security
+	RunTimeStatus: Active
+	LastError: 0
+	EventSources:
+		SOC002-WS001.soc002.local
+			RunTimeStatus: Active
+			LastError: 0
+--- EventCollector/Operational non-Information since 2026-10-15 00:40 ---
+count=0
+--- Sysmon installed on DC1? ---
+Sysmon64: ABSENT (as required)
+--- ForwardedEvents coverage ---
+Microsoft-Windows-Security-Auditing      4624  count=47     newest=2026-10-15 00:48:01
+Microsoft-Windows-Security-Auditing      4625  count=1      newest=2026-10-15 00:46:54
+Microsoft-Windows-Security-Auditing      4688  count=225    newest=2026-10-15 00:48:01
+Microsoft-Windows-PowerShell             4104  count=270    newest=2026-10-15 00:48:15
+Microsoft-Windows-Sysmon                 1     count=1673   newest=2026-10-15 00:48:01
+Microsoft-Windows-Sysmon                 3     count=83     newest=2026-10-15 00:48:02
+
+
+
+[STDERR]
+#< CLIXML
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">2</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="2"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.10:5985/wsman

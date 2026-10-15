@@ -1,0 +1,47 @@
+=== SOC-002 PHASE 8 :: INTEGRITY VERIFICATION & CLEANUP ===
+Generated (utc) : 2026-10-14T23:45:53Z
+Pre-change snapshot : phase8/evidence/pre_state_sha256.txt (taken before any Phase 8 file was created)
+
+-------------------------------------------------------------------------------
+SECTION 1 - DET-001 v2 AND THE PHASE 6 DETECTION STACK
+-------------------------------------------------------------------------------
+6e0651dc43f781e9d71bc2ebc6b7c74d4d882a30799a61372945cceda0d5efca  phase5/detections/detect_encoded_powershell.ps1
+d4d5d12fa62ab856816ea5b81ce4d0f2e154fa614764b05f34ac9c510930c974  phase6/detections/correlate_det001_det002.ps1
+c9b73426134571dfa6a26df3cb39e4d6030ce5886720cf7679de575845b0d16c  phase6/detections/detect_encoded_powershell_v2.ps1
+86149f2559512515ce2a97f54bbee1d54e788cc21d5346c34278326434668bae  phase6/detections/detect_powershell_lineage.ps1
+3c332445bfb69045e2ad3b135c8184086d91979d8fc03c1bbead79d17b69d09f  phase6/detections/lib_soc002_v2.ps1
+3404a8bf210fde3ac1418f1fd7dae15251bc8f3dae6ae717c453ffaa28ed4c7d  phase6/detections/lib_soc002_windows.ps1
+
+DET-001 v2 expected (pre-Phase-8) : c9b73426134571dfa6a26df3cb39e4d6030ce5886720cf7679de575845b0d16c
+DET-001 v2 actual   (post-Phase-8): c9b73426134571dfa6a26df3cb39e4d6030ce5886720cf7679de575845b0d16c
+RESULT: DET-001 v2 is BYTE-IDENTICAL. It was not modified, extended or rewritten.
+
+--- all detection source files vs pre-change snapshot ---
+  no differences: all 6 detection source files match the pre-change hashes.
+
+-------------------------------------------------------------------------------
+SECTION 2 - PHASE 5 / PHASE 6 / PHASE 7 EVIDENCE PRESERVATION
+-------------------------------------------------------------------------------
+phase5 : pre-files=88  now-files=88  changed=0  missing=0  added=0
+phase6 : pre-files=34  now-files=34  changed=0  missing=0  added=0
+phase7 : pre-files=51  now-files=51  changed=0  missing=0  added=0
+
+RESULT: Phase 5, Phase 6 and Phase 7 evidence is byte-for-byte unchanged
+        (changed=0, missing=0, added=0 for every tree).
+        Phase 8 added only files under phase8/.
+
+-------------------------------------------------------------------------------
+SECTION 3 - LAB TEMP DIRECTORIES (cleanup confirmation)
+-------------------------------------------------------------------------------
+Host-side temp dirs created by Phase 8 are removed by the tooling itself;
+the live-validation transcript records 'TMP_REMOVED=True' and the DC1 detector
+run records 'TMP_REMOVED=True'. Evidence: evidence/t07_live_validation.txt,
+evidence/t09c_det003_live_dc1.txt.
+
+-------------------------------------------------------------------------------
+SECTION 4 - SECRETS CHECK
+-------------------------------------------------------------------------------
+Scanning Phase 8 artefacts for the credential environment variable NAMES
+(values are never written by any Phase 8 tool):
+  files mentioning WINRM_USER/WINRM_PASS (name only, in tooling): 5
+  files containing a password VALUE: 0 (no Phase 8 tool prints or stores the password)

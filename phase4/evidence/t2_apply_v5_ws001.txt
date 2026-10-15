@@ -1,0 +1,85 @@
+=== v5 hash: 9754444FD933EA12C00966C5373601DE1EEE32515407F6CDDC79FA6D33D43A18
+
+
+
+System Monitor v15.22 - System activity monitor
+
+By Mark Russinovich and Thomas Garnier
+
+Copyright (C) 2014-2026 Microsoft Corporation
+
+Using libxml2. libxml2 is Copyright (C) 1998-2012 Daniel Veillard. All Rights Reserved.
+
+Sysinternals - www.sysinternals.com
+
+
+
+Current configuration:
+
+ - Service name:                  Sysmon64
+
+ - Driver name:                   SysmonDrv
+
+ - Config file:                   C:\Temp\soc002_sysmon_phase4_v5.xml
+
+ - Config hash:                   SHA256=9754444FD933EA12C00966C5373601DE1EEE32515407F6CDDC79FA6D33D43A18
+
+
+
+ - HashingAlgorithms:             SHA256
+
+ - Network connection:            enabled
+
+ - Archive Directory:             -
+
+ - Image loading:                 disabled
+
+ - CRL checking:                  enabled
+
+ - DNS lookup:                    enabled
+
+
+
+Rule configuration (version 4.90):
+
+ - ProcessCreate                      onmatch: include   combine rules using 'Or'
+
+	Image                          filter: contains     value: '\'
+
+ - NetworkConnect                     onmatch: include   combine rules using 'Or'
+
+	DestinationPort                filter: more than    value: '0'
+
+
+
+=== GENERATE ===
+SOC002-PHASE4-T2-V5
+curl=0
+=== NEW Event 1 ===
+RecId=3222 00:40:21 Image=C:\Windows\System32\curl.exe
+RecId=3220 00:40:21 Image=C:\Windows\System32\cmd.exe
+RecId=3218 00:40:21 Image=C:\Windows\Sysmon64.exe
+=== NEW Event 3 ===
+RecId=3224 00:40:22 Img=<unknown process> Dst=192.168.56.10:5985
+RecId=3217 00:40:19 Img=C:\Windows\System32\lsass.exe Dst=192.168.56.10:49668
+RecId=3216 00:40:19 Img=System Dst=192.168.56.102:5985
+=== counts last 3 min ===
+
+Name Count
+---- -----
+1        3
+16       3
+3       16
+5       25
+
+
+
+
+
+
+[STDERR]
+#< CLIXML
+
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">2</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="2"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+[RC]=0
+[EP]=http://192.168.56.102:5985/wsman

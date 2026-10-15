@@ -1,0 +1,16 @@
+<Sysmon schemaversion="4.90">
+  <HashAlgorithms>SHA256</HashAlgorithms>
+  <EventFiltering>
+    <!-- SOC-002 Phase 4: focused collection - process creation + network connections only -->
+    <RuleGroup name="SOC002-Phase4-ProcessCreate" groupRelation="or">
+      <ProcessCreate onmatch="include">
+        <Image condition="contains">\</Image>
+      </ProcessCreate>
+    </RuleGroup>
+    <RuleGroup name="SOC002-Phase4-NetworkConnect" groupRelation="or">
+      <NetworkConnect onmatch="include">
+        <DestinationPort condition="more than">0</DestinationPort>
+      </NetworkConnect>
+    </RuleGroup>
+  </EventFiltering>
+</Sysmon>
