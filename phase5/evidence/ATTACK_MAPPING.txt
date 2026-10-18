@@ -1,5 +1,5 @@
-SOC-002 PHASE 5 - MITRE ATT&CK MAPPING (evidence-bounded)
-=========================================================
+SOC-002 PHASE 5 - MITRE ATT&CK MAPPING
+========================================
 Rule: only map what the telemetry actually shows, and label how confident that is.
 
 OBSERVED TECHNIQUE-LIKE BEHAVIOUR (directly supported by the artifacts)

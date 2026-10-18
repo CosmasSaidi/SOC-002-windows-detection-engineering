@@ -139,8 +139,8 @@ suspicious than a resolved path, never less.
 
 Two measurements were taken, because they answer different questions.
 
-**Replay over the preserved Phase 5 evidence** (evidence-bounded; this is the
-apples-to-apples comparison with the Phase 5 baseline of 39/38):
+**Replay over the preserved Phase 5 evidence** (the apples-to-apples comparison
+with the Phase 5 baseline of 39/38):
 
 | Metric | Phase 5 | Phase 6 (replay) |
 |---|---|---|

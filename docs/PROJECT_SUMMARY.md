@@ -9,8 +9,8 @@ Detection engineering is easy to demonstrate badly: pick a suspicious string,
 show that it matches a suspicious event, and declare success. SOC-002 exists to
 demonstrate the parts that make a detection *trustworthy* — proving the telemetry
 works, measuring the detection's own behaviour, admitting where it fails, and
-handing the result to another analyst (or another platform) without overstating
-what was proven.
+documenting the result for another analyst or another platform without
+overstating what was proven.
 
 The project is a self-directed, controlled lab. It was built to answer a concrete
 question: *can one detection be carried from raw Windows/AD telemetry all the way
@@ -175,4 +175,3 @@ the offline validators (`validate_sigma.ps1`, `validate_kql.ps1`).
 | Production claim | **None** — controlled lab only |
 
 SOC-002 is complete as a controlled detection-engineering and investigation lab.
-It demonstrates skills; it does not claim employment experience.

@@ -1,31 +1,29 @@
 # SOC-002 — Windows Detection Engineering & Investigation
 
-A self-directed, controlled Windows/AD security operations lab that takes one
-detection from raw telemetry to a portable, vendor-neutral artifact. The project
-builds an isolated two-VM Active Directory environment, centralises Windows
-telemetry through Windows Event Forwarding (WEF), engineers and tunes detections
-against controlled activity, investigates the resulting alerts, validates a real
-blind spot, maps the behaviour to MITRE ATT&CK, and closes by representing the
-detection in Sigma and translating it to KQL.
+Built an isolated Windows/Active Directory security operations environment
+focused on endpoint telemetry, detection engineering, and investigation.
 
-> This is a controlled laboratory project. It demonstrates detection-engineering
-> and investigation skills; it is **not** production SOC experience, enterprise
-> SOC experience, professional incident response, a real-world breach, live
-> production detection, or a deployed Sentinel detection.
+The lab uses Windows Server 2022 as the domain controller and Windows 10 as a
+domain-joined workstation. Windows Event Forwarding (WEF), Sysmon, PowerShell
+Script Block Logging, and Windows Security auditing provide the telemetry used
+to build and test detections.
+
+This is a controlled laboratory project. It is **not** production SOC experience,
+enterprise SOC experience, professional incident response, a real-world breach,
+live production detection, or a deployed Sentinel detection.
 
 ## 1. Objective
 
-Prove, end to end and with preserved evidence, that a single detection can be
-built, tuned, broken, fixed and handed off honestly:
+Follow one detection from raw Windows/AD telemetry through detection, tuning,
+investigation, blind-spot testing, and portable documentation:
 
 - collect Windows/AD telemetry centrally and prove each source works;
-- write a first detection and measure its real behaviour (including its noise);
+- write a first detection and measure its real behaviour, including its noise;
 - tune it without silently shrinking its coverage;
 - test a known limitation with a controlled execution and accept the negative
   result;
 - add a complementary detection for the confirmed gap;
-- represent the detection portably (Sigma) and translate it (KQL);
-- keep every claim bounded by what the evidence shows.
+- represent the detection portably (Sigma) and translate it (KQL).
 
 ## 2. Project description
 
@@ -38,7 +36,8 @@ layer, and documented the detection's failure modes. Phase 7 validated a real
 blind spot with a single controlled execution. Phase 8 built `SOC002-DET-003` for
 that gap. Phases 9 and 10 represented `SOC002-DET-001` in Sigma and translated it
 to KQL. Every phase preserved its evidence and the evidence of the phases before
-it; the integrity of the Phase 5–10 source artifacts is verified at hand-off.
+it; the integrity of the Phase 5–10 source artifacts was verified at the end of
+each phase.
 
 ## 3. Environment / architecture
 
@@ -88,11 +87,11 @@ Details: `DETECTION_ENGINEERING.md`.
 
 Every alert is treated as an analyst question — "what happened, how was it
 delivered, does the evidence support a benign explanation?" — not as a verdict.
-The investigation model is evidence-bounded:
+The investigation model uses three labels:
 
-- **OBSERVED** — read directly from an event or host output.
-- **INFERRED** — drawn from multiple observations.
-- **NOT VERIFIED** — not tested, or not auditable in this lab.
+- **OBSERVED** — read directly from a telemetry field or host output.
+- **INFERRED** — a reasonable interpretation supported by the available evidence.
+- **NOT VERIFIED** — not established by the available evidence.
 
 Three documented cases exist: `SOC002-CASE-0001` (Phase 5),
 `SOC002-CASE-0002` (Phase 7), `SOC002-CASE-0003` (Phase 8). See
@@ -146,7 +145,7 @@ executed against any live backend and are **not** deployed to Microsoft Sentinel
 
 ## 10. ATT&CK coverage
 
-Evidence-bounded mapping only:
+Mapping is limited to what the telemetry actually shows:
 
 - **Observed technique-like behaviour:** `T1059.001` (PowerShell), `T1027`
   (obfuscated/encoded information).
@@ -155,7 +154,7 @@ Evidence-bounded mapping only:
 - **Deliberately not mapped:** persistence, privilege escalation, credential
   access, lateral movement, log tampering, `T1140`.
 
-See `ATTACK_MAPPING.md` for the OBSERVED / INFERRED / contextual distinction.
+See `ATTACK_MAPPING.md` for the OBSERVED / INFERRED / NOT VERIFIED distinction.
 
 ## 11. Key findings
 
@@ -186,40 +185,29 @@ See `ATTACK_MAPPING.md` for the OBSERVED / INFERRED / contextual distinction.
 
 Full coverage matrix: `DETECTION_COVERAGE_AND_LIMITATIONS.md`.
 
-## 13. Evidence structure
+## 13. Repository structure
 
 ```
-soc002-final/
-  README.md
-  PROJECT_SUMMARY.md                    executive/technical summary
-  DETECTION_ENGINEERING.md              DET-001 / DET-001 v2 / DET-003 evolution
-  INVESTIGATION_AND_CASES.md            CASE-0001/0002/0003
-  TELEMETRY_ARCHITECTURE.md             WS001 / DC1 / WEF / Sysmon / 4104 / Security
+README.md
+docs/
+  README.md                            this document
+  PROJECT_SUMMARY.md                   executive/technical summary
+  DETECTION_ENGINEERING.md             DET-001 / DET-001 v2 / DET-003 evolution
+  INVESTIGATION_AND_CASES.md           CASE-0001/0002/0003
+  TELEMETRY_ARCHITECTURE.md            WS001 / DC1 / WEF / Sysmon / 4104 / Security
   DETECTION_COVERAGE_AND_LIMITATIONS.md coverage table + blind spots
-  ATTACK_MAPPING.md                     conservative ATT&CK mapping
-  PORTFOLIO_NOTES.md                    how to present this publicly
-  EVIDENCE_INDEX.md                     navigable index of the original evidence
-  SHA256_MANIFEST.txt                   hashes of this documentation package
-  FINAL_INTEGRITY_REPORT.md             pre/post integrity of Phase 5–10 sources
+  ATTACK_MAPPING.md                    conservative ATT&CK mapping
+  EVIDENCE_INDEX.md                    navigable index of the original evidence
+  FINAL_INTEGRITY_REPORT.md            pre/post integrity of Phase 5–10 sources
+phase4/                               telemetry pipeline (Sysmon, WEF, auditing)
+phase5/                               first detection: SOC002-DET-001
+phase6/                               DET-001 v2, DET-002, CORR-001
+phase7/                               blind-spot validation
+phase8/                               SOC002-DET-003
+phase9/                               Sigma representation
+phase10/                              KQL translation
 ```
 
 The original Phase 4–10 artifacts are preserved untouched under `phase4/` …
-`phase10/`. This directory contains documentation, summaries and indexes only —
-no original evidence was rewritten.
-
-## 14. Honest skills demonstrated
-
-- Building and verifying a WEF-based Windows/AD telemetry pipeline.
-- Writing readable detection logic over centralised event data.
-- Measuring, rather than asserting, detection behaviour and false positives.
-- Tuning by context without silently reducing coverage; documenting refused
-  tunings.
-- Designing a negative test, accepting the negative result, and building a
-  complementary detection for a confirmed gap.
-- Multi-source correlation and evidence-bounded investigation with explicit
-  OBSERVED / INFERRED / NOT VERIFIED labelling.
-- Conservative ATT&CK mapping; portable detection representation (Sigma) and a
-  Sentinel-oriented translation (KQL).
-- Evidence preservation and SHA256-based integrity hand-off.
-
-The project demonstrates skills; it does not claim employment experience.
+`phase10/`. The `docs/` directory contains documentation, summaries and indexes
+only — no original evidence was rewritten.
