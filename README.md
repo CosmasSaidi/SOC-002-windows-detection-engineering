@@ -208,6 +208,6 @@ phase9/                               Sigma representation
 phase10/                              KQL translation
 ```
 
-The original Phase 4–10 artifacts are preserved untouched under `phase4/` …
-`phase10/`. The `docs/` directory contains documentation, summaries and indexes
-only — no original evidence was rewritten.
+The Phase 4–10 technical artifacts remain organized in their respective phase
+directories. The `docs/` directory contains project documentation, summaries,
+indexes, and integrity records.
